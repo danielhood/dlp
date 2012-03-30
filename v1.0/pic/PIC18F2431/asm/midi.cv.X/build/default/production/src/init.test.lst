@@ -1,0 +1,1054 @@
+MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001 ; Main entry point
+                      00002 
+                      00003 ; ------------------------------------------------------------------------------
+                      00004 ; Hardware Details
+                      00005 ;       - Using PIC16F819
+                      00006 ;       - Clock: 20MHz Crystal across OSC1/OSC2
+                      00007 ;       - PORTA:
+                      00008 ;               - A0:A4 - Unused
+                      00009 ;               - A5 doesn't exist on this chip
+                      00010 ;               - A6:A7 is for the crystal
+                      00011 ;       - PORTB:
+                      00012 ;               - B0 is GATE output
+                      00013 ;               - B1,3,4  (PWM1,3,5) are CV PWM output driving OP-AMPs
+                      00014 ;                       B1 (PWM1) - Pitch
+                      00015 ;                       B3 (PWM3) - Velocity
+                      00016 ;                       B4 (PWM5) - CC20
+                      00017 ;               - B2,5 - Unused
+                      00018 ;               - B6:B7 is for UP00B Programmer
+                      00019 ;       - PORTC:
+                      00020 ;               - C0:5 - Unused/Debug output
+                      00021 ;               - C6    - Serial TX (Currently unused)
+                      00022 ;               - C7    - MIDI IN - Serial RX
+                      00023 ;
+                      00024 
+                      00025 #include p18f2431.inc
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ;  MPASM PIC18F2431 processor include
+                      00005 ; 
+                      00006 ;  (c) Copyright 1999-2011 Microchip Technology, All rights reserved
+                      00007 ;==========================================================================
+                      00008 
+                      01464         LIST
+                      00026 
+                      00027 ; ------------------------------------------------------------------------------
+                      00028 ; External code refs
+                      00029 ;
+  0000                00030         extern  _MAIN           ; Main App code
+  0000                00031         extern  _SERVICE_HI     ; Interrupt handlers
+  0000                00032         extern  _SERVICE_LO
+  0000                00033         extern  _SETUP          ; Setup code
+                      00034         
+  0000                00035         global  CV_PITCH_DATA
+                      00036 
+                      00037 ; ------------------------------------------------------------------------------
+                      00038 ; Main entry and RESET vector
+                      00039 ;
+                      00040 .RIVEC  org     0x0000
+000000 EC?? F???      00041         call    _SETUP          ; Init hardware
+000004 EF?? F???      00042         goto    _MAIN           ; Main app code
+                      00043 
+                      00044 
+MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00045 ; ------------------------------------------------------------------------------
+                      00046 ; High-Priority Interrupt Vector
+                      00047 ;
+                      00048 .HIVEC  org     0x0008
+000008 EF?? F???      00049         goto    _SERVICE_HI     ; Points to interrupt service routine
+                      00050 
+                      00051 
+                      00052 ; ------------------------------------------------------------------------------
+                      00053 ; Lo-Priority Interrupt Vector
+                      00054 ;
+                      00055 .LIVEC  org     0x0018
+000018 EF?? F???      00056         goto    _SERVICE_LO     ; Points to interrupt service routine
+                      00057 
+                      00058 
+                      00059 ; ------------------------------------------------------------------------------
+                      00060 ; Program Data
+                      00061 ;
+                      00062 ;       This data set holds a lookup table for scaling 127-bit MIDI note values to a
+                      00063 ;       160 bit based value.  The supported note values are only for 24 to 84.
+                      00064 ;               - This  table contains 128 values from 0x2100 to 0x217F
+                      00065 ;               - This maps onto EEPROM data addresses 0x00 to 0x7F
+                      00066 ;       C4 (60) = 3.0V
+                      00067 ;       Calculated: y = (x - 24)* 126 / (84-24);
+                      00068 ;
+00001C                00069 CV_PITCH_DATA:
+                      00070         ;         C     C#    D     D#    E     F     F#    G     G#    A     A#    B
+00001C 0000 0000 0000 00071         db      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00  ; C-1
+       0000 0000 0000 
+000028 0000 0000 0000 00072         db      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00  ; C0
+       0000 0000 0000 
+000034 0400 0D09 1712 00073         db      0x00, 0x04, 0x09, 0x0d, 0x12, 0x17, 0x1b, 0x20, 0x24, 0x29, 0x2d, 0x32  ; C1
+       201B 2924 322D 
+000040 3B36 433F 4C48 00074         db      0x36, 0x3b, 0x3f, 0x43, 0x48, 0x4c, 0x51, 0x55, 0x59, 0x5e, 0x62, 0x66  ; C2
+       5551 5E59 6662 
+00004C 6F6B 7773 807C 00075         db      0x6b, 0x6f, 0x73, 0x77, 0x7c, 0x80, 0x84, 0x88, 0x8c, 0x91, 0x95, 0x99  ; C3
+       8884 918C 9995 
+000058 A19D A9A5 B2AE 00076         db      0x9d, 0xa1, 0xa5, 0xa9, 0xae, 0xb2, 0xb6, 0xba, 0xbe, 0xc2, 0xc6, 0xca  ; C4
+       BAB6 C2BE CAC6 
+000064 D2CE DAD6 E2DE 00077         db      0xce, 0xd2, 0xd6, 0xda, 0xde, 0xe2, 0xe6, 0xea, 0xee, 0xf2, 0xf6, 0xfa  ; C5
+       EAE6 F2EE FAF6 
+000070 FEFE FEFE FEFE 00078         db      0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe  ; C6
+       FEFE FEFE FEFE 
+00007C FEFE FEFE FEFE 00079         db      0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe  ; C7
+       FEFE FEFE FEFE 
+000088 FEFE FEFE FEFE 00080         db      0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe  ; C8
+       FEFE FEFE FEFE 
+000094 FEFE FEFE FEFE 00081         db      0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe                          ; C9
+       FEFE 
+                      00082 
+                      00083 
+                      00084 ;CV_PITCH_DATA:
+                      00085 ;       db      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+                      00086 ;       db      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00087 ;       db      0x00, 0x00, 0x00, 0x00, 0x00, 0xf4, 0xf8, 0xfc
+                      00088 ;       db      0x00, 0x04, 0x08, 0x0c, 0x11, 0x15, 0x19, 0x1d
+                      00089 ;       db      0x22, 0x26, 0x2a, 0x2e, 0x33, 0x37, 0x3b, 0x3f
+                      00090 ;       db      0x44, 0x48, 0x4c, 0x50, 0x55, 0x59, 0x5d, 0x61
+                      00091 ;       db      0x66, 0x6a, 0x6e, 0x72, 0x77, 0x7b, 0x7f, 0x83
+                      00092 ;       db      0x88, 0x8c, 0x90, 0x94, 0x99, 0x9d, 0xa1, 0xa5
+                      00093 ;       db      0xaa, 0xae, 0xb2, 0xb6, 0xbb, 0xbf, 0xc3, 0xc7
+                      00094 ;       db      0xcc, 0xd0, 0xd4, 0xd8, 0xdd, 0xe1, 0xe5, 0xe9
+                      00095 ;       db      0xee, 0xf2, 0xf6, 0xfa, 0xff, 0xff, 0xff, 0xff
+                      00096 ;       db      0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
+                      00097 ;       db      0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
+                      00098 ;       db      0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
+                      00099 ;       db      0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
+                      00100 ;       db      0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
+                      00101 
+                      00102 
+                      00103         end
+MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE  4
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+.HIVEC                            00000008
+.LIVEC                            00000018
+.RIVEC                            00000000
+A                                 00000000
+ABDEN                             00000000
+ABDOVF                            00000007
+ACCESS                            00000000
+ACMOD0                            00000002
+ACMOD1                            00000003
+ACONV                             00000005
+ACQT0                             00000003
+ACQT1                             00000004
+ACQT2                             00000005
+ACQT3                             00000006
+ACSCH                             00000004
+ADCHS                             00000F99
+ADCON0                            00000FC2
+ADCON1                            00000FC1
+ADCON2                            00000FC0
+ADCON3                            00000F9A
+ADCS0                             00000000
+ADCS1                             00000001
+ADCS2                             00000002
+ADDEN                             00000003
+ADEN                              00000003
+ADFM                              00000007
+ADIE                              00000006
+ADIF                              00000006
+ADIP                              00000006
+ADON                              00000000
+ADPNT0                            00000000
+ADPNT1                            00000001
+ADRES                             00000FC3
+ADRESH                            00000FC4
+ADRESL                            00000FC3
+ADRS0                             00000006
+ADRS1                             00000007
+AN0                               00000000
+AN1                               00000001
+AN2                               00000002
+AN3                               00000003
+AN4                               00000004
+ANS0                              00000000
+ANS1                              00000001
+ANS2                              00000002
+ANS3                              00000003
+ANS4                              00000004
+ANSEL0                            00000FB8
+BANKED                            00000001
+BAUDCON                           00000FAA
+BAUDCTL                           00000FAA
+BF                                00000000
+BFEMT                             00000003
+MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE  5
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+BFOVFL                            00000002
+BOR                               00000000
+BRFEN                             00000007
+BRG16                             00000003
+BRGH                              00000002
+BSR                               00000FE0
+C                                 00000000
+CAP1BUFH                          00000F69
+CAP1BUFL                          00000F68
+CAP1CON                           00000F63
+CAP1M0                            00000000
+CAP1M1                            00000001
+CAP1M2                            00000002
+CAP1M3                            00000003
+CAP1REN                           00000006
+CAP1TMR                           00000005
+CAP2BUFH                          00000F67
+CAP2BUFL                          00000F66
+CAP2CON                           00000F62
+CAP2M0                            00000000
+CAP2M1                            00000001
+CAP2M2                            00000002
+CAP2M3                            00000003
+CAP2REN                           00000006
+CAP2TMR                           00000005
+CAP3BUFH                          00000F65
+CAP3BUFL                          00000F64
+CAP3CON                           00000F61
+CAP3M0                            00000000
+CAP3M1                            00000001
+CAP3M2                            00000002
+CAP3M3                            00000003
+CAP3REN                           00000006
+CAP3TMR                           00000005
+CCP1                              00000002
+CCP1CON                           00000FBD
+CCP1IE                            00000002
+CCP1IF                            00000002
+CCP1IP                            00000002
+CCP1M0                            00000000
+CCP1M1                            00000001
+CCP1M2                            00000002
+CCP1M3                            00000003
+CCP1X                             00000005
+CCP1Y                             00000004
+CCP2                              00000001
+CCP2CON                           00000FBA
+CCP2IE                            00000000
+CCP2IF                            00000000
+CCP2IP                            00000000
+CCP2M0                            00000000
+CCP2M1                            00000001
+CCP2M2                            00000002
+MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE  6
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+CCP2M3                            00000003
+CCP2X                             00000005
+CCP2Y                             00000004
+CCPR1                             00000FBE
+CCPR1H                            00000FBF
+CCPR1L                            00000FBE
+CCPR2                             00000FBB
+CCPR2H                            00000FBC
+CCPR2L                            00000FBB
+CFGS                              00000006
+CK                                00000006
+CKE                               00000006
+CKP                               00000004
+CLKI                              00000007
+CLKO                              00000006
+CREN                              00000004
+CSRC                              00000007
+CV_PITCH_DATA                     0000001C
+D                                 00000005
+DATA_ADDRESS                      00000005
+DC                                00000001
+DC1B0                             00000004
+DC1B1                             00000005
+DC2B0                             00000004
+DC2B1                             00000005
+DDRA                              TRISA
+DDRB                              TRISB
+DDRC                              TRISC
+DDRD                              TRISD
+DDRE                              TRISE
+DFLTCON                           00000F60
+DONE                              00000001
+DOWN                              00000005
+DT0                               00000000
+DT1                               00000001
+DT2                               00000002
+DT3                               00000003
+DT4                               00000004
+DT5                               00000005
+DTA0                              00000000
+DTA1                              00000001
+DTA2                              00000002
+DTA3                              00000003
+DTA4                              00000004
+DTA5                              00000005
+DTAPS0                            00000006
+DTAPS1                            00000007
+DTCON                             00000F6D
+DTPS0                             00000006
+DTPS1                             00000007
+D_A                               00000005
+D_NOT_A                           00000005
+EEADR                             00000FA9
+MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE  7
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+EECON1                            00000FA6
+EECON2                            00000FA7
+EEDATA                            00000FA8
+EEIE                              00000004
+EEIF                              00000004
+EEIP                              00000004
+EEPGD                             00000007
+FAST                              00000001
+FERR                              00000002
+FFOVFL                            00000002
+FIFOEN                            00000004
+FLT1EN                            00000003
+FLT2EN                            00000004
+FLT3EN                            00000005
+FLT4EN                            00000006
+FLTA                              00000001
+FLTAEN                            00000000
+FLTAMOD                           00000001
+FLTAS                             00000002
+FLTB                              00000002
+FLTBEN                            00000004
+FLTBMOD                           00000005
+FLTBS                             00000006
+FLTCK0                            00000000
+FLTCK1                            00000001
+FLTCK2                            00000002
+FLTCON                            00000003
+FLTCONFIG                         00000F6C
+FLTS                              00000002
+FREE                              00000004
+FSR0                              00000000
+FSR0H                             00000FEA
+FSR0L                             00000FE9
+FSR1                              00000001
+FSR1H                             00000FE2
+FSR1L                             00000FE1
+FSR2                              00000002
+FSR2H                             00000FDA
+FSR2L                             00000FD9
+GASEL0                            00000000
+GASEL1                            00000001
+GBSEL0                            00000004
+GBSEL1                            00000005
+GCSEL0                            00000002
+GCSEL1                            00000003
+GDSEL0                            00000006
+GDSEL1                            00000007
+GIE                               00000007
+GIEH                              00000007
+GIEL                              00000006
+GIE_GIEH                          00000007
+GO                                00000001
+GODONE                            00000001
+MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE  8
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+GO_DONE                           00000001
+GO_NOT_DONE                       00000001
+IC1IE                             00000001
+IC1IF                             00000001
+IC1IP                             00000001
+IC2QEIE                           00000002
+IC2QEIF                           00000002
+IC2QEIP                           00000002
+IC3DRIE                           00000003
+IC3DRIF                           00000003
+IC3DRIP                           00000003
+IDLEN                             00000007
+INDF0                             00000FEF
+INDF1                             00000FE7
+INDF2                             00000FDF
+INT0                              00000003
+INT0E                             00000004
+INT0F                             00000001
+INT0IE                            00000004
+INT0IF                            00000001
+INT1                              00000004
+INT1E                             00000003
+INT1F                             00000000
+INT1IE                            00000003
+INT1IF                            00000000
+INT1IP                            00000006
+INT1P                             00000006
+INT2                              00000005
+INT2E                             00000004
+INT2F                             00000001
+INT2IE                            00000004
+INT2IF                            00000001
+INT2IP                            00000007
+INT2P                             00000007
+INTCON                            00000FF2
+INTCON2                           00000FF1
+INTCON3                           00000FF0
+INTEDG0                           00000006
+INTEDG1                           00000005
+INTEDG2                           00000004
+IOFS                              00000002
+IPEN                              00000007
+IPR1                              00000F9F
+IPR2                              00000FA2
+IPR3                              00000FA5
+IRCF0                             00000004
+IRCF1                             00000005
+IRCF2                             00000006
+IRVST                             00000005
+IVRST                             00000005
+LATA                              00000F89
+LATA0                             00000000
+LATA1                             00000001
+MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE  9
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+LATA2                             00000002
+LATA3                             00000003
+LATA4                             00000004
+LATA6                             00000006
+LATA7                             00000007
+LATB                              00000F8A
+LATB0                             00000000
+LATB1                             00000001
+LATB2                             00000002
+LATB3                             00000003
+LATB4                             00000004
+LATB5                             00000005
+LATB6                             00000006
+LATB7                             00000007
+LATC                              00000F8B
+LATC0                             00000000
+LATC1                             00000001
+LATC2                             00000002
+LATC3                             00000003
+LATC4                             00000004
+LATC5                             00000005
+LATC6                             00000006
+LATC7                             00000007
+LVDCON                            00000FD2
+LVDEN                             00000004
+LVDIE                             00000002
+LVDIF                             00000002
+LVDIP                             00000002
+LVDL0                             00000000
+LVDL1                             00000001
+LVDL2                             00000002
+LVDL3                             00000003
+MAXCNTH                           00000F65
+MAXCNTL                           00000F64
+MCLR                              00000003
+N                                 00000004
+NOT_A                             00000005
+NOT_ADDRESS                       00000005
+NOT_BOR                           00000000
+NOT_DONE                          00000001
+NOT_DOWN                          00000005
+NOT_FLTA                          00000001
+NOT_FLTB                          00000002
+NOT_IPEN                          00000007
+NOT_MCLR                          00000003
+NOT_PD                            00000002
+NOT_POR                           00000001
+NOT_RBPU                          00000007
+NOT_RESEN                         00000006
+NOT_RI                            00000004
+NOT_SS                            00000006
+NOT_T1SYNC                        00000002
+NOT_T5SYNC                        00000002
+MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE 10
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+NOT_TO                            00000003
+NOT_VELM                          00000007
+NOT_W                             00000002
+NOT_WRITE                         00000002
+OERR                              00000001
+OSC1                              00000007
+OSC2                              00000006
+OSCCON                            00000FD3
+OSCTUNE                           00000F9B
+OSFIE                             00000007
+OSFIF                             00000007
+OSFIP                             00000007
+OSTS                              00000003
+OSYNC                             00000000
+OV                                00000003
+OVDCOND                           00000F6B
+OVDCONS                           00000F6A
+P                                 00000004
+PC                                00000FF9
+PCL                               00000FF9
+PCLATH                            00000FFA
+PCLATU                            00000FFB
+PD                                00000002
+PDC0H                             00000F78
+PDC0L                             00000F79
+PDC1H                             00000F76
+PDC1L                             00000F77
+PDC2H                             00000F74
+PDC2L                             00000F75
+PDEC0                             00000000
+PDEC1                             00000001
+PEIE                              00000006
+PEIE_GIEL                         00000006
+PIE1                              00000F9D
+PIE2                              00000FA0
+PIE3                              00000FA3
+PIR1                              00000F9E
+PIR2                              00000FA1
+PIR3                              00000FA4
+PLUSW0                            00000FEB
+PLUSW1                            00000FE3
+PLUSW2                            00000FDB
+PMOD0                             00000000
+PMOD1                             00000001
+PMOD2                             00000002
+PMOD3                             00000003
+POR                               00000001
+PORTA                             00000F80
+PORTB                             00000F81
+PORTC                             00000F82
+PORTE                             00000F84
+POSCNTH                           00000F67
+POSCNTL                           00000F66
+MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE 11
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+POSTDEC0                          00000FED
+POSTDEC1                          00000FE5
+POSTDEC2                          00000FDD
+POSTINC0                          00000FEE
+POSTINC1                          00000FE6
+POSTINC2                          00000FDE
+POUT0                             00000000
+POUT1                             00000001
+POUT2                             00000002
+POUT3                             00000003
+POUT4                             00000004
+POUT5                             00000005
+POUT6                             00000006
+POUT7                             00000007
+POVD0                             00000000
+POVD1                             00000001
+POVD2                             00000002
+POVD3                             00000003
+POVD4                             00000004
+POVD5                             00000005
+POVD6                             00000006
+POVD7                             00000007
+PR2                               00000FCB
+PR5                               00000F90
+PR5H                              00000F91
+PR5L                              00000F90
+PREINC0                           00000FEC
+PREINC1                           00000FE4
+PREINC2                           00000FDC
+PROD                              00000FF3
+PRODH                             00000FF4
+PRODL                             00000FF3
+PSA                               00000003
+PTCKPS0                           00000002
+PTCKPS1                           00000003
+PTCON0                            00000F7F
+PTCON1                            00000F7E
+PTDIR                             00000006
+PTEN                              00000007
+PTIE                              00000004
+PTIF                              00000004
+PTIP                              00000004
+PTMOD0                            00000000
+PTMOD1                            00000001
+PTMRH                             00000F7C
+PTMRL                             00000F7D
+PTOPS0                            00000004
+PTOPS1                            00000005
+PTOPS2                            00000006
+PTOPS3                            00000007
+PTPERH                            00000F7A
+PTPERL                            00000F7B
+PWMCON0                           00000F6F
+MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE 12
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+PWMCON1                           00000F6E
+PWMEN0                            00000004
+PWMEN1                            00000005
+PWMEN2                            00000006
+QEICON                            00000FB6
+QEIM0                             00000002
+QEIM1                             00000003
+QEIM2                             00000004
+R                                 00000002
+RA0                               00000000
+RA1                               00000001
+RA2                               00000002
+RA3                               00000003
+RA4                               00000004
+RA6                               00000006
+RA7                               00000007
+RB0                               00000000
+RB1                               00000001
+RB2                               00000002
+RB3                               00000003
+RB4                               00000004
+RB5                               00000005
+RB6                               00000006
+RB7                               00000007
+RBIE                              00000003
+RBIF                              00000000
+RBIP                              00000000
+RBPU                              00000007
+RC0                               00000000
+RC1                               00000001
+RC2                               00000002
+RC3                               00000003
+RC4                               00000004
+RC5                               00000005
+RC6                               00000006
+RC7                               00000007
+RCIDL                             00000006
+RCIE                              00000005
+RCIF                              00000005
+RCIP                              00000005
+RCMT                              00000006
+RCON                              00000FD0
+RCREG                             00000FAE
+RCSTA                             00000FAB
+RD                                00000000
+RD16                              00000007
+RE3                               00000003
+READ_WRITE                        00000002
+RESEN                             00000006
+RI                                00000004
+RX                                00000007
+RX9                               00000006
+RX9D                              00000000
+MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE 13
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+RXDTP                             00000005
+R_NOT_W                           00000002
+R_W                               00000002
+S                                 00000003
+SASEL0                            00000000
+SASEL1                            00000001
+SBSEL0                            00000004
+SBSEL1                            00000005
+SCK                               00000005
+SCKP                              00000004
+SCL                               00000005
+SCS0                              00000000
+SCS1                              00000001
+SCSEL0                            00000002
+SCSEL1                            00000003
+SDA                               00000004
+SDI                               00000004
+SDO                               00000007
+SDSEL0                            00000006
+SDSEL1                            00000007
+SENDB                             00000003
+SEVOPS0                           00000004
+SEVOPS1                           00000005
+SEVOPS2                           00000006
+SEVOPS3                           00000007
+SEVTCMPH                          00000F70
+SEVTCMPL                          00000F71
+SEVTDIR                           00000003
+SMP                               00000007
+SPBRG                             00000FAF
+SPBRGH                            00000FB0
+SPEN                              00000007
+SREN                              00000005
+SS                                00000006
+SSPADD                            00000FC8
+SSPBUF                            00000FC9
+SSPCON                            00000FC6
+SSPEN                             00000005
+SSPIE                             00000003
+SSPIF                             00000003
+SSPIP                             00000003
+SSPM0                             00000000
+SSPM1                             00000001
+SSPM2                             00000002
+SSPM3                             00000003
+SSPOV                             00000006
+SSPSTAT                           00000FC7
+SSRC0                             00000000
+SSRC1                             00000001
+SSRC2                             00000002
+SSRC3                             00000003
+SSRC4                             00000004
+STATUS                            00000FD8
+MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE 14
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+STKFUL                            00000007
+STKOVF                            00000007
+STKPTR                            00000FFC
+STKPTR0                           00000000
+STKPTR1                           00000001
+STKPTR2                           00000002
+STKPTR3                           00000003
+STKPTR4                           00000004
+STKUNF                            00000006
+SWDTEN                            00000000
+SYNC                              00000004
+T016BIT                           00000006
+T0CKI                             00000003
+T0CON                             00000FD5
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0IP                              00000002
+T0PS0                             00000000
+T0PS1                             00000001
+T0PS2                             00000002
+T0PS3                             00000003
+T0SE                              00000004
+T13CKI                            00000000
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000FCD
+T1INSYNC                          00000002
+T1OSCEN                           00000003
+T1OSI                             00000001
+T1OSO                             00000000
+T1RUN                             00000006
+T1SYNC                            00000002
+T2CKPS0                           00000000
+T2CKPS1                           00000001
+T2CON                             00000FCA
+T2OUTPS0                          00000003
+T2OUTPS1                          00000004
+T2OUTPS2                          00000005
+T2OUTPS3                          00000006
+T5CKI                             00000003
+T5CON                             00000FB7
+T5MOD                             00000005
+T5PS0                             00000003
+T5PS1                             00000004
+T5SEN                             00000007
+T5SYNC                            00000002
+TABLAT                            00000FF5
+TBIE                              00000004
+TBIF                              00000004
+TBIP                              00000004
+TBLPTR                            00000FF6
+TBLPTRH                           00000FF7
+MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE 15
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+TBLPTRL                           00000FF6
+TBLPTRU                           00000FF8
+TMR0                              00000FD6
+TMR0H                             00000FD7
+TMR0IE                            00000005
+TMR0IF                            00000002
+TMR0IP                            00000002
+TMR0L                             00000FD6
+TMR0ON                            00000007
+TMR1                              00000FCE
+TMR1CS                            00000001
+TMR1H                             00000FCF
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1IP                            00000000
+TMR1L                             00000FCE
+TMR1ON                            00000000
+TMR2                              00000FCC
+TMR2IE                            00000001
+TMR2IF                            00000001
+TMR2IP                            00000001
+TMR2ON                            00000002
+TMR5                              00000F87
+TMR5CS                            00000001
+TMR5H                             00000F88
+TMR5IE                            00000000
+TMR5IF                            00000000
+TMR5IP                            00000000
+TMR5L                             00000F87
+TMR5ON                            00000000
+TO                                00000003
+TOS                               00000FFD
+TOSH                              00000FFE
+TOSL                              00000FFD
+TOSU                              00000FFF
+TOUTPS0                           00000003
+TOUTPS1                           00000004
+TOUTPS2                           00000005
+TOUTPS3                           00000006
+TRISA                             00000F92
+TRISA0                            00000000
+TRISA1                            00000001
+TRISA2                            00000002
+TRISA3                            00000003
+TRISA4                            00000004
+TRISA6                            00000006
+TRISA7                            00000007
+TRISB                             00000F93
+TRISB0                            00000000
+TRISB1                            00000001
+TRISB2                            00000002
+TRISB3                            00000003
+TRISB4                            00000004
+MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE 16
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+TRISB5                            00000005
+TRISB6                            00000006
+TRISB7                            00000007
+TRISC                             00000F94
+TRISC0                            00000000
+TRISC1                            00000001
+TRISC2                            00000002
+TRISC3                            00000003
+TRISC4                            00000004
+TRISC5                            00000005
+TRISC6                            00000006
+TRISC7                            00000007
+TRMT                              00000001
+TUN0                              00000000
+TUN1                              00000001
+TUN2                              00000002
+TUN3                              00000003
+TUN4                              00000004
+TUN5                              00000005
+TX                                00000006
+TX9                               00000006
+TX9D                              00000000
+TXCKP                             00000004
+TXEN                              00000005
+TXIE                              00000004
+TXIF                              00000004
+TXIP                              00000004
+TXREG                             00000FAD
+TXSTA                             00000FAC
+UA                                00000001
+UDIS                              00000001
+UP                                00000005
+UPDOWN                            00000005
+UP_DOWN                           00000005
+UP_NOT_DOWN                       00000005
+VCFG0                             00000006
+VCFG1                             00000007
+VELM                              00000007
+VELRH                             00000F69
+VELRL                             00000F68
+VREFM                             00000002
+VREFP                             00000003
+W                                 00000000
+WCOL                              00000007
+WDTCON                            00000FD1
+WDTW                              00000007
+WR                                00000001
+WREG                              00000FE8
+WREN                              00000002
+WRERR                             00000003
+WUE                               00000001
+Z                                 00000002
+_BOREN_OFF_2L                     000000FD
+MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE 17
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_BOREN_ON_2L                      000000FF
+_BORV_20_2L                       000000FF
+_BORV_27_2L                       000000FB
+_BORV_42_2L                       000000F7
+_BORV_45_2L                       000000F3
+_CONFIG1H                         00300001
+_CONFIG2H                         00300003
+_CONFIG2L                         00300002
+_CONFIG3H                         00300005
+_CONFIG3L                         00300004
+_CONFIG4L                         00300006
+_CONFIG5H                         00300009
+_CONFIG5L                         00300008
+_CONFIG6H                         0030000B
+_CONFIG6L                         0030000A
+_CONFIG7H                         0030000D
+_CONFIG7L                         0030000C
+_CP0_OFF_5L                       000000FF
+_CP0_ON_5L                        000000FE
+_CP1_OFF_5L                       000000FF
+_CP1_ON_5L                        000000FD
+_CP2_OFF_5L                       000000FF
+_CP2_ON_5L                        000000FB
+_CP3_OFF_5L                       000000FF
+_CP3_ON_5L                        000000F7
+_CPB_OFF_5H                       000000FF
+_CPB_ON_5H                        000000BF
+_CPD_OFF_5H                       000000FF
+_CPD_ON_5H                        0000007F
+_DEBUG_OFF_4L                     000000FF
+_DEBUG_ON_4L                      0000007F
+_DEVID1                           003FFFFE
+_DEVID2                           003FFFFF
+_EBTR0_OFF_7L                     000000FF
+_EBTR0_ON_7L                      000000FE
+_EBTR1_OFF_7L                     000000FF
+_EBTR1_ON_7L                      000000FD
+_EBTR2_OFF_7L                     000000FF
+_EBTR2_ON_7L                      000000FB
+_EBTR3_OFF_7L                     000000FF
+_EBTR3_ON_7L                      000000F7
+_EBTRB_OFF_7H                     000000FF
+_EBTRB_ON_7H                      000000BF
+_FCMEN_OFF_1H                     000000BF
+_FCMEN_ON_1H                      000000FF
+_HPOL_HIGH_3L                     000000FF
+_HPOL_LOW_3L                      000000EF
+_IDLOC0                           00200000
+_IDLOC1                           00200001
+_IDLOC2                           00200002
+_IDLOC3                           00200003
+_IDLOC4                           00200004
+_IDLOC5                           00200005
+MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE 18
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_IDLOC6                           00200006
+_IDLOC7                           00200007
+_IESO_OFF_1H                      0000007F
+_IESO_ON_1H                       000000FF
+_LPOL_HIGH_3L                     000000FF
+_LPOL_LOW_3L                      000000F7
+_LVP_OFF_4L                       000000FB
+_LVP_ON_4L                        000000FF
+_MAIN                             00000000
+_MCLRE_OFF_3H                     0000007F
+_MCLRE_ON_3H                      000000FF
+_OSC_ECIO_1H                      000000F5
+_OSC_EC_1H                        000000F4
+_OSC_HSPLL_1H                     000000F6
+_OSC_HS_1H                        000000F2
+_OSC_IRCIO_1H                     000000F8
+_OSC_IRC_1H                       000000F9
+_OSC_LP_1H                        000000F0
+_OSC_RC1_1H                       000000FA
+_OSC_RC2_1H                       000000F3
+_OSC_RCIO_1H                      000000F7
+_OSC_RC_1H                        000000FC
+_OSC_XT_1H                        000000F1
+_PWMPIN_OFF_3L                    000000FF
+_PWMPIN_ON_3L                     000000FB
+_PWRTEN_OFF_2L                    000000FF
+_PWRTEN_ON_2L                     000000FE
+_SERVICE_HI                       00000000
+_SERVICE_LO                       00000000
+_SETUP                            00000000
+_STVREN_OFF_4L                    000000FE
+_STVREN_ON_4L                     000000FF
+_T1OSCMX_OFF_3L                   000000DF
+_T1OSCMX_ON_3L                    000000FF
+_WDPS_1024_2H                     000000F5
+_WDPS_128_2H                      000000EF
+_WDPS_16384_2H                    000000FD
+_WDPS_16_2H                       000000E9
+_WDPS_1_2H                        000000E1
+_WDPS_2048_2H                     000000F7
+_WDPS_256_2H                      000000F1
+_WDPS_2_2H                        000000E3
+_WDPS_32768_2H                    000000FF
+_WDPS_32_2H                       000000EB
+_WDPS_4096_2H                     000000F9
+_WDPS_4_2H                        000000E5
+_WDPS_512_2H                      000000F3
+_WDPS_64_2H                       000000ED
+_WDPS_8192_2H                     000000FB
+_WDPS_8_2H                        000000E7
+_WDTEN_OFF_2H                     000000FE
+_WDTEN_ON_2H                      000000FF
+_WINEN_OFF_2H                     000000FF
+MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE 19
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_WINEN_ON_2H                      000000DF
+_WRT0_OFF_6L                      000000FF
+_WRT0_ON_6L                       000000FE
+_WRT1_OFF_6L                      000000FF
+_WRT1_ON_6L                       000000FD
+_WRT2_OFF_6L                      000000FF
+_WRT2_ON_6L                       000000FB
+_WRT3_OFF_6L                      000000FF
+_WRT3_ON_6L                       000000F7
+_WRTB_OFF_6H                      000000FF
+_WRTB_ON_6H                       000000BF
+_WRTC_OFF_6H                      000000FF
+_WRTC_ON_6H                       000000DF
+_WRTD_OFF_6H                      000000FF
+_WRTD_ON_6H                       0000007F
+__18F2431                         00000001
+
+Errors   :     0
+Warnings :     0 reported,     0 suppressed
+Messages :     0 reported,     0 suppressed
+
+
