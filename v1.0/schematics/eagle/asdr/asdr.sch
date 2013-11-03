@@ -55,6 +55,10 @@
 <layer number="98" name="Guide" color="6" fill="1" visible="yes" active="yes"/>
 </layers>
 <schematic xreflabel="%F%N/%S.%C%R" xrefpart="/%S.%C%R">
+<description>CV Gate Triggered ASDR
+
+Adapted from:
+http://www.uni-bonn.de/~uzs159</description>
 <libraries>
 <library name="_common">
 <packages>
