@@ -525,10 +525,10 @@ grid 2.032 mm, diameter 5 mm</description>
 <part name="J2" library="_common" deviceset="JACK-M" device="" value="TRIGGER IN"/>
 <part name="J3" library="_common" deviceset="JACK-M" device="" value="WAVE OUT"/>
 <part name="R1" library="_common" deviceset="R" device="0309/10" value="10K"/>
-<part name="R2" library="_common" deviceset="R" device="0309/10" value="330"/>
+<part name="R2" library="_common" deviceset="R" device="0309/10" value="10K"/>
 <part name="R3" library="_common" deviceset="R" device="0309/10" value="2.2K"/>
 <part name="R4" library="_common" deviceset="R" device="0309/10" value="2.2K"/>
-<part name="R5" library="_common" deviceset="R" device="0309/10" value="330"/>
+<part name="R5" library="_common" deviceset="R" device="0309/10" value="390"/>
 <part name="R6" library="_common" deviceset="R" device="0309/10" value="10K"/>
 <part name="R7" library="_common" deviceset="R" device="0309/10" value="1K"/>
 <part name="R11" library="_common" deviceset="R" device="0309/10" value="22K"/>
