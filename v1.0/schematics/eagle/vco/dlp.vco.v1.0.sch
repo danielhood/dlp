@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="6.1">
+<eagle version="6.5.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -1090,7 +1090,7 @@ Distributor: &lt;a href ="https://www.buerklin.com/default.asp?event=ShowArtikel
 <part name="R10" library="_common" deviceset="R" device="0309/10" value="1.5M"/>
 <part name="P+2" library="supply1" deviceset="+12V" device=""/>
 <part name="R11" library="_common" deviceset="R" device="0309/10" value="100K"/>
-<part name="ATT1" library="_common" deviceset="R-VAR" device="" value="LIN.FM-ATT"/>
+<part name="LIN.FM-ATT" library="_common" deviceset="R-VAR" device="" value="250K"/>
 <part name="C4" library="_common" deviceset="CC-US" device="025-024X044" value="0.22μF"/>
 <part name="J2" library="_common" deviceset="JACK-M" device="" value="LIN FM"/>
 <part name="GND7" library="supply1" deviceset="0V" device=""/>
@@ -1104,7 +1104,7 @@ Distributor: &lt;a href ="https://www.buerklin.com/default.asp?event=ShowArtikel
 <part name="R16" library="_common" deviceset="R" device="0309/10" value="3.3M"/>
 <part name="FINE" library="_common" deviceset="R-VAR" device="" value="250K"/>
 <part name="COARSE" library="_common" deviceset="R-VAR" device="" value="250K"/>
-<part name="EXP.FM-ATT" library="_common" deviceset="R-VAR" device="" value="100K"/>
+<part name="EXP.FM-ATT" library="_common" deviceset="R-VAR" device="" value="250K"/>
 <part name="J4" library="_common" deviceset="JACK-M" device="" value="EXP FM"/>
 <part name="J5" library="_common" deviceset="JACK-M" device="" value="PITCH"/>
 <part name="P+3" library="supply1" deviceset="+12V" device=""/>
@@ -1259,7 +1259,7 @@ Distributor: &lt;a href ="https://www.buerklin.com/default.asp?event=ShowArtikel
 <instance part="R10" gate="G$1" x="-15.24" y="35.56" rot="R90"/>
 <instance part="P+2" gate="1" x="-15.24" y="45.72"/>
 <instance part="R11" gate="G$1" x="-22.86" y="-2.54"/>
-<instance part="ATT1" gate="G$1" x="-33.02" y="-2.54" rot="R270"/>
+<instance part="LIN.FM-ATT" gate="G$1" x="-33.02" y="-2.54" rot="R270"/>
 <instance part="C4" gate="G$1" x="-40.64" y="7.62" rot="R90"/>
 <instance part="J2" gate="G$1" x="-50.8" y="5.08"/>
 <instance part="GND7" gate="1" x="-53.34" y="-2.54"/>
@@ -1438,7 +1438,7 @@ Distributor: &lt;a href ="https://www.buerklin.com/default.asp?event=ShowArtikel
 <pinref part="R8" gate="G$1" pin="1"/>
 </segment>
 <segment>
-<pinref part="ATT1" gate="G$1" pin="2"/>
+<pinref part="LIN.FM-ATT" gate="G$1" pin="2"/>
 <pinref part="GND9" gate="1" pin="0V"/>
 </segment>
 <segment>
@@ -1790,12 +1790,12 @@ Distributor: &lt;a href ="https://www.buerklin.com/default.asp?event=ShowArtikel
 <net name="N$18" class="0">
 <segment>
 <pinref part="R11" gate="G$1" pin="1"/>
-<pinref part="ATT1" gate="G$1" pin="P$1"/>
+<pinref part="LIN.FM-ATT" gate="G$1" pin="P$1"/>
 </segment>
 </net>
 <net name="N$19" class="0">
 <segment>
-<pinref part="ATT1" gate="G$1" pin="1"/>
+<pinref part="LIN.FM-ATT" gate="G$1" pin="1"/>
 <pinref part="C4" gate="G$1" pin="2"/>
 <wire x1="-35.56" y1="7.62" x2="-33.02" y2="7.62" width="0.1524" layer="91"/>
 <wire x1="-33.02" y1="7.62" x2="-33.02" y2="2.54" width="0.1524" layer="91"/>

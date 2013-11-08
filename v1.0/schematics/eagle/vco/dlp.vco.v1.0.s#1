@@ -1081,8 +1081,6 @@ Distributor: &lt;a href ="https://www.buerklin.com/default.asp?event=ShowArtikel
 <part name="R3" library="_common" deviceset="R" device="0309/10" value="3.3M"/>
 <part name="J1" library="_common" deviceset="JACK-M" device="" value="PWM"/>
 <part name="PWM-1" library="_common" deviceset="R-VAR" device="" value="250K"/>
-<part name="R4" library="_common" deviceset="R" device="0309/10" value="100K"/>
-<part name="GND5" library="supply1" deviceset="0V" device=""/>
 <part name="R5" library="_common" deviceset="R" device="0309/10" value="4.7K"/>
 <part name="C3" library="_common" deviceset="CC-US" device="025-024X044" value="100pF"/>
 <part name="D2" library="_common" deviceset="1N4148" device=""/>
@@ -1209,8 +1207,6 @@ Distributor: &lt;a href ="https://www.buerklin.com/default.asp?event=ShowArtikel
 <part name="C11" library="_common" deviceset="CC-US" device="025-024X044" value="18pF"/>
 <part name="C12" library="_common" deviceset="CE-US" device="E2-5" value="10μF"/>
 <part name="R41" library="_common" deviceset="R" device="0309/10" value="22K"/>
-<part name="R42" library="_common" deviceset="R" device="0309/10" value="100K"/>
-<part name="GND36" library="supply1" deviceset="0V" device=""/>
 <part name="SQ-SW" library="_common" deviceset="R-VAR" device="" value="50K"/>
 <part name="SW-LEVEL1" library="_common" deviceset="R-VAR" device="" value="OSC2-LEVEL"/>
 <part name="S1" library="switch-misc" deviceset="9077-1" device="" value="TO-GAIN"/>
@@ -1254,8 +1250,6 @@ Distributor: &lt;a href ="https://www.buerklin.com/default.asp?event=ShowArtikel
 <instance part="R3" gate="G$1" x="33.02" y="12.7" rot="R180"/>
 <instance part="J1" gate="G$1" x="10.16" y="-25.4"/>
 <instance part="PWM-1" gate="G$1" x="7.62" y="-7.62" rot="R270"/>
-<instance part="R4" gate="G$1" x="5.08" y="-45.72" rot="R270"/>
-<instance part="GND5" gate="1" x="5.08" y="-53.34"/>
 <instance part="R5" gate="G$1" x="12.7" y="17.78"/>
 <instance part="C3" gate="G$1" x="0" y="27.94" rot="R90"/>
 <instance part="D2" gate="G$1" x="5.08" y="63.5" rot="R270"/>
@@ -1394,8 +1388,6 @@ Distributor: &lt;a href ="https://www.buerklin.com/default.asp?event=ShowArtikel
 <instance part="C11" gate="G$1" x="223.52" y="10.16" rot="R90"/>
 <instance part="C12" gate="G$1" x="246.38" y="20.32" rot="MR270"/>
 <instance part="R41" gate="G$1" x="256.54" y="20.32"/>
-<instance part="R42" gate="G$1" x="210.82" y="-10.16" rot="R270"/>
-<instance part="GND36" gate="1" x="210.82" y="-17.78"/>
 <instance part="SQ-SW" gate="G$1" x="236.22" y="20.32" rot="R270"/>
 <instance part="SW-LEVEL1" gate="G$1" x="274.32" y="30.48" rot="R180"/>
 <instance part="S1" gate="1" x="144.78" y="-40.64" rot="MR270"/>
@@ -1436,10 +1428,6 @@ Distributor: &lt;a href ="https://www.buerklin.com/default.asp?event=ShowArtikel
 <wire x1="30.48" y1="68.58" x2="35.56" y2="68.58" width="0.1524" layer="91"/>
 <pinref part="GND3" gate="1" pin="0V"/>
 <wire x1="35.56" y1="68.58" x2="35.56" y2="63.5" width="0.1524" layer="91"/>
-</segment>
-<segment>
-<pinref part="R4" gate="G$1" pin="2"/>
-<pinref part="GND5" gate="1" pin="0V"/>
 </segment>
 <segment>
 <pinref part="J1" gate="G$1" pin="GND"/>
@@ -1583,10 +1571,6 @@ Distributor: &lt;a href ="https://www.buerklin.com/default.asp?event=ShowArtikel
 <pinref part="IC5" gate="C" pin="+IN"/>
 <pinref part="GND34" gate="1" pin="0V"/>
 <wire x1="177.8" y1="27.94" x2="177.8" y2="25.4" width="0.1524" layer="91"/>
-</segment>
-<segment>
-<pinref part="R42" gate="G$1" pin="2"/>
-<pinref part="GND36" gate="1" pin="0V"/>
 </segment>
 <segment>
 <pinref part="IC7" gate="B" pin="+IN"/>
