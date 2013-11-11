@@ -784,7 +784,7 @@ Source: http://www.alphapotentiometers.net/html/16mm_pot_2.html</description>
 <part name="R2" library="_common" deviceset="R" device="0309/10" value="1K"/>
 <part name="GND1" library="supply1" deviceset="0V" device=""/>
 <part name="R3" library="pot" deviceset="3RP/1610G" device="" value="50K LOG"/>
-<part name="R4" library="_common" deviceset="R" device="0309/10" value="2.2K"/>
+<part name="R4" library="_common" deviceset="R" device="0309/10" value="10K"/>
 <part name="R5" library="_common" deviceset="R" device="0309/10" value="10K"/>
 <part name="R12" library="_common" deviceset="R" device="0309/10" value="10K"/>
 <part name="GND2" library="supply1" deviceset="0V" device=""/>
