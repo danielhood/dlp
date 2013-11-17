@@ -661,10 +661,10 @@ http://www.st.com&lt;p&gt;
 <part name="R5" library="_common" deviceset="R" device="0309/10" value="10K"/>
 <part name="R6" library="_common" deviceset="R" device="0309/10" value="4.7K"/>
 <part name="R7" library="_common" deviceset="R" device="0309/10" value="4.7K"/>
-<part name="S-1" library="_common" deviceset="R-VAR" device="" value="10K"/>
-<part name="D-1" library="_common" deviceset="R-VAR" device="" value="2.2M"/>
-<part name="A-1" library="_common" deviceset="R-VAR" device="" value="2.2M"/>
-<part name="R-1" library="_common" deviceset="R-VAR" device="" value="2.2M"/>
+<part name="S-1" library="_common" deviceset="R-VAR" device="" value="10K LIN"/>
+<part name="D-1" library="_common" deviceset="R-VAR" device="" value="1M LIN"/>
+<part name="A-1" library="_common" deviceset="R-VAR" device="" value="1M LIN"/>
+<part name="R-1" library="_common" deviceset="R-VAR" device="" value="1M LIN"/>
 <part name="R8" library="_common" deviceset="R" device="0309/10" value="220"/>
 <part name="R9" library="_common" deviceset="R" device="0309/10" value="220"/>
 <part name="D1" library="_common" deviceset="1N4148" device=""/>
@@ -673,7 +673,7 @@ http://www.st.com&lt;p&gt;
 <part name="D4" library="_common" deviceset="1N4148" device=""/>
 <part name="D5" library="_common" deviceset="1N4148" device=""/>
 <part name="R10" library="_common" deviceset="R" device="0309/10" value="220"/>
-<part name="C1" library="_common" deviceset="CC-US" device="025-024X044" value="2.2pF"/>
+<part name="C1" library="_common" deviceset="CC-US" device="025-024X044" value="2.2uF"/>
 <part name="C2" library="_common" deviceset="CC-US" device="025-024X044" value="10nF"/>
 <part name="C3" library="_common" deviceset="CC-US" device="025-024X044" value="10nF"/>
 <part name="Q1" library="_common" deviceset="2N3417" device=""/>
@@ -704,10 +704,10 @@ http://www.st.com&lt;p&gt;
 <part name="R15" library="_common" deviceset="R" device="0309/10" value="10K"/>
 <part name="R16" library="_common" deviceset="R" device="0309/10" value="4.7K"/>
 <part name="R17" library="_common" deviceset="R" device="0309/10" value="4.7K"/>
-<part name="S-2" library="_common" deviceset="R-VAR" device="" value="10K"/>
-<part name="D-2" library="_common" deviceset="R-VAR" device="" value="2.2M"/>
-<part name="A-2" library="_common" deviceset="R-VAR" device="" value="2.2M"/>
-<part name="R-2" library="_common" deviceset="R-VAR" device="" value="2.2M"/>
+<part name="S-2" library="_common" deviceset="R-VAR" device="" value="10K LIN"/>
+<part name="D-2" library="_common" deviceset="R-VAR" device="" value="1M LIN"/>
+<part name="A-2" library="_common" deviceset="R-VAR" device="" value="1M LIN"/>
+<part name="R-2" library="_common" deviceset="R-VAR" device="" value="1M LIN"/>
 <part name="R18" library="_common" deviceset="R" device="0309/10" value="220"/>
 <part name="R19" library="_common" deviceset="R" device="0309/10" value="220"/>
 <part name="D6" library="_common" deviceset="1N4148" device=""/>
@@ -716,7 +716,7 @@ http://www.st.com&lt;p&gt;
 <part name="D9" library="_common" deviceset="1N4148" device=""/>
 <part name="D10" library="_common" deviceset="1N4148" device=""/>
 <part name="R20" library="_common" deviceset="R" device="0309/10" value="220"/>
-<part name="C4" library="_common" deviceset="CC-US" device="025-024X044" value="2.2pF"/>
+<part name="C4" library="_common" deviceset="CC-US" device="025-024X044" value="2.2uF"/>
 <part name="C5" library="_common" deviceset="CC-US" device="025-024X044" value="10nF"/>
 <part name="C6" library="_common" deviceset="CC-US" device="025-024X044" value="10nF"/>
 <part name="Q4" library="_common" deviceset="2N3417" device=""/>
@@ -746,6 +746,8 @@ http://www.st.com&lt;p&gt;
 <text x="50.8" y="22.86" size="1.778" layer="91">Adapted from:
 http://www.uni-bonn.de/~uzs159</text>
 <text x="50.8" y="20.32" size="1.778" layer="91">http://www.schmitzbits.de/</text>
+<text x="50.8" y="15.24" size="1.778" layer="91">Updated: 2013-11-13</text>
+<text x="-7.62" y="50.8" size="1.778" layer="91">0 - 7 V</text>
 </plain>
 <instances>
 <instance part="IN1" gate="G$1" x="-12.7" y="81.28"/>
@@ -756,7 +758,7 @@ http://www.uni-bonn.de/~uzs159</text>
 <instance part="R4" gate="G$1" x="60.96" y="96.52" rot="R270"/>
 <instance part="R5" gate="G$1" x="96.52" y="83.82"/>
 <instance part="R6" gate="G$1" x="111.76" y="96.52" rot="R90"/>
-<instance part="R7" gate="G$1" x="81.28" y="50.8" rot="R180"/>
+<instance part="R7" gate="G$1" x="83.82" y="50.8" rot="R180"/>
 <instance part="S-1" gate="G$1" x="73.66" y="45.72" rot="R90"/>
 <instance part="D-1" gate="G$1" x="48.26" y="45.72" rot="R180"/>
 <instance part="A-1" gate="G$1" x="48.26" y="5.08" rot="R180"/>
@@ -778,7 +780,7 @@ http://www.uni-bonn.de/~uzs159</text>
 <instance part="P+1" gate="1" x="27.94" y="104.14"/>
 <instance part="P+2" gate="1" x="60.96" y="104.14"/>
 <instance part="P+3" gate="1" x="111.76" y="104.14"/>
-<instance part="P+5" gate="1" x="86.36" y="55.88"/>
+<instance part="P+5" gate="1" x="93.98" y="58.42"/>
 <instance part="GND1" gate="1" x="-15.24" y="76.2"/>
 <instance part="GND2" gate="1" x="-15.24" y="43.18"/>
 <instance part="GND3" gate="1" x="7.62" y="71.12"/>
@@ -799,7 +801,7 @@ http://www.uni-bonn.de/~uzs159</text>
 <instance part="R14" gate="G$1" x="205.74" y="96.52" rot="MR270"/>
 <instance part="R15" gate="G$1" x="170.18" y="83.82" rot="MR0"/>
 <instance part="R16" gate="G$1" x="154.94" y="96.52" rot="MR90"/>
-<instance part="R17" gate="G$1" x="185.42" y="45.72" rot="MR180"/>
+<instance part="R17" gate="G$1" x="182.88" y="45.72" rot="MR180"/>
 <instance part="S-2" gate="G$1" x="193.04" y="40.64" rot="MR90"/>
 <instance part="D-2" gate="G$1" x="218.44" y="40.64" rot="MR180"/>
 <instance part="A-2" gate="G$1" x="218.44" y="5.08" rot="MR180"/>
@@ -821,7 +823,7 @@ http://www.uni-bonn.de/~uzs159</text>
 <instance part="P+4" gate="1" x="238.76" y="106.68" rot="MR0"/>
 <instance part="P+8" gate="1" x="205.74" y="106.68" rot="MR0"/>
 <instance part="P+9" gate="1" x="154.94" y="106.68" rot="MR0"/>
-<instance part="P+10" gate="1" x="180.34" y="50.8" rot="MR0"/>
+<instance part="P+10" gate="1" x="172.72" y="50.8" rot="MR0"/>
 <instance part="GND11" gate="1" x="281.94" y="76.2" rot="MR0"/>
 <instance part="GND12" gate="1" x="281.94" y="43.18" rot="MR0"/>
 <instance part="GND13" gate="1" x="259.08" y="71.12" rot="MR0"/>
@@ -1121,7 +1123,8 @@ http://www.uni-bonn.de/~uzs159</text>
 <segment>
 <pinref part="R7" gate="G$1" pin="1"/>
 <pinref part="P+5" gate="1" pin="+12V"/>
-<wire x1="86.36" y1="50.8" x2="86.36" y2="53.34" width="0.1524" layer="91"/>
+<wire x1="88.9" y1="50.8" x2="93.98" y2="50.8" width="0.1524" layer="91"/>
+<wire x1="93.98" y1="50.8" x2="93.98" y2="55.88" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="R4" gate="G$1" pin="1"/>
@@ -1136,7 +1139,8 @@ http://www.uni-bonn.de/~uzs159</text>
 <segment>
 <pinref part="R17" gate="G$1" pin="1"/>
 <pinref part="P+10" gate="1" pin="+12V"/>
-<wire x1="180.34" y1="45.72" x2="180.34" y2="48.26" width="0.1524" layer="91"/>
+<wire x1="177.8" y1="45.72" x2="172.72" y2="45.72" width="0.1524" layer="91"/>
+<wire x1="172.72" y1="45.72" x2="172.72" y2="48.26" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="P+4" gate="1" pin="+12V"/>
@@ -1195,7 +1199,7 @@ http://www.uni-bonn.de/~uzs159</text>
 <segment>
 <pinref part="R7" gate="G$1" pin="2"/>
 <pinref part="S-1" gate="G$1" pin="2"/>
-<wire x1="76.2" y1="50.8" x2="73.66" y2="50.8" width="0.1524" layer="91"/>
+<wire x1="78.74" y1="50.8" x2="73.66" y2="50.8" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$21" class="0">
@@ -1394,7 +1398,7 @@ http://www.uni-bonn.de/~uzs159</text>
 <segment>
 <pinref part="R17" gate="G$1" pin="2"/>
 <pinref part="S-2" gate="G$1" pin="2"/>
-<wire x1="190.5" y1="45.72" x2="193.04" y2="45.72" width="0.1524" layer="91"/>
+<wire x1="187.96" y1="45.72" x2="193.04" y2="45.72" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$41" class="0">
