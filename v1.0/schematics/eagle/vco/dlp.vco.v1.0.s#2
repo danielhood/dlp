@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="6.1">
+<eagle version="6.5.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -1053,6 +1053,120 @@ Distributor: &lt;a href ="https://www.buerklin.com/default.asp?event=ShowArtikel
 </deviceset>
 </devicesets>
 </library>
+<library name="switch">
+<description>&lt;b&gt;Switches&lt;/b&gt;&lt;p&gt;
+Marquardt, Siemens, C&amp;K, ITT, and others&lt;p&gt;
+&lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;</description>
+<packages>
+<package name="320-938">
+<description>&lt;b&gt;TOGGLE SWITCH&lt;/b&gt;&lt;p&gt;
+distributor RS Components</description>
+<wire x1="-5.4102" y1="6.6802" x2="-6.0452" y2="6.0452" width="0.1524" layer="21"/>
+<wire x1="-5.4102" y1="6.6802" x2="5.4102" y2="6.6802" width="0.1524" layer="21"/>
+<wire x1="6.0452" y1="6.0452" x2="5.4102" y2="6.6802" width="0.1524" layer="21"/>
+<wire x1="5.4102" y1="-6.6802" x2="6.0452" y2="-6.0452" width="0.1524" layer="21"/>
+<wire x1="5.4102" y1="-6.6802" x2="-5.4102" y2="-6.6802" width="0.1524" layer="21"/>
+<wire x1="-6.0452" y1="-6.0452" x2="-5.4102" y2="-6.6802" width="0.1524" layer="21"/>
+<wire x1="6.0452" y1="6.0452" x2="6.0452" y2="-6.0452" width="0.1524" layer="21"/>
+<wire x1="-6.0452" y1="-6.0452" x2="-6.0452" y2="6.0452" width="0.1524" layer="21"/>
+<wire x1="4.318" y1="2.286" x2="4.318" y2="-2.286" width="0.1524" layer="51"/>
+<wire x1="-4.318" y1="2.286" x2="-4.318" y2="-2.286" width="0.1524" layer="51"/>
+<wire x1="4.318" y1="2.286" x2="0" y2="5.08" width="0.1524" layer="51"/>
+<wire x1="0" y1="5.08" x2="-4.318" y2="2.286" width="0.1524" layer="51"/>
+<wire x1="-4.318" y1="-2.286" x2="0" y2="-5.08" width="0.1524" layer="51"/>
+<wire x1="0" y1="-5.08" x2="4.318" y2="-2.286" width="0.1524" layer="51"/>
+<wire x1="1.905" y1="-1.27" x2="2.54" y2="-1.905" width="0.1524" layer="51"/>
+<wire x1="2.54" y1="-1.905" x2="2.54" y2="-2.54" width="0.1524" layer="51"/>
+<wire x1="1.905" y1="-3.175" x2="2.54" y2="-2.54" width="0.1524" layer="51"/>
+<wire x1="1.905" y1="-3.175" x2="-1.905" y2="-3.175" width="0.1524" layer="51"/>
+<wire x1="-2.54" y1="-2.54" x2="-1.905" y2="-3.175" width="0.1524" layer="51"/>
+<wire x1="-2.54" y1="-2.54" x2="-2.54" y2="-1.905" width="0.1524" layer="51"/>
+<wire x1="-1.905" y1="-1.27" x2="-2.54" y2="-1.905" width="0.1524" layer="51"/>
+<wire x1="-1.905" y1="-1.27" x2="1.905" y2="-1.27" width="0.1524" layer="51"/>
+<wire x1="1.6002" y1="1.27" x2="2.54" y2="-1.905" width="0.1524" layer="51"/>
+<wire x1="-1.6002" y1="1.27" x2="-2.54" y2="-1.905" width="0.1524" layer="51"/>
+<wire x1="-2.54" y1="-2.54" x2="2.54" y2="-2.54" width="0.1524" layer="51" curve="-270"/>
+<wire x1="-2.54" y1="-1.27" x2="2.54" y2="-1.27" width="0.1524" layer="51" curve="-233.130102"/>
+<wire x1="-1.6002" y1="1.27" x2="1.6002" y2="1.27" width="0.1524" layer="51"/>
+<pad name="3" x="-2.3876" y="-4.0132" drill="2.0066" shape="octagon"/>
+<pad name="2" x="-2.3876" y="0" drill="2.0066" shape="octagon"/>
+<pad name="1" x="-2.3876" y="4.0132" drill="2.0066" shape="octagon"/>
+<pad name="4" x="2.3876" y="4.0132" drill="2.0066" shape="octagon"/>
+<pad name="5" x="2.3876" y="0" drill="2.0066" shape="octagon"/>
+<pad name="6" x="2.3876" y="-4.0132" drill="2.0066" shape="octagon"/>
+<text x="-5.08" y="7.62" size="1.778" layer="25" ratio="10">&gt;NAME</text>
+<text x="-5.08" y="-9.525" size="1.778" layer="27" ratio="10">&gt;VALUE</text>
+</package>
+</packages>
+<symbols>
+<symbol name="U2">
+<wire x1="0" y1="-3.175" x2="0" y2="-1.905" width="0.254" layer="94"/>
+<wire x1="0" y1="-1.905" x2="-1.905" y2="3.175" width="0.254" layer="94"/>
+<wire x1="1.27" y1="2.54" x2="2.54" y2="2.54" width="0.254" layer="94"/>
+<wire x1="2.54" y1="2.54" x2="2.54" y2="3.175" width="0.254" layer="94"/>
+<wire x1="-2.54" y1="2.54" x2="-1.27" y2="2.54" width="0.254" layer="94"/>
+<wire x1="-2.54" y1="2.54" x2="-2.54" y2="3.175" width="0.254" layer="94"/>
+<wire x1="-0.635" y1="0" x2="-1.27" y2="0" width="0.1524" layer="94"/>
+<wire x1="-1.905" y1="0" x2="-2.54" y2="0" width="0.1524" layer="94"/>
+<wire x1="-3.175" y1="0" x2="-3.81" y2="0" width="0.1524" layer="94"/>
+<text x="5.08" y="-1.905" size="1.778" layer="95" rot="R90">&gt;PART</text>
+<pin name="P" x="0" y="-5.08" visible="pad" length="short" direction="pas" rot="R90"/>
+<pin name="S" x="2.54" y="5.08" visible="pad" length="short" direction="pas" rot="R270"/>
+<pin name="O" x="-2.54" y="5.08" visible="pad" length="short" direction="pas" rot="R270"/>
+</symbol>
+<symbol name="KS-U-">
+<wire x1="-3.81" y1="1.905" x2="-2.54" y2="1.905" width="0.254" layer="94"/>
+<wire x1="-3.81" y1="1.905" x2="-3.81" y2="0" width="0.254" layer="94"/>
+<wire x1="-3.81" y1="0" x2="-1.905" y2="0" width="0.1524" layer="94"/>
+<wire x1="-3.81" y1="0" x2="-3.81" y2="-1.905" width="0.254" layer="94"/>
+<wire x1="-1.27" y1="0" x2="-0.762" y2="0" width="0.1524" layer="94"/>
+<wire x1="-5.08" y1="1.905" x2="-3.81" y2="1.905" width="0.254" layer="94"/>
+<wire x1="0.254" y1="0" x2="0.635" y2="0" width="0.1524" layer="94"/>
+<wire x1="1.27" y1="0" x2="1.905" y2="0" width="0.1524" layer="94"/>
+<wire x1="2.54" y1="-3.175" x2="2.54" y2="-1.905" width="0.254" layer="94"/>
+<wire x1="2.54" y1="-1.905" x2="0.635" y2="3.175" width="0.254" layer="94"/>
+<wire x1="3.81" y1="2.54" x2="5.08" y2="2.54" width="0.254" layer="94"/>
+<wire x1="5.08" y1="2.54" x2="5.08" y2="3.175" width="0.254" layer="94"/>
+<wire x1="0" y1="2.54" x2="1.27" y2="2.54" width="0.254" layer="94"/>
+<wire x1="0" y1="2.54" x2="0" y2="3.175" width="0.254" layer="94"/>
+<wire x1="-0.762" y1="0" x2="-0.254" y2="-0.762" width="0.1524" layer="94"/>
+<wire x1="-0.254" y1="-0.762" x2="0.254" y2="0" width="0.1524" layer="94"/>
+<wire x1="1.905" y1="0" x2="2.413" y2="0" width="0.1524" layer="94"/>
+<wire x1="3.175" y1="0" x2="3.683" y2="0" width="0.1524" layer="94"/>
+<wire x1="4.445" y1="0" x2="4.953" y2="0" width="0.1524" layer="94"/>
+<text x="-3.81" y="2.54" size="1.778" layer="96" rot="R90">&gt;VALUE</text>
+<text x="-6.35" y="-1.905" size="1.778" layer="95" rot="R90">&gt;PART</text>
+<pin name="P" x="2.54" y="-5.08" visible="pad" length="short" direction="pas" rot="R90"/>
+<pin name="S" x="5.08" y="5.08" visible="pad" length="short" direction="pas" rot="R270"/>
+<pin name="O" x="0" y="5.08" visible="pad" length="short" direction="pas" rot="R270"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="320-938" prefix="S" uservalue="yes">
+<description>&lt;b&gt;TOGGLE SWITCH&lt;/b&gt;&lt;p&gt;
+distributor RS Components</description>
+<gates>
+<gate name="B" symbol="U2" x="12.7" y="0" addlevel="always"/>
+<gate name="1" symbol="KS-U-" x="0" y="0" addlevel="must"/>
+</gates>
+<devices>
+<device name="" package="320-938">
+<connects>
+<connect gate="1" pin="O" pad="1"/>
+<connect gate="1" pin="P" pad="2"/>
+<connect gate="1" pin="S" pad="3"/>
+<connect gate="B" pin="O" pad="4"/>
+<connect gate="B" pin="P" pad="5"/>
+<connect gate="B" pin="S" pad="6"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -1081,8 +1195,6 @@ Distributor: &lt;a href ="https://www.buerklin.com/default.asp?event=ShowArtikel
 <part name="R3" library="_common" deviceset="R" device="0309/10" value="3.3M"/>
 <part name="J1" library="_common" deviceset="JACK-M" device="" value="PWM"/>
 <part name="PWM-1" library="_common" deviceset="R-VAR" device="" value="250K"/>
-<part name="R4" library="_common" deviceset="R" device="0309/10" value="100K"/>
-<part name="GND5" library="supply1" deviceset="0V" device=""/>
 <part name="R5" library="_common" deviceset="R" device="0309/10" value="4.7K"/>
 <part name="C3" library="_common" deviceset="CC-US" device="025-024X044" value="100pF"/>
 <part name="D2" library="_common" deviceset="1N4148" device=""/>
@@ -1092,7 +1204,7 @@ Distributor: &lt;a href ="https://www.buerklin.com/default.asp?event=ShowArtikel
 <part name="R10" library="_common" deviceset="R" device="0309/10" value="1.5M"/>
 <part name="P+2" library="supply1" deviceset="+12V" device=""/>
 <part name="R11" library="_common" deviceset="R" device="0309/10" value="100K"/>
-<part name="ATT1" library="_common" deviceset="R-VAR" device="" value="LIN.FM-ATT"/>
+<part name="LIN.FM-ATT" library="_common" deviceset="R-VAR" device="" value="250K"/>
 <part name="C4" library="_common" deviceset="CC-US" device="025-024X044" value="0.22μF"/>
 <part name="J2" library="_common" deviceset="JACK-M" device="" value="LIN FM"/>
 <part name="GND7" library="supply1" deviceset="0V" device=""/>
@@ -1106,9 +1218,9 @@ Distributor: &lt;a href ="https://www.buerklin.com/default.asp?event=ShowArtikel
 <part name="R16" library="_common" deviceset="R" device="0309/10" value="3.3M"/>
 <part name="FINE" library="_common" deviceset="R-VAR" device="" value="250K"/>
 <part name="COARSE" library="_common" deviceset="R-VAR" device="" value="250K"/>
-<part name="EXP.FM-ATT" library="_common" deviceset="R-VAR" device="" value="100K"/>
+<part name="EXP.FM-ATT" library="_common" deviceset="R-VAR" device="" value="250K"/>
 <part name="J4" library="_common" deviceset="JACK-M" device="" value="EXP FM"/>
-<part name="J5" library="_common" deviceset="JACK-M" device="" value="PITCH"/>
+<part name="J5" library="_common" deviceset="JACK-M" device="" value="PITCH-1"/>
 <part name="P+3" library="supply1" deviceset="+12V" device=""/>
 <part name="P+4" library="supply1" deviceset="+12V" device=""/>
 <part name="GND11" library="supply1" deviceset="0V" device=""/>
@@ -1151,7 +1263,7 @@ Distributor: &lt;a href ="https://www.buerklin.com/default.asp?event=ShowArtikel
 <part name="GND19" library="supply1" deviceset="0V" device=""/>
 <part name="OSC-LEVEL" library="_common" deviceset="R-VAR" device="" value="50K (log)"/>
 <part name="R25" library="_common" deviceset="R" device="0309/10" value="1K"/>
-<part name="J8" library="_common" deviceset="JACK-M" device="" value="OSC1 OUT"/>
+<part name="J8" library="_common" deviceset="JACK-M" device="" value="MIX OUT"/>
 <part name="GND20" library="supply1" deviceset="0V" device=""/>
 <part name="P+7" library="supply1" deviceset="+12V" device=""/>
 <part name="GND21" library="supply1" deviceset="0V" device=""/>
@@ -1169,17 +1281,12 @@ Distributor: &lt;a href ="https://www.buerklin.com/default.asp?event=ShowArtikel
 <part name="P+8" library="supply1" deviceset="+12V" device=""/>
 <part name="P-5" library="supply1" deviceset="-12V" device=""/>
 <part name="R28" library="_common" deviceset="R" device="0309/10" value="100K"/>
-<part name="J9" library="_common" deviceset="JACK-M" device="" value="EXP FM"/>
-<part name="EXP.FM-ATT1" library="_common" deviceset="R-VAR" device="" value="100K"/>
-<part name="R30" library="_common" deviceset="R" device="0309/10" value="100K"/>
-<part name="GND27" library="supply1" deviceset="0V" device=""/>
 <part name="R31" library="_common" deviceset="R" device="0309/10" value="100K"/>
 <part name="COARSE1" library="_common" deviceset="R-VAR" device="" value="250K"/>
 <part name="P+9" library="supply1" deviceset="+12V" device=""/>
 <part name="P-6" library="supply1" deviceset="-12V" device=""/>
 <part name="GND28" library="supply1" deviceset="0V" device=""/>
 <part name="R32" library="_common" deviceset="R" device="0309/10" value="2.2K"/>
-<part name="GND29" library="supply1" deviceset="0V" device=""/>
 <part name="Q4" library="_common" deviceset="2N3417" device=""/>
 <part name="Q5" library="_common" deviceset="2N3417" device=""/>
 <part name="Q6" library="_common" deviceset="2N3906" device=""/>
@@ -1198,8 +1305,6 @@ Distributor: &lt;a href ="https://www.buerklin.com/default.asp?event=ShowArtikel
 <part name="C10" library="_common" deviceset="CC-US" device="025-024X044" value="100pF"/>
 <part name="R36" library="_common" deviceset="R" device="0309/10" value="1.5M"/>
 <part name="P+11" library="supply1" deviceset="+12V" device=""/>
-<part name="R37" library="_common" deviceset="R" device="0309/10" value="100K"/>
-<part name="GND33" library="supply1" deviceset="0V" device=""/>
 <part name="GND34" library="supply1" deviceset="0V" device=""/>
 <part name="R38" library="_common" deviceset="R" device="0309/10" value="4.7K"/>
 <part name="GND35" library="supply1" deviceset="0V" device=""/>
@@ -1209,14 +1314,12 @@ Distributor: &lt;a href ="https://www.buerklin.com/default.asp?event=ShowArtikel
 <part name="C11" library="_common" deviceset="CC-US" device="025-024X044" value="18pF"/>
 <part name="C12" library="_common" deviceset="CE-US" device="E2-5" value="10μF"/>
 <part name="R41" library="_common" deviceset="R" device="0309/10" value="22K"/>
-<part name="R42" library="_common" deviceset="R" device="0309/10" value="100K"/>
-<part name="GND36" library="supply1" deviceset="0V" device=""/>
 <part name="SQ-SW" library="_common" deviceset="R-VAR" device="" value="50K"/>
 <part name="SW-LEVEL1" library="_common" deviceset="R-VAR" device="" value="OSC2-LEVEL"/>
 <part name="S1" library="switch-misc" deviceset="9077-1" device="" value="TO-GAIN"/>
 <part name="GND37" library="supply1" deviceset="0V" device=""/>
 <part name="R43" library="_common" deviceset="R" device="0309/10" value="1K"/>
-<part name="J10" library="_common" deviceset="JACK-M" device="" value="SW OUT"/>
+<part name="J10" library="_common" deviceset="JACK-M" device="" value="OSC2 OUT"/>
 <part name="GND38" library="supply1" deviceset="0V" device=""/>
 <part name="R44" library="_common" deviceset="R" device="0309/10" value="10K"/>
 <part name="P+12" library="supply1" deviceset="+12V" device=""/>
@@ -1227,10 +1330,20 @@ Distributor: &lt;a href ="https://www.buerklin.com/default.asp?event=ShowArtikel
 <part name="PWM-2" library="_common" deviceset="R-VAR" device="" value="250K"/>
 <part name="P+14" library="supply1" deviceset="+12V" device=""/>
 <part name="GND40" library="supply1" deviceset="0V" device=""/>
+<part name="S2" library="switch" deviceset="320-938" device=""/>
+<part name="J11" library="_common" deviceset="JACK-M" device="" value="PITCH-2"/>
+<part name="IC6" library="_common" deviceset="NTE912" device="P"/>
+<part name="J12" library="_common" deviceset="JACK-M" device="" value="LIN FM"/>
+<part name="LIN.FM-ATT2" library="_common" deviceset="R-VAR" device="" value="250K"/>
+<part name="R4" library="_common" deviceset="R" device="0309/10" value="100K"/>
+<part name="GND5" library="supply1" deviceset="0V" device=""/>
+<part name="GND36" library="supply1" deviceset="0V" device=""/>
+<part name="C13" library="_common" deviceset="CC-US" device="025-024X044" value="0.22μF"/>
 </parts>
 <sheets>
 <sheet>
 <plain>
+<text x="81.28" y="101.6" size="1.778" layer="97">PITCH LINK/SPLIT</text>
 </plain>
 <instances>
 <instance part="Q1" gate="G$1" x="66.04" y="50.8"/>
@@ -1254,8 +1367,6 @@ Distributor: &lt;a href ="https://www.buerklin.com/default.asp?event=ShowArtikel
 <instance part="R3" gate="G$1" x="33.02" y="12.7" rot="R180"/>
 <instance part="J1" gate="G$1" x="10.16" y="-25.4"/>
 <instance part="PWM-1" gate="G$1" x="7.62" y="-7.62" rot="R270"/>
-<instance part="R4" gate="G$1" x="5.08" y="-45.72" rot="R270"/>
-<instance part="GND5" gate="1" x="5.08" y="-53.34"/>
 <instance part="R5" gate="G$1" x="12.7" y="17.78"/>
 <instance part="C3" gate="G$1" x="0" y="27.94" rot="R90"/>
 <instance part="D2" gate="G$1" x="5.08" y="63.5" rot="R270"/>
@@ -1265,12 +1376,12 @@ Distributor: &lt;a href ="https://www.buerklin.com/default.asp?event=ShowArtikel
 <instance part="R10" gate="G$1" x="-15.24" y="35.56" rot="R90"/>
 <instance part="P+2" gate="1" x="-15.24" y="45.72"/>
 <instance part="R11" gate="G$1" x="-22.86" y="-2.54"/>
-<instance part="ATT1" gate="G$1" x="-33.02" y="-2.54" rot="R270"/>
-<instance part="C4" gate="G$1" x="-40.64" y="7.62" rot="R90"/>
-<instance part="J2" gate="G$1" x="-50.8" y="5.08"/>
-<instance part="GND7" gate="1" x="-53.34" y="-2.54"/>
+<instance part="LIN.FM-ATT" gate="G$1" x="-35.56" y="-2.54" rot="R270"/>
+<instance part="C4" gate="G$1" x="-43.18" y="7.62" rot="R90"/>
+<instance part="J2" gate="G$1" x="-53.34" y="5.08"/>
+<instance part="GND7" gate="1" x="-55.88" y="-2.54"/>
 <instance part="GND8" gate="1" x="-10.16" y="10.16"/>
-<instance part="GND9" gate="1" x="-33.02" y="-10.16"/>
+<instance part="GND9" gate="1" x="-35.56" y="-10.16"/>
 <instance part="GND10" gate="1" x="-33.02" y="60.96"/>
 <instance part="R12" gate="G$1" x="-17.78" y="83.82"/>
 <instance part="R13" gate="G$1" x="-48.26" y="83.82"/>
@@ -1351,17 +1462,12 @@ Distributor: &lt;a href ="https://www.buerklin.com/default.asp?event=ShowArtikel
 <instance part="P-5" gate="1" x="-45.72" y="-40.64" rot="MR0"/>
 <instance part="IC5" gate="B" x="162.56" y="73.66" rot="MR180"/>
 <instance part="R28" gate="G$1" x="144.78" y="83.82"/>
-<instance part="J9" gate="G$1" x="127" y="78.74"/>
-<instance part="EXP.FM-ATT1" gate="G$1" x="134.62" y="73.66" rot="R270"/>
-<instance part="R30" gate="G$1" x="144.78" y="73.66"/>
-<instance part="GND27" gate="1" x="134.62" y="66.04"/>
 <instance part="R31" gate="G$1" x="144.78" y="55.88"/>
-<instance part="COARSE1" gate="G$1" x="124.46" y="55.88" rot="R270"/>
-<instance part="P+9" gate="1" x="124.46" y="68.58"/>
-<instance part="P-6" gate="1" x="124.46" y="43.18"/>
+<instance part="COARSE1" gate="G$1" x="132.08" y="55.88" rot="R270"/>
+<instance part="P+9" gate="1" x="132.08" y="68.58"/>
+<instance part="P-6" gate="1" x="132.08" y="43.18"/>
 <instance part="GND28" gate="1" x="154.94" y="66.04"/>
 <instance part="R32" gate="G$1" x="167.64" y="83.82"/>
-<instance part="GND29" gate="1" x="124.46" y="73.66"/>
 <instance part="Q4" gate="G$1" x="254" y="55.88"/>
 <instance part="Q5" gate="G$1" x="233.68" y="55.88" rot="MR0"/>
 <instance part="Q6" gate="G$1" x="243.84" y="78.74"/>
@@ -1370,7 +1476,7 @@ Distributor: &lt;a href ="https://www.buerklin.com/default.asp?event=ShowArtikel
 <instance part="GND30" gate="1" x="279.4" y="45.72"/>
 <instance part="P+10" gate="1" x="246.38" y="91.44"/>
 <instance part="C9" gate="G$1" x="238.76" y="45.72" rot="R90"/>
-<instance part="GND31" gate="1" x="218.44" y="71.12"/>
+<instance part="GND31" gate="1" x="223.52" y="66.04"/>
 <instance part="D4" gate="G$1" x="193.04" y="68.58" rot="R270"/>
 <instance part="GND32" gate="1" x="180.34" y="50.8"/>
 <instance part="R34" gate="G$1" x="180.34" y="58.42" rot="R90"/>
@@ -1379,9 +1485,7 @@ Distributor: &lt;a href ="https://www.buerklin.com/default.asp?event=ShowArtikel
 <instance part="HF-TRIM1" gate="G$1" x="193.04" y="50.8"/>
 <instance part="C10" gate="G$1" x="187.96" y="38.1" rot="R90"/>
 <instance part="R36" gate="G$1" x="172.72" y="43.18" rot="R90"/>
-<instance part="P+11" gate="1" x="172.72" y="50.8"/>
-<instance part="R37" gate="G$1" x="172.72" y="33.02" rot="R270"/>
-<instance part="GND33" gate="1" x="172.72" y="25.4"/>
+<instance part="P+11" gate="1" x="172.72" y="53.34"/>
 <instance part="IC5" gate="C" x="185.42" y="30.48" rot="MR180"/>
 <instance part="GND34" gate="1" x="177.8" y="22.86"/>
 <instance part="R38" gate="G$1" x="200.66" y="30.48"/>
@@ -1394,8 +1498,6 @@ Distributor: &lt;a href ="https://www.buerklin.com/default.asp?event=ShowArtikel
 <instance part="C11" gate="G$1" x="223.52" y="10.16" rot="R90"/>
 <instance part="C12" gate="G$1" x="246.38" y="20.32" rot="MR270"/>
 <instance part="R41" gate="G$1" x="256.54" y="20.32"/>
-<instance part="R42" gate="G$1" x="210.82" y="-10.16" rot="R270"/>
-<instance part="GND36" gate="1" x="210.82" y="-17.78"/>
 <instance part="SQ-SW" gate="G$1" x="236.22" y="20.32" rot="R270"/>
 <instance part="SW-LEVEL1" gate="G$1" x="274.32" y="30.48" rot="R180"/>
 <instance part="S1" gate="1" x="144.78" y="-40.64" rot="MR270"/>
@@ -1407,14 +1509,22 @@ Distributor: &lt;a href ="https://www.buerklin.com/default.asp?event=ShowArtikel
 <instance part="IC7" gate="P" x="-38.1" y="-30.48"/>
 <instance part="P+12" gate="1" x="-38.1" y="-20.32" rot="MR0"/>
 <instance part="P-7" gate="1" x="-38.1" y="-40.64" rot="MR0"/>
-<instance part="IC1" gate="C" x="193.04" y="81.28" rot="MR90"/>
-<instance part="IC1" gate="D" x="218.44" y="81.28" rot="R90"/>
 <instance part="P+13" gate="1" x="7.62" y="0" rot="MR0"/>
 <instance part="GND39" gate="1" x="7.62" y="-15.24"/>
 <instance part="R45" gate="G$1" x="15.24" y="-15.24" rot="R90"/>
 <instance part="PWM-2" gate="G$1" x="198.12" y="-2.54" rot="R270"/>
 <instance part="P+14" gate="1" x="198.12" y="5.08" rot="MR0"/>
 <instance part="GND40" gate="1" x="198.12" y="-10.16"/>
+<instance part="S2" gate="B" x="66.04" y="96.52" rot="R180"/>
+<instance part="S2" gate="1" x="78.74" y="96.52" rot="R180"/>
+<instance part="J11" gate="G$1" x="-66.04" y="101.6"/>
+<instance part="IC6" gate="A" x="208.28" y="73.66"/>
+<instance part="J12" gate="G$1" x="132.08" y="17.78"/>
+<instance part="LIN.FM-ATT2" gate="G$1" x="152.4" y="7.62" rot="R270"/>
+<instance part="R4" gate="G$1" x="165.1" y="7.62"/>
+<instance part="GND5" gate="1" x="152.4" y="0"/>
+<instance part="GND36" gate="1" x="129.54" y="10.16"/>
+<instance part="C13" gate="G$1" x="144.78" y="20.32" rot="R90"/>
 </instances>
 <busses>
 </busses>
@@ -1438,10 +1548,6 @@ Distributor: &lt;a href ="https://www.buerklin.com/default.asp?event=ShowArtikel
 <wire x1="35.56" y1="68.58" x2="35.56" y2="63.5" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="R4" gate="G$1" pin="2"/>
-<pinref part="GND5" gate="1" pin="0V"/>
-</segment>
-<segment>
 <pinref part="J1" gate="G$1" pin="GND"/>
 <pinref part="GND4" gate="1" pin="0V"/>
 </segment>
@@ -1450,7 +1556,7 @@ Distributor: &lt;a href ="https://www.buerklin.com/default.asp?event=ShowArtikel
 <pinref part="R8" gate="G$1" pin="1"/>
 </segment>
 <segment>
-<pinref part="ATT1" gate="G$1" pin="2"/>
+<pinref part="LIN.FM-ATT" gate="G$1" pin="2"/>
 <pinref part="GND9" gate="1" pin="0V"/>
 </segment>
 <segment>
@@ -1470,7 +1576,7 @@ Distributor: &lt;a href ="https://www.buerklin.com/default.asp?event=ShowArtikel
 <segment>
 <pinref part="J2" gate="G$1" pin="GND"/>
 <pinref part="GND7" gate="1" pin="0V"/>
-<wire x1="-53.34" y1="2.54" x2="-53.34" y2="0" width="0.1524" layer="91"/>
+<wire x1="-55.88" y1="2.54" x2="-55.88" y2="0" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="J4" gate="G$1" pin="GND"/>
@@ -1543,14 +1649,6 @@ Distributor: &lt;a href ="https://www.buerklin.com/default.asp?event=ShowArtikel
 <wire x1="68.58" y1="-78.74" x2="68.58" y2="-81.28" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="EXP.FM-ATT1" gate="G$1" pin="2"/>
-<pinref part="GND27" gate="1" pin="0V"/>
-</segment>
-<segment>
-<pinref part="J9" gate="G$1" pin="GND"/>
-<pinref part="GND29" gate="1" pin="0V"/>
-</segment>
-<segment>
 <pinref part="R33" gate="G$1" pin="1"/>
 <pinref part="GND30" gate="1" pin="0V"/>
 <wire x1="279.4" y1="48.26" x2="279.4" y2="50.8" width="0.1524" layer="91"/>
@@ -1562,11 +1660,6 @@ Distributor: &lt;a href ="https://www.buerklin.com/default.asp?event=ShowArtikel
 <pinref part="GND35" gate="1" pin="0V"/>
 </segment>
 <segment>
-<pinref part="GND31" gate="1" pin="0V"/>
-<wire x1="218.44" y1="76.2" x2="218.44" y2="73.66" width="0.1524" layer="91"/>
-<pinref part="IC1" gate="D" pin="B"/>
-</segment>
-<segment>
 <pinref part="GND32" gate="1" pin="0V"/>
 <pinref part="R34" gate="G$1" pin="1"/>
 </segment>
@@ -1576,17 +1669,9 @@ Distributor: &lt;a href ="https://www.buerklin.com/default.asp?event=ShowArtikel
 <wire x1="154.94" y1="71.12" x2="154.94" y2="68.58" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="R37" gate="G$1" pin="2"/>
-<pinref part="GND33" gate="1" pin="0V"/>
-</segment>
-<segment>
 <pinref part="IC5" gate="C" pin="+IN"/>
 <pinref part="GND34" gate="1" pin="0V"/>
 <wire x1="177.8" y1="27.94" x2="177.8" y2="25.4" width="0.1524" layer="91"/>
-</segment>
-<segment>
-<pinref part="R42" gate="G$1" pin="2"/>
-<pinref part="GND36" gate="1" pin="0V"/>
 </segment>
 <segment>
 <pinref part="IC7" gate="B" pin="+IN"/>
@@ -1604,6 +1689,21 @@ Distributor: &lt;a href ="https://www.buerklin.com/default.asp?event=ShowArtikel
 <segment>
 <pinref part="PWM-2" gate="G$1" pin="2"/>
 <pinref part="GND40" gate="1" pin="0V"/>
+</segment>
+<segment>
+<pinref part="IC6" gate="A" pin="B3"/>
+<wire x1="218.44" y1="73.66" x2="223.52" y2="73.66" width="0.1524" layer="91"/>
+<pinref part="GND31" gate="1" pin="0V"/>
+<wire x1="223.52" y1="73.66" x2="223.52" y2="68.58" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="LIN.FM-ATT2" gate="G$1" pin="2"/>
+<pinref part="GND5" gate="1" pin="0V"/>
+</segment>
+<segment>
+<pinref part="J12" gate="G$1" pin="GND"/>
+<pinref part="GND36" gate="1" pin="0V"/>
+<wire x1="129.54" y1="15.24" x2="129.54" y2="12.7" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$1" class="0">
@@ -1691,7 +1791,7 @@ Distributor: &lt;a href ="https://www.buerklin.com/default.asp?event=ShowArtikel
 <segment>
 <pinref part="COARSE1" gate="G$1" pin="1"/>
 <pinref part="P+9" gate="1" pin="+12V"/>
-<wire x1="124.46" y1="60.96" x2="124.46" y2="66.04" width="0.1524" layer="91"/>
+<wire x1="132.08" y1="60.96" x2="132.08" y2="66.04" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="P+10" gate="1" pin="+12V"/>
@@ -1701,6 +1801,7 @@ Distributor: &lt;a href ="https://www.buerklin.com/default.asp?event=ShowArtikel
 <segment>
 <pinref part="R36" gate="G$1" pin="2"/>
 <pinref part="P+11" gate="1" pin="+12V"/>
+<wire x1="172.72" y1="50.8" x2="172.72" y2="48.26" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="IC7" gate="P" pin="V+"/>
@@ -1806,15 +1907,16 @@ Distributor: &lt;a href ="https://www.buerklin.com/default.asp?event=ShowArtikel
 <net name="N$18" class="0">
 <segment>
 <pinref part="R11" gate="G$1" pin="1"/>
-<pinref part="ATT1" gate="G$1" pin="P$1"/>
+<pinref part="LIN.FM-ATT" gate="G$1" pin="P$1"/>
+<wire x1="-30.48" y1="-2.54" x2="-27.94" y2="-2.54" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$19" class="0">
 <segment>
-<pinref part="ATT1" gate="G$1" pin="1"/>
+<pinref part="LIN.FM-ATT" gate="G$1" pin="1"/>
 <pinref part="C4" gate="G$1" pin="2"/>
-<wire x1="-35.56" y1="7.62" x2="-33.02" y2="7.62" width="0.1524" layer="91"/>
-<wire x1="-33.02" y1="7.62" x2="-33.02" y2="2.54" width="0.1524" layer="91"/>
+<wire x1="-38.1" y1="7.62" x2="-35.56" y2="7.62" width="0.1524" layer="91"/>
+<wire x1="-35.56" y1="7.62" x2="-35.56" y2="2.54" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$20" class="0">
@@ -1909,7 +2011,7 @@ Distributor: &lt;a href ="https://www.buerklin.com/default.asp?event=ShowArtikel
 <segment>
 <pinref part="COARSE1" gate="G$1" pin="2"/>
 <pinref part="P-6" gate="1" pin="-12V"/>
-<wire x1="124.46" y1="45.72" x2="124.46" y2="50.8" width="0.1524" layer="91"/>
+<wire x1="132.08" y1="45.72" x2="132.08" y2="50.8" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="IC7" gate="P" pin="V-"/>
@@ -1922,19 +2024,6 @@ Distributor: &lt;a href ="https://www.buerklin.com/default.asp?event=ShowArtikel
 <pinref part="J4" gate="G$1" pin="HOT"/>
 <wire x1="-58.42" y1="66.04" x2="-58.42" y2="68.58" width="0.1524" layer="91"/>
 <wire x1="-58.42" y1="68.58" x2="-60.96" y2="68.58" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="N$27" class="0">
-<segment>
-<pinref part="J5" gate="G$1" pin="HOT"/>
-<pinref part="R13" gate="G$1" pin="1"/>
-<wire x1="-60.96" y1="83.82" x2="-58.42" y2="83.82" width="0.1524" layer="91"/>
-<wire x1="-58.42" y1="83.82" x2="-53.34" y2="83.82" width="0.1524" layer="91"/>
-<wire x1="-58.42" y1="83.82" x2="-58.42" y2="91.44" width="0.1524" layer="91"/>
-<wire x1="-58.42" y1="91.44" x2="139.7" y2="91.44" width="0.1524" layer="91"/>
-<junction x="-58.42" y="83.82"/>
-<pinref part="R28" gate="G$1" pin="1"/>
-<wire x1="139.7" y1="91.44" x2="139.7" y2="83.82" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$28" class="0">
@@ -2189,25 +2278,11 @@ Distributor: &lt;a href ="https://www.buerklin.com/default.asp?event=ShowArtikel
 <pinref part="R27" gate="G$1" pin="2"/>
 </segment>
 </net>
-<net name="N$51" class="0">
-<segment>
-<pinref part="EXP.FM-ATT1" gate="G$1" pin="P$1"/>
-<pinref part="R30" gate="G$1" pin="1"/>
-</segment>
-</net>
 <net name="N$52" class="0">
 <segment>
 <pinref part="R31" gate="G$1" pin="1"/>
 <pinref part="COARSE1" gate="G$1" pin="P$1"/>
-<wire x1="139.7" y1="55.88" x2="129.54" y2="55.88" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="N$53" class="0">
-<segment>
-<pinref part="J9" gate="G$1" pin="HOT"/>
-<wire x1="132.08" y1="81.28" x2="134.62" y2="81.28" width="0.1524" layer="91"/>
-<pinref part="EXP.FM-ATT1" gate="G$1" pin="1"/>
-<wire x1="134.62" y1="81.28" x2="134.62" y2="78.74" width="0.1524" layer="91"/>
+<wire x1="139.7" y1="55.88" x2="137.16" y2="55.88" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$54" class="0">
@@ -2215,13 +2290,10 @@ Distributor: &lt;a href ="https://www.buerklin.com/default.asp?event=ShowArtikel
 <pinref part="R28" gate="G$1" pin="2"/>
 <pinref part="R32" gate="G$1" pin="1"/>
 <wire x1="149.86" y1="83.82" x2="154.94" y2="83.82" width="0.1524" layer="91"/>
-<pinref part="R30" gate="G$1" pin="2"/>
 <wire x1="154.94" y1="83.82" x2="162.56" y2="83.82" width="0.1524" layer="91"/>
-<wire x1="149.86" y1="83.82" x2="149.86" y2="73.66" width="0.1524" layer="91"/>
 <pinref part="R31" gate="G$1" pin="2"/>
-<wire x1="149.86" y1="73.66" x2="149.86" y2="55.88" width="0.1524" layer="91"/>
+<wire x1="149.86" y1="83.82" x2="149.86" y2="55.88" width="0.1524" layer="91"/>
 <junction x="149.86" y="83.82"/>
-<junction x="149.86" y="73.66"/>
 <pinref part="IC5" gate="B" pin="-IN"/>
 <wire x1="154.94" y1="83.82" x2="154.94" y2="76.2" width="0.1524" layer="91"/>
 <junction x="154.94" y="83.82"/>
@@ -2229,8 +2301,7 @@ Distributor: &lt;a href ="https://www.buerklin.com/default.asp?event=ShowArtikel
 </net>
 <net name="N$56" class="0">
 <segment>
-<wire x1="210.82" y1="45.72" x2="210.82" y2="83.82" width="0.1524" layer="91"/>
-<wire x1="210.82" y1="83.82" x2="213.36" y2="83.82" width="0.1524" layer="91"/>
+<wire x1="210.82" y1="45.72" x2="210.82" y2="68.58" width="0.1524" layer="91"/>
 <wire x1="210.82" y1="45.72" x2="231.14" y2="45.72" width="0.1524" layer="91"/>
 <pinref part="C9" gate="G$1" pin="1"/>
 <pinref part="Q5" gate="G$1" pin="E"/>
@@ -2240,7 +2311,6 @@ Distributor: &lt;a href ="https://www.buerklin.com/default.asp?event=ShowArtikel
 <wire x1="210.82" y1="45.72" x2="210.82" y2="33.02" width="0.1524" layer="91"/>
 <junction x="210.82" y="45.72"/>
 <pinref part="IC5" gate="D" pin="+IN"/>
-<pinref part="IC1" gate="D" pin="C"/>
 </segment>
 </net>
 <net name="N$57" class="0">
@@ -2298,21 +2368,6 @@ Distributor: &lt;a href ="https://www.buerklin.com/default.asp?event=ShowArtikel
 <junction x="193.04" y="38.1"/>
 </segment>
 </net>
-<net name="N$62" class="0">
-<segment>
-<pinref part="R38" gate="G$1" pin="2"/>
-<wire x1="205.74" y1="30.48" x2="205.74" y2="88.9" width="0.1524" layer="91"/>
-<pinref part="IC1" gate="C" pin="E"/>
-<pinref part="IC1" gate="D" pin="E"/>
-<wire x1="187.96" y1="83.82" x2="185.42" y2="83.82" width="0.1524" layer="91"/>
-<wire x1="185.42" y1="83.82" x2="185.42" y2="88.9" width="0.1524" layer="91"/>
-<wire x1="185.42" y1="88.9" x2="205.74" y2="88.9" width="0.1524" layer="91"/>
-<wire x1="223.52" y1="83.82" x2="226.06" y2="83.82" width="0.1524" layer="91"/>
-<wire x1="226.06" y1="83.82" x2="226.06" y2="88.9" width="0.1524" layer="91"/>
-<wire x1="226.06" y1="88.9" x2="205.74" y2="88.9" width="0.1524" layer="91"/>
-<junction x="205.74" y="88.9"/>
-</segment>
-</net>
 <net name="N$63" class="0">
 <segment>
 <pinref part="D4" gate="G$1" pin="C"/>
@@ -2321,20 +2376,20 @@ Distributor: &lt;a href ="https://www.buerklin.com/default.asp?event=ShowArtikel
 </net>
 <net name="N$64" class="0">
 <segment>
-<wire x1="198.12" y1="83.82" x2="200.66" y2="83.82" width="0.1524" layer="91"/>
-<wire x1="200.66" y1="83.82" x2="200.66" y2="43.18" width="0.1524" layer="91"/>
-<wire x1="200.66" y1="43.18" x2="177.8" y2="43.18" width="0.1524" layer="91"/>
+<wire x1="205.74" y1="68.58" x2="205.74" y2="43.18" width="0.1524" layer="91"/>
+<wire x1="205.74" y1="43.18" x2="177.8" y2="43.18" width="0.1524" layer="91"/>
 <pinref part="C10" gate="G$1" pin="1"/>
 <pinref part="R36" gate="G$1" pin="1"/>
-<pinref part="R37" gate="G$1" pin="1"/>
 <wire x1="172.72" y1="38.1" x2="177.8" y2="38.1" width="0.1524" layer="91"/>
 <wire x1="177.8" y1="38.1" x2="182.88" y2="38.1" width="0.1524" layer="91"/>
 <wire x1="177.8" y1="43.18" x2="177.8" y2="38.1" width="0.1524" layer="91"/>
 <pinref part="IC5" gate="C" pin="-IN"/>
 <wire x1="177.8" y1="38.1" x2="177.8" y2="33.02" width="0.1524" layer="91"/>
 <junction x="177.8" y="38.1"/>
+<wire x1="172.72" y1="38.1" x2="172.72" y2="7.62" width="0.1524" layer="91"/>
+<pinref part="R4" gate="G$1" pin="2"/>
+<wire x1="172.72" y1="7.62" x2="170.18" y2="7.62" width="0.1524" layer="91"/>
 <junction x="172.72" y="38.1"/>
-<pinref part="IC1" gate="C" pin="C"/>
 </segment>
 </net>
 <net name="N$65" class="0">
@@ -2350,12 +2405,12 @@ Distributor: &lt;a href ="https://www.buerklin.com/default.asp?event=ShowArtikel
 <wire x1="180.34" y1="73.66" x2="170.18" y2="73.66" width="0.1524" layer="91"/>
 <junction x="180.34" y="73.66"/>
 <pinref part="D4" gate="G$1" pin="A"/>
-<pinref part="IC1" gate="C" pin="B"/>
-<wire x1="193.04" y1="76.2" x2="193.04" y2="73.66" width="0.1524" layer="91"/>
 <wire x1="193.04" y1="73.66" x2="193.04" y2="71.12" width="0.1524" layer="91"/>
 <wire x1="185.42" y1="73.66" x2="193.04" y2="73.66" width="0.1524" layer="91"/>
-<junction x="193.04" y="73.66"/>
 <junction x="185.42" y="73.66"/>
+<pinref part="IC6" gate="A" pin="B1"/>
+<wire x1="193.04" y1="73.66" x2="198.12" y2="73.66" width="0.1524" layer="91"/>
+<junction x="193.04" y="73.66"/>
 </segment>
 </net>
 <net name="N$66" class="0">
@@ -2535,6 +2590,74 @@ Distributor: &lt;a href ="https://www.buerklin.com/default.asp?event=ShowArtikel
 <pinref part="PWM-2" gate="G$1" pin="P$1"/>
 <pinref part="IC7" gate="A" pin="-IN"/>
 <wire x1="203.2" y1="-2.54" x2="210.82" y2="-2.54" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$78" class="0">
+<segment>
+<pinref part="R13" gate="G$1" pin="1"/>
+<wire x1="-58.42" y1="83.82" x2="-53.34" y2="83.82" width="0.1524" layer="91"/>
+<wire x1="-58.42" y1="83.82" x2="-58.42" y2="88.9" width="0.1524" layer="91"/>
+<junction x="-58.42" y="83.82"/>
+<pinref part="J5" gate="G$1" pin="HOT"/>
+<wire x1="-60.96" y1="83.82" x2="-58.42" y2="83.82" width="0.1524" layer="91"/>
+<wire x1="-58.42" y1="88.9" x2="63.5" y2="88.9" width="0.1524" layer="91"/>
+<pinref part="S2" gate="B" pin="S"/>
+<wire x1="63.5" y1="88.9" x2="63.5" y2="91.44" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$27" class="0">
+<segment>
+<pinref part="J11" gate="G$1" pin="HOT"/>
+<pinref part="S2" gate="1" pin="P"/>
+<wire x1="-60.96" y1="104.14" x2="66.04" y2="104.14" width="0.1524" layer="91"/>
+<wire x1="66.04" y1="104.14" x2="76.2" y2="104.14" width="0.1524" layer="91"/>
+<wire x1="76.2" y1="104.14" x2="76.2" y2="101.6" width="0.1524" layer="91"/>
+<pinref part="S2" gate="B" pin="P"/>
+<wire x1="66.04" y1="104.14" x2="66.04" y2="101.6" width="0.1524" layer="91"/>
+<junction x="66.04" y="104.14"/>
+</segment>
+</net>
+<net name="N$79" class="0">
+<segment>
+<pinref part="S2" gate="1" pin="S"/>
+<wire x1="73.66" y1="91.44" x2="73.66" y2="88.9" width="0.1524" layer="91"/>
+<wire x1="73.66" y1="88.9" x2="78.74" y2="88.9" width="0.1524" layer="91"/>
+<pinref part="S2" gate="1" pin="O"/>
+<wire x1="78.74" y1="88.9" x2="78.74" y2="91.44" width="0.1524" layer="91"/>
+<wire x1="78.74" y1="88.9" x2="139.7" y2="88.9" width="0.1524" layer="91"/>
+<pinref part="R28" gate="G$1" pin="1"/>
+<wire x1="139.7" y1="88.9" x2="139.7" y2="83.82" width="0.1524" layer="91"/>
+<junction x="78.74" y="88.9"/>
+</segment>
+</net>
+<net name="N$62" class="0">
+<segment>
+<pinref part="R38" gate="G$1" pin="2"/>
+<wire x1="205.74" y1="30.48" x2="208.28" y2="30.48" width="0.1524" layer="91"/>
+<pinref part="IC6" gate="A" pin="E"/>
+<wire x1="208.28" y1="30.48" x2="208.28" y2="68.58" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$80" class="0">
+<segment>
+<pinref part="LIN.FM-ATT2" gate="G$1" pin="P$1"/>
+<pinref part="R4" gate="G$1" pin="1"/>
+<wire x1="160.02" y1="7.62" x2="157.48" y2="7.62" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$81" class="0">
+<segment>
+<pinref part="LIN.FM-ATT2" gate="G$1" pin="1"/>
+<pinref part="C13" gate="G$1" pin="2"/>
+<wire x1="149.86" y1="20.32" x2="152.4" y2="20.32" width="0.1524" layer="91"/>
+<wire x1="152.4" y1="20.32" x2="152.4" y2="12.7" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$51" class="0">
+<segment>
+<pinref part="J12" gate="G$1" pin="HOT"/>
+<pinref part="C13" gate="G$1" pin="1"/>
+<wire x1="137.16" y1="20.32" x2="139.7" y2="20.32" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
