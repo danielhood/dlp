@@ -662,7 +662,7 @@ http://www.st.com&lt;p&gt;
 <part name="R6" library="_common" deviceset="R" device="0309/10" value="4.7K"/>
 <part name="R7" library="_common" deviceset="R" device="0309/10" value="4.7K"/>
 <part name="S-1" library="_common" deviceset="R-VAR" device="" value="10K LIN"/>
-<part name="D-1" library="_common" deviceset="R-VAR" device="" value="1M LIN"/>
+<part name="D-1" library="_common" deviceset="R-VAR" device="" value="200K LOG"/>
 <part name="A-1" library="_common" deviceset="R-VAR" device="" value="1M LIN"/>
 <part name="R-1" library="_common" deviceset="R-VAR" device="" value="1M LIN"/>
 <part name="R8" library="_common" deviceset="R" device="0309/10" value="220"/>
@@ -705,7 +705,7 @@ http://www.st.com&lt;p&gt;
 <part name="R16" library="_common" deviceset="R" device="0309/10" value="4.7K"/>
 <part name="R17" library="_common" deviceset="R" device="0309/10" value="4.7K"/>
 <part name="S-2" library="_common" deviceset="R-VAR" device="" value="10K LIN"/>
-<part name="D-2" library="_common" deviceset="R-VAR" device="" value="1M LIN"/>
+<part name="D-2" library="_common" deviceset="R-VAR" device="" value="200K LOG"/>
 <part name="A-2" library="_common" deviceset="R-VAR" device="" value="1M LIN"/>
 <part name="R-2" library="_common" deviceset="R-VAR" device="" value="1M LIN"/>
 <part name="R18" library="_common" deviceset="R" device="0309/10" value="220"/>
@@ -746,8 +746,8 @@ http://www.st.com&lt;p&gt;
 <text x="50.8" y="22.86" size="1.778" layer="91">Adapted from:
 http://www.uni-bonn.de/~uzs159</text>
 <text x="50.8" y="20.32" size="1.778" layer="91">http://www.schmitzbits.de/</text>
-<text x="50.8" y="15.24" size="1.778" layer="91">Updated: 2013-11-13</text>
 <text x="-7.62" y="50.8" size="1.778" layer="91">0 - 7 V</text>
+<text x="50.8" y="15.24" size="1.778" layer="91">Updated 2013-11-20</text>
 </plain>
 <instances>
 <instance part="IN1" gate="G$1" x="-12.7" y="81.28"/>
