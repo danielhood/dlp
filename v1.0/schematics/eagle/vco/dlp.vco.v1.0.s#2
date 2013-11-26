@@ -1194,7 +1194,7 @@ distributor RS Components</description>
 <part name="C2" library="_common" deviceset="CC-US" device="025-024X044" value="18pF"/>
 <part name="R3" library="_common" deviceset="R" device="0309/10" value="3.3M"/>
 <part name="J1" library="_common" deviceset="JACK-M" device="" value="PWM"/>
-<part name="PWM-1" library="_common" deviceset="R-VAR" device="" value="250K"/>
+<part name="PWM-1" library="_common" deviceset="R-VAR" device="" value="250K (lin)"/>
 <part name="R5" library="_common" deviceset="R" device="0309/10" value="4.7K"/>
 <part name="C3" library="_common" deviceset="CC-US" device="025-024X044" value="100pF"/>
 <part name="D2" library="_common" deviceset="1N4148" device=""/>
@@ -1204,7 +1204,7 @@ distributor RS Components</description>
 <part name="R10" library="_common" deviceset="R" device="0309/10" value="1.5M"/>
 <part name="P+2" library="supply1" deviceset="+12V" device=""/>
 <part name="R11" library="_common" deviceset="R" device="0309/10" value="100K"/>
-<part name="LIN.FM-ATT" library="_common" deviceset="R-VAR" device="" value="250K"/>
+<part name="LIN.FM-ATT" library="_common" deviceset="R-VAR" device="" value="250K (lin)"/>
 <part name="C4" library="_common" deviceset="CC-US" device="025-024X044" value="0.22μF"/>
 <part name="J2" library="_common" deviceset="JACK-M" device="" value="LIN FM"/>
 <part name="GND7" library="supply1" deviceset="0V" device=""/>
@@ -1217,8 +1217,8 @@ distributor RS Components</description>
 <part name="R15" library="_common" deviceset="R" device="0309/10" value="100K"/>
 <part name="R16" library="_common" deviceset="R" device="0309/10" value="3.3M"/>
 <part name="FINE" library="_common" deviceset="R-VAR" device="" value="250K"/>
-<part name="COARSE" library="_common" deviceset="R-VAR" device="" value="250K"/>
-<part name="EXP.FM-ATT" library="_common" deviceset="R-VAR" device="" value="250K"/>
+<part name="COARSE" library="_common" deviceset="R-VAR" device="" value="250K (lin)"/>
+<part name="EXP.FM-ATT" library="_common" deviceset="R-VAR" device="" value="250K (lin)"/>
 <part name="J4" library="_common" deviceset="JACK-M" device="" value="EXP FM"/>
 <part name="J5" library="_common" deviceset="JACK-M" device="" value="PITCH-1"/>
 <part name="P+3" library="supply1" deviceset="+12V" device=""/>
@@ -1282,7 +1282,7 @@ distributor RS Components</description>
 <part name="P-5" library="supply1" deviceset="-12V" device=""/>
 <part name="R28" library="_common" deviceset="R" device="0309/10" value="100K"/>
 <part name="R31" library="_common" deviceset="R" device="0309/10" value="100K"/>
-<part name="COARSE1" library="_common" deviceset="R-VAR" device="" value="250K"/>
+<part name="COARSE1" library="_common" deviceset="R-VAR" device="" value="250K (lin)"/>
 <part name="P+9" library="supply1" deviceset="+12V" device=""/>
 <part name="P-6" library="supply1" deviceset="-12V" device=""/>
 <part name="GND28" library="supply1" deviceset="0V" device=""/>
@@ -1314,9 +1314,9 @@ distributor RS Components</description>
 <part name="C11" library="_common" deviceset="CC-US" device="025-024X044" value="18pF"/>
 <part name="C12" library="_common" deviceset="CE-US" device="E2-5" value="10μF"/>
 <part name="R41" library="_common" deviceset="R" device="0309/10" value="22K"/>
-<part name="SQ-SW" library="_common" deviceset="R-VAR" device="" value="50K"/>
-<part name="SW-LEVEL1" library="_common" deviceset="R-VAR" device="" value="OSC2-LEVEL"/>
-<part name="S1" library="switch-misc" deviceset="9077-1" device="" value="TO-GAIN"/>
+<part name="SQ-SW" library="_common" deviceset="R-VAR" device="" value="50K (lin)"/>
+<part name="OSC2.LEVEL" library="_common" deviceset="R-VAR" device="" value="50K (log)"/>
+<part name="S1" library="switch-misc" deviceset="9077-1" device="" value="OSC2 TO MIX"/>
 <part name="GND37" library="supply1" deviceset="0V" device=""/>
 <part name="R43" library="_common" deviceset="R" device="0309/10" value="1K"/>
 <part name="J10" library="_common" deviceset="JACK-M" device="" value="OSC2 OUT"/>
@@ -1327,18 +1327,33 @@ distributor RS Components</description>
 <part name="P+13" library="supply1" deviceset="+12V" device=""/>
 <part name="GND39" library="supply1" deviceset="0V" device=""/>
 <part name="R45" library="_common" deviceset="R" device="0309/10" value="10K"/>
-<part name="PWM-2" library="_common" deviceset="R-VAR" device="" value="250K"/>
+<part name="PWM-2" library="_common" deviceset="R-VAR" device="" value="250K (lin)"/>
 <part name="P+14" library="supply1" deviceset="+12V" device=""/>
 <part name="GND40" library="supply1" deviceset="0V" device=""/>
 <part name="S2" library="switch" deviceset="320-938" device=""/>
 <part name="J11" library="_common" deviceset="JACK-M" device="" value="PITCH-2"/>
 <part name="IC6" library="_common" deviceset="NTE912" device="P"/>
 <part name="J12" library="_common" deviceset="JACK-M" device="" value="LIN FM"/>
-<part name="LIN.FM-ATT2" library="_common" deviceset="R-VAR" device="" value="250K"/>
+<part name="LIN.FM-ATT2" library="_common" deviceset="R-VAR" device="" value="250K (lin)"/>
 <part name="R4" library="_common" deviceset="R" device="0309/10" value="100K"/>
 <part name="GND5" library="supply1" deviceset="0V" device=""/>
 <part name="GND36" library="supply1" deviceset="0V" device=""/>
 <part name="C13" library="_common" deviceset="CC-US" device="025-024X044" value="0.22μF"/>
+<part name="P+15" library="supply1" deviceset="+12V" device=""/>
+<part name="P-8" library="supply1" deviceset="-12V" device=""/>
+<part name="GND27" library="supply1" deviceset="0V" device=""/>
+<part name="C14" library="_common" deviceset="CC-US" device="025-024X044" value="0.1uF"/>
+<part name="C15" library="_common" deviceset="CC-US" device="025-024X044" value="0.1uF"/>
+<part name="C16" library="_common" deviceset="CC-US" device="025-024X044" value="0.01uF"/>
+<part name="C17" library="_common" deviceset="CC-US" device="025-024X044" value="0.01uF"/>
+<part name="C18" library="_common" deviceset="CC-US" device="025-024X044" value="0.1uF"/>
+<part name="C19" library="_common" deviceset="CE-US" device="E2-5" value="10uF"/>
+<part name="C20" library="_common" deviceset="CC-US" device="025-024X044" value="0.1uF"/>
+<part name="C21" library="_common" deviceset="CC-US" device="025-024X044" value="0.1uF"/>
+<part name="C22" library="_common" deviceset="CC-US" device="025-024X044" value="0.01uF"/>
+<part name="C23" library="_common" deviceset="CC-US" device="025-024X044" value="0.01uF"/>
+<part name="C24" library="_common" deviceset="CC-US" device="025-024X044" value="0.1uF"/>
+<part name="C25" library="_common" deviceset="CE-US" device="E2-5" value="10uF"/>
 </parts>
 <sheets>
 <sheet>
@@ -1499,7 +1514,7 @@ distributor RS Components</description>
 <instance part="C12" gate="G$1" x="246.38" y="20.32" rot="MR270"/>
 <instance part="R41" gate="G$1" x="256.54" y="20.32"/>
 <instance part="SQ-SW" gate="G$1" x="236.22" y="20.32" rot="R270"/>
-<instance part="SW-LEVEL1" gate="G$1" x="274.32" y="30.48" rot="R180"/>
+<instance part="OSC2.LEVEL" gate="G$1" x="274.32" y="30.48" rot="R180"/>
 <instance part="S1" gate="1" x="144.78" y="-40.64" rot="MR270"/>
 <instance part="GND37" gate="1" x="261.62" y="10.16"/>
 <instance part="R43" gate="G$1" x="274.32" y="0"/>
@@ -1525,6 +1540,21 @@ distributor RS Components</description>
 <instance part="GND5" gate="1" x="152.4" y="0"/>
 <instance part="GND36" gate="1" x="129.54" y="10.16"/>
 <instance part="C13" gate="G$1" x="144.78" y="20.32" rot="R90"/>
+<instance part="P+15" gate="1" x="-17.78" y="-53.34"/>
+<instance part="P-8" gate="1" x="-17.78" y="-83.82"/>
+<instance part="GND27" gate="1" x="-7.62" y="-73.66"/>
+<instance part="C14" gate="G$1" x="-43.18" y="-63.5"/>
+<instance part="C15" gate="G$1" x="-35.56" y="-63.5"/>
+<instance part="C16" gate="G$1" x="-27.94" y="-63.5"/>
+<instance part="C17" gate="G$1" x="-17.78" y="-63.5"/>
+<instance part="C18" gate="G$1" x="-53.34" y="-63.5"/>
+<instance part="C19" gate="G$1" x="-63.5" y="-63.5" rot="MR0"/>
+<instance part="C20" gate="G$1" x="-43.18" y="-73.66"/>
+<instance part="C21" gate="G$1" x="-35.56" y="-73.66"/>
+<instance part="C22" gate="G$1" x="-27.94" y="-73.66"/>
+<instance part="C23" gate="G$1" x="-17.78" y="-73.66"/>
+<instance part="C24" gate="G$1" x="-53.34" y="-73.66"/>
+<instance part="C25" gate="G$1" x="-63.5" y="-73.66" rot="MR0"/>
 </instances>
 <busses>
 </busses>
@@ -1705,6 +1735,34 @@ distributor RS Components</description>
 <pinref part="GND36" gate="1" pin="0V"/>
 <wire x1="129.54" y1="15.24" x2="129.54" y2="12.7" width="0.1524" layer="91"/>
 </segment>
+<segment>
+<pinref part="C19" gate="G$1" pin="-"/>
+<pinref part="C18" gate="G$1" pin="2"/>
+<wire x1="-63.5" y1="-68.58" x2="-53.34" y2="-68.58" width="0.1524" layer="91"/>
+<pinref part="C14" gate="G$1" pin="2"/>
+<wire x1="-53.34" y1="-68.58" x2="-43.18" y2="-68.58" width="0.1524" layer="91"/>
+<pinref part="C15" gate="G$1" pin="2"/>
+<wire x1="-43.18" y1="-68.58" x2="-35.56" y2="-68.58" width="0.1524" layer="91"/>
+<wire x1="-35.56" y1="-68.58" x2="-27.94" y2="-68.58" width="0.1524" layer="91"/>
+<pinref part="C17" gate="G$1" pin="2"/>
+<wire x1="-27.94" y1="-68.58" x2="-17.78" y2="-68.58" width="0.1524" layer="91"/>
+<wire x1="-17.78" y1="-68.58" x2="-7.62" y2="-68.58" width="0.1524" layer="91"/>
+<pinref part="GND27" gate="1" pin="0V"/>
+<wire x1="-7.62" y1="-68.58" x2="-7.62" y2="-71.12" width="0.1524" layer="91"/>
+<pinref part="C25" gate="G$1" pin="+"/>
+<junction x="-63.5" y="-68.58"/>
+<pinref part="C24" gate="G$1" pin="1"/>
+<junction x="-53.34" y="-68.58"/>
+<pinref part="C20" gate="G$1" pin="1"/>
+<junction x="-43.18" y="-68.58"/>
+<pinref part="C21" gate="G$1" pin="1"/>
+<junction x="-35.56" y="-68.58"/>
+<pinref part="C16" gate="G$1" pin="2"/>
+<pinref part="C22" gate="G$1" pin="1"/>
+<junction x="-27.94" y="-68.58"/>
+<pinref part="C23" gate="G$1" pin="1"/>
+<junction x="-17.78" y="-68.58"/>
+</segment>
 </net>
 <net name="N$1" class="0">
 <segment>
@@ -1814,6 +1872,26 @@ distributor RS Components</description>
 <segment>
 <pinref part="PWM-2" gate="G$1" pin="1"/>
 <pinref part="P+14" gate="1" pin="+12V"/>
+</segment>
+<segment>
+<pinref part="C17" gate="G$1" pin="1"/>
+<pinref part="P+15" gate="1" pin="+12V"/>
+<wire x1="-17.78" y1="-55.88" x2="-17.78" y2="-58.42" width="0.1524" layer="91"/>
+<pinref part="C19" gate="G$1" pin="+"/>
+<pinref part="C18" gate="G$1" pin="1"/>
+<wire x1="-63.5" y1="-58.42" x2="-53.34" y2="-58.42" width="0.1524" layer="91"/>
+<pinref part="C14" gate="G$1" pin="1"/>
+<wire x1="-53.34" y1="-58.42" x2="-43.18" y2="-58.42" width="0.1524" layer="91"/>
+<pinref part="C15" gate="G$1" pin="1"/>
+<wire x1="-43.18" y1="-58.42" x2="-35.56" y2="-58.42" width="0.1524" layer="91"/>
+<pinref part="C16" gate="G$1" pin="1"/>
+<wire x1="-35.56" y1="-58.42" x2="-27.94" y2="-58.42" width="0.1524" layer="91"/>
+<junction x="-53.34" y="-58.42"/>
+<junction x="-43.18" y="-58.42"/>
+<junction x="-35.56" y="-58.42"/>
+<wire x1="-27.94" y1="-58.42" x2="-17.78" y2="-58.42" width="0.1524" layer="91"/>
+<junction x="-27.94" y="-58.42"/>
+<junction x="-17.78" y="-58.42"/>
 </segment>
 </net>
 <net name="N$2" class="0">
@@ -2016,6 +2094,26 @@ distributor RS Components</description>
 <segment>
 <pinref part="IC7" gate="P" pin="V-"/>
 <pinref part="P-7" gate="1" pin="-12V"/>
+</segment>
+<segment>
+<pinref part="C25" gate="G$1" pin="-"/>
+<pinref part="C24" gate="G$1" pin="2"/>
+<wire x1="-63.5" y1="-78.74" x2="-53.34" y2="-78.74" width="0.1524" layer="91"/>
+<pinref part="C20" gate="G$1" pin="2"/>
+<wire x1="-53.34" y1="-78.74" x2="-43.18" y2="-78.74" width="0.1524" layer="91"/>
+<pinref part="C21" gate="G$1" pin="2"/>
+<wire x1="-43.18" y1="-78.74" x2="-35.56" y2="-78.74" width="0.1524" layer="91"/>
+<pinref part="C22" gate="G$1" pin="2"/>
+<wire x1="-35.56" y1="-78.74" x2="-27.94" y2="-78.74" width="0.1524" layer="91"/>
+<junction x="-35.56" y="-78.74"/>
+<junction x="-43.18" y="-78.74"/>
+<junction x="-53.34" y="-78.74"/>
+<pinref part="C23" gate="G$1" pin="2"/>
+<wire x1="-27.94" y1="-78.74" x2="-17.78" y2="-78.74" width="0.1524" layer="91"/>
+<pinref part="P-8" gate="1" pin="-12V"/>
+<wire x1="-17.78" y1="-78.74" x2="-17.78" y2="-81.28" width="0.1524" layer="91"/>
+<junction x="-17.78" y="-78.74"/>
+<junction x="-27.94" y="-78.74"/>
 </segment>
 </net>
 <net name="N$26" class="0">
@@ -2502,16 +2600,16 @@ distributor RS Components</description>
 <pinref part="R41" gate="G$1" pin="2"/>
 <pinref part="IC7" gate="B" pin="-IN"/>
 <wire x1="261.62" y1="20.32" x2="261.62" y2="30.48" width="0.1524" layer="91"/>
-<pinref part="SW-LEVEL1" gate="G$1" pin="2"/>
+<pinref part="OSC2.LEVEL" gate="G$1" pin="2"/>
 <wire x1="261.62" y1="30.48" x2="269.24" y2="30.48" width="0.1524" layer="91"/>
 <junction x="261.62" y="20.32"/>
 </segment>
 </net>
 <net name="N$74" class="0">
 <segment>
-<pinref part="SW-LEVEL1" gate="G$1" pin="P$1"/>
+<pinref part="OSC2.LEVEL" gate="G$1" pin="P$1"/>
 <wire x1="274.32" y1="25.4" x2="279.4" y2="25.4" width="0.1524" layer="91"/>
-<pinref part="SW-LEVEL1" gate="G$1" pin="1"/>
+<pinref part="OSC2.LEVEL" gate="G$1" pin="1"/>
 <wire x1="279.4" y1="30.48" x2="279.4" y2="25.4" width="0.1524" layer="91"/>
 <pinref part="IC7" gate="B" pin="OUT"/>
 <wire x1="279.4" y1="25.4" x2="279.4" y2="17.78" width="0.1524" layer="91"/>
