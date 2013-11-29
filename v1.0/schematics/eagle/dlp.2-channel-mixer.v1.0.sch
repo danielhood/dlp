@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="6.1">
+<eagle version="6.5.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="yes" altdistance="0.01" altunitdist="inch" altunit="inch"/>
+<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="no" active="no"/>
 <layer number="16" name="Bottom" color="1" fill="1" visible="no" active="no"/>
@@ -438,7 +438,7 @@ type 0309, grid 10mm</description>
 <part name="J2" library="_common" deviceset="JACK-M" device="" value="CH2-IN"/>
 <part name="J3" library="_common" deviceset="JACK-M" device="" value="CH3-IN"/>
 <part name="J4" library="_common" deviceset="JACK-M" device="" value="MIX-OUT"/>
-<part name="J5" library="_common" deviceset="JACK-M" device="" value="CH3-OUT"/>
+<part name="J5" library="_common" deviceset="JACK-M" device="" value="CH3-INV-OUT"/>
 <part name="C1" library="_common" deviceset="CE-US" device="E2-5" value="4.7μF"/>
 <part name="C2" library="_common" deviceset="CE-US" device="E2-5" value="4.7μF"/>
 <part name="C3" library="_common" deviceset="CE-US" device="E2-5" value="10μF"/>
