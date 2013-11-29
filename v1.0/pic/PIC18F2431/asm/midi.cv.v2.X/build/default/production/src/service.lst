@@ -1,0 +1,1443 @@
+MPASM  5.43                       SERVICE.ASM   2-28-2012  10:59:31         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001 ; Interrupt service handlers
+                      00002 
+                      00003 #include p18f2431.inc
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ;  MPASM PIC18F2431 processor include
+                      00005 ; 
+                      00006 ;  (c) Copyright 1999-2011 Microchip Technology, All rights reserved
+                      00007 ;==========================================================================
+                      00008 
+                      01464         LIST
+                      00004 #include inc/vars.inc
+                      00001 ; ------------------------------------------------------------------------------
+                      00002 ; Variables
+                      00003 
+                      00004         cblock  0x0000          ; start addresses in user register space
+                      00005 
+                      00006 ;------ Shared variables
+  00000000            00007         CUR_BYTE                ; Completed byte read by service code
+                      00008 
+  00000001            00009         CV_FLAGS                ; Set of flags to indicate if values have been updated
+  00000002            00010         CV_PITCH                ; Current value for note pitch
+  00000003            00011         CV_VELOCITY             ; Current value for note Velocity
+  00000004            00012         CV_MOD                  ; Current value for the Mod Wheel
+  00000005            00013         CV_GATE                 ; Flag for current gate setting (BIT0)
+                      00014 
+  00000006            00015         SYS_EX_DATA             ; Current Sysex byte (set to 0xF7 if no data)
+                      00016 
+                      00017 ;------ service.asm variables
+  00000007            00018         W_TMP                   ; Storage for W register during interrupt
+  00000008            00019         ST_TMP                  ; Storage for STATUS register during interrupt
+  00000009            00020         BSR_TMP                 ; Storage for BSR register during interrupt
+                      00021 
+  0000000A            00022         MIDI_STATE              ; Current midi state offset
+  0000000B            00023         MIDI_STATE_TMP          ; Used to store the last midi state when in SysEx mode
+  0000000C            00024         MSG_COUNT               ; Counts the number of msg params passed
+  0000000D            00025         CC_NUM                  ; Holds the controller number for the CC message
+  0000000E            00026         MSG_PITCH               ; Holds the working pitch that may be pushed live
+  0000000F            00027         MSG_VELOCITY            ; Holds the working velocity that may be pushed live
+                      00028 
+                      00029 ;------ midi.asm variables
+  00000010            00030         TMP_CV_BYTE_L           ; Holds a temp value for pushing CV values to the PWM registers
+  00000011            00031         TMP_CV_BYTE_H
+                      00032 
+                      00033 ;------ midi.read.int.asm variables (entry point)
+                      00034 
+                      00035         endc
+                      00036 
+                      00037 
+                      00038 ; ------------------------------------------------------------------------------
+                      00039 ; Constants
+                      00040 ;
+MPASM  5.43                       SERVICE.ASM   2-28-2012  10:59:31         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+  00000000            00041 CV_DATA_LKP:    equ     0x00    ; EEPROM base Address of CV Controller data lookup
+  00000080            00042 CV_NOTE_LKP:    equ     0x80    ; EEPROM base Address CV Note data lookup
+                      00043 
+                      00044 ; CV_FLAGS
+  00000000            00045 CVF_PITCH:      equ     0x00
+  00000001            00046 CVF_VELOCITY:   equ     0x01
+  00000002            00047 CVF_MOD:        equ     0x02
+  00000003            00048 CVF_GATE:       equ     0x03
+                      00049 
+  00000000            00050 _MOFFSET_NOTE_OFF:      equ     0x00    ; 0x8c
+  00000002            00051 _MOFFSET_NOTE_ON:       equ     0x02    ; 0x9c
+  00000004            00052 _MOFFSET_KP:            equ     0x04    ; 0xAc
+  00000006            00053 _MOFFSET_CC:            equ     0x06    ; 0xBc
+  00000008            00054 _MOFFSET_PC:            equ     0x08    ; 0xCc
+  0000000A            00055 _MOFFSET_CP:            equ     0x0A    ; 0xDc
+  0000000C            00056 _MOFFSET_PB:            equ     0x0C    ; 0xEc
+  0000000E            00057 _MOFFSET_SYS_EX:        equ     0x0E    ; 0xF0
+  00000010            00058 _MOFFSET_F1:            equ     0x10    ; 0xF1
+  00000012            00059 _MOFFSET_SP:            equ     0x12    ; 0xF2
+  00000014            00060 _MOFFSET_SS:            equ     0x14    ; 0xF3
+  00000016            00061 _MOSSFEST_F4:           equ     0x16    ; 0xF4
+  00000018            00062 _MOFFSET_UBS:           equ     0x18    ; 0xF5
+  0000001A            00063 _MOFFSET_TR:            equ     0x1A    ; 0xF6
+  0000001C            00064 _MOFFSET_SYS_EX_END:    equ     0x1C    ; 0xF7
+  0000001E            00065 _MOFFSET_TT:            equ     0x1E    ; 0xF8
+  00000020            00066 _MOSSFEST_F9:           equ     0x20    ; 0xF9
+  00000022            00067 _MOFFSET_START_SONG:    equ     0x22    ; 0xFA
+  00000024            00068 _MOFFSET_CONT_SONG:     equ     0x24    ; 0xFB
+  00000026            00069 _MOFFSET_STOP_SONG:     equ     0x26    ; 0xFC
+  00000028            00070 _MOSSFEST_FD:           equ     0x28    ; 0xFD
+  0000002A            00071 _MOFFSET_AS:            equ     0x2A    ; 0xFE
+  0000002C            00072 _MOFFSET_SYS_RESET:     equ     0x2C    ; 0xFF
+  0000002E            00073 _MOFFSET_NONE:          equ     0x2E
+                      00005 
+                      00006 ; ------------------------------------------------------------------------------
+                      00007 ; Export global code refs
+                      00008 ;
+  0000                00009         global  _SERVICE_HI
+  0000                00010         global  _SERVICE_LO
+                      00011 
+                      00012 
+                      00013 ; ------------------------------------------------------------------------------
+                      00014 ; Local Constants
+                      00015 
+  00000005            00016 MIDI:           equ     0x05    ; MIDI input on RB5
+                      00017 
+                      00018 
+                      00019 ; ------------------------------------------------------------------------------
+                      00020 ; Context SAVE/RESTORE macros
+                      00021 ;
+                      00022 _SAVE_CTX       macro
+                      00023         movwf   W_TMP           ; Save W to W_TEMP register
+                      00024         movff   STATUS,ST_TMP   ; Save STATUS to ST_TEMP register
+MPASM  5.43                       SERVICE.ASM   2-28-2012  10:59:31         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00025         movff   BSR,BSR_TMP     ; Save bank select
+                      00026         endm
+                      00027 
+                      00028 _RESTORE_CTX    macro
+                      00029         movff   BSR_TMP,BSR     ; Restore bank select
+                      00030         movf    W_TMP           ; Restore W
+                      00031         movff   ST_TMP,STATUS   ; Restore STATUS
+                      00032         endm
+                      00033 
+                      00034 ; ------------------------------------------------------------------------------
+                      00035 ; Dispatcher for interrupt handlers
+                      00036 ;
+                      00037 .SERVICE        code    ; Relocatable code for interrupt handler
+000000                00038 _SERVICE_LO:
+                      00039         ; Not used
+000000 0010           00040         retfie
+                      00041 
+000002                00042 _SERVICE_HI:
+                      00043         _SAVE_CTX
+000002 6E07               M         movwf   W_TMP           ; Save W to W_TEMP register
+000004 CFD8 F008          M         movff   STATUS,ST_TMP   ; Save STATUS to ST_TEMP register
+000008 CFE0 F009          M         movff   BSR,BSR_TMP     ; Save bank select
+                      00044 
+                      00045 ; Assumes only one interrupt will be enabled at a time
+00000C                00046 _CHECK_RC:
+00000C BA9E           00047         btfsc   PIR1,RCIF       ; Check for Serial RX interrupt (MIDI IN - byte read)
+00000E EF?? F???      00048         goto    _HANDLE_RC
+                      00049 
+000012                00050 _EXIT_SERVICE:
+                      00051         _RESTORE_CTX
+000012 C009 FFE0          M         movff   BSR_TMP,BSR     ; Restore bank select
+000016 5207               M         movf    W_TMP           ; Restore W
+000018 C008 FFD8          M         movff   ST_TMP,STATUS   ; Restore STATUS
+                      00052 
+00001C 0010           00053         retfie
+                      00054 
+                      00055 
+                      00056 ; ------------------------------------------------------------------------------
+                      00057 ; Handler for MIDI IN over Serial RX
+                      00058 ;
+00001E                00059 _HANDLE_RC:
+00001E CFAE F000      00060         movff   RCREG,CUR_BYTE  ; Copy received byte to CUR_BYTE
+                      00061 
+                      00062         ; First, check to see if we are in SysEx mode
+000022 0E0E           00063         movlw   _MOFFSET_SYS_EX
+000024 620A           00064         cpfseq  MIDI_STATE
+000026 EF?? F???      00065         goto    _CHECK_BYTE_TYPE
+                      00066 
+00002A                00067 _MSTATE_SYS_EX:
+00002A 0EF7           00068         movlw   0xF7
+00002C 6200           00069         cpfseq  CUR_BYTE
+00002E EF?? F???      00070         goto    _PROCESS_SYS_EX_DATA
+000032                00071 _PROCSES_SYS_EX_END:
+MPASM  5.43                       SERVICE.ASM   2-28-2012  10:59:31         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+000032 C00B F00A      00072         movff   MIDI_STATE_TMP,MIDI_STATE       ; Restore the last state before the SYS_EX message came 
+                            in
+000036 EF?? F???      00073         goto    _RC_CLEANUP
+00003A                00074 _PROCESS_SYS_EX_DATA:
+00003A C000 F006      00075         movff   CUR_BYTE,SYS_EX_DATA
+00003E EF?? F???      00076         goto    _RC_CLEANUP
+                      00077 
+000042                00078 _CHECK_BYTE_TYPE:
+000042 0E80           00079         movlw   0x80            ; Check to see if we have a status or a message byte
+000044 6000           00080         cpfslt  CUR_BYTE
+000046 EF?? F???      00081         goto    _PROCESS_STATUS
+                      00082 
+                      00083 ; ------------------------------------------------------------------------------
+                      00084 ; Process MIDI Message byte
+                      00085 ;
+                      00086 
+00004A                00087 _PROCESS_MESSAGE:
+                      00088 ; Branch based on which state we are in
+00004A 500A           00089         movf    MIDI_STATE,W    ; State setting represents offset into jump table
+00004C 26F9           00090         addwf   PCL,F
+00004E D???           00091         bra     _MSTATE_NOTE_OFF
+000050 D???           00092         bra     _MSTATE_NOTE_ON
+000052 D???           00093         bra     _MSTATE_KP
+000054 D???           00094         bra     _MSTATE_CC
+000056 D???           00095         bra     _MSTATE_PC
+000058 D???           00096         bra     _MSTATE_CP
+00005A D???           00097         bra     _MSTATE_PB
+00005C D???           00098         bra     _MSTATE_SYS_EX          ; Never called from here
+00005E D???           00099         bra     _MSTATE_F1              ; Never called
+000060 D???           00100         bra     _MSTATE_SP
+000062 D???           00101         bra     _MSTATE_SS
+000064 D???           00102         bra     _MSTATE_F4              ; Never called
+000066 D???           00103         bra     _MSTATE_UBS
+000068 D???           00104         bra     _MSTATE_TR
+00006A D???           00105         bra     _MSTATE_SYS_EX_END      ; Never called
+00006C D???           00106         bra     _MSTATE_TT
+00006E D???           00107         bra     _MSTATE_F9              ; Never called
+000070 D???           00108         bra     _MSTATE_START_SONG
+000072 D???           00109         bra     _MSTATE_CONT_SONG
+000074 D???           00110         bra     _MSTATE_STOP_SONG
+000076 D???           00111         bra     _MSTATE_FD
+000078 D???           00112         bra     _MSTATE_AS
+00007A D???           00113         bra     _MSTATE_SYS_RESET
+00007C D???           00114         bra     _MSTATE_NONE            ; Only ever called if a midi message byte arrives before a statu
+                            s byte after reset
+                      00115 
+                      00116 ;       movff   CUR_BYTE,CV_NOTE        ; Copy to all registers
+                      00117 ;       movff   CUR_BYTE,CV_VELOCITY    ; Copy to all registers
+                      00118 ;       movff   CUR_BYTE,CV_MOD         ; Copy to all registers
+                      00119 ;       btg     CV_GATE,0               ; Flip the gate flag
+                      00120 
+00007E                00121 _RC_CLEANUP:
+00007E 9A9E           00122         bcf     PIR1,RCIF       ; Clear Serial RX interrupt
+MPASM  5.43                       SERVICE.ASM   2-28-2012  10:59:31         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+000080 EF?? F???      00123         goto    _EXIT_SERVICE
+                      00124 
+                      00125 
+                      00126 ; ------------------------------------------------------------------------------
+                      00127 ; Midi message processing based on current state
+                      00128 ;
+000084                00129 _MSTATE_NOTE_OFF:
+000084 B00C           00130         btfsc   MSG_COUNT,0
+000086 EF?? F???      00131         goto    _PROCESS_VELOCITY_NOTE_OFF
+00008A                00132 _PROCSES_PITCH_NOTE_OFF:
+00008A C000 F00E      00133         movff   CUR_BYTE,MSG_PITCH
+00008E 2A0C           00134         incf    MSG_COUNT
+000090 EF?? F???      00135         goto    _RC_CLEANUP
+000094                00136 _PROCESS_VELOCITY_NOTE_OFF:
+000094 C000 F00F      00137         movff   CUR_BYTE,MSG_VELOCITY
+000098                00138 _PROCESS_VELOCITY_NOTE_OFF2:
+000098 500E           00139         movf    MSG_PITCH,W
+00009A 6202           00140         cpfseq  CV_PITCH
+00009C EF?? F???      00141         goto    _END_NOTE_OFF           ; Ignore note off, since a new note-on has been triggered since
+0000A0 EF?? F???      00142         goto    _PUT_NOTE_OFF_LIVE
+0000A4                00143 _PUT_NOTE_OFF_LIVE:
+0000A4 C00E F002      00144         movff   MSG_PITCH,CV_PITCH              ; Push the velocity and pitch live
+0000A8 8001           00145         bsf     CV_FLAGS,CVF_PITCH
+0000AA C00F F003      00146         movff   MSG_VELOCITY,CV_VELOCITY
+0000AE 8201           00147         bsf     CV_FLAGS,CVF_VELOCITY
+0000B0 9005           00148         bcf     CV_GATE,0               ; Clear the gate flag
+0000B2 8601           00149         bsf     CV_FLAGS,CVF_GATE
+0000B4                00150 _END_NOTE_OFF:
+0000B4 6A0C           00151         clrf    MSG_COUNT               ; Reset message count
+0000B6 EF?? F???      00152         goto    _RC_CLEANUP
+                      00153 
+0000BA                00154 _MSTATE_NOTE_ON:
+0000BA B00C           00155         btfsc   MSG_COUNT,0
+0000BC EF?? F???      00156         goto    _PROCESS_VELOCITY_NOTE_ON
+0000C0                00157 _PROCSES_PITCH_NOTE_ON:
+0000C0 C000 F00E      00158         movff   CUR_BYTE,MSG_PITCH
+0000C4 2A0C           00159         incf    MSG_COUNT
+0000C6 EF?? F???      00160         goto    _RC_CLEANUP
+0000CA                00161 _PROCESS_VELOCITY_NOTE_ON:
+0000CA C000 F00F      00162         movff   CUR_BYTE,MSG_VELOCITY
+0000CE 520F           00163         movf    MSG_VELOCITY,F          ; Check value of velocity
+0000D0 E0??           00164         bz      _PROCESS_VELOCITY_NOTE_OFF2     ; Vel0 is interpreted as a note off
+0000D2 C00E F002      00165         movff   MSG_PITCH,CV_PITCH              ; Push the velocity and pitch live as new note-on's are 
+                            always published
+0000D6 8001           00166         bsf     CV_FLAGS,CVF_PITCH
+0000D8 C00F F003      00167         movff   MSG_VELOCITY,CV_VELOCITY
+0000DC 8201           00168         bsf     CV_FLAGS,CVF_VELOCITY
+0000DE 8005           00169         bsf     CV_GATE,0               ; Set the gate flag
+0000E0 8601           00170         bsf     CV_FLAGS,CVF_GATE
+0000E2 6A0C           00171         clrf    MSG_COUNT               ; Reset message count
+0000E4 EF?? F???      00172         goto    _RC_CLEANUP
+                      00173 
+0000E8                00174 _MSTATE_KP:
+MPASM  5.43                       SERVICE.ASM   2-28-2012  10:59:31         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0000E8 EF?? F???      00175         goto    _RC_CLEANUP
+                      00176 
+0000EC                00177 _MSTATE_CC:
+0000EC B00C           00178         btfsc   MSG_COUNT,0
+0000EE EF?? F???      00179         goto    _PROCESS_CVALUE
+0000F2                00180 _PROCSES_CNUM:
+0000F2 C000 F00D      00181         movff   CUR_BYTE,CC_NUM
+0000F6 2A0C           00182         incf    MSG_COUNT
+0000F8 EF?? F???      00183         goto    _RC_CLEANUP
+0000FC                00184 _PROCESS_CVALUE:
+0000FC 0E01           00185         movlw   0x01                    ; Controller num that we're mapping (Mod Wheel)
+0000FE 620D           00186         cpfseq  CC_NUM                  ; Check to see if this is the controller we want
+000100 EF?? F???      00187         goto    _END_CVALUE             ; Ignore CC value
+000104 C000 F004      00188         movff   CUR_BYTE,CV_MOD         ; Update the CC value
+000108 8401           00189         bsf     CV_FLAGS,CVF_MOD
+00010A                00190 _END_CVALUE:
+00010A 6A0C           00191         clrf    MSG_COUNT               ; Reset message count
+00010C EF?? F???      00192         goto    _RC_CLEANUP
+                      00193 
+000110                00194 _MSTATE_PC:
+000110 EF?? F???      00195         goto    _RC_CLEANUP
+                      00196 
+000114                00197 _MSTATE_CP:
+000114 EF?? F???      00198         goto    _RC_CLEANUP
+                      00199 
+000118                00200 _MSTATE_PB:
+000118 EF?? F???      00201         goto    _RC_CLEANUP
+                      00202 
+00011C                00203 _MSTATE_F1:
+00011C EF?? F???      00204         goto    _RC_CLEANUP
+                      00205 
+000120                00206 _MSTATE_SP:
+000120 EF?? F???      00207         goto    _RC_CLEANUP
+                      00208 
+000124                00209 _MSTATE_SS:
+000124 EF?? F???      00210         goto    _RC_CLEANUP
+                      00211 
+000128                00212 _MSTATE_F4:
+000128 EF?? F???      00213         goto    _RC_CLEANUP
+                      00214 
+00012C                00215 _MSTATE_UBS:
+00012C EF?? F???      00216         goto    _RC_CLEANUP
+                      00217 
+000130                00218 _MSTATE_TR:
+000130 EF?? F???      00219         goto    _RC_CLEANUP
+                      00220 
+000134                00221 _MSTATE_SYS_EX_END:
+000134 EF?? F???      00222         goto    _RC_CLEANUP
+                      00223 
+000138                00224 _MSTATE_TT:
+000138 EF?? F???      00225         goto    _RC_CLEANUP
+                      00226 
+00013C                00227 _MSTATE_F9:
+MPASM  5.43                       SERVICE.ASM   2-28-2012  10:59:31         PAGE  7
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00013C EF?? F???      00228         goto    _RC_CLEANUP
+                      00229 
+000140                00230 _MSTATE_START_SONG:
+000140 EF?? F???      00231         goto    _RC_CLEANUP
+                      00232 
+000144                00233 _MSTATE_CONT_SONG:
+000144 EF?? F???      00234         goto    _RC_CLEANUP
+                      00235 
+000148                00236 _MSTATE_STOP_SONG:
+000148 EF?? F???      00237         goto    _RC_CLEANUP
+                      00238 
+00014C                00239 _MSTATE_FD:
+00014C EF?? F???      00240         goto    _RC_CLEANUP
+                      00241 
+000150                00242 _MSTATE_AS:
+000150 EF?? F???      00243         goto    _RC_CLEANUP
+                      00244 
+000154                00245 _MSTATE_SYS_RESET:
+000154 00FF           00246         reset
+                      00247 
+000156                00248 _MSTATE_NONE:   ; Ignore non-status bytes
+000156 EF?? F???      00249         goto    _RC_CLEANUP
+                      00250 
+                      00251 
+                      00252 ; ------------------------------------------------------------------------------
+                      00253 ; Process MIDI Status byte
+                      00254 ;
+00015A                00255 _PROCESS_STATUS:
+00015A 0EF0           00256         movlw   0xF0            ; Check for sysex
+00015C 6200           00257         cpfseq  CUR_BYTE
+00015E EF?? F???      00258         goto    _CHECK_BYTE
+000162 C00A F00B      00259         movff   MIDI_STATE,MIDI_STATE_TMP       ; Store the current status if sysex start
+000166                00260 _CHECK_BYTE:
+000166 0EF0           00261         movlw   0xF0            ; Check for system message
+000168 6000           00262         cpfslt  CUR_BYTE
+00016A EF?? F???      00263         goto    _SET_SYSTEM_MSG
+00016E                00264 _SET_STD_MSG:
+00016E 5000           00265         movf    CUR_BYTE,W
+000170 0B70           00266         andlw   0x70            ; Ignore MIDI channel and kill MSbit
+000172 3AE8           00267         swapf   WREG
+000174 EF?? F???      00268         goto    _CREATE_OFFSET
+000178                00269 _SET_SYSTEM_MSG:
+000178 5000           00270         movf    CUR_BYTE,W
+00017A 0B0F           00271         andlw   0x0F            ; We only need the first nibble since we know this is a Sys message
+00017C 0F07           00272         addlw   0x07            ; Add 7 to scale this up
+00017E                00273 _CREATE_OFFSET:
+00017E 46E8           00274         rlncf   WREG            ; create an offset mapping by mult x 2
+000180 6E0A           00275         movwf   MIDI_STATE
+000182 6A0C           00276         clrf    MSG_COUNT       ; Reset message count
+                      00277 
+                      00278         ; Check to see if we need to process the sys messge now (F6 and above do not have any addtional 
+                            mesage bytes)
+000184 0EF6           00279         movlw   0xF6
+MPASM  5.43                       SERVICE.ASM   2-28-2012  10:59:31         PAGE  8
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+000186 6000           00280         cpfslt  CUR_BYTE
+000188 EF?? F???      00281         goto    _PROCESS_MESSAGE
+                      00282 
+00018C EF?? F???      00283         goto    _RC_CLEANUP
+                      00284 
+                      00285 
+                      00286         end
+MPASM  5.43                       SERVICE.ASM   2-28-2012  10:59:31         PAGE  9
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+A                                 00000000
+ABDEN                             00000000
+ABDOVF                            00000007
+ACCESS                            00000000
+ACMOD0                            00000002
+ACMOD1                            00000003
+ACONV                             00000005
+ACQT0                             00000003
+ACQT1                             00000004
+ACQT2                             00000005
+ACQT3                             00000006
+ACSCH                             00000004
+ADCHS                             00000F99
+ADCON0                            00000FC2
+ADCON1                            00000FC1
+ADCON2                            00000FC0
+ADCON3                            00000F9A
+ADCS0                             00000000
+ADCS1                             00000001
+ADCS2                             00000002
+ADDEN                             00000003
+ADEN                              00000003
+ADFM                              00000007
+ADIE                              00000006
+ADIF                              00000006
+ADIP                              00000006
+ADON                              00000000
+ADPNT0                            00000000
+ADPNT1                            00000001
+ADRES                             00000FC3
+ADRESH                            00000FC4
+ADRESL                            00000FC3
+ADRS0                             00000006
+ADRS1                             00000007
+AN0                               00000000
+AN1                               00000001
+AN2                               00000002
+AN3                               00000003
+AN4                               00000004
+ANS0                              00000000
+ANS1                              00000001
+ANS2                              00000002
+ANS3                              00000003
+ANS4                              00000004
+ANSEL0                            00000FB8
+BANKED                            00000001
+BAUDCON                           00000FAA
+BAUDCTL                           00000FAA
+BF                                00000000
+BFEMT                             00000003
+BFOVFL                            00000002
+BOR                               00000000
+BRFEN                             00000007
+MPASM  5.43                       SERVICE.ASM   2-28-2012  10:59:31         PAGE 10
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+BRG16                             00000003
+BRGH                              00000002
+BSR                               00000FE0
+BSR_TMP                           00000009
+C                                 00000000
+CAP1BUFH                          00000F69
+CAP1BUFL                          00000F68
+CAP1CON                           00000F63
+CAP1M0                            00000000
+CAP1M1                            00000001
+CAP1M2                            00000002
+CAP1M3                            00000003
+CAP1REN                           00000006
+CAP1TMR                           00000005
+CAP2BUFH                          00000F67
+CAP2BUFL                          00000F66
+CAP2CON                           00000F62
+CAP2M0                            00000000
+CAP2M1                            00000001
+CAP2M2                            00000002
+CAP2M3                            00000003
+CAP2REN                           00000006
+CAP2TMR                           00000005
+CAP3BUFH                          00000F65
+CAP3BUFL                          00000F64
+CAP3CON                           00000F61
+CAP3M0                            00000000
+CAP3M1                            00000001
+CAP3M2                            00000002
+CAP3M3                            00000003
+CAP3REN                           00000006
+CAP3TMR                           00000005
+CCP1                              00000002
+CCP1CON                           00000FBD
+CCP1IE                            00000002
+CCP1IF                            00000002
+CCP1IP                            00000002
+CCP1M0                            00000000
+CCP1M1                            00000001
+CCP1M2                            00000002
+CCP1M3                            00000003
+CCP1X                             00000005
+CCP1Y                             00000004
+CCP2                              00000001
+CCP2CON                           00000FBA
+CCP2IE                            00000000
+CCP2IF                            00000000
+CCP2IP                            00000000
+CCP2M0                            00000000
+CCP2M1                            00000001
+CCP2M2                            00000002
+CCP2M3                            00000003
+CCP2X                             00000005
+MPASM  5.43                       SERVICE.ASM   2-28-2012  10:59:31         PAGE 11
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+CCP2Y                             00000004
+CCPR1                             00000FBE
+CCPR1H                            00000FBF
+CCPR1L                            00000FBE
+CCPR2                             00000FBB
+CCPR2H                            00000FBC
+CCPR2L                            00000FBB
+CC_NUM                            0000000D
+CFGS                              00000006
+CK                                00000006
+CKE                               00000006
+CKP                               00000004
+CLKI                              00000007
+CLKO                              00000006
+CREN                              00000004
+CSRC                              00000007
+CUR_BYTE                          00000000
+CVF_GATE                          00000003
+CVF_MOD                           00000002
+CVF_PITCH                         00000000
+CVF_VELOCITY                      00000001
+CV_DATA_LKP                       00000000
+CV_FLAGS                          00000001
+CV_GATE                           00000005
+CV_MOD                            00000004
+CV_NOTE_LKP                       00000080
+CV_PITCH                          00000002
+CV_VELOCITY                       00000003
+D                                 00000005
+DATA_ADDRESS                      00000005
+DC                                00000001
+DC1B0                             00000004
+DC1B1                             00000005
+DC2B0                             00000004
+DC2B1                             00000005
+DDRA                              TRISA
+DDRB                              TRISB
+DDRC                              TRISC
+DDRD                              TRISD
+DDRE                              TRISE
+DFLTCON                           00000F60
+DONE                              00000001
+DOWN                              00000005
+DT0                               00000000
+DT1                               00000001
+DT2                               00000002
+DT3                               00000003
+DT4                               00000004
+DT5                               00000005
+DTA0                              00000000
+DTA1                              00000001
+DTA2                              00000002
+DTA3                              00000003
+MPASM  5.43                       SERVICE.ASM   2-28-2012  10:59:31         PAGE 12
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+DTA4                              00000004
+DTA5                              00000005
+DTAPS0                            00000006
+DTAPS1                            00000007
+DTCON                             00000F6D
+DTPS0                             00000006
+DTPS1                             00000007
+D_A                               00000005
+D_NOT_A                           00000005
+EEADR                             00000FA9
+EECON1                            00000FA6
+EECON2                            00000FA7
+EEDATA                            00000FA8
+EEIE                              00000004
+EEIF                              00000004
+EEIP                              00000004
+EEPGD                             00000007
+FAST                              00000001
+FERR                              00000002
+FFOVFL                            00000002
+FIFOEN                            00000004
+FLT1EN                            00000003
+FLT2EN                            00000004
+FLT3EN                            00000005
+FLT4EN                            00000006
+FLTA                              00000001
+FLTAEN                            00000000
+FLTAMOD                           00000001
+FLTAS                             00000002
+FLTB                              00000002
+FLTBEN                            00000004
+FLTBMOD                           00000005
+FLTBS                             00000006
+FLTCK0                            00000000
+FLTCK1                            00000001
+FLTCK2                            00000002
+FLTCON                            00000003
+FLTCONFIG                         00000F6C
+FLTS                              00000002
+FREE                              00000004
+FSR0                              00000000
+FSR0H                             00000FEA
+FSR0L                             00000FE9
+FSR1                              00000001
+FSR1H                             00000FE2
+FSR1L                             00000FE1
+FSR2                              00000002
+FSR2H                             00000FDA
+FSR2L                             00000FD9
+GASEL0                            00000000
+GASEL1                            00000001
+GBSEL0                            00000004
+GBSEL1                            00000005
+MPASM  5.43                       SERVICE.ASM   2-28-2012  10:59:31         PAGE 13
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+GCSEL0                            00000002
+GCSEL1                            00000003
+GDSEL0                            00000006
+GDSEL1                            00000007
+GIE                               00000007
+GIEH                              00000007
+GIEL                              00000006
+GIE_GIEH                          00000007
+GO                                00000001
+GODONE                            00000001
+GO_DONE                           00000001
+GO_NOT_DONE                       00000001
+IC1IE                             00000001
+IC1IF                             00000001
+IC1IP                             00000001
+IC2QEIE                           00000002
+IC2QEIF                           00000002
+IC2QEIP                           00000002
+IC3DRIE                           00000003
+IC3DRIF                           00000003
+IC3DRIP                           00000003
+IDLEN                             00000007
+INDF0                             00000FEF
+INDF1                             00000FE7
+INDF2                             00000FDF
+INT0                              00000003
+INT0E                             00000004
+INT0F                             00000001
+INT0IE                            00000004
+INT0IF                            00000001
+INT1                              00000004
+INT1E                             00000003
+INT1F                             00000000
+INT1IE                            00000003
+INT1IF                            00000000
+INT1IP                            00000006
+INT1P                             00000006
+INT2                              00000005
+INT2E                             00000004
+INT2F                             00000001
+INT2IE                            00000004
+INT2IF                            00000001
+INT2IP                            00000007
+INT2P                             00000007
+INTCON                            00000FF2
+INTCON2                           00000FF1
+INTCON3                           00000FF0
+INTEDG0                           00000006
+INTEDG1                           00000005
+INTEDG2                           00000004
+IOFS                              00000002
+IPEN                              00000007
+IPR1                              00000F9F
+MPASM  5.43                       SERVICE.ASM   2-28-2012  10:59:31         PAGE 14
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+IPR2                              00000FA2
+IPR3                              00000FA5
+IRCF0                             00000004
+IRCF1                             00000005
+IRCF2                             00000006
+IRVST                             00000005
+IVRST                             00000005
+LATA                              00000F89
+LATA0                             00000000
+LATA1                             00000001
+LATA2                             00000002
+LATA3                             00000003
+LATA4                             00000004
+LATA6                             00000006
+LATA7                             00000007
+LATB                              00000F8A
+LATB0                             00000000
+LATB1                             00000001
+LATB2                             00000002
+LATB3                             00000003
+LATB4                             00000004
+LATB5                             00000005
+LATB6                             00000006
+LATB7                             00000007
+LATC                              00000F8B
+LATC0                             00000000
+LATC1                             00000001
+LATC2                             00000002
+LATC3                             00000003
+LATC4                             00000004
+LATC5                             00000005
+LATC6                             00000006
+LATC7                             00000007
+LVDCON                            00000FD2
+LVDEN                             00000004
+LVDIE                             00000002
+LVDIF                             00000002
+LVDIP                             00000002
+LVDL0                             00000000
+LVDL1                             00000001
+LVDL2                             00000002
+LVDL3                             00000003
+MAXCNTH                           00000F65
+MAXCNTL                           00000F64
+MCLR                              00000003
+MIDI                              00000005
+MIDI_STATE                        0000000A
+MIDI_STATE_TMP                    0000000B
+MSG_COUNT                         0000000C
+MSG_PITCH                         0000000E
+MSG_VELOCITY                      0000000F
+N                                 00000004
+NOT_A                             00000005
+MPASM  5.43                       SERVICE.ASM   2-28-2012  10:59:31         PAGE 15
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+NOT_ADDRESS                       00000005
+NOT_BOR                           00000000
+NOT_DONE                          00000001
+NOT_DOWN                          00000005
+NOT_FLTA                          00000001
+NOT_FLTB                          00000002
+NOT_IPEN                          00000007
+NOT_MCLR                          00000003
+NOT_PD                            00000002
+NOT_POR                           00000001
+NOT_RBPU                          00000007
+NOT_RESEN                         00000006
+NOT_RI                            00000004
+NOT_SS                            00000006
+NOT_T1SYNC                        00000002
+NOT_T5SYNC                        00000002
+NOT_TO                            00000003
+NOT_VELM                          00000007
+NOT_W                             00000002
+NOT_WRITE                         00000002
+OERR                              00000001
+OSC1                              00000007
+OSC2                              00000006
+OSCCON                            00000FD3
+OSCTUNE                           00000F9B
+OSFIE                             00000007
+OSFIF                             00000007
+OSFIP                             00000007
+OSTS                              00000003
+OSYNC                             00000000
+OV                                00000003
+OVDCOND                           00000F6B
+OVDCONS                           00000F6A
+P                                 00000004
+PC                                00000FF9
+PCL                               00000FF9
+PCLATH                            00000FFA
+PCLATU                            00000FFB
+PD                                00000002
+PDC0H                             00000F78
+PDC0L                             00000F79
+PDC1H                             00000F76
+PDC1L                             00000F77
+PDC2H                             00000F74
+PDC2L                             00000F75
+PDEC0                             00000000
+PDEC1                             00000001
+PEIE                              00000006
+PEIE_GIEL                         00000006
+PIE1                              00000F9D
+PIE2                              00000FA0
+PIE3                              00000FA3
+PIR1                              00000F9E
+MPASM  5.43                       SERVICE.ASM   2-28-2012  10:59:31         PAGE 16
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+PIR2                              00000FA1
+PIR3                              00000FA4
+PLUSW0                            00000FEB
+PLUSW1                            00000FE3
+PLUSW2                            00000FDB
+PMOD0                             00000000
+PMOD1                             00000001
+PMOD2                             00000002
+PMOD3                             00000003
+POR                               00000001
+PORTA                             00000F80
+PORTB                             00000F81
+PORTC                             00000F82
+PORTE                             00000F84
+POSCNTH                           00000F67
+POSCNTL                           00000F66
+POSTDEC0                          00000FED
+POSTDEC1                          00000FE5
+POSTDEC2                          00000FDD
+POSTINC0                          00000FEE
+POSTINC1                          00000FE6
+POSTINC2                          00000FDE
+POUT0                             00000000
+POUT1                             00000001
+POUT2                             00000002
+POUT3                             00000003
+POUT4                             00000004
+POUT5                             00000005
+POUT6                             00000006
+POUT7                             00000007
+POVD0                             00000000
+POVD1                             00000001
+POVD2                             00000002
+POVD3                             00000003
+POVD4                             00000004
+POVD5                             00000005
+POVD6                             00000006
+POVD7                             00000007
+PR2                               00000FCB
+PR5                               00000F90
+PR5H                              00000F91
+PR5L                              00000F90
+PREINC0                           00000FEC
+PREINC1                           00000FE4
+PREINC2                           00000FDC
+PROD                              00000FF3
+PRODH                             00000FF4
+PRODL                             00000FF3
+PSA                               00000003
+PTCKPS0                           00000002
+PTCKPS1                           00000003
+PTCON0                            00000F7F
+PTCON1                            00000F7E
+MPASM  5.43                       SERVICE.ASM   2-28-2012  10:59:31         PAGE 17
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+PTDIR                             00000006
+PTEN                              00000007
+PTIE                              00000004
+PTIF                              00000004
+PTIP                              00000004
+PTMOD0                            00000000
+PTMOD1                            00000001
+PTMRH                             00000F7C
+PTMRL                             00000F7D
+PTOPS0                            00000004
+PTOPS1                            00000005
+PTOPS2                            00000006
+PTOPS3                            00000007
+PTPERH                            00000F7A
+PTPERL                            00000F7B
+PWMCON0                           00000F6F
+PWMCON1                           00000F6E
+PWMEN0                            00000004
+PWMEN1                            00000005
+PWMEN2                            00000006
+QEICON                            00000FB6
+QEIM0                             00000002
+QEIM1                             00000003
+QEIM2                             00000004
+R                                 00000002
+RA0                               00000000
+RA1                               00000001
+RA2                               00000002
+RA3                               00000003
+RA4                               00000004
+RA6                               00000006
+RA7                               00000007
+RB0                               00000000
+RB1                               00000001
+RB2                               00000002
+RB3                               00000003
+RB4                               00000004
+RB5                               00000005
+RB6                               00000006
+RB7                               00000007
+RBIE                              00000003
+RBIF                              00000000
+RBIP                              00000000
+RBPU                              00000007
+RC0                               00000000
+RC1                               00000001
+RC2                               00000002
+RC3                               00000003
+RC4                               00000004
+RC5                               00000005
+RC6                               00000006
+RC7                               00000007
+RCIDL                             00000006
+MPASM  5.43                       SERVICE.ASM   2-28-2012  10:59:31         PAGE 18
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+RCIE                              00000005
+RCIF                              00000005
+RCIP                              00000005
+RCMT                              00000006
+RCON                              00000FD0
+RCREG                             00000FAE
+RCSTA                             00000FAB
+RD                                00000000
+RD16                              00000007
+RE3                               00000003
+READ_WRITE                        00000002
+RESEN                             00000006
+RI                                00000004
+RX                                00000007
+RX9                               00000006
+RX9D                              00000000
+RXDTP                             00000005
+R_NOT_W                           00000002
+R_W                               00000002
+S                                 00000003
+SASEL0                            00000000
+SASEL1                            00000001
+SBSEL0                            00000004
+SBSEL1                            00000005
+SCK                               00000005
+SCKP                              00000004
+SCL                               00000005
+SCS0                              00000000
+SCS1                              00000001
+SCSEL0                            00000002
+SCSEL1                            00000003
+SDA                               00000004
+SDI                               00000004
+SDO                               00000007
+SDSEL0                            00000006
+SDSEL1                            00000007
+SENDB                             00000003
+SEVOPS0                           00000004
+SEVOPS1                           00000005
+SEVOPS2                           00000006
+SEVOPS3                           00000007
+SEVTCMPH                          00000F70
+SEVTCMPL                          00000F71
+SEVTDIR                           00000003
+SMP                               00000007
+SPBRG                             00000FAF
+SPBRGH                            00000FB0
+SPEN                              00000007
+SREN                              00000005
+SS                                00000006
+SSPADD                            00000FC8
+SSPBUF                            00000FC9
+SSPCON                            00000FC6
+MPASM  5.43                       SERVICE.ASM   2-28-2012  10:59:31         PAGE 19
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+SSPEN                             00000005
+SSPIE                             00000003
+SSPIF                             00000003
+SSPIP                             00000003
+SSPM0                             00000000
+SSPM1                             00000001
+SSPM2                             00000002
+SSPM3                             00000003
+SSPOV                             00000006
+SSPSTAT                           00000FC7
+SSRC0                             00000000
+SSRC1                             00000001
+SSRC2                             00000002
+SSRC3                             00000003
+SSRC4                             00000004
+STATUS                            00000FD8
+STKFUL                            00000007
+STKOVF                            00000007
+STKPTR                            00000FFC
+STKPTR0                           00000000
+STKPTR1                           00000001
+STKPTR2                           00000002
+STKPTR3                           00000003
+STKPTR4                           00000004
+STKUNF                            00000006
+ST_TMP                            00000008
+SWDTEN                            00000000
+SYNC                              00000004
+SYS_EX_DATA                       00000006
+T016BIT                           00000006
+T0CKI                             00000003
+T0CON                             00000FD5
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0IP                              00000002
+T0PS0                             00000000
+T0PS1                             00000001
+T0PS2                             00000002
+T0PS3                             00000003
+T0SE                              00000004
+T13CKI                            00000000
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000FCD
+T1INSYNC                          00000002
+T1OSCEN                           00000003
+T1OSI                             00000001
+T1OSO                             00000000
+T1RUN                             00000006
+T1SYNC                            00000002
+T2CKPS0                           00000000
+T2CKPS1                           00000001
+MPASM  5.43                       SERVICE.ASM   2-28-2012  10:59:31         PAGE 20
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+T2CON                             00000FCA
+T2OUTPS0                          00000003
+T2OUTPS1                          00000004
+T2OUTPS2                          00000005
+T2OUTPS3                          00000006
+T5CKI                             00000003
+T5CON                             00000FB7
+T5MOD                             00000005
+T5PS0                             00000003
+T5PS1                             00000004
+T5SEN                             00000007
+T5SYNC                            00000002
+TABLAT                            00000FF5
+TBIE                              00000004
+TBIF                              00000004
+TBIP                              00000004
+TBLPTR                            00000FF6
+TBLPTRH                           00000FF7
+TBLPTRL                           00000FF6
+TBLPTRU                           00000FF8
+TMP_CV_BYTE_H                     00000011
+TMP_CV_BYTE_L                     00000010
+TMR0                              00000FD6
+TMR0H                             00000FD7
+TMR0IE                            00000005
+TMR0IF                            00000002
+TMR0IP                            00000002
+TMR0L                             00000FD6
+TMR0ON                            00000007
+TMR1                              00000FCE
+TMR1CS                            00000001
+TMR1H                             00000FCF
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1IP                            00000000
+TMR1L                             00000FCE
+TMR1ON                            00000000
+TMR2                              00000FCC
+TMR2IE                            00000001
+TMR2IF                            00000001
+TMR2IP                            00000001
+TMR2ON                            00000002
+TMR5                              00000F87
+TMR5CS                            00000001
+TMR5H                             00000F88
+TMR5IE                            00000000
+TMR5IF                            00000000
+TMR5IP                            00000000
+TMR5L                             00000F87
+TMR5ON                            00000000
+TO                                00000003
+TOS                               00000FFD
+TOSH                              00000FFE
+MPASM  5.43                       SERVICE.ASM   2-28-2012  10:59:31         PAGE 21
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+TOSL                              00000FFD
+TOSU                              00000FFF
+TOUTPS0                           00000003
+TOUTPS1                           00000004
+TOUTPS2                           00000005
+TOUTPS3                           00000006
+TRISA                             00000F92
+TRISA0                            00000000
+TRISA1                            00000001
+TRISA2                            00000002
+TRISA3                            00000003
+TRISA4                            00000004
+TRISA6                            00000006
+TRISA7                            00000007
+TRISB                             00000F93
+TRISB0                            00000000
+TRISB1                            00000001
+TRISB2                            00000002
+TRISB3                            00000003
+TRISB4                            00000004
+TRISB5                            00000005
+TRISB6                            00000006
+TRISB7                            00000007
+TRISC                             00000F94
+TRISC0                            00000000
+TRISC1                            00000001
+TRISC2                            00000002
+TRISC3                            00000003
+TRISC4                            00000004
+TRISC5                            00000005
+TRISC6                            00000006
+TRISC7                            00000007
+TRMT                              00000001
+TUN0                              00000000
+TUN1                              00000001
+TUN2                              00000002
+TUN3                              00000003
+TUN4                              00000004
+TUN5                              00000005
+TX                                00000006
+TX9                               00000006
+TX9D                              00000000
+TXCKP                             00000004
+TXEN                              00000005
+TXIE                              00000004
+TXIF                              00000004
+TXIP                              00000004
+TXREG                             00000FAD
+TXSTA                             00000FAC
+UA                                00000001
+UDIS                              00000001
+UP                                00000005
+UPDOWN                            00000005
+MPASM  5.43                       SERVICE.ASM   2-28-2012  10:59:31         PAGE 22
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+UP_DOWN                           00000005
+UP_NOT_DOWN                       00000005
+VCFG0                             00000006
+VCFG1                             00000007
+VELM                              00000007
+VELRH                             00000F69
+VELRL                             00000F68
+VREFM                             00000002
+VREFP                             00000003
+W                                 00000000
+WCOL                              00000007
+WDTCON                            00000FD1
+WDTW                              00000007
+WR                                00000001
+WREG                              00000FE8
+WREN                              00000002
+WRERR                             00000003
+WUE                               00000001
+W_TMP                             00000007
+Z                                 00000002
+_BOREN_OFF_2L                     000000FD
+_BOREN_ON_2L                      000000FF
+_BORV_20_2L                       000000FF
+_BORV_27_2L                       000000FB
+_BORV_42_2L                       000000F7
+_BORV_45_2L                       000000F3
+_CHECK_BYTE                       00000166
+_CHECK_BYTE_TYPE                  00000042
+_CHECK_RC                         0000000C
+_CONFIG1H                         00300001
+_CONFIG2H                         00300003
+_CONFIG2L                         00300002
+_CONFIG3H                         00300005
+_CONFIG3L                         00300004
+_CONFIG4L                         00300006
+_CONFIG5H                         00300009
+_CONFIG5L                         00300008
+_CONFIG6H                         0030000B
+_CONFIG6L                         0030000A
+_CONFIG7H                         0030000D
+_CONFIG7L                         0030000C
+_CP0_OFF_5L                       000000FF
+_CP0_ON_5L                        000000FE
+_CP1_OFF_5L                       000000FF
+_CP1_ON_5L                        000000FD
+_CP2_OFF_5L                       000000FF
+_CP2_ON_5L                        000000FB
+_CP3_OFF_5L                       000000FF
+_CP3_ON_5L                        000000F7
+_CPB_OFF_5H                       000000FF
+_CPB_ON_5H                        000000BF
+_CPD_OFF_5H                       000000FF
+_CPD_ON_5H                        0000007F
+MPASM  5.43                       SERVICE.ASM   2-28-2012  10:59:31         PAGE 23
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_CREATE_OFFSET                    0000017E
+_DEBUG_OFF_4L                     000000FF
+_DEBUG_ON_4L                      0000007F
+_DEVID1                           003FFFFE
+_DEVID2                           003FFFFF
+_EBTR0_OFF_7L                     000000FF
+_EBTR0_ON_7L                      000000FE
+_EBTR1_OFF_7L                     000000FF
+_EBTR1_ON_7L                      000000FD
+_EBTR2_OFF_7L                     000000FF
+_EBTR2_ON_7L                      000000FB
+_EBTR3_OFF_7L                     000000FF
+_EBTR3_ON_7L                      000000F7
+_EBTRB_OFF_7H                     000000FF
+_EBTRB_ON_7H                      000000BF
+_END_CVALUE                       0000010A
+_END_NOTE_OFF                     000000B4
+_EXIT_SERVICE                     00000012
+_FCMEN_OFF_1H                     000000BF
+_FCMEN_ON_1H                      000000FF
+_HANDLE_RC                        0000001E
+_HPOL_HIGH_3L                     000000FF
+_HPOL_LOW_3L                      000000EF
+_IDLOC0                           00200000
+_IDLOC1                           00200001
+_IDLOC2                           00200002
+_IDLOC3                           00200003
+_IDLOC4                           00200004
+_IDLOC5                           00200005
+_IDLOC6                           00200006
+_IDLOC7                           00200007
+_IESO_OFF_1H                      0000007F
+_IESO_ON_1H                       000000FF
+_LPOL_HIGH_3L                     000000FF
+_LPOL_LOW_3L                      000000F7
+_LVP_OFF_4L                       000000FB
+_LVP_ON_4L                        000000FF
+_MCLRE_OFF_3H                     0000007F
+_MCLRE_ON_3H                      000000FF
+_MOFFSET_AS                       0000002A
+_MOFFSET_CC                       00000006
+_MOFFSET_CONT_SONG                00000024
+_MOFFSET_CP                       0000000A
+_MOFFSET_F1                       00000010
+_MOFFSET_KP                       00000004
+_MOFFSET_NONE                     0000002E
+_MOFFSET_NOTE_OFF                 00000000
+_MOFFSET_NOTE_ON                  00000002
+_MOFFSET_PB                       0000000C
+_MOFFSET_PC                       00000008
+_MOFFSET_SP                       00000012
+_MOFFSET_SS                       00000014
+_MOFFSET_START_SONG               00000022
+MPASM  5.43                       SERVICE.ASM   2-28-2012  10:59:31         PAGE 24
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_MOFFSET_STOP_SONG                00000026
+_MOFFSET_SYS_EX                   0000000E
+_MOFFSET_SYS_EX_END               0000001C
+_MOFFSET_SYS_RESET                0000002C
+_MOFFSET_TR                       0000001A
+_MOFFSET_TT                       0000001E
+_MOFFSET_UBS                      00000018
+_MOSSFEST_F4                      00000016
+_MOSSFEST_F9                      00000020
+_MOSSFEST_FD                      00000028
+_MSTATE_AS                        00000150
+_MSTATE_CC                        000000EC
+_MSTATE_CONT_SONG                 00000144
+_MSTATE_CP                        00000114
+_MSTATE_F1                        0000011C
+_MSTATE_F4                        00000128
+_MSTATE_F9                        0000013C
+_MSTATE_FD                        0000014C
+_MSTATE_KP                        000000E8
+_MSTATE_NONE                      00000156
+_MSTATE_NOTE_OFF                  00000084
+_MSTATE_NOTE_ON                   000000BA
+_MSTATE_PB                        00000118
+_MSTATE_PC                        00000110
+_MSTATE_SP                        00000120
+_MSTATE_SS                        00000124
+_MSTATE_START_SONG                00000140
+_MSTATE_STOP_SONG                 00000148
+_MSTATE_SYS_EX                    0000002A
+_MSTATE_SYS_EX_END                00000134
+_MSTATE_SYS_RESET                 00000154
+_MSTATE_TR                        00000130
+_MSTATE_TT                        00000138
+_MSTATE_UBS                       0000012C
+_OSC_ECIO_1H                      000000F5
+_OSC_EC_1H                        000000F4
+_OSC_HSPLL_1H                     000000F6
+_OSC_HS_1H                        000000F2
+_OSC_IRCIO_1H                     000000F8
+_OSC_IRC_1H                       000000F9
+_OSC_LP_1H                        000000F0
+_OSC_RC1_1H                       000000FA
+_OSC_RC2_1H                       000000F3
+_OSC_RCIO_1H                      000000F7
+_OSC_RC_1H                        000000FC
+_OSC_XT_1H                        000000F1
+_PROCESS_CVALUE                   000000FC
+_PROCESS_MESSAGE                  0000004A
+_PROCESS_STATUS                   0000015A
+_PROCESS_SYS_EX_DATA              0000003A
+_PROCESS_VELOCITY_NOTE_OFF        00000094
+_PROCESS_VELOCITY_NOTE_OFF2       00000098
+_PROCESS_VELOCITY_NOTE_ON         000000CA
+MPASM  5.43                       SERVICE.ASM   2-28-2012  10:59:31         PAGE 25
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_PROCSES_CNUM                     000000F2
+_PROCSES_PITCH_NOTE_OFF           0000008A
+_PROCSES_PITCH_NOTE_ON            000000C0
+_PROCSES_SYS_EX_END               00000032
+_PUT_NOTE_OFF_LIVE                000000A4
+_PWMPIN_OFF_3L                    000000FF
+_PWMPIN_ON_3L                     000000FB
+_PWRTEN_OFF_2L                    000000FF
+_PWRTEN_ON_2L                     000000FE
+_RC_CLEANUP                       0000007E
+_RESTORE_CTX                      
+_SAVE_CTX                         
+_SERVICE_HI                       00000002
+_SERVICE_LO                       00000000
+_SET_STD_MSG                      0000016E
+_SET_SYSTEM_MSG                   00000178
+_STVREN_OFF_4L                    000000FE
+_STVREN_ON_4L                     000000FF
+_T1OSCMX_OFF_3L                   000000DF
+_T1OSCMX_ON_3L                    000000FF
+_WDPS_1024_2H                     000000F5
+_WDPS_128_2H                      000000EF
+_WDPS_16384_2H                    000000FD
+_WDPS_16_2H                       000000E9
+_WDPS_1_2H                        000000E1
+_WDPS_2048_2H                     000000F7
+_WDPS_256_2H                      000000F1
+_WDPS_2_2H                        000000E3
+_WDPS_32768_2H                    000000FF
+_WDPS_32_2H                       000000EB
+_WDPS_4096_2H                     000000F9
+_WDPS_4_2H                        000000E5
+_WDPS_512_2H                      000000F3
+_WDPS_64_2H                       000000ED
+_WDPS_8192_2H                     000000FB
+_WDPS_8_2H                        000000E7
+_WDTEN_OFF_2H                     000000FE
+_WDTEN_ON_2H                      000000FF
+_WINEN_OFF_2H                     000000FF
+_WINEN_ON_2H                      000000DF
+_WRT0_OFF_6L                      000000FF
+_WRT0_ON_6L                       000000FE
+_WRT1_OFF_6L                      000000FF
+_WRT1_ON_6L                       000000FD
+_WRT2_OFF_6L                      000000FF
+_WRT2_ON_6L                       000000FB
+_WRT3_OFF_6L                      000000FF
+_WRT3_ON_6L                       000000F7
+_WRTB_OFF_6H                      000000FF
+_WRTB_ON_6H                       000000BF
+_WRTC_OFF_6H                      000000FF
+_WRTC_ON_6H                       000000DF
+_WRTD_OFF_6H                      000000FF
+MPASM  5.43                       SERVICE.ASM   2-28-2012  10:59:31         PAGE 26
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_WRTD_ON_6H                       0000007F
+__18F2431                         00000001
+
+Errors   :     0
+Warnings :     0 reported,     0 suppressed
+Messages :     0 reported,     0 suppressed
+
+

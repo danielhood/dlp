@@ -1,0 +1,67 @@
+MPASM  5.43                        CONFIG.ASM   2-28-2012  10:59:28         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001 ; ------------------------------------------------------------------------------
+                      00002 ; Configurtion
+                      00003 ;
+                      00004         config  OSC = HS        ; Use 20MHz crystal (HS)
+                      00005 
+                      00006 ; Default config settings
+                      00007         config  FCMEN = OFF     ; Fail-Safe Clock Monitor Enable bit
+                      00008 
+                      00009         config  IESO = OFF      ; Internal External Oscillator Switchover bit
+                      00010 
+                      00011         config  PWRTEN = OFF    ; Power-up Timer Enable bit
+                      00012         config  BOREN = OFF     ; Brown-out Reset Enable bits
+                      00013         config  WDTEN = OFF     ; Watchdog Timer Enable bit
+                      00014 
+                      00015         config  PWMPIN = OFF    ; PWM output pins Reset state control
+                      00016 
+                      00017         config  T1OSCMX = ON    ; Timer1 Oscillator MUX => Low-power Timer1 operation when microcontroll
+                            er is in Sleep mode
+                      00018 
+                      00019         config  MCLRE = ON      ; MCLR Pin Enable bit
+                      00020 
+                      00021         config  STVREN = ON     ; Stack Full/Underflow Reset Enable bit
+                      00022 
+                      00023         config  LVP = OFF       ; Low-Voltage ICSP Enable bit
+                      00024         config  DEBUG = OFF     ; Background Debugger Enable bit
+                      00025 
+                      00026         config  CP0 = OFF       ; Code Protection bits
+                      00027         config  CP1 = OFF
+                      00028         config  CP2 = OFF
+                      00029         config  CP3 = OFF
+                      00030         config  CPB = OFF       ; Boot Block Code Protection bit
+                      00031         config  CPD = OFF       ; Data EEPROM Code Protection bit
+                      00032 
+                      00033         config  WRT0 = OFF      ; Write Protection bits
+                      00034         config  WRT1 = OFF
+                      00035         config  WRT2 = OFF
+                      00036         config  WRT3 = OFF
+                      00037         config  WRTC = OFF      ; Configuration Register Write Protection bit
+                      00038         config  WRTB = OFF      ; Boot Block Write Protection bit
+                      00039         config  WRTD = OFF      ; Data EEPROM Write Protection bit
+                      00040 
+                      00041         config  EBTR0 = OFF     ; Table Read Protection bits
+                      00042         config  EBTR1 = OFF
+                      00043         config  EBTR2 = OFF
+                      00044         config  EBTR3 = OFF
+                      00045         config  EBTRB = OFF     ; Boot Block Table Read Protection bit
+                      00046 
+                      00047         end
+MPASM  5.43                        CONFIG.ASM   2-28-2012  10:59:28         PAGE  2
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+__18F2431                         00000001
+
+Errors   :     0
+Warnings :     0 reported,     0 suppressed
+Messages :     0 reported,     0 suppressed
+
+
