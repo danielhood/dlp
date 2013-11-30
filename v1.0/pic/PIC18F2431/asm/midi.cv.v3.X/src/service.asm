@@ -173,6 +173,8 @@ _MSTATE_KP:
 	goto	_RC_CLEANUP
 
 _MSTATE_CC:
+	btfsc	PORTA,0			; Check MIDI MODE
+	goto	_RC_CLEANUP		; Simply ignore CC in MODE1
 	btfsc	MSG_COUNT,0
 	goto	_PROCESS_CC01
 _PROCSES_CNUM:
