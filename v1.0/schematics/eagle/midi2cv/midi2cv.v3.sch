@@ -343,25 +343,6 @@ grid 2.032 mm, diameter 5 mm</description>
 <text x="2.54" y="-2.159" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
 <rectangle x1="0.254" y1="-1.016" x2="0.762" y2="1.016" layer="51"/>
 </package>
-<package name="DIL08">
-<description>&lt;b&gt;Dual In Line Package&lt;/b&gt;</description>
-<wire x1="5.08" y1="2.921" x2="-5.08" y2="2.921" width="0.1524" layer="21"/>
-<wire x1="-5.08" y1="-2.921" x2="5.08" y2="-2.921" width="0.1524" layer="21"/>
-<wire x1="5.08" y1="2.921" x2="5.08" y2="-2.921" width="0.1524" layer="21"/>
-<wire x1="-5.08" y1="2.921" x2="-5.08" y2="1.016" width="0.1524" layer="21"/>
-<wire x1="-5.08" y1="-2.921" x2="-5.08" y2="-1.016" width="0.1524" layer="21"/>
-<wire x1="-5.08" y1="1.016" x2="-5.08" y2="-1.016" width="0.1524" layer="21" curve="-180"/>
-<pad name="1" x="-3.81" y="-3.81" drill="0.8128" diameter="1.27" rot="R90"/>
-<pad name="2" x="-1.27" y="-3.81" drill="0.8128" diameter="1.27" rot="R90"/>
-<pad name="7" x="-1.27" y="3.81" drill="0.8128" diameter="1.27" rot="R90"/>
-<pad name="8" x="-3.81" y="3.81" drill="0.8128" diameter="1.27" rot="R90"/>
-<pad name="3" x="1.27" y="-3.81" drill="0.8128" diameter="1.27" rot="R90"/>
-<pad name="4" x="3.81" y="-3.81" drill="0.8128" diameter="1.27" rot="R90"/>
-<pad name="6" x="1.27" y="3.81" drill="0.8128" diameter="1.27" rot="R90"/>
-<pad name="5" x="3.81" y="3.81" drill="0.8128" diameter="1.27" rot="R90"/>
-<text x="-5.334" y="-2.921" size="1.27" layer="25" ratio="10" rot="R90">&gt;NAME</text>
-<text x="-3.556" y="-0.635" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
-</package>
 </packages>
 <symbols>
 <symbol name="PIC18F2*31">
@@ -713,31 +694,6 @@ high speed (Philips)</description>
 <connects>
 <connect gate="G$1" pin="+" pad="+"/>
 <connect gate="G$1" pin="-" pad="-"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
-<deviceset name="TL082" prefix="IC">
-<description>&lt;b&gt;OP AMP&lt;/b&gt;</description>
-<gates>
-<gate name="A" symbol="OPAMP" x="15.24" y="10.16" swaplevel="1"/>
-<gate name="B" symbol="OPAMP" x="15.24" y="-12.7" swaplevel="1"/>
-<gate name="P" symbol="PWR+-" x="15.24" y="10.16" addlevel="request"/>
-</gates>
-<devices>
-<device name="P" package="DIL08">
-<connects>
-<connect gate="A" pin="+IN" pad="3"/>
-<connect gate="A" pin="-IN" pad="2"/>
-<connect gate="A" pin="OUT" pad="1"/>
-<connect gate="B" pin="+IN" pad="5"/>
-<connect gate="B" pin="-IN" pad="6"/>
-<connect gate="B" pin="OUT" pad="7"/>
-<connect gate="P" pin="V+" pad="8"/>
-<connect gate="P" pin="V-" pad="4"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -2403,7 +2359,7 @@ Audio, scart, microphone, headphone&lt;p&gt;
 <part name="P+5" library="supply1" deviceset="+12V" device=""/>
 <part name="P-1" library="supply1" deviceset="-12V" device=""/>
 <part name="J1" library="_common" deviceset="JACK-M" device="" value="VEL3 OUT"/>
-<part name="J2" library="_common" deviceset="JACK-M" device="" value="MOD1 OUT"/>
+<part name="J2" library="_common" deviceset="JACK-M" device="" value="VEL2 OUT"/>
 <part name="J3" library="_common" deviceset="JACK-M" device="" value="VEL1 OUT"/>
 <part name="J4" library="_common" deviceset="JACK-M" device="" value="GATE5 OUT"/>
 <part name="GND11" library="supply1" deviceset="0V" device=""/>
@@ -2414,10 +2370,7 @@ Audio, scart, microphone, headphone&lt;p&gt;
 <part name="C7" library="_common" deviceset="CE-US" device="E2-5" value="4.7uF"/>
 <part name="C8" library="_common" deviceset="CE-US" device="E2-5" value="4.7uF"/>
 <part name="IC3" library="_common" deviceset="TL084" device="P"/>
-<part name="IC4" library="_common" deviceset="TL082" device="P"/>
-<part name="P+6" library="supply1" deviceset="+12V" device=""/>
 <part name="P+7" library="supply1" deviceset="+12V" device=""/>
-<part name="P-2" library="supply1" deviceset="-12V" device=""/>
 <part name="P-3" library="supply1" deviceset="-12V" device=""/>
 <part name="R10" library="_common" deviceset="R" device="0309/10" value="390"/>
 <part name="R11" library="_common" deviceset="R" device="0309/10" value="390"/>
@@ -2503,12 +2456,9 @@ D#1, E1 -&gt; GATE 4-5</text>
 <instance part="IC3" gate="B" x="-17.78" y="116.84" rot="R180"/>
 <instance part="IC3" gate="C" x="-17.78" y="99.06" rot="R180"/>
 <instance part="IC3" gate="D" x="-17.78" y="81.28" rot="R180"/>
-<instance part="IC4" gate="P" x="114.3" y="86.36"/>
-<instance part="IC3" gate="P" x="106.68" y="86.36"/>
-<instance part="P+6" gate="1" x="114.3" y="96.52"/>
-<instance part="P+7" gate="1" x="106.68" y="96.52"/>
-<instance part="P-2" gate="1" x="114.3" y="76.2"/>
-<instance part="P-3" gate="1" x="106.68" y="76.2"/>
+<instance part="IC3" gate="P" x="111.76" y="86.36"/>
+<instance part="P+7" gate="1" x="111.76" y="96.52"/>
+<instance part="P-3" gate="1" x="111.76" y="76.2"/>
 <instance part="R10" gate="G$1" x="-2.54" y="132.08"/>
 <instance part="R11" gate="G$1" x="-2.54" y="114.3"/>
 <instance part="R12" gate="G$1" x="-2.54" y="96.52"/>
@@ -2774,10 +2724,6 @@ D#1, E1 -&gt; GATE 4-5</text>
 <pinref part="P+5" gate="1" pin="+12V"/>
 </segment>
 <segment>
-<pinref part="IC4" gate="P" pin="V+"/>
-<pinref part="P+6" gate="1" pin="+12V"/>
-</segment>
-<segment>
 <pinref part="IC3" gate="P" pin="V+"/>
 <pinref part="P+7" gate="1" pin="+12V"/>
 </segment>
@@ -2786,10 +2732,6 @@ D#1, E1 -&gt; GATE 4-5</text>
 <segment>
 <pinref part="IC2" gate="P" pin="V-"/>
 <pinref part="P-1" gate="1" pin="-12V"/>
-</segment>
-<segment>
-<pinref part="IC4" gate="P" pin="V-"/>
-<pinref part="P-2" gate="1" pin="-12V"/>
 </segment>
 <segment>
 <pinref part="IC3" gate="P" pin="V-"/>
