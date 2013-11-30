@@ -1,26 +1,19 @@
 ; Main entry point
 
 ; ------------------------------------------------------------------------------
-; Hardware Details
-;	- Using PIC16F819
-;	- Clock: 20MHz Crystal across OSC1/OSC2
-;	- PORTA:
-;		- A0:A4 - Unused
-;		- A5 doesn't exist on this chip
-;		- A6:A7 is for the crystal
-;	- PORTB:
-;		- B0 is GATE output
-;		- B1,3,4  (PWM1,3,5) are CV PWM output driving OP-AMPs
-;			B1 (PWM1) - Pitch
-;			B3 (PWM3) - Velocity
-;			B4 (PWM5) - CC20
-;		- B2,5 - Unused
-;		- B6:B7 is for UP00B Programmer
-;	- PORTC:
-;		- C0:5 - Unused/Debug output
-;		- C6	- Serial TX (Currently unused)
-;		- C7	- MIDI IN - Serial RX
-;
+; MIDI2CV v3.0 Multi-mode midi
+;	Both modes respond to all midi channels. Only one channel should be used
+;		at at time.
+;	A switch on RA0 allows selection of one of two MIDI modes
+;	MODE0 (Synth Mode):
+;		- PITCH, VEL, and MOD (CC01) on PWM ports (1,3,5)
+;		- GATE on RC0 (GATE 1)
+;		- CC02 to 05 > 63 on RC1:4 (GATE 2 - 5)
+;	MODE1 (Drum Mode):
+;		- Respond only to notes C1, C#1, D1, D#1, E1
+;		- Gates for each note on RC0:4
+;		- Vel for C1, C#1, D1 on PWM1,3,5
+
 
 #include p18f2431.inc
 

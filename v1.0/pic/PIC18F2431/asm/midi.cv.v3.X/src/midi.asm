@@ -64,24 +64,12 @@ _MAIN:
 	clrf	PORTB		; Clear PORTB
 	clrf	PORTC		; Clear PORTC
 
-	;	 '--00000d'
 	movlw	b'00000000'	; Set the high byte to 0
 	movwf	PDC0H
 	movwf	PDC1H
 	movwf	PDC2H
 
-	;        'ddddddQQ'
-	;movlw	b'11111100'
-	;movwf	PDC0L
-	;movwf	PDC1L
-	;movwf	PDC2L
-	;goto	_MAIN
-
 _LOOP:
-	;movff	CV_PITCH,PDC0L
-	;movff	CV_VELOCITY,PDC1L
-	;movff	CV_MOD,PDC2L
-
 _UPDATE_PITCH:
 	btfss	CV_FLAGS,CVF_PITCH
 	goto	_UPDATE_VELOCITY
@@ -110,30 +98,11 @@ _UPDATE_MOD:
 	_SPLIT_CV_VALUE2
 	movff	TMP_CV_BYTE_H,PDC2H
 	movff	TMP_CV_BYTE_L,PDC2L
-
-	;movf	CV_MOD,W
-	;_SCALE_CV_NOTE		; Scales W, returning result in W
-	;_SPLIT_CV_VALUE2
-	;movff	TMP_CV_BYTE_H,PDC0H
-	;movff	TMP_CV_BYTE_L,PDC0L
-
-
 	bcf	CV_FLAGS,CVF_MOD
 
 _UPDATE_GATE:
-	btfss	CV_FLAGS,CVF_GATE
+	movff	CV_GATE,PORTC		; Simply apply current gate settings directly to PORTC
 	goto	_LOOP
-	btfss	CV_GATE,0		; Gate flag is bit0
-	goto	_CLEAR_GATE
-_SET_GATE:
-	bsf	PORTB,0
-	bcf	CV_FLAGS,CVF_GATE
-	goto	_LOOP
-_CLEAR_GATE:
-	bcf	PORTB,0
-	bcf	CV_FLAGS,CVF_GATE
-	goto	_LOOP
-
 
 	end
 

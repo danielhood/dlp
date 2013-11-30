@@ -11,12 +11,6 @@
 
 
 ; ------------------------------------------------------------------------------
-; Local Constants
-
-MIDI:		equ	0x05	; MIDI input on RB5
-
-
-; ------------------------------------------------------------------------------
 ; Context SAVE/RESTORE macros
 ;
 _SAVE_CTX	macro
@@ -113,11 +107,6 @@ _PROCESS_MESSAGE:
 	bra	_MSTATE_SYS_RESET
 	bra	_MSTATE_NONE		; Only ever called if a midi message byte arrives before a status byte after reset
 
-;	movff	CUR_BYTE,CV_NOTE	; Copy to all registers
-;	movff	CUR_BYTE,CV_VELOCITY	; Copy to all registers
-;	movff	CUR_BYTE,CV_MOD		; Copy to all registers
-;	btg	CV_GATE,0		; Flip the gate flag
-
 _RC_CLEANUP:
 	bcf	PIR1,RCIF	; Clear Serial RX interrupt
 	goto	_EXIT_SERVICE
@@ -127,6 +116,8 @@ _RC_CLEANUP:
 ; Midi message processing based on current state
 ;
 _MSTATE_NOTE_OFF:
+	btfsc	PORTA,0			; Check MIDI MODE
+	goto	_MSTATE_NOTE_OFF_MODE_1
 	btfsc	MSG_COUNT,0
 	goto	_PROCESS_VELOCITY_NOTE_OFF
 _PROCSES_PITCH_NOTE_OFF:
@@ -138,20 +129,24 @@ _PROCESS_VELOCITY_NOTE_OFF:
 _PROCESS_VELOCITY_NOTE_OFF2:
 	movf	MSG_PITCH,W
 	cpfseq	CV_PITCH
-	goto	_END_NOTE_OFF		; Ignore note off, since a new note-on has been triggered since
+	goto	_END_NOTE_OFF			; Ignore note off, since a new note-on has been triggered since
 	goto	_PUT_NOTE_OFF_LIVE
 _PUT_NOTE_OFF_LIVE:
 	movff	MSG_PITCH,CV_PITCH		; Push the velocity and pitch live
-	bsf	CV_FLAGS,CVF_PITCH
+	bsf	CV_FLAGS,CVF_PITCH		; Flag PITCH and VELOCITY as updated
 	movff	MSG_VELOCITY,CV_VELOCITY
 	bsf	CV_FLAGS,CVF_VELOCITY
-	bcf	CV_GATE,0		; Clear the gate flag
-	bsf	CV_FLAGS,CVF_GATE
+	bcf	CV_GATE,0			; Clear GATE
 _END_NOTE_OFF:
-	clrf	MSG_COUNT		; Reset message count
+	clrf	MSG_COUNT			; Reset message count
+	goto	_RC_CLEANUP
+
+_MSTATE_NOTE_OFF_MODE_1:
 	goto	_RC_CLEANUP
 
 _MSTATE_NOTE_ON:
+	btfsc	PORTA,0				; Check MIDI MODE
+	goto	_MSTATE_NOTE_ON_MODE_1
 	btfsc	MSG_COUNT,0
 	goto	_PROCESS_VELOCITY_NOTE_ON
 _PROCSES_PITCH_NOTE_ON:
@@ -160,15 +155,18 @@ _PROCSES_PITCH_NOTE_ON:
 	goto	_RC_CLEANUP
 _PROCESS_VELOCITY_NOTE_ON:
 	movff	CUR_BYTE,MSG_VELOCITY
-	movf	MSG_VELOCITY,F		; Check value of velocity
+	movf	MSG_VELOCITY,F			; Check value of velocity
 	bz	_PROCESS_VELOCITY_NOTE_OFF2	; Vel0 is interpreted as a note off
-	movff	MSG_PITCH,CV_PITCH		; Push the velocity and pitch live as new note-on's are always published
-	bsf	CV_FLAGS,CVF_PITCH
+	movff	MSG_PITCH,CV_PITCH		; Push the velocity and pitch live as new note-on's
+						; are always published
+	bsf	CV_FLAGS,CVF_PITCH		; Flag PITCH and VELOCITY as updated
 	movff	MSG_VELOCITY,CV_VELOCITY
 	bsf	CV_FLAGS,CVF_VELOCITY
-	bsf	CV_GATE,0		; Set the gate flag
-	bsf	CV_FLAGS,CVF_GATE
-	clrf	MSG_COUNT		; Reset message count
+	bsf	CV_GATE,0			; Trigger GATE
+	clrf	MSG_COUNT			; Reset message count
+	goto	_RC_CLEANUP
+
+_MSTATE_NOTE_ON_MODE_1:
 	goto	_RC_CLEANUP
 
 _MSTATE_KP:
@@ -176,17 +174,66 @@ _MSTATE_KP:
 
 _MSTATE_CC:
 	btfsc	MSG_COUNT,0
-	goto	_PROCESS_CVALUE
+	goto	_PROCESS_CC01
 _PROCSES_CNUM:
 	movff	CUR_BYTE,CC_NUM
 	incf	MSG_COUNT
 	goto	_RC_CLEANUP
-_PROCESS_CVALUE:
+_PROCESS_CC01:
 	movlw	0x01			; Controller num that we're mapping (Mod Wheel)
 	cpfseq	CC_NUM			; Check to see if this is the controller we want
-	goto	_END_CVALUE		; Ignore CC value
+	goto	_PROCESS_CC02		; Try next CC Value
 	movff	CUR_BYTE,CV_MOD		; Update the CC value
 	bsf	CV_FLAGS,CVF_MOD
+	goto	_END_CVALUE
+_PROCESS_CC02:
+	movlw	0x02
+	cpfseq	CC_NUM			; Check CC Value
+	goto	_PROCESS_CC03		; Try next CC Value
+	movlw	0x7F			; Check if > 63
+	cpfsgt	CUR_BYTE
+	goto	_CC02_OFF
+	bsf	CV_GATE,1		; Trigger Gate
+	goto	_END_CVALUE
+_CC02_OFF:
+	bcf	CV_GATE,1		; Clear Gate
+	goto	_END_CVALUE
+_PROCESS_CC03:
+	movlw	0x03
+	cpfseq	CC_NUM			; Check CC Value
+	goto	_PROCESS_CC04		; Try next CC Value
+	movlw	0x7F			; Check if > 63
+	cpfsgt	CUR_BYTE
+	goto	_CC03_OFF
+	bsf	CV_GATE,2		; Trigger Gate
+	goto	_END_CVALUE
+_CC03_OFF:
+	bcf	CV_GATE,2		; Clear Gate
+	goto	_END_CVALUE
+_PROCESS_CC04:
+	movlw	0x04
+	cpfseq	CC_NUM			; Check CC Value
+	goto	_PROCESS_CC05		; Try next CC Value
+	movlw	0x7F			; Check if > 63
+	cpfsgt	CUR_BYTE
+	goto	_CC04_OFF
+	bsf	CV_GATE,3		; Trigger Gate
+	goto	_END_CVALUE
+_CC04_OFF:
+	bcf	CV_GATE,3		; Clear Gate
+	goto	_END_CVALUE
+_PROCESS_CC05:
+	movlw	0x05
+	cpfseq	CC_NUM			; Check CC Value
+	goto	_END_CVALUE		; CC Must be > 5 so ignore
+	movlw	0x7F			; Check if > 63
+	cpfsgt	CUR_BYTE
+	goto	_CC05_OFF
+	bsf	CV_GATE,4		; Trigger Gate
+	goto	_END_CVALUE
+_CC05_OFF:
+	bcf	CV_GATE,4		; Clear Gate
+	goto	_END_CVALUE
 _END_CVALUE:
 	clrf	MSG_COUNT		; Reset message count
 	goto	_RC_CLEANUP
@@ -262,8 +309,11 @@ _CHECK_BYTE:
 	cpfslt	CUR_BYTE
 	goto	_SET_SYSTEM_MSG
 _SET_STD_MSG:
+	movf	CUR_BYTE,W	
+	andlw	0x0F		; Extract MIDI chan
+	movwf	MIDI_CHAN
 	movf	CUR_BYTE,W
-	andlw	0x70		; Ignore MIDI channel and kill MSbit
+	andlw	0x70		; Extract status code and drop MSb
 	swapf	WREG
 	goto	_CREATE_OFFSET
 _SET_SYSTEM_MSG:

@@ -6,11 +6,13 @@
 ;------ Shared variables
 	CUR_BYTE		; Completed byte read by service code
 
-	CV_FLAGS		; Set of flags to indicate if values have been updated
-	CV_PITCH		; Current value for note pitch
-	CV_VELOCITY		; Current value for note Velocity
-	CV_MOD			; Current value for the Mod Wheel
-	CV_GATE			; Flag for current gate setting (BIT0)
+	
+	CV_FLAGS		; Set of flags to indicate which PWM values have been updated
+
+	CV_PITCH		; Current value for note Pitch (or VEL1 in MODE1)
+	CV_VELOCITY		; Current value for note Velocity (or VEL2 in MODE1)
+	CV_MOD			; Current value for the Mod Wheel (or VEL3 in MODE1)
+	CV_GATE			; Current gate settings (bits 0-4) 
 
 	SYS_EX_DATA		; Current Sysex byte (set to 0xF7 if no data)
 
@@ -23,6 +25,7 @@
 	MIDI_STATE_TMP		; Used to store the last midi state when in SysEx mode
 	MSG_COUNT		; Counts the number of msg params passed
 	CC_NUM			; Holds the controller number for the CC message
+	MSG_CHAN		; Holds the working MIDI channel number
 	MSG_PITCH		; Holds the working pitch that may be pushed live
 	MSG_VELOCITY		; Holds the working velocity that may be pushed live
 
@@ -42,10 +45,9 @@ CV_DATA_LKP:	equ	0x00	; EEPROM base Address of CV Controller data lookup
 CV_NOTE_LKP:	equ	0x80	; EEPROM base Address CV Note data lookup
 
 ; CV_FLAGS
-CVF_PITCH:	equ	0x00
-CVF_VELOCITY:	equ	0x01
-CVF_MOD:	equ	0x02
-CVF_GATE:	equ	0x03
+CVF_PITCH:	equ	0x00	; MODE0
+CVF_VELOCITY:	equ	0x01	; MODE0
+CVF_MOD:	equ	0x02	; MODE0
 
 _MOFFSET_NOTE_OFF:	equ	0x00	; 0x8c
 _MOFFSET_NOTE_ON:	equ	0x02	; 0x9c

@@ -19,17 +19,19 @@ _SETUP:
 	movlw	0x00		; All Digital I/O on PORTA
 	movwf	ANSEL0
 
-	movlw	0x00		; PORTA - All output
-	movwf	TRISA
+	movlw	b'00000001'	; PORTA:	RA0 - Switch Input for MIDI Mode (Pitch/Mod vs Drum Trigger)
+	movwf	TRISA		; 		RA1:4 - Output (Unused)
+				;		RA5 - Doesn't exist on this chip
+				;		RA6:7 - Crystal Osc
 
-	movlw	b'00000000'	; PORTB:	RB0 - Digital Out (GATE)
-	movwf	TRISB		;		RB1,3,4 - PWM Out (CV)
-				;		RB2:5 - Digital Out (Unused)
+	movlw	b'00000000'	; PORTB:	RB0,2,5 - Digital Out (Unused)
+	movwf	TRISB		;		RB1,3,4 - PWM Out 1,3,5 (CV)
 				;		RB6:7 - PGC/PGD
 
 	movlw	b'11000000'	; PORTC
-	movwf	TRISC		;		RC0:5 - Unused Out
-				;		RC6:7 - Serial I/O (must both be set to 1)
+	movwf	TRISC		;		RC0:4 - Ditigal Out (Gates 1 - 5)
+				;		RC5   - Digital Out (Unused)
+				;		RC6:7 - Serial TX/RX (must both be set to 1)
 
 ; PWM Config (for CV out)
 	movlw	b'00000010'	; No Pre-scale, No Post-scale, Continuous w/no interrupts
@@ -83,6 +85,10 @@ _SETUP:
 
 	movlw	_MOFFSET_NONE	; Set inital midi state
 	movwf	MIDI_STATE
+	
+	movlw	0x01
+	movwf	MSG_CHAN	; Default to channel 1
+
 
 	movlw	0xF7		; Set SysEx data to deault state
 	movwf	SYS_EX_DATA
