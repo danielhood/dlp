@@ -1,10 +1,10 @@
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE  1
+MPASM  5.43                          MIDI.ASM   12-1-2013  16:07:58         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-                      00001 ; Interrupt service handlers
+                      00001 ; MIDI Processing Routines (Main code loop)
                       00002 
                       00003 #include p18f2431.inc
                       00001         LIST
@@ -57,7 +57,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00038         endc
                       00039 
                       00040 
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE  2
+MPASM  5.43                          MIDI.ASM   12-1-2013  16:07:58         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -102,506 +102,155 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00006 ; ------------------------------------------------------------------------------
                       00007 ; Export global code refs
                       00008 ;
-  0000                00009         global  _SERVICE_HI
-  0000                00010         global  _SERVICE_LO
-                      00011 
+  0000                00009         global  _MAIN
+                      00010 
+  0000                00011         extern CV_PITCH_DATA
                       00012 
-                      00013 ; ------------------------------------------------------------------------------
-                      00014 ; Context SAVE/RESTORE macros
-                      00015 ;
-                      00016 _SAVE_CTX       macro
-                      00017         movwf   W_TMP           ; Save W to W_TEMP register
-                      00018         movff   STATUS,ST_TMP   ; Save STATUS to ST_TEMP register
-                      00019         movff   BSR,BSR_TMP     ; Save bank select
-                      00020         endm
-                      00021 
-                      00022 _RESTORE_CTX    macro
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE  3
+                      00013 
+                      00014 ; ------------------------------------------------------------------------------
+                      00015 ; Converts a 7 bit value in W and scales the result returining it in W
+                      00016 ; Register W is expected to contain the base address of the CV value lookup table.
+                      00017 ;       Use program memory lookup.
+                      00018 ;       EEPROM lookups seemed to only return 00's.
+                      00019 ;
+                      00020 _SCALE_CV_NOTE  macro
+                      00021         addlw   low CV_PITCH_DATA
+                      00022         movwf   TBLPTRL         ; Address to read
+MPASM  5.43                          MIDI.ASM   12-1-2013  16:07:58         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-                      00023         movff   BSR_TMP,BSR     ; Restore bank select
-                      00024         movf    W_TMP           ; Restore W
-                      00025         movff   ST_TMP,STATUS   ; Restore STATUS
-                      00026         endm
+                      00023         tblrd   *
+                      00024         movf    TABLAT,W        ; W = table data
+                      00025         endm
+                      00026 
                       00027 
                       00028 ; ------------------------------------------------------------------------------
-                      00029 ; Dispatcher for interrupt handlers
-                      00030 ;
-                      00031 .SERVICE        code    ; Relocatable code for interrupt handler
-000000                00032 _SERVICE_LO:
-                      00033         ; Not used
-000000 0010           00034         retfie
-                      00035 
-000002                00036 _SERVICE_HI:
-                      00037         _SAVE_CTX
-000002 6E07               M         movwf   W_TMP           ; Save W to W_TEMP register
-000004 CFD8 F008          M         movff   STATUS,ST_TMP   ; Save STATUS to ST_TEMP register
-000008 CFE0 F009          M         movff   BSR,BSR_TMP     ; Save bank select
-                      00038 
-                      00039 ; Assumes only one interrupt will be enabled at a time
-00000C                00040 _CHECK_RC:
-00000C BA9E           00041         btfsc   PIR1,RCIF       ; Check for Serial RX interrupt (MIDI IN - byte read)
-00000E EF?? F???      00042         goto    _HANDLE_RC
-                      00043 
-000012                00044 _EXIT_SERVICE:
-                      00045         _RESTORE_CTX
-000012 C009 FFE0          M         movff   BSR_TMP,BSR     ; Restore bank select
-000016 5207               M         movf    W_TMP           ; Restore W
-000018 C008 FFD8          M         movff   ST_TMP,STATUS   ; Restore STATUS
-                      00046 
-00001C 0010           00047         retfie
-                      00048 
-                      00049 
-                      00050 ; ------------------------------------------------------------------------------
-                      00051 ; Handler for MIDI IN over Serial RX
-                      00052 ;
-00001E                00053 _HANDLE_RC:
-00001E CFAE F000      00054         movff   RCREG,CUR_BYTE  ; Copy received byte to CUR_BYTE
-                      00055 
-                      00056         ; First, check to see if we are in SysEx mode
-000022 0E0E           00057         movlw   _MOFFSET_SYS_EX
-000024 620A           00058         cpfseq  MIDI_STATE
-000026 EF?? F???      00059         goto    _CHECK_BYTE_TYPE
-                      00060 
-00002A                00061 _MSTATE_SYS_EX:
-00002A 0EF7           00062         movlw   0xF7
-00002C 6200           00063         cpfseq  CUR_BYTE
-00002E EF?? F???      00064         goto    _PROCESS_SYS_EX_DATA
-000032                00065 _PROCSES_SYS_EX_END:
-000032 C00B F00A      00066         movff   MIDI_STATE_TMP,MIDI_STATE       ; Restore the last state before the SYS_EX message came 
-                            in
-000036 EF?? F???      00067         goto    _RC_CLEANUP
-00003A                00068 _PROCESS_SYS_EX_DATA:
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE  4
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
-00003A C000 F006      00069         movff   CUR_BYTE,SYS_EX_DATA
-00003E EF?? F???      00070         goto    _RC_CLEANUP
+                      00029 ; Macro to split the 7 bits across the high and low PWM output registers
+                      00030 ; by putting them into the TMP_CV_BYTE_L and TMP_CV_BYTE_H
+                      00031 ;       The 7th bit should end up in the TMP_CV_BYTE_H
+                      00032 ;       The remaining 6 bits should be in the upper 6 bits of TMP_CV_BYTE_L
+                      00033 ;       Upon return:
+                      00034 ;               TMP_CV_BYTE_H should be placed into PDCxH: '--00000d'
+                      00035 ;               TMP_CV_BYTE_L should be placed into PDCxL: 'dddddd00'
+                      00036 ;
+                      00037 _SPLIT_CV_VALUE macro
+                      00038         movwf   TMP_CV_BYTE_L   ; W should contain the 7bit CV value (0..127)
+                      00039         bcf     STATUS,C        ; Ensure C = 0
+                      00040         rlncf   TMP_CV_BYTE_L,F
+                      00041         rlcf    TMP_CV_BYTE_L,F ; pushes the msbit of 7bit value into C
+                      00042         clrf    TMP_CV_BYTE_H
+                      00043         rlcf    TMP_CV_BYTE_H   ; rolls on the C bit 
+                      00044         endm
+                      00045 
+                      00046 _SPLIT_CV_VALUE2        macro
+                      00047         ;rlncf  WREG            ; Double the value since we're using a period of 256 instead of 128
+                      00048         movwf   TMP_CV_BYTE_L   ; W should contain the 8bit CV value
+                      00049         andlw   0xC0
+                      00050         movwf   TMP_CV_BYTE_H   ;
+                      00051         rlncf   TMP_CV_BYTE_L,F
+                      00052         rlncf   TMP_CV_BYTE_L,F ; pushes the msbit of 7bit value into C
+                      00053         swapf   TMP_CV_BYTE_H,F
+                      00054         rrncf   TMP_CV_BYTE_H,F
+                      00055         rrncf   TMP_CV_BYTE_H,F
+                      00056         endm
+                      00057 
+                      00058 ; ------------------------------------------------------------------------------
+                      00059 ; Main code
+                      00060 ;
+                      00061 .MAIN   code                    ; Relocatable code for main application
+000000                00062 _MAIN:
+000000 6A80           00063         clrf    PORTA           ; Clear PORTA
+000002 6A81           00064         clrf    PORTB           ; Clear PORTB
+000004 6A82           00065         clrf    PORTC           ; Clear PORTC
+                      00066 
+000006 0E00           00067         movlw   b'00000000'     ; Set the high byte to 0
+000008 6E78           00068         movwf   PDC0H
+00000A 6E76           00069         movwf   PDC1H
+00000C 6E74           00070         movwf   PDC2H
                       00071 
-000042                00072 _CHECK_BYTE_TYPE:
-000042 0E80           00073         movlw   0x80            ; Check to see if we have a status or a message byte
-000044 6000           00074         cpfslt  CUR_BYTE
-000046 EF?? F???      00075         goto    _PROCESS_STATUS
-                      00076 
-                      00077 ; ------------------------------------------------------------------------------
-                      00078 ; Process MIDI Message byte
-                      00079 ;
-                      00080 
-00004A                00081 _PROCESS_MESSAGE:
-                      00082 ; Branch based on which state we are in
-00004A 500A           00083         movf    MIDI_STATE,W    ; State setting represents offset into jump table
-00004C 26F9           00084         addwf   PCL,F
-00004E D???           00085         bra     _MSTATE_NOTE_OFF
-000050 D???           00086         bra     _MSTATE_NOTE_ON
-000052 D???           00087         bra     _MSTATE_KP
-000054 D???           00088         bra     _MSTATE_CC
-000056 D???           00089         bra     _MSTATE_PC
-000058 D???           00090         bra     _MSTATE_CP
-00005A D???           00091         bra     _MSTATE_PB
-00005C D???           00092         bra     _MSTATE_SYS_EX          ; Never called from here
-00005E D???           00093         bra     _MSTATE_F1              ; Never called
-000060 D???           00094         bra     _MSTATE_SP
-000062 D???           00095         bra     _MSTATE_SS
-000064 D???           00096         bra     _MSTATE_F4              ; Never called
-000066 D???           00097         bra     _MSTATE_UBS
-000068 D???           00098         bra     _MSTATE_TR
-00006A D???           00099         bra     _MSTATE_SYS_EX_END      ; Never called
-00006C D???           00100         bra     _MSTATE_TT
-00006E D???           00101         bra     _MSTATE_F9              ; Never called
-000070 D???           00102         bra     _MSTATE_START_SONG
-000072 D???           00103         bra     _MSTATE_CONT_SONG
-000074 D???           00104         bra     _MSTATE_STOP_SONG
-000076 D???           00105         bra     _MSTATE_FD
-000078 D???           00106         bra     _MSTATE_AS
-00007A D???           00107         bra     _MSTATE_SYS_RESET
-00007C D???           00108         bra     _MSTATE_NONE            ; Only ever called if a midi message byte arrives before a statu
-                            s byte after reset
-                      00109 
-00007E                00110 _RC_CLEANUP:
-00007E 9A9E           00111         bcf     PIR1,RCIF       ; Clear Serial RX interrupt
-000080 EF?? F???      00112         goto    _EXIT_SERVICE
-                      00113 
-                      00114 
-                      00115 ; ------------------------------------------------------------------------------
-                      00116 ; Midi message processing based on current state
-                      00117 ;
-000084                00118 _MSTATE_NOTE_OFF:
-000084 B080           00119         btfsc   PORTA,0                 ; Check MIDI MODE
-000086 EF?? F???      00120         goto    _MSTATE_NOTE_OFF_MODE_1
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE  5
+00000E                00072 _LOOP:
+00000E                00073 _UPDATE_PITCH:
+00000E A001           00074         btfss   CV_FLAGS,CVF_PITCH
+000010 EF?? F???      00075         goto    _UPDATE_VELOCITY
+MPASM  5.43                          MIDI.ASM   12-1-2013  16:07:58         PAGE  4
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-00008A B00C           00121         btfsc   MSG_COUNT,0
-00008C EF?? F???      00122         goto    _PROCESS_VELOCITY_NOTE_OFF
-000090                00123 _PROCSES_PITCH_NOTE_OFF:
-000090 C000 F00F      00124         movff   CUR_BYTE,MSG_PITCH
-000094 2A0C           00125         incf    MSG_COUNT
-000096 EF?? F???      00126         goto    _RC_CLEANUP
-00009A                00127 _PROCESS_VELOCITY_NOTE_OFF:
-00009A C000 F010      00128         movff   CUR_BYTE,MSG_VELOCITY
-00009E                00129 _PROCESS_VELOCITY_NOTE_OFF2:
-00009E 500F           00130         movf    MSG_PITCH,W
-0000A0 6202           00131         cpfseq  CV_PITCH
-0000A2 EF?? F???      00132         goto    _END_NOTE_OFF                   ; Ignore note off, since a new note-on has been triggere
-                            d since
-0000A6                00133 _PUT_NOTE_OFF_LIVE:
-0000A6 C00F F002      00134         movff   MSG_PITCH,CV_PITCH              ; Push the velocity and pitch live
-0000AA 8001           00135         bsf     CV_FLAGS,CVF_PITCH              ; Flag PITCH and VELOCITY as updated
-0000AC C010 F003      00136         movff   MSG_VELOCITY,CV_VELOCITY
-0000B0 8201           00137         bsf     CV_FLAGS,CVF_VELOCITY
-0000B2 9005           00138         bcf     CV_GATE,0                       ; Clear GATE
-0000B4                00139 _END_NOTE_OFF:
-0000B4 6A0C           00140         clrf    MSG_COUNT                       ; Reset message count
-0000B6 EF?? F???      00141         goto    _RC_CLEANUP
-                      00142 
-0000BA                00143 _MSTATE_NOTE_OFF_MODE_1:
-0000BA B00C           00144         btfsc   MSG_COUNT,0
-0000BC EF?? F???      00145         goto    _PROCESS_VELOCITY_NOTE_OFF_M1
-0000C0                00146 _PROCSES_PITCH_NOTE_OFF_M1:
-0000C0 C000 F00F      00147         movff   CUR_BYTE,MSG_PITCH
-0000C4 2A0C           00148         incf    MSG_COUNT
-0000C6 EF?? F???      00149         goto    _RC_CLEANUP
-0000CA                00150 _PROCESS_VELOCITY_NOTE_OFF_M1:
-0000CA 0E17           00151         movlw   0x17                            ; Filter notes C1 to E1 (0x18 to 0x1C)
-0000CC 640F           00152         cpfsgt  MSG_PITCH
-0000CE EF?? F???      00153         goto    _RC_CLEANUP
-0000D2 0E1D           00154         movlw   0x1D
-0000D4 600F           00155         cpfslt  MSG_PITCH
-0000D6 EF?? F???      00156         goto    _RC_CLEANUP
-0000DA C000 F010      00157         movff   CUR_BYTE,MSG_VELOCITY
-0000DE                00158 _PROCESS_VELOCITY_NOTE_OFF2_M1:
-0000DE                00159 _PUT_NOTE_OFF_LIVE_M1:
-0000DE 0E1C           00160         movlw   0x1C                            ; Jump to correct handler for each supported note
-0000E0 600F           00161         cpfslt  MSG_PITCH
-0000E2 EF?? F???      00162         goto    _PROCESS_NOTE_OFF_GATE5
-0000E6 0E1B           00163         movlw   0x1B
-0000E8 600F           00164         cpfslt  MSG_PITCH
-0000EA EF?? F???      00165         goto    _PROCESS_NOTE_OFF_GATE4
-0000EE 0E1A           00166         movlw   0x1A
-0000F0 600F           00167         cpfslt  MSG_PITCH
-0000F2 EF?? F???      00168         goto    _PROCESS_NOTE_OFF_GATE3
-0000F6 0E19           00169         movlw   0x19
-0000F8 600F           00170         cpfslt  MSG_PITCH
-0000FA EF?? F???      00171         goto    _PROCESS_NOTE_OFF_GATE2
-0000FE                00172 _PROCESS_NOTE_OFF_GATE1:
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE  6
+000014 5002           00076         movf    CV_PITCH,W
+                      00077         _SCALE_CV_NOTE          ; Scales W, returning result in W
+000016 0F??               M         addlw   low CV_PITCH_DATA
+000018 6EF6               M         movwf   TBLPTRL         ; Address to read
+00001A 0008               M         tblrd   *
+00001C 50F5               M         movf    TABLAT,W        ; W = table data
+                      00078         _SPLIT_CV_VALUE2
+                          M         ;rlncf  WREG            ; Double the value since we're using a period of 256 instead of 128
+00001E 6E11               M         movwf   TMP_CV_BYTE_L   ; W should contain the 8bit CV value
+000020 0BC0               M         andlw   0xC0
+000022 6E12               M         movwf   TMP_CV_BYTE_H   ;
+000024 4611               M         rlncf   TMP_CV_BYTE_L,F
+000026 4611               M         rlncf   TMP_CV_BYTE_L,F ; pushes the msbit of 7bit value into C
+000028 3A12               M         swapf   TMP_CV_BYTE_H,F
+00002A 4212               M         rrncf   TMP_CV_BYTE_H,F
+00002C 4212               M         rrncf   TMP_CV_BYTE_H,F
+00002E C012 FF78      00079         movff   TMP_CV_BYTE_H,PDC0H
+000032 C011 FF79      00080         movff   TMP_CV_BYTE_L,PDC0L
+000036 9001           00081         bcf     CV_FLAGS,CVF_PITCH
+                      00082 
+000038                00083 _UPDATE_VELOCITY:
+000038 A201           00084         btfss   CV_FLAGS,CVF_VELOCITY
+00003A EF?? F???      00085         goto    _UPDATE_MOD
+00003E 5003           00086         movf    CV_VELOCITY,W
+000040 46E8           00087         rlncf   WREG            ; Double the value since we're using a period of 256 instead of 128
+                      00088         _SPLIT_CV_VALUE2
+                          M         ;rlncf  WREG            ; Double the value since we're using a period of 256 instead of 128
+000042 6E11               M         movwf   TMP_CV_BYTE_L   ; W should contain the 8bit CV value
+000044 0BC0               M         andlw   0xC0
+000046 6E12               M         movwf   TMP_CV_BYTE_H   ;
+000048 4611               M         rlncf   TMP_CV_BYTE_L,F
+00004A 4611               M         rlncf   TMP_CV_BYTE_L,F ; pushes the msbit of 7bit value into C
+00004C 3A12               M         swapf   TMP_CV_BYTE_H,F
+00004E 4212               M         rrncf   TMP_CV_BYTE_H,F
+000050 4212               M         rrncf   TMP_CV_BYTE_H,F
+000052 C012 FF76      00089         movff   TMP_CV_BYTE_H,PDC1H
+000056 C011 FF77      00090         movff   TMP_CV_BYTE_L,PDC1L
+00005A 9201           00091         bcf     CV_FLAGS,CVF_VELOCITY
+                      00092 
+00005C                00093 _UPDATE_MOD:
+00005C A401           00094         btfss   CV_FLAGS,CVF_MOD
+00005E EF?? F???      00095         goto    _UPDATE_GATE
+000062 5004           00096         movf    CV_MOD,W
+000064 46E8           00097         rlncf   WREG            ; Double the value since we're using a period of 256 instead of 128
+                      00098         _SPLIT_CV_VALUE2
+                          M         ;rlncf  WREG            ; Double the value since we're using a period of 256 instead of 128
+000066 6E11               M         movwf   TMP_CV_BYTE_L   ; W should contain the 8bit CV value
+000068 0BC0               M         andlw   0xC0
+00006A 6E12               M         movwf   TMP_CV_BYTE_H   ;
+00006C 4611               M         rlncf   TMP_CV_BYTE_L,F
+00006E 4611               M         rlncf   TMP_CV_BYTE_L,F ; pushes the msbit of 7bit value into C
+000070 3A12               M         swapf   TMP_CV_BYTE_H,F
+000072 4212               M         rrncf   TMP_CV_BYTE_H,F
+MPASM  5.43                          MIDI.ASM   12-1-2013  16:07:58         PAGE  5
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-0000FE C010 F002      00173         movff   MSG_VELOCITY,CV_PITCH           ; PWM1
-000102 8001           00174         bsf     CV_FLAGS,CVF_PITCH
-000104 9005           00175         bcf     CV_GATE,0                       ; Clear GATE1
-000106 6A0C           00176         clrf    MSG_COUNT                       ; Reset message count
-000108 EF?? F???      00177         goto    _RC_CLEANUP
-00010C                00178 _PROCESS_NOTE_OFF_GATE2:
-00010C C010 F003      00179         movff   MSG_VELOCITY,CV_VELOCITY        ; PWM3
-000110 8201           00180         bsf     CV_FLAGS,CVF_VELOCITY
-000112 9205           00181         bcf     CV_GATE,1                       ; Clear GATE2
-000114 6A0C           00182         clrf    MSG_COUNT                       ; Reset message count
-000116 EF?? F???      00183         goto    _RC_CLEANUP
-00011A                00184 _PROCESS_NOTE_OFF_GATE3:
-00011A C010 F004      00185         movff   MSG_VELOCITY,CV_MOD             ; PWM5
-00011E 8401           00186         bsf     CV_FLAGS,CVF_MOD
-000120 9405           00187         bcf     CV_GATE,2                       ; Clear GATE3
-000122 6A0C           00188         clrf    MSG_COUNT                       ; Reset message count
-000124 EF?? F???      00189         goto    _RC_CLEANUP
-000128                00190 _PROCESS_NOTE_OFF_GATE4:
-000128 9605           00191         bcf     CV_GATE,3                       ; Clear GATE4
-00012A 6A0C           00192         clrf    MSG_COUNT                       ; Reset message count
-00012C EF?? F???      00193         goto    _RC_CLEANUP
-000130                00194 _PROCESS_NOTE_OFF_GATE5:
-000130 9805           00195         bcf     CV_GATE,4                       ; Clear GATE5
-000132 6A0C           00196         clrf    MSG_COUNT                       ; Reset message count
-000134 EF?? F???      00197         goto    _RC_CLEANUP
-                      00198 
-000138                00199 _MSTATE_NOTE_ON:
-000138 B080           00200         btfsc   PORTA,0                         ; Check MIDI MODE
-00013A EF?? F???      00201         goto    _MSTATE_NOTE_ON_MODE_1
-00013E B00C           00202         btfsc   MSG_COUNT,0
-000140 EF?? F???      00203         goto    _PROCESS_VELOCITY_NOTE_ON
-000144                00204 _PROCSES_PITCH_NOTE_ON:
-000144 C000 F00F      00205         movff   CUR_BYTE,MSG_PITCH
-000148 2A0C           00206         incf    MSG_COUNT
-00014A EF?? F???      00207         goto    _RC_CLEANUP
-00014E                00208 _PROCESS_VELOCITY_NOTE_ON:
-00014E C000 F010      00209         movff   CUR_BYTE,MSG_VELOCITY
-000152 5210           00210         movf    MSG_VELOCITY,F                  ; Check value of velocity
-000154 E0??           00211         bz      _PROCESS_VELOCITY_NOTE_OFF2     ; Vel0 is interpreted as a note off
-000156 C00F F002      00212         movff   MSG_PITCH,CV_PITCH              ; Push the velocity and pitch live as new note-on's
-                      00213                                                 ; are always published
-00015A 8001           00214         bsf     CV_FLAGS,CVF_PITCH              ; Flag PITCH and VELOCITY as updated
-00015C C010 F003      00215         movff   MSG_VELOCITY,CV_VELOCITY
-000160 8201           00216         bsf     CV_FLAGS,CVF_VELOCITY
-000162 8005           00217         bsf     CV_GATE,0                       ; Trigger GATE
-000164 6A0C           00218         clrf    MSG_COUNT                       ; Reset message count
-000166 EF?? F???      00219         goto    _RC_CLEANUP
-                      00220 
-00016A                00221 _MSTATE_NOTE_ON_MODE_1:
-00016A B00C           00222         btfsc   MSG_COUNT,0
-00016C EF?? F???      00223         goto    _PROCESS_VELOCITY_NOTE_ON_M1
-000170                00224 _PROCSES_PITCH_NOTE_ON_M1:
-000170 C000 F00F      00225         movff   CUR_BYTE,MSG_PITCH
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE  7
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
-000174 2A0C           00226         incf    MSG_COUNT
-000176 EF?? F???      00227         goto    _RC_CLEANUP
-00017A                00228 _PROCESS_VELOCITY_NOTE_ON_M1:
-00017A 0E17           00229         movlw   0x17                            ; Filter notes C1 to E1 (0x18 to 0x1C)
-00017C 640F           00230         cpfsgt  MSG_PITCH
-00017E EF?? F???      00231         goto    _RC_CLEANUP
-000182 0E1D           00232         movlw   0x1D
-000184 600F           00233         cpfslt  MSG_PITCH
-000186 EF?? F???      00234         goto    _RC_CLEANUP
-00018A C000 F010      00235         movff   CUR_BYTE,MSG_VELOCITY
-00018E 5210           00236         movf    MSG_VELOCITY,F                  ; Check value of velocity
-000190 E0??           00237         bz      _PROCESS_VELOCITY_NOTE_OFF2_M1  ; Vel0 is interpreted as a note off
-000192 0E1C           00238         movlw   0x1C                            ; Jump to correct handler for each supported note
-000194 600F           00239         cpfslt  MSG_PITCH
-000196 EF?? F???      00240         goto    _PROCESS_NOTE_ON_GATE5
-00019A 0E1B           00241         movlw   0x1B
-00019C 600F           00242         cpfslt  MSG_PITCH
-00019E EF?? F???      00243         goto    _PROCESS_NOTE_ON_GATE4
-0001A2 0E1A           00244         movlw   0x1A
-0001A4 600F           00245         cpfslt  MSG_PITCH
-0001A6 EF?? F???      00246         goto    _PROCESS_NOTE_ON_GATE3
-0001AA 0E19           00247         movlw   0x19
-0001AC 600F           00248         cpfslt  MSG_PITCH
-0001AE EF?? F???      00249         goto    _PROCESS_NOTE_ON_GATE2
-0001B2                00250 _PROCESS_NOTE_ON_GATE1:
-0001B2 C010 F002      00251         movff   MSG_VELOCITY,CV_PITCH           ; PWM1
-0001B6 8001           00252         bsf     CV_FLAGS,CVF_PITCH
-0001B8 8005           00253         bsf     CV_GATE,0                       ; Trigger GATE1
-0001BA 6A0C           00254         clrf    MSG_COUNT                       ; Reset message count
-0001BC EF?? F???      00255         goto    _RC_CLEANUP
-0001C0                00256 _PROCESS_NOTE_ON_GATE2:
-0001C0 C010 F003      00257         movff   MSG_VELOCITY,CV_VELOCITY        ; PWM3
-0001C4 8201           00258         bsf     CV_FLAGS,CVF_VELOCITY
-0001C6 8205           00259         bsf     CV_GATE,1                       ; Trigger GATE2
-0001C8 6A0C           00260         clrf    MSG_COUNT                       ; Reset message count
-0001CA EF?? F???      00261         goto    _RC_CLEANUP
-0001CE                00262 _PROCESS_NOTE_ON_GATE3:
-0001CE C010 F004      00263         movff   MSG_VELOCITY,CV_MOD             ; PWM5
-0001D2 8401           00264         bsf     CV_FLAGS,CVF_MOD
-0001D4 8405           00265         bsf     CV_GATE,2                       ; Trigger GATE3
-0001D6 6A0C           00266         clrf    MSG_COUNT                       ; Reset message count
-0001D8 EF?? F???      00267         goto    _RC_CLEANUP
-0001DC                00268 _PROCESS_NOTE_ON_GATE4:
-0001DC 8605           00269         bsf     CV_GATE,3                       ; Trigger GATE4
-0001DE 6A0C           00270         clrf    MSG_COUNT                       ; Reset message count
-0001E0 EF?? F???      00271         goto    _RC_CLEANUP
-0001E4                00272 _PROCESS_NOTE_ON_GATE5:
-0001E4 8805           00273         bsf     CV_GATE,4                       ; Trigger GATE5
-0001E6 6A0C           00274         clrf    MSG_COUNT                       ; Reset message count
-0001E8 EF?? F???      00275         goto    _RC_CLEANUP
-                      00276 
-0001EC                00277 _MSTATE_KP:
-0001EC EF?? F???      00278         goto    _RC_CLEANUP
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE  8
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
-                      00279 
-0001F0                00280 _MSTATE_CC:
-0001F0 B080           00281         btfsc   PORTA,0                 ; Check MIDI MODE
-0001F2 EF?? F???      00282         goto    _RC_CLEANUP             ; Simply ignore CC in MODE1
-0001F6 B00C           00283         btfsc   MSG_COUNT,0
-0001F8 EF?? F???      00284         goto    _PROCESS_CC01
-0001FC                00285 _PROCSES_CNUM:
-0001FC C000 F00D      00286         movff   CUR_BYTE,CC_NUM
-000200 2A0C           00287         incf    MSG_COUNT
-000202 EF?? F???      00288         goto    _RC_CLEANUP
-000206                00289 _PROCESS_CC01:
-000206 0E01           00290         movlw   0x01                    ; Controller num that we're mapping (Mod Wheel)
-000208 620D           00291         cpfseq  CC_NUM                  ; Check to see if this is the controller we want
-00020A EF?? F???      00292         goto    _PROCESS_CC02           ; Try next CC Value
-00020E C000 F004      00293         movff   CUR_BYTE,CV_MOD         ; Update the CC value
-000212 8401           00294         bsf     CV_FLAGS,CVF_MOD
-000214 EF?? F???      00295         goto    _END_CVALUE
-000218                00296 _PROCESS_CC02:
-000218 0E02           00297         movlw   0x02
-00021A 620D           00298         cpfseq  CC_NUM                  ; Check CC Value
-00021C EF?? F???      00299         goto    _PROCESS_CC03           ; Try next CC Value
-000220 0E3F           00300         movlw   0x3F                    ; Check if > 63
-000222 6400           00301         cpfsgt  CUR_BYTE
-000224 EF?? F???      00302         goto    _CC02_OFF
-000228 8205           00303         bsf     CV_GATE,1               ; Trigger Gate
-00022A EF?? F???      00304         goto    _END_CVALUE
-00022E                00305 _CC02_OFF:
-00022E 9205           00306         bcf     CV_GATE,1               ; Clear Gate
-000230 EF?? F???      00307         goto    _END_CVALUE
-000234                00308 _PROCESS_CC03:
-000234 0E03           00309         movlw   0x03
-000236 620D           00310         cpfseq  CC_NUM                  ; Check CC Value
-000238 EF?? F???      00311         goto    _PROCESS_CC04           ; Try next CC Value
-00023C 0E3F           00312         movlw   0x3F                    ; Check if > 63
-00023E 6400           00313         cpfsgt  CUR_BYTE
-000240 EF?? F???      00314         goto    _CC03_OFF
-000244 8405           00315         bsf     CV_GATE,2               ; Trigger Gate
-000246 EF?? F???      00316         goto    _END_CVALUE
-00024A                00317 _CC03_OFF:
-00024A 9405           00318         bcf     CV_GATE,2               ; Clear Gate
-00024C EF?? F???      00319         goto    _END_CVALUE
-000250                00320 _PROCESS_CC04:
-000250 0E04           00321         movlw   0x04
-000252 620D           00322         cpfseq  CC_NUM                  ; Check CC Value
-000254 EF?? F???      00323         goto    _PROCESS_CC05           ; Try next CC Value
-000258 0E3F           00324         movlw   0x3F                    ; Check if > 63
-00025A 6400           00325         cpfsgt  CUR_BYTE
-00025C EF?? F???      00326         goto    _CC04_OFF
-000260 8605           00327         bsf     CV_GATE,3               ; Trigger Gate
-000262 EF?? F???      00328         goto    _END_CVALUE
-000266                00329 _CC04_OFF:
-000266 9605           00330         bcf     CV_GATE,3               ; Clear Gate
-000268 EF?? F???      00331         goto    _END_CVALUE
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE  9
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
-00026C                00332 _PROCESS_CC05:
-00026C 0E05           00333         movlw   0x05
-00026E 620D           00334         cpfseq  CC_NUM                  ; Check CC Value
-000270 EF?? F???      00335         goto    _END_CVALUE             ; CC Must be > 5 so ignore
-000274 0E3F           00336         movlw   0x3F                    ; Check if > 63
-000276 6400           00337         cpfsgt  CUR_BYTE
-000278 EF?? F???      00338         goto    _CC05_OFF
-00027C 8805           00339         bsf     CV_GATE,4               ; Trigger Gate
-00027E EF?? F???      00340         goto    _END_CVALUE
-000282                00341 _CC05_OFF:
-000282 9805           00342         bcf     CV_GATE,4               ; Clear Gate
-000284 EF?? F???      00343         goto    _END_CVALUE
-000288                00344 _END_CVALUE:
-000288 6A0C           00345         clrf    MSG_COUNT               ; Reset message count
-00028A EF?? F???      00346         goto    _RC_CLEANUP
-                      00347 
-00028E                00348 _MSTATE_PC:
-00028E EF?? F???      00349         goto    _RC_CLEANUP
-                      00350 
-000292                00351 _MSTATE_CP:
-000292 EF?? F???      00352         goto    _RC_CLEANUP
-                      00353 
-000296                00354 _MSTATE_PB:
-000296 EF?? F???      00355         goto    _RC_CLEANUP
-                      00356 
-00029A                00357 _MSTATE_F1:
-00029A EF?? F???      00358         goto    _RC_CLEANUP
-                      00359 
-00029E                00360 _MSTATE_SP:
-00029E EF?? F???      00361         goto    _RC_CLEANUP
-                      00362 
-0002A2                00363 _MSTATE_SS:
-0002A2 EF?? F???      00364         goto    _RC_CLEANUP
-                      00365 
-0002A6                00366 _MSTATE_F4:
-0002A6 EF?? F???      00367         goto    _RC_CLEANUP
-                      00368 
-0002AA                00369 _MSTATE_UBS:
-0002AA EF?? F???      00370         goto    _RC_CLEANUP
-                      00371 
-0002AE                00372 _MSTATE_TR:
-0002AE EF?? F???      00373         goto    _RC_CLEANUP
-                      00374 
-0002B2                00375 _MSTATE_SYS_EX_END:
-0002B2 EF?? F???      00376         goto    _RC_CLEANUP
-                      00377 
-0002B6                00378 _MSTATE_TT:
-0002B6 EF?? F???      00379         goto    _RC_CLEANUP
-                      00380 
-0002BA                00381 _MSTATE_F9:
-0002BA EF?? F???      00382         goto    _RC_CLEANUP
-                      00383 
-0002BE                00384 _MSTATE_START_SONG:
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE 10
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
-0002BE EF?? F???      00385         goto    _RC_CLEANUP
-                      00386 
-0002C2                00387 _MSTATE_CONT_SONG:
-0002C2 EF?? F???      00388         goto    _RC_CLEANUP
-                      00389 
-0002C6                00390 _MSTATE_STOP_SONG:
-0002C6 EF?? F???      00391         goto    _RC_CLEANUP
-                      00392 
-0002CA                00393 _MSTATE_FD:
-0002CA EF?? F???      00394         goto    _RC_CLEANUP
-                      00395 
-0002CE                00396 _MSTATE_AS:
-0002CE EF?? F???      00397         goto    _RC_CLEANUP
-                      00398 
-0002D2                00399 _MSTATE_SYS_RESET:
-0002D2 00FF           00400         reset
-                      00401 
-0002D4                00402 _MSTATE_NONE:   ; Ignore non-status bytes
-0002D4 EF?? F???      00403         goto    _RC_CLEANUP
-                      00404 
-                      00405 
-                      00406 ; ------------------------------------------------------------------------------
-                      00407 ; Process MIDI Status byte
-                      00408 ;
-0002D8                00409 _PROCESS_STATUS:
-0002D8 0EF0           00410         movlw   0xF0            ; Check for sysex
-0002DA 6200           00411         cpfseq  CUR_BYTE
-0002DC EF?? F???      00412         goto    _CHECK_BYTE
-0002E0 C00A F00B      00413         movff   MIDI_STATE,MIDI_STATE_TMP       ; Store the current status if sysex start
-0002E4                00414 _CHECK_BYTE:
-0002E4 0EF0           00415         movlw   0xF0            ; Check for system message
-0002E6 6000           00416         cpfslt  CUR_BYTE
-0002E8 EF?? F???      00417         goto    _SET_SYSTEM_MSG
-0002EC                00418 _SET_STD_MSG:
-                      00419 ;       movf    CUR_BYTE,W
-                      00420 ;       andlw   0x0F            ; Extract MIDI chan
-                      00421 ;       movwf   MIDI_CHAN
-0002EC 5000           00422         movf    CUR_BYTE,W
-0002EE 0B70           00423         andlw   0x70            ; Extract status code and drop MSb
-0002F0 3AE8           00424         swapf   WREG
-0002F2 EF?? F???      00425         goto    _CREATE_OFFSET
-0002F6                00426 _SET_SYSTEM_MSG:
-0002F6 5000           00427         movf    CUR_BYTE,W
-0002F8 0B0F           00428         andlw   0x0F            ; We only need the first nibble since we know this is a Sys message
-0002FA 0F07           00429         addlw   0x07            ; Add 7 to scale this up
-0002FC                00430 _CREATE_OFFSET:
-0002FC 46E8           00431         rlncf   WREG            ; create an offset mapping by mult x 2
-0002FE 6E0A           00432         movwf   MIDI_STATE
-000300 6A0C           00433         clrf    MSG_COUNT       ; Reset message count
-                      00434 
-                      00435         ; Check to see if we need to process the sys messge now (F6 and above do not have any addtional 
-                            mesage bytes)
-000302 0EF6           00436         movlw   0xF6
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE 11
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
-000304 6000           00437         cpfslt  CUR_BYTE
-000306 EF?? F???      00438         goto    _PROCESS_MESSAGE
-                      00439 
-00030A EF?? F???      00440         goto    _RC_CLEANUP
-                      00441 
-                      00442 
-                      00443         end
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE 12
+000074 4212               M         rrncf   TMP_CV_BYTE_H,F
+000076 C012 FF74      00099         movff   TMP_CV_BYTE_H,PDC2H
+00007A C011 FF75      00100         movff   TMP_CV_BYTE_L,PDC2L
+00007E 9401           00101         bcf     CV_FLAGS,CVF_MOD
+                      00102 
+000080                00103 _UPDATE_GATE:
+000080 C005 FF82      00104         movff   CV_GATE,PORTC           ; Simply apply current gate settings directly to PORTC
+000084 EF?? F???      00105         goto    _LOOP
+                      00106 
+                      00107         end
+MPASM  5.43                          MIDI.ASM   12-1-2013  16:07:58         PAGE  6
 
 
 SYMBOL TABLE
@@ -660,7 +309,7 @@ BFEMT                             00000003
 BFOVFL                            00000002
 BOR                               00000000
 BRFEN                             00000007
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE 13
+MPASM  5.43                          MIDI.ASM   12-1-2013  16:07:58         PAGE  7
 
 
 SYMBOL TABLE
@@ -719,7 +368,7 @@ CCP2M1                            00000001
 CCP2M2                            00000002
 CCP2M3                            00000003
 CCP2X                             00000005
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE 14
+MPASM  5.43                          MIDI.ASM   12-1-2013  16:07:58         PAGE  8
 
 
 SYMBOL TABLE
@@ -751,6 +400,7 @@ CV_GATE                           00000005
 CV_MOD                            00000004
 CV_NOTE_LKP                       00000080
 CV_PITCH                          00000002
+CV_PITCH_DATA                     00000000
 CV_VELOCITY                       00000003
 D                                 00000005
 DATA_ADDRESS                      00000005
@@ -777,13 +427,13 @@ DTA0                              00000000
 DTA1                              00000001
 DTA2                              00000002
 DTA3                              00000003
-DTA4                              00000004
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE 15
+MPASM  5.43                          MIDI.ASM   12-1-2013  16:07:58         PAGE  9
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+DTA4                              00000004
 DTA5                              00000005
 DTAPS0                            00000006
 DTAPS1                            00000007
@@ -836,13 +486,13 @@ GASEL0                            00000000
 GASEL1                            00000001
 GBSEL0                            00000004
 GBSEL1                            00000005
-GCSEL0                            00000002
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE 16
+MPASM  5.43                          MIDI.ASM   12-1-2013  16:07:58         PAGE 10
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+GCSEL0                            00000002
 GCSEL1                            00000003
 GDSEL0                            00000006
 GDSEL1                            00000007
@@ -895,13 +545,13 @@ INTEDG2                           00000004
 IOFS                              00000002
 IPEN                              00000007
 IPR1                              00000F9F
-IPR2                              00000FA2
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE 17
+MPASM  5.43                          MIDI.ASM   12-1-2013  16:07:58         PAGE 11
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+IPR2                              00000FA2
 IPR3                              00000FA5
 IRCF0                             00000004
 IRCF1                             00000005
@@ -954,13 +604,13 @@ MSG_PITCH                         0000000F
 MSG_VELOCITY                      00000010
 N                                 00000004
 NOT_A                             00000005
-NOT_ADDRESS                       00000005
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE 18
+MPASM  5.43                          MIDI.ASM   12-1-2013  16:07:58         PAGE 12
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+NOT_ADDRESS                       00000005
 NOT_BOR                           00000000
 NOT_DONE                          00000001
 NOT_DOWN                          00000005
@@ -1013,13 +663,13 @@ PIE1                              00000F9D
 PIE2                              00000FA0
 PIE3                              00000FA3
 PIR1                              00000F9E
-PIR2                              00000FA1
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE 19
+MPASM  5.43                          MIDI.ASM   12-1-2013  16:07:58         PAGE 13
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+PIR2                              00000FA1
 PIR3                              00000FA4
 PLUSW0                            00000FEB
 PLUSW1                            00000FE3
@@ -1072,13 +722,13 @@ PTCKPS0                           00000002
 PTCKPS1                           00000003
 PTCON0                            00000F7F
 PTCON1                            00000F7E
-PTDIR                             00000006
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE 20
+MPASM  5.43                          MIDI.ASM   12-1-2013  16:07:58         PAGE 14
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+PTDIR                             00000006
 PTEN                              00000007
 PTIE                              00000004
 PTIF                              00000004
@@ -1131,13 +781,13 @@ RC5                               00000005
 RC6                               00000006
 RC7                               00000007
 RCIDL                             00000006
-RCIE                              00000005
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE 21
+MPASM  5.43                          MIDI.ASM   12-1-2013  16:07:58         PAGE 15
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+RCIE                              00000005
 RCIF                              00000005
 RCIP                              00000005
 RCMT                              00000006
@@ -1190,13 +840,13 @@ SS                                00000006
 SSPADD                            00000FC8
 SSPBUF                            00000FC9
 SSPCON                            00000FC6
-SSPEN                             00000005
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE 22
+MPASM  5.43                          MIDI.ASM   12-1-2013  16:07:58         PAGE 16
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+SSPEN                             00000005
 SSPIE                             00000003
 SSPIF                             00000003
 SSPIP                             00000003
@@ -1249,13 +899,13 @@ T1RUN                             00000006
 T1SYNC                            00000002
 T2CKPS0                           00000000
 T2CKPS1                           00000001
-T2CON                             00000FCA
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE 23
+MPASM  5.43                          MIDI.ASM   12-1-2013  16:07:58         PAGE 17
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+T2CON                             00000FCA
 T2OUTPS0                          00000003
 T2OUTPS1                          00000004
 T2OUTPS2                          00000005
@@ -1308,13 +958,13 @@ TMR5ON                            00000000
 TO                                00000003
 TOS                               00000FFD
 TOSH                              00000FFE
-TOSL                              00000FFD
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE 24
+MPASM  5.43                          MIDI.ASM   12-1-2013  16:07:58         PAGE 18
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+TOSL                              00000FFD
 TOSU                              00000FFF
 TOUTPS0                           00000003
 TOUTPS1                           00000004
@@ -1367,13 +1017,13 @@ UA                                00000001
 UDIS                              00000001
 UP                                00000005
 UPDOWN                            00000005
-UP_DOWN                           00000005
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE 25
+MPASM  5.43                          MIDI.ASM   12-1-2013  16:07:58         PAGE 19
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+UP_DOWN                           00000005
 UP_NOT_DOWN                       00000005
 VCFG0                             00000006
 VCFG1                             00000007
@@ -1399,13 +1049,6 @@ _BORV_20_2L                       000000FF
 _BORV_27_2L                       000000FB
 _BORV_42_2L                       000000F7
 _BORV_45_2L                       000000F3
-_CC02_OFF                         0000022E
-_CC03_OFF                         0000024A
-_CC04_OFF                         00000266
-_CC05_OFF                         00000282
-_CHECK_BYTE                       000002E4
-_CHECK_BYTE_TYPE                  00000042
-_CHECK_RC                         0000000C
 _CONFIG1H                         00300001
 _CONFIG2H                         00300003
 _CONFIG2L                         00300002
@@ -1427,19 +1070,18 @@ _CP2_ON_5L                        000000FB
 _CP3_OFF_5L                       000000FF
 _CP3_ON_5L                        000000F7
 _CPB_OFF_5H                       000000FF
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE 26
+_CPB_ON_5H                        000000BF
+_CPD_OFF_5H                       000000FF
+_CPD_ON_5H                        0000007F
+_DEBUG_OFF_4L                     000000FF
+_DEBUG_ON_4L                      0000007F
+_DEVID1                           003FFFFE
+MPASM  5.43                          MIDI.ASM   12-1-2013  16:07:58         PAGE 20
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
-_CPB_ON_5H                        000000BF
-_CPD_OFF_5H                       000000FF
-_CPD_ON_5H                        0000007F
-_CREATE_OFFSET                    000002FC
-_DEBUG_OFF_4L                     000000FF
-_DEBUG_ON_4L                      0000007F
-_DEVID1                           003FFFFE
 _DEVID2                           003FFFFF
 _EBTR0_OFF_7L                     000000FF
 _EBTR0_ON_7L                      000000FE
@@ -1451,12 +1093,8 @@ _EBTR3_OFF_7L                     000000FF
 _EBTR3_ON_7L                      000000F7
 _EBTRB_OFF_7H                     000000FF
 _EBTRB_ON_7H                      000000BF
-_END_CVALUE                       00000288
-_END_NOTE_OFF                     000000B4
-_EXIT_SERVICE                     00000012
 _FCMEN_OFF_1H                     000000BF
 _FCMEN_ON_1H                      000000FF
-_HANDLE_RC                        0000001E
 _HPOL_HIGH_3L                     000000FF
 _HPOL_LOW_3L                      000000EF
 _IDLOC0                           00200000
@@ -1469,10 +1107,12 @@ _IDLOC6                           00200006
 _IDLOC7                           00200007
 _IESO_OFF_1H                      0000007F
 _IESO_ON_1H                       000000FF
+_LOOP                             0000000E
 _LPOL_HIGH_3L                     000000FF
 _LPOL_LOW_3L                      000000F7
 _LVP_OFF_4L                       000000FB
 _LVP_ON_4L                        000000FF
+_MAIN                             00000000
 _MCLRE_OFF_3H                     0000007F
 _MCLRE_ON_3H                      000000FF
 _MOFFSET_AS                       0000002A
@@ -1486,12 +1126,6 @@ _MOFFSET_NOTE_OFF                 00000000
 _MOFFSET_NOTE_ON                  00000002
 _MOFFSET_PB                       0000000C
 _MOFFSET_PC                       00000008
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE 27
-
-
-SYMBOL TABLE
-  LABEL                             VALUE 
-
 _MOFFSET_SP                       00000012
 _MOFFSET_SS                       00000014
 _MOFFSET_START_SONG               00000022
@@ -1501,36 +1135,16 @@ _MOFFSET_SYS_EX_END               0000001C
 _MOFFSET_SYS_RESET                0000002C
 _MOFFSET_TR                       0000001A
 _MOFFSET_TT                       0000001E
+MPASM  5.43                          MIDI.ASM   12-1-2013  16:07:58         PAGE 21
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
 _MOFFSET_UBS                      00000018
 _MOSSFEST_F4                      00000016
 _MOSSFEST_F9                      00000020
 _MOSSFEST_FD                      00000028
-_MSTATE_AS                        000002CE
-_MSTATE_CC                        000001F0
-_MSTATE_CONT_SONG                 000002C2
-_MSTATE_CP                        00000292
-_MSTATE_F1                        0000029A
-_MSTATE_F4                        000002A6
-_MSTATE_F9                        000002BA
-_MSTATE_FD                        000002CA
-_MSTATE_KP                        000001EC
-_MSTATE_NONE                      000002D4
-_MSTATE_NOTE_OFF                  00000084
-_MSTATE_NOTE_OFF_MODE_1           000000BA
-_MSTATE_NOTE_ON                   00000138
-_MSTATE_NOTE_ON_MODE_1            0000016A
-_MSTATE_PB                        00000296
-_MSTATE_PC                        0000028E
-_MSTATE_SP                        0000029E
-_MSTATE_SS                        000002A2
-_MSTATE_START_SONG                000002BE
-_MSTATE_STOP_SONG                 000002C6
-_MSTATE_SYS_EX                    0000002A
-_MSTATE_SYS_EX_END                000002B2
-_MSTATE_SYS_RESET                 000002D2
-_MSTATE_TR                        000002AE
-_MSTATE_TT                        000002B6
-_MSTATE_UBS                       000002AA
 _OSC_ECIO_1H                      000000F5
 _OSC_EC_1H                        000000F4
 _OSC_HSPLL_1H                     000000F6
@@ -1543,59 +1157,21 @@ _OSC_RC2_1H                       000000F3
 _OSC_RCIO_1H                      000000F7
 _OSC_RC_1H                        000000FC
 _OSC_XT_1H                        000000F1
-_PROCESS_CC01                     00000206
-_PROCESS_CC02                     00000218
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE 28
-
-
-SYMBOL TABLE
-  LABEL                             VALUE 
-
-_PROCESS_CC03                     00000234
-_PROCESS_CC04                     00000250
-_PROCESS_CC05                     0000026C
-_PROCESS_MESSAGE                  0000004A
-_PROCESS_NOTE_OFF_GATE1           000000FE
-_PROCESS_NOTE_OFF_GATE2           0000010C
-_PROCESS_NOTE_OFF_GATE3           0000011A
-_PROCESS_NOTE_OFF_GATE4           00000128
-_PROCESS_NOTE_OFF_GATE5           00000130
-_PROCESS_NOTE_ON_GATE1            000001B2
-_PROCESS_NOTE_ON_GATE2            000001C0
-_PROCESS_NOTE_ON_GATE3            000001CE
-_PROCESS_NOTE_ON_GATE4            000001DC
-_PROCESS_NOTE_ON_GATE5            000001E4
-_PROCESS_STATUS                   000002D8
-_PROCESS_SYS_EX_DATA              0000003A
-_PROCESS_VELOCITY_NOTE_OFF        0000009A
-_PROCESS_VELOCITY_NOTE_OFF2       0000009E
-_PROCESS_VELOCITY_NOTE_OFF2_M1    000000DE
-_PROCESS_VELOCITY_NOTE_OFF_M1     000000CA
-_PROCESS_VELOCITY_NOTE_ON         0000014E
-_PROCESS_VELOCITY_NOTE_ON_M1      0000017A
-_PROCSES_CNUM                     000001FC
-_PROCSES_PITCH_NOTE_OFF           00000090
-_PROCSES_PITCH_NOTE_OFF_M1        000000C0
-_PROCSES_PITCH_NOTE_ON            00000144
-_PROCSES_PITCH_NOTE_ON_M1         00000170
-_PROCSES_SYS_EX_END               00000032
-_PUT_NOTE_OFF_LIVE                000000A6
-_PUT_NOTE_OFF_LIVE_M1             000000DE
 _PWMPIN_OFF_3L                    000000FF
 _PWMPIN_ON_3L                     000000FB
 _PWRTEN_OFF_2L                    000000FF
 _PWRTEN_ON_2L                     000000FE
-_RC_CLEANUP                       0000007E
-_RESTORE_CTX                      
-_SAVE_CTX                         
-_SERVICE_HI                       00000002
-_SERVICE_LO                       00000000
-_SET_STD_MSG                      000002EC
-_SET_SYSTEM_MSG                   000002F6
+_SCALE_CV_NOTE                    
+_SPLIT_CV_VALUE                   
+_SPLIT_CV_VALUE2                  
 _STVREN_OFF_4L                    000000FE
 _STVREN_ON_4L                     000000FF
 _T1OSCMX_OFF_3L                   000000DF
 _T1OSCMX_ON_3L                    000000FF
+_UPDATE_GATE                      00000080
+_UPDATE_MOD                       0000005C
+_UPDATE_PITCH                     0000000E
+_UPDATE_VELOCITY                  00000038
 _WDPS_1024_2H                     000000F5
 _WDPS_128_2H                      000000EF
 _WDPS_16384_2H                    000000FD
@@ -1604,12 +1180,6 @@ _WDPS_1_2H                        000000E1
 _WDPS_2048_2H                     000000F7
 _WDPS_256_2H                      000000F1
 _WDPS_2_2H                        000000E3
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE 29
-
-
-SYMBOL TABLE
-  LABEL                             VALUE 
-
 _WDPS_32768_2H                    000000FF
 _WDPS_32_2H                       000000EB
 _WDPS_4096_2H                     000000F9
@@ -1624,6 +1194,12 @@ _WINEN_OFF_2H                     000000FF
 _WINEN_ON_2H                      000000DF
 _WRT0_OFF_6L                      000000FF
 _WRT0_ON_6L                       000000FE
+MPASM  5.43                          MIDI.ASM   12-1-2013  16:07:58         PAGE 22
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
 _WRT1_OFF_6L                      000000FF
 _WRT1_ON_6L                       000000FD
 _WRT2_OFF_6L                      000000FF
@@ -1637,6 +1213,8 @@ _WRTC_ON_6H                       000000DF
 _WRTD_OFF_6H                      000000FF
 _WRTD_ON_6H                       0000007F
 __18F2431                         00000001
+__DEBUG                           
+__MPLAB_DEBUGGER_PICKIT2          1
 
 Errors   :     0
 Warnings :     0 reported,     0 suppressed

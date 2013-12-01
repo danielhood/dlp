@@ -130,7 +130,6 @@ _PROCESS_VELOCITY_NOTE_OFF2:
 	movf	MSG_PITCH,W
 	cpfseq	CV_PITCH
 	goto	_END_NOTE_OFF			; Ignore note off, since a new note-on has been triggered since
-	goto	_PUT_NOTE_OFF_LIVE
 _PUT_NOTE_OFF_LIVE:
 	movff	MSG_PITCH,CV_PITCH		; Push the velocity and pitch live
 	bsf	CV_FLAGS,CVF_PITCH		; Flag PITCH and VELOCITY as updated
@@ -142,6 +141,59 @@ _END_NOTE_OFF:
 	goto	_RC_CLEANUP
 
 _MSTATE_NOTE_OFF_MODE_1:
+	btfsc	MSG_COUNT,0
+	goto	_PROCESS_VELOCITY_NOTE_OFF_M1
+_PROCSES_PITCH_NOTE_OFF_M1:
+	movff	CUR_BYTE,MSG_PITCH
+	incf	MSG_COUNT
+	goto	_RC_CLEANUP
+_PROCESS_VELOCITY_NOTE_OFF_M1:
+	movlw	0x17				; Filter notes C1 to E1 (0x18 to 0x1C)
+	cpfsgt	MSG_PITCH
+	goto	_RC_CLEANUP
+	movlw	0x1D
+	cpfslt	MSG_PITCH
+	goto	_RC_CLEANUP
+	movff	CUR_BYTE,MSG_VELOCITY
+_PROCESS_VELOCITY_NOTE_OFF2_M1:
+_PUT_NOTE_OFF_LIVE_M1:
+	movlw	0x1C				; Jump to correct handler for each supported note
+	cpfslt	MSG_PITCH
+	goto	_PROCESS_NOTE_OFF_GATE5
+	movlw	0x1B
+	cpfslt	MSG_PITCH
+	goto	_PROCESS_NOTE_OFF_GATE4
+	movlw	0x1A
+	cpfslt	MSG_PITCH
+	goto	_PROCESS_NOTE_OFF_GATE3
+	movlw	0x19
+	cpfslt	MSG_PITCH
+	goto	_PROCESS_NOTE_OFF_GATE2
+_PROCESS_NOTE_OFF_GATE1:
+	movff	MSG_VELOCITY,CV_PITCH		; PWM1
+	bsf	CV_FLAGS,CVF_PITCH
+	bcf	CV_GATE,0			; Clear GATE1
+	clrf	MSG_COUNT			; Reset message count
+	goto	_RC_CLEANUP
+_PROCESS_NOTE_OFF_GATE2:
+	movff	MSG_VELOCITY,CV_VELOCITY	; PWM3
+	bsf	CV_FLAGS,CVF_VELOCITY
+	bcf	CV_GATE,1			; Clear GATE2
+	clrf	MSG_COUNT			; Reset message count
+	goto	_RC_CLEANUP
+_PROCESS_NOTE_OFF_GATE3:
+	movff	MSG_VELOCITY,CV_MOD		; PWM5
+	bsf	CV_FLAGS,CVF_MOD
+	bcf	CV_GATE,2			; Clear GATE3
+	clrf	MSG_COUNT			; Reset message count
+	goto	_RC_CLEANUP
+_PROCESS_NOTE_OFF_GATE4:
+	bcf	CV_GATE,3			; Clear GATE4
+	clrf	MSG_COUNT			; Reset message count
+	goto	_RC_CLEANUP
+_PROCESS_NOTE_OFF_GATE5:
+	bcf	CV_GATE,4			; Clear GATE5
+	clrf	MSG_COUNT			; Reset message count
 	goto	_RC_CLEANUP
 
 _MSTATE_NOTE_ON:
@@ -167,6 +219,59 @@ _PROCESS_VELOCITY_NOTE_ON:
 	goto	_RC_CLEANUP
 
 _MSTATE_NOTE_ON_MODE_1:
+	btfsc	MSG_COUNT,0
+	goto	_PROCESS_VELOCITY_NOTE_ON_M1
+_PROCSES_PITCH_NOTE_ON_M1:
+	movff	CUR_BYTE,MSG_PITCH
+	incf	MSG_COUNT
+	goto	_RC_CLEANUP
+_PROCESS_VELOCITY_NOTE_ON_M1:
+	movlw	0x17				; Filter notes C1 to E1 (0x18 to 0x1C)
+	cpfsgt	MSG_PITCH
+	goto	_RC_CLEANUP
+	movlw	0x1D
+	cpfslt	MSG_PITCH
+	goto	_RC_CLEANUP
+	movff	CUR_BYTE,MSG_VELOCITY
+	movf	MSG_VELOCITY,F			; Check value of velocity
+	bz	_PROCESS_VELOCITY_NOTE_OFF2_M1	; Vel0 is interpreted as a note off
+	movlw	0x1C				; Jump to correct handler for each supported note
+	cpfslt	MSG_PITCH
+	goto	_PROCESS_NOTE_ON_GATE5
+	movlw	0x1B
+	cpfslt	MSG_PITCH
+	goto	_PROCESS_NOTE_ON_GATE4
+	movlw	0x1A
+	cpfslt	MSG_PITCH
+	goto	_PROCESS_NOTE_ON_GATE3
+	movlw	0x19
+	cpfslt	MSG_PITCH
+	goto	_PROCESS_NOTE_ON_GATE2
+_PROCESS_NOTE_ON_GATE1:
+	movff	MSG_VELOCITY,CV_PITCH		; PWM1
+	bsf	CV_FLAGS,CVF_PITCH
+	bsf	CV_GATE,0			; Trigger GATE1
+	clrf	MSG_COUNT			; Reset message count
+	goto	_RC_CLEANUP
+_PROCESS_NOTE_ON_GATE2:
+	movff	MSG_VELOCITY,CV_VELOCITY	; PWM3
+	bsf	CV_FLAGS,CVF_VELOCITY
+	bsf	CV_GATE,1			; Trigger GATE2
+	clrf	MSG_COUNT			; Reset message count
+	goto	_RC_CLEANUP
+_PROCESS_NOTE_ON_GATE3:
+	movff	MSG_VELOCITY,CV_MOD		; PWM5
+	bsf	CV_FLAGS,CVF_MOD
+	bsf	CV_GATE,2			; Trigger GATE3
+	clrf	MSG_COUNT			; Reset message count
+	goto	_RC_CLEANUP
+_PROCESS_NOTE_ON_GATE4:
+	bsf	CV_GATE,3			; Trigger GATE4
+	clrf	MSG_COUNT			; Reset message count
+	goto	_RC_CLEANUP
+_PROCESS_NOTE_ON_GATE5:
+	bsf	CV_GATE,4			; Trigger GATE5
+	clrf	MSG_COUNT			; Reset message count
 	goto	_RC_CLEANUP
 
 _MSTATE_KP:
