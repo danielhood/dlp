@@ -1,4 +1,4 @@
-MPASM  5.43                          MIDI.ASM   3-1-2012  15:26:22         PAGE  1
+MPASM  5.43                          MIDI.ASM   12-1-2013  14:52:25         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,7 +57,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00038 ; ------------------------------------------------------------------------------
                       00039 ; Constants
                       00040 ;
-MPASM  5.43                          MIDI.ASM   3-1-2012  15:26:22         PAGE  2
+MPASM  5.43                          MIDI.ASM   12-1-2013  14:52:25         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -116,7 +116,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00022         movwf   TBLPTRL         ; Address to read
                       00023         tblrd   *
                       00024         movf    TABLAT,W        ; W = table data
-MPASM  5.43                          MIDI.ASM   3-1-2012  15:26:22         PAGE  3
+MPASM  5.43                          MIDI.ASM   12-1-2013  14:52:25         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -175,7 +175,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00075         ;movwf  PDC0L
                       00076         ;movwf  PDC1L
                       00077         ;movwf  PDC2L
-MPASM  5.43                          MIDI.ASM   3-1-2012  15:26:22         PAGE  4
+MPASM  5.43                          MIDI.ASM   12-1-2013  14:52:25         PAGE  4
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -234,7 +234,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00005C A401           00106         btfss   CV_FLAGS,CVF_MOD
 00005E EF?? F???      00107         goto    _UPDATE_GATE
 000062 5004           00108         movf    CV_MOD,W
-MPASM  5.43                          MIDI.ASM   3-1-2012  15:26:22         PAGE  5
+MPASM  5.43                          MIDI.ASM   12-1-2013  14:52:25         PAGE  5
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -279,7 +279,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00136 
                       00137 
                       00138         end
-MPASM  5.43                          MIDI.ASM   3-1-2012  15:26:22         PAGE  6
+MPASM  5.43                          MIDI.ASM   12-1-2013  14:52:25         PAGE  6
 
 
 SYMBOL TABLE
@@ -338,7 +338,7 @@ BFEMT                             00000003
 BFOVFL                            00000002
 BOR                               00000000
 BRFEN                             00000007
-MPASM  5.43                          MIDI.ASM   3-1-2012  15:26:22         PAGE  7
+MPASM  5.43                          MIDI.ASM   12-1-2013  14:52:25         PAGE  7
 
 
 SYMBOL TABLE
@@ -397,7 +397,7 @@ CCP2M1                            00000001
 CCP2M2                            00000002
 CCP2M3                            00000003
 CCP2X                             00000005
-MPASM  5.43                          MIDI.ASM   3-1-2012  15:26:22         PAGE  8
+MPASM  5.43                          MIDI.ASM   12-1-2013  14:52:25         PAGE  8
 
 
 SYMBOL TABLE
@@ -456,7 +456,7 @@ DT5                               00000005
 DTA0                              00000000
 DTA1                              00000001
 DTA2                              00000002
-MPASM  5.43                          MIDI.ASM   3-1-2012  15:26:22         PAGE  9
+MPASM  5.43                          MIDI.ASM   12-1-2013  14:52:25         PAGE  9
 
 
 SYMBOL TABLE
@@ -515,7 +515,7 @@ FSR2L                             00000FD9
 GASEL0                            00000000
 GASEL1                            00000001
 GBSEL0                            00000004
-MPASM  5.43                          MIDI.ASM   3-1-2012  15:26:22         PAGE 10
+MPASM  5.43                          MIDI.ASM   12-1-2013  14:52:25         PAGE 10
 
 
 SYMBOL TABLE
@@ -574,7 +574,7 @@ INTEDG1                           00000005
 INTEDG2                           00000004
 IOFS                              00000002
 IPEN                              00000007
-MPASM  5.43                          MIDI.ASM   3-1-2012  15:26:22         PAGE 11
+MPASM  5.43                          MIDI.ASM   12-1-2013  14:52:25         PAGE 11
 
 
 SYMBOL TABLE
@@ -633,7 +633,7 @@ MSG_PITCH                         0000000E
 MSG_VELOCITY                      0000000F
 N                                 00000004
 NOT_A                             00000005
-MPASM  5.43                          MIDI.ASM   3-1-2012  15:26:22         PAGE 12
+MPASM  5.43                          MIDI.ASM   12-1-2013  14:52:25         PAGE 12
 
 
 SYMBOL TABLE
@@ -692,7 +692,7 @@ PIE1                              00000F9D
 PIE2                              00000FA0
 PIE3                              00000FA3
 PIR1                              00000F9E
-MPASM  5.43                          MIDI.ASM   3-1-2012  15:26:22         PAGE 13
+MPASM  5.43                          MIDI.ASM   12-1-2013  14:52:25         PAGE 13
 
 
 SYMBOL TABLE
@@ -751,7 +751,7 @@ PTCKPS0                           00000002
 PTCKPS1                           00000003
 PTCON0                            00000F7F
 PTCON1                            00000F7E
-MPASM  5.43                          MIDI.ASM   3-1-2012  15:26:22         PAGE 14
+MPASM  5.43                          MIDI.ASM   12-1-2013  14:52:25         PAGE 14
 
 
 SYMBOL TABLE
@@ -810,7 +810,7 @@ RC5                               00000005
 RC6                               00000006
 RC7                               00000007
 RCIDL                             00000006
-MPASM  5.43                          MIDI.ASM   3-1-2012  15:26:22         PAGE 15
+MPASM  5.43                          MIDI.ASM   12-1-2013  14:52:25         PAGE 15
 
 
 SYMBOL TABLE
@@ -869,7 +869,7 @@ SS                                00000006
 SSPADD                            00000FC8
 SSPBUF                            00000FC9
 SSPCON                            00000FC6
-MPASM  5.43                          MIDI.ASM   3-1-2012  15:26:22         PAGE 16
+MPASM  5.43                          MIDI.ASM   12-1-2013  14:52:25         PAGE 16
 
 
 SYMBOL TABLE
@@ -928,7 +928,7 @@ T1RUN                             00000006
 T1SYNC                            00000002
 T2CKPS0                           00000000
 T2CKPS1                           00000001
-MPASM  5.43                          MIDI.ASM   3-1-2012  15:26:22         PAGE 17
+MPASM  5.43                          MIDI.ASM   12-1-2013  14:52:25         PAGE 17
 
 
 SYMBOL TABLE
@@ -987,7 +987,7 @@ TMR5ON                            00000000
 TO                                00000003
 TOS                               00000FFD
 TOSH                              00000FFE
-MPASM  5.43                          MIDI.ASM   3-1-2012  15:26:22         PAGE 18
+MPASM  5.43                          MIDI.ASM   12-1-2013  14:52:25         PAGE 18
 
 
 SYMBOL TABLE
@@ -1046,7 +1046,7 @@ UA                                00000001
 UDIS                              00000001
 UP                                00000005
 UPDOWN                            00000005
-MPASM  5.43                          MIDI.ASM   3-1-2012  15:26:22         PAGE 19
+MPASM  5.43                          MIDI.ASM   12-1-2013  14:52:25         PAGE 19
 
 
 SYMBOL TABLE
@@ -1105,7 +1105,7 @@ _CPD_OFF_5H                       000000FF
 _CPD_ON_5H                        0000007F
 _DEBUG_OFF_4L                     000000FF
 _DEBUG_ON_4L                      0000007F
-MPASM  5.43                          MIDI.ASM   3-1-2012  15:26:22         PAGE 20
+MPASM  5.43                          MIDI.ASM   12-1-2013  14:52:25         PAGE 20
 
 
 SYMBOL TABLE
@@ -1164,7 +1164,7 @@ _MOFFSET_SYS_EX                   0000000E
 _MOFFSET_SYS_EX_END               0000001C
 _MOFFSET_SYS_RESET                0000002C
 _MOFFSET_TR                       0000001A
-MPASM  5.43                          MIDI.ASM   3-1-2012  15:26:22         PAGE 21
+MPASM  5.43                          MIDI.ASM   12-1-2013  14:52:25         PAGE 21
 
 
 SYMBOL TABLE
@@ -1223,7 +1223,7 @@ _WDTEN_OFF_2H                     000000FE
 _WDTEN_ON_2H                      000000FF
 _WINEN_OFF_2H                     000000FF
 _WINEN_ON_2H                      000000DF
-MPASM  5.43                          MIDI.ASM   3-1-2012  15:26:22         PAGE 22
+MPASM  5.43                          MIDI.ASM   12-1-2013  14:52:25         PAGE 22
 
 
 SYMBOL TABLE

@@ -1,4 +1,4 @@
-MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE  1
+MPASM  5.43                     INIT.TEST.ASM   12-1-2013  14:50:04         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -7,28 +7,21 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00001 ; Main entry point
                       00002 
                       00003 ; ------------------------------------------------------------------------------
-                      00004 ; Hardware Details
-                      00005 ;       - Using PIC16F819
-                      00006 ;       - Clock: 20MHz Crystal across OSC1/OSC2
-                      00007 ;       - PORTA:
-                      00008 ;               - A0:A4 - Unused
-                      00009 ;               - A5 doesn't exist on this chip
-                      00010 ;               - A6:A7 is for the crystal
-                      00011 ;       - PORTB:
-                      00012 ;               - B0 is GATE output
-                      00013 ;               - B1,3,4  (PWM1,3,5) are CV PWM output driving OP-AMPs
-                      00014 ;                       B1 (PWM1) - Pitch
-                      00015 ;                       B3 (PWM3) - Velocity
-                      00016 ;                       B4 (PWM5) - CC20
-                      00017 ;               - B2,5 - Unused
-                      00018 ;               - B6:B7 is for UP00B Programmer
-                      00019 ;       - PORTC:
-                      00020 ;               - C0:5 - Unused/Debug output
-                      00021 ;               - C6    - Serial TX (Currently unused)
-                      00022 ;               - C7    - MIDI IN - Serial RX
-                      00023 ;
-                      00024 
-                      00025 #include p18f2431.inc
+                      00004 ; MIDI2CV v3.0 Multi-mode midi
+                      00005 ;       Both modes respond to all midi channels. Only one channel should be used
+                      00006 ;               at at time.
+                      00007 ;       A switch on RA0 allows selection of one of two MIDI modes
+                      00008 ;       MODE0 (Synth Mode):
+                      00009 ;               - PITCH, VEL, and MOD (CC01) on PWM ports (1,3,5)
+                      00010 ;               - GATE on RC0 (GATE 1)
+                      00011 ;               - CC02 to 05 > 63 on RC1:4 (GATE 2 - 5)
+                      00012 ;       MODE1 (Drum Mode):
+                      00013 ;               - Respond only to notes C1, C#1, D1, D#1, E1
+                      00014 ;               - Gates for each note on RC0:4
+                      00015 ;               - Vel for C1, C#1, D1 on PWM1,3,5
+                      00016 
+                      00017 
+                      00018 #include p18f2431.inc
                       00001         LIST
                       00002 
                       00003 ;==========================================================================
@@ -38,108 +31,108 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00007 ;==========================================================================
                       00008 
                       01464         LIST
-                      00026 
-                      00027 ; ------------------------------------------------------------------------------
-                      00028 ; External code refs
-                      00029 ;
-  0000                00030         extern  _MAIN           ; Main App code
-  0000                00031         extern  _SERVICE_HI     ; Interrupt handlers
-  0000                00032         extern  _SERVICE_LO
-  0000                00033         extern  _SETUP          ; Setup code
-                      00034         
-  0000                00035         global  CV_PITCH_DATA
+                      00019 
+                      00020 ; ------------------------------------------------------------------------------
+                      00021 ; External code refs
+                      00022 ;
+  0000                00023         extern  _MAIN           ; Main App code
+  0000                00024         extern  _SERVICE_HI     ; Interrupt handlers
+  0000                00025         extern  _SERVICE_LO
+  0000                00026         extern  _SETUP          ; Setup code
+                      00027         
+  0000                00028         global  CV_PITCH_DATA
+                      00029 
+                      00030 ; ------------------------------------------------------------------------------
+                      00031 ; Main entry and RESET vector
+                      00032 ;
+                      00033 .RIVEC  org     0x0000
+000000 EC?? F???      00034         call    _SETUP          ; Init hardware
+000004 EF?? F???      00035         goto    _MAIN           ; Main app code
                       00036 
-                      00037 ; ------------------------------------------------------------------------------
-                      00038 ; Main entry and RESET vector
-                      00039 ;
-                      00040 .RIVEC  org     0x0000
-000000 EC?? F???      00041         call    _SETUP          ; Init hardware
-000004 EF?? F???      00042         goto    _MAIN           ; Main app code
+                      00037 
+                      00038 ; ------------------------------------------------------------------------------
+                      00039 ; High-Priority Interrupt Vector
+                      00040 ;
+                      00041 .HIVEC  org     0x0008
+000008 EF?? F???      00042         goto    _SERVICE_HI     ; Points to interrupt service routine
                       00043 
                       00044 
-MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE  2
+MPASM  5.43                     INIT.TEST.ASM   12-1-2013  14:50:04         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
                       00045 ; ------------------------------------------------------------------------------
-                      00046 ; High-Priority Interrupt Vector
+                      00046 ; Lo-Priority Interrupt Vector
                       00047 ;
-                      00048 .HIVEC  org     0x0008
-000008 EF?? F???      00049         goto    _SERVICE_HI     ; Points to interrupt service routine
+                      00048 .LIVEC  org     0x0018
+000018 EF?? F???      00049         goto    _SERVICE_LO     ; Points to interrupt service routine
                       00050 
                       00051 
                       00052 ; ------------------------------------------------------------------------------
-                      00053 ; Lo-Priority Interrupt Vector
+                      00053 ; Program Data
                       00054 ;
-                      00055 .LIVEC  org     0x0018
-000018 EF?? F???      00056         goto    _SERVICE_LO     ; Points to interrupt service routine
-                      00057 
-                      00058 
-                      00059 ; ------------------------------------------------------------------------------
-                      00060 ; Program Data
+                      00055 ;       This data set holds a lookup table for scaling 127-bit MIDI note values to a
+                      00056 ;       160 bit based value.  The supported note values are only for 24 to 84.
+                      00057 ;               - This  table contains 128 values from 0x2100 to 0x217F
+                      00058 ;               - This maps onto EEPROM data addresses 0x00 to 0x7F
+                      00059 ;       C4 (60) = 3.0V
+                      00060 ;       Calculated: y = (x - 24)* 126 / (84-24);
                       00061 ;
-                      00062 ;       This data set holds a lookup table for scaling 127-bit MIDI note values to a
-                      00063 ;       160 bit based value.  The supported note values are only for 24 to 84.
-                      00064 ;               - This  table contains 128 values from 0x2100 to 0x217F
-                      00065 ;               - This maps onto EEPROM data addresses 0x00 to 0x7F
-                      00066 ;       C4 (60) = 3.0V
-                      00067 ;       Calculated: y = (x - 24)* 126 / (84-24);
-                      00068 ;
-00001C                00069 CV_PITCH_DATA:
-                      00070         ;         C     C#    D     D#    E     F     F#    G     G#    A     A#    B
-00001C 0000 0000 0000 00071         db      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00  ; C-1
+00001C                00062 CV_PITCH_DATA:
+                      00063         ;         C     C#    D     D#    E     F     F#    G     G#    A     A#    B
+00001C 0000 0000 0000 00064         db      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00  ; C-1
        0000 0000 0000 
-000028 0000 0000 0000 00072         db      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00  ; C0
+000028 0000 0000 0000 00065         db      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00  ; C0
        0000 0000 0000 
-000034 0400 0D09 1712 00073         db      0x00, 0x04, 0x09, 0x0d, 0x12, 0x17, 0x1b, 0x20, 0x24, 0x29, 0x2d, 0x32  ; C1
+000034 0400 0D09 1712 00066         db      0x00, 0x04, 0x09, 0x0d, 0x12, 0x17, 0x1b, 0x20, 0x24, 0x29, 0x2d, 0x32  ; C1
        201B 2924 322D 
-000040 3B36 433F 4C48 00074         db      0x36, 0x3b, 0x3f, 0x43, 0x48, 0x4c, 0x51, 0x55, 0x59, 0x5e, 0x62, 0x66  ; C2
+000040 3B36 433F 4C48 00067         db      0x36, 0x3b, 0x3f, 0x43, 0x48, 0x4c, 0x51, 0x55, 0x59, 0x5e, 0x62, 0x66  ; C2
        5551 5E59 6662 
-00004C 6F6B 7773 807C 00075         db      0x6b, 0x6f, 0x73, 0x77, 0x7c, 0x80, 0x84, 0x88, 0x8c, 0x91, 0x95, 0x99  ; C3
+00004C 6F6B 7773 807C 00068         db      0x6b, 0x6f, 0x73, 0x77, 0x7c, 0x80, 0x84, 0x88, 0x8c, 0x91, 0x95, 0x99  ; C3
        8884 918C 9995 
-000058 A19D A9A5 B2AE 00076         db      0x9d, 0xa1, 0xa5, 0xa9, 0xae, 0xb2, 0xb6, 0xba, 0xbe, 0xc2, 0xc6, 0xca  ; C4
+000058 A19D A9A5 B2AE 00069         db      0x9d, 0xa1, 0xa5, 0xa9, 0xae, 0xb2, 0xb6, 0xba, 0xbe, 0xc2, 0xc6, 0xca  ; C4
        BAB6 C2BE CAC6 
-000064 D2CE DAD6 E2DE 00077         db      0xce, 0xd2, 0xd6, 0xda, 0xde, 0xe2, 0xe6, 0xea, 0xee, 0xf2, 0xf6, 0xfa  ; C5
+000064 D2CE DAD6 E2DE 00070         db      0xce, 0xd2, 0xd6, 0xda, 0xde, 0xe2, 0xe6, 0xea, 0xee, 0xf2, 0xf6, 0xfa  ; C5
        EAE6 F2EE FAF6 
-000070 FEFE FEFE FEFE 00078         db      0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe  ; C6
+000070 FEFE FEFE FEFE 00071         db      0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe  ; C6
        FEFE FEFE FEFE 
-00007C FEFE FEFE FEFE 00079         db      0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe  ; C7
+00007C FEFE FEFE FEFE 00072         db      0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe  ; C7
        FEFE FEFE FEFE 
-000088 FEFE FEFE FEFE 00080         db      0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe  ; C8
+000088 FEFE FEFE FEFE 00073         db      0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe  ; C8
        FEFE FEFE FEFE 
-000094 FEFE FEFE FEFE 00081         db      0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe                          ; C9
+000094 FEFE FEFE FEFE 00074         db      0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe                          ; C9
        FEFE 
-                      00082 
-                      00083 
-                      00084 ;CV_PITCH_DATA:
-                      00085 ;       db      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-                      00086 ;       db      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE  3
+                      00075 
+                      00076 
+                      00077 ;CV_PITCH_DATA:
+                      00078 ;       db      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+                      00079 ;       db      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+                      00080 ;       db      0x00, 0x00, 0x00, 0x00, 0x00, 0xf4, 0xf8, 0xfc
+                      00081 ;       db      0x00, 0x04, 0x08, 0x0c, 0x11, 0x15, 0x19, 0x1d
+                      00082 ;       db      0x22, 0x26, 0x2a, 0x2e, 0x33, 0x37, 0x3b, 0x3f
+                      00083 ;       db      0x44, 0x48, 0x4c, 0x50, 0x55, 0x59, 0x5d, 0x61
+                      00084 ;       db      0x66, 0x6a, 0x6e, 0x72, 0x77, 0x7b, 0x7f, 0x83
+                      00085 ;       db      0x88, 0x8c, 0x90, 0x94, 0x99, 0x9d, 0xa1, 0xa5
+                      00086 ;       db      0xaa, 0xae, 0xb2, 0xb6, 0xbb, 0xbf, 0xc3, 0xc7
+MPASM  5.43                     INIT.TEST.ASM   12-1-2013  14:50:04         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-                      00087 ;       db      0x00, 0x00, 0x00, 0x00, 0x00, 0xf4, 0xf8, 0xfc
-                      00088 ;       db      0x00, 0x04, 0x08, 0x0c, 0x11, 0x15, 0x19, 0x1d
-                      00089 ;       db      0x22, 0x26, 0x2a, 0x2e, 0x33, 0x37, 0x3b, 0x3f
-                      00090 ;       db      0x44, 0x48, 0x4c, 0x50, 0x55, 0x59, 0x5d, 0x61
-                      00091 ;       db      0x66, 0x6a, 0x6e, 0x72, 0x77, 0x7b, 0x7f, 0x83
-                      00092 ;       db      0x88, 0x8c, 0x90, 0x94, 0x99, 0x9d, 0xa1, 0xa5
-                      00093 ;       db      0xaa, 0xae, 0xb2, 0xb6, 0xbb, 0xbf, 0xc3, 0xc7
-                      00094 ;       db      0xcc, 0xd0, 0xd4, 0xd8, 0xdd, 0xe1, 0xe5, 0xe9
-                      00095 ;       db      0xee, 0xf2, 0xf6, 0xfa, 0xff, 0xff, 0xff, 0xff
-                      00096 ;       db      0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
-                      00097 ;       db      0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
-                      00098 ;       db      0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
-                      00099 ;       db      0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
-                      00100 ;       db      0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
-                      00101 
-                      00102 
-                      00103         end
-MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE  4
+                      00087 ;       db      0xcc, 0xd0, 0xd4, 0xd8, 0xdd, 0xe1, 0xe5, 0xe9
+                      00088 ;       db      0xee, 0xf2, 0xf6, 0xfa, 0xff, 0xff, 0xff, 0xff
+                      00089 ;       db      0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
+                      00090 ;       db      0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
+                      00091 ;       db      0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
+                      00092 ;       db      0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
+                      00093 ;       db      0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
+                      00094 
+                      00095 
+                      00096         end
+MPASM  5.43                     INIT.TEST.ASM   12-1-2013  14:50:04         PAGE  4
 
 
 SYMBOL TABLE
@@ -198,7 +191,7 @@ BAUDCON                           00000FAA
 BAUDCTL                           00000FAA
 BF                                00000000
 BFEMT                             00000003
-MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE  5
+MPASM  5.43                     INIT.TEST.ASM   12-1-2013  14:50:04         PAGE  5
 
 
 SYMBOL TABLE
@@ -257,7 +250,7 @@ CCP2IP                            00000000
 CCP2M0                            00000000
 CCP2M1                            00000001
 CCP2M2                            00000002
-MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE  6
+MPASM  5.43                     INIT.TEST.ASM   12-1-2013  14:50:04         PAGE  6
 
 
 SYMBOL TABLE
@@ -316,7 +309,7 @@ DTPS1                             00000007
 D_A                               00000005
 D_NOT_A                           00000005
 EEADR                             00000FA9
-MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE  7
+MPASM  5.43                     INIT.TEST.ASM   12-1-2013  14:50:04         PAGE  7
 
 
 SYMBOL TABLE
@@ -375,7 +368,7 @@ GIEL                              00000006
 GIE_GIEH                          00000007
 GO                                00000001
 GODONE                            00000001
-MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE  8
+MPASM  5.43                     INIT.TEST.ASM   12-1-2013  14:50:04         PAGE  8
 
 
 SYMBOL TABLE
@@ -434,7 +427,7 @@ IVRST                             00000005
 LATA                              00000F89
 LATA0                             00000000
 LATA1                             00000001
-MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE  9
+MPASM  5.43                     INIT.TEST.ASM   12-1-2013  14:50:04         PAGE  9
 
 
 SYMBOL TABLE
@@ -493,7 +486,7 @@ NOT_RI                            00000004
 NOT_SS                            00000006
 NOT_T1SYNC                        00000002
 NOT_T5SYNC                        00000002
-MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE 10
+MPASM  5.43                     INIT.TEST.ASM   12-1-2013  14:50:04         PAGE 10
 
 
 SYMBOL TABLE
@@ -552,7 +545,7 @@ PORTC                             00000F82
 PORTE                             00000F84
 POSCNTH                           00000F67
 POSCNTL                           00000F66
-MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE 11
+MPASM  5.43                     INIT.TEST.ASM   12-1-2013  14:50:04         PAGE 11
 
 
 SYMBOL TABLE
@@ -611,7 +604,7 @@ PTOPS3                            00000007
 PTPERH                            00000F7A
 PTPERL                            00000F7B
 PWMCON0                           00000F6F
-MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE 12
+MPASM  5.43                     INIT.TEST.ASM   12-1-2013  14:50:04         PAGE 12
 
 
 SYMBOL TABLE
@@ -670,7 +663,7 @@ RI                                00000004
 RX                                00000007
 RX9                               00000006
 RX9D                              00000000
-MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE 13
+MPASM  5.43                     INIT.TEST.ASM   12-1-2013  14:50:04         PAGE 13
 
 
 SYMBOL TABLE
@@ -729,7 +722,7 @@ SSRC2                             00000002
 SSRC3                             00000003
 SSRC4                             00000004
 STATUS                            00000FD8
-MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE 14
+MPASM  5.43                     INIT.TEST.ASM   12-1-2013  14:50:04         PAGE 14
 
 
 SYMBOL TABLE
@@ -788,7 +781,7 @@ TBIF                              00000004
 TBIP                              00000004
 TBLPTR                            00000FF6
 TBLPTRH                           00000FF7
-MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE 15
+MPASM  5.43                     INIT.TEST.ASM   12-1-2013  14:50:04         PAGE 15
 
 
 SYMBOL TABLE
@@ -847,7 +840,7 @@ TRISB1                            00000001
 TRISB2                            00000002
 TRISB3                            00000003
 TRISB4                            00000004
-MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE 16
+MPASM  5.43                     INIT.TEST.ASM   12-1-2013  14:50:04         PAGE 16
 
 
 SYMBOL TABLE
@@ -906,7 +899,7 @@ WRERR                             00000003
 WUE                               00000001
 Z                                 00000002
 _BOREN_OFF_2L                     000000FD
-MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE 17
+MPASM  5.43                     INIT.TEST.ASM   12-1-2013  14:50:04         PAGE 17
 
 
 SYMBOL TABLE
@@ -965,7 +958,7 @@ _IDLOC2                           00200002
 _IDLOC3                           00200003
 _IDLOC4                           00200004
 _IDLOC5                           00200005
-MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE 18
+MPASM  5.43                     INIT.TEST.ASM   12-1-2013  14:50:04         PAGE 18
 
 
 SYMBOL TABLE
@@ -1024,7 +1017,7 @@ _WDPS_8_2H                        000000E7
 _WDTEN_OFF_2H                     000000FE
 _WDTEN_ON_2H                      000000FF
 _WINEN_OFF_2H                     000000FF
-MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE 19
+MPASM  5.43                     INIT.TEST.ASM   12-1-2013  14:50:04         PAGE 19
 
 
 SYMBOL TABLE

@@ -192,7 +192,7 @@ _PROCESS_CC02:
 	movlw	0x02
 	cpfseq	CC_NUM			; Check CC Value
 	goto	_PROCESS_CC03		; Try next CC Value
-	movlw	0x7F			; Check if > 63
+	movlw	0x3F			; Check if > 63
 	cpfsgt	CUR_BYTE
 	goto	_CC02_OFF
 	bsf	CV_GATE,1		; Trigger Gate
@@ -204,7 +204,7 @@ _PROCESS_CC03:
 	movlw	0x03
 	cpfseq	CC_NUM			; Check CC Value
 	goto	_PROCESS_CC04		; Try next CC Value
-	movlw	0x7F			; Check if > 63
+	movlw	0x3F			; Check if > 63
 	cpfsgt	CUR_BYTE
 	goto	_CC03_OFF
 	bsf	CV_GATE,2		; Trigger Gate
@@ -216,7 +216,7 @@ _PROCESS_CC04:
 	movlw	0x04
 	cpfseq	CC_NUM			; Check CC Value
 	goto	_PROCESS_CC05		; Try next CC Value
-	movlw	0x7F			; Check if > 63
+	movlw	0x3F			; Check if > 63
 	cpfsgt	CUR_BYTE
 	goto	_CC04_OFF
 	bsf	CV_GATE,3		; Trigger Gate
@@ -228,7 +228,7 @@ _PROCESS_CC05:
 	movlw	0x05
 	cpfseq	CC_NUM			; Check CC Value
 	goto	_END_CVALUE		; CC Must be > 5 so ignore
-	movlw	0x7F			; Check if > 63
+	movlw	0x3F			; Check if > 63
 	cpfsgt	CUR_BYTE
 	goto	_CC05_OFF
 	bsf	CV_GATE,4		; Trigger Gate
@@ -311,9 +311,9 @@ _CHECK_BYTE:
 	cpfslt	CUR_BYTE
 	goto	_SET_SYSTEM_MSG
 _SET_STD_MSG:
-	movf	CUR_BYTE,W	
-	andlw	0x0F		; Extract MIDI chan
-	movwf	MIDI_CHAN
+;	movf	CUR_BYTE,W
+;	andlw	0x0F		; Extract MIDI chan
+;	movwf	MIDI_CHAN
 	movf	CUR_BYTE,W
 	andlw	0x70		; Extract status code and drop MSb
 	swapf	WREG

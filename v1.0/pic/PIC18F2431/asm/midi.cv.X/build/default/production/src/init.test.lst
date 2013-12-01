@@ -1,4 +1,4 @@
-MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE  1
+MPASM  5.43                     INIT.TEST.ASM   12-1-2013  14:52:24         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,7 +57,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 000004 EF?? F???      00042         goto    _MAIN           ; Main app code
                       00043 
                       00044 
-MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE  2
+MPASM  5.43                     INIT.TEST.ASM   12-1-2013  14:52:24         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -116,7 +116,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00084 ;CV_PITCH_DATA:
                       00085 ;       db      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
                       00086 ;       db      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE  3
+MPASM  5.43                     INIT.TEST.ASM   12-1-2013  14:52:24         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -139,7 +139,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00101 
                       00102 
                       00103         end
-MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE  4
+MPASM  5.43                     INIT.TEST.ASM   12-1-2013  14:52:24         PAGE  4
 
 
 SYMBOL TABLE
@@ -198,7 +198,7 @@ BAUDCON                           00000FAA
 BAUDCTL                           00000FAA
 BF                                00000000
 BFEMT                             00000003
-MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE  5
+MPASM  5.43                     INIT.TEST.ASM   12-1-2013  14:52:24         PAGE  5
 
 
 SYMBOL TABLE
@@ -257,7 +257,7 @@ CCP2IP                            00000000
 CCP2M0                            00000000
 CCP2M1                            00000001
 CCP2M2                            00000002
-MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE  6
+MPASM  5.43                     INIT.TEST.ASM   12-1-2013  14:52:24         PAGE  6
 
 
 SYMBOL TABLE
@@ -316,7 +316,7 @@ DTPS1                             00000007
 D_A                               00000005
 D_NOT_A                           00000005
 EEADR                             00000FA9
-MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE  7
+MPASM  5.43                     INIT.TEST.ASM   12-1-2013  14:52:24         PAGE  7
 
 
 SYMBOL TABLE
@@ -375,7 +375,7 @@ GIEL                              00000006
 GIE_GIEH                          00000007
 GO                                00000001
 GODONE                            00000001
-MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE  8
+MPASM  5.43                     INIT.TEST.ASM   12-1-2013  14:52:24         PAGE  8
 
 
 SYMBOL TABLE
@@ -434,7 +434,7 @@ IVRST                             00000005
 LATA                              00000F89
 LATA0                             00000000
 LATA1                             00000001
-MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE  9
+MPASM  5.43                     INIT.TEST.ASM   12-1-2013  14:52:24         PAGE  9
 
 
 SYMBOL TABLE
@@ -493,7 +493,7 @@ NOT_RI                            00000004
 NOT_SS                            00000006
 NOT_T1SYNC                        00000002
 NOT_T5SYNC                        00000002
-MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE 10
+MPASM  5.43                     INIT.TEST.ASM   12-1-2013  14:52:24         PAGE 10
 
 
 SYMBOL TABLE
@@ -552,7 +552,7 @@ PORTC                             00000F82
 PORTE                             00000F84
 POSCNTH                           00000F67
 POSCNTL                           00000F66
-MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE 11
+MPASM  5.43                     INIT.TEST.ASM   12-1-2013  14:52:24         PAGE 11
 
 
 SYMBOL TABLE
@@ -611,7 +611,7 @@ PTOPS3                            00000007
 PTPERH                            00000F7A
 PTPERL                            00000F7B
 PWMCON0                           00000F6F
-MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE 12
+MPASM  5.43                     INIT.TEST.ASM   12-1-2013  14:52:24         PAGE 12
 
 
 SYMBOL TABLE
@@ -670,7 +670,7 @@ RI                                00000004
 RX                                00000007
 RX9                               00000006
 RX9D                              00000000
-MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE 13
+MPASM  5.43                     INIT.TEST.ASM   12-1-2013  14:52:24         PAGE 13
 
 
 SYMBOL TABLE
@@ -729,7 +729,7 @@ SSRC2                             00000002
 SSRC3                             00000003
 SSRC4                             00000004
 STATUS                            00000FD8
-MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE 14
+MPASM  5.43                     INIT.TEST.ASM   12-1-2013  14:52:24         PAGE 14
 
 
 SYMBOL TABLE
@@ -788,7 +788,7 @@ TBIF                              00000004
 TBIP                              00000004
 TBLPTR                            00000FF6
 TBLPTRH                           00000FF7
-MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE 15
+MPASM  5.43                     INIT.TEST.ASM   12-1-2013  14:52:24         PAGE 15
 
 
 SYMBOL TABLE
@@ -847,7 +847,7 @@ TRISB1                            00000001
 TRISB2                            00000002
 TRISB3                            00000003
 TRISB4                            00000004
-MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE 16
+MPASM  5.43                     INIT.TEST.ASM   12-1-2013  14:52:24         PAGE 16
 
 
 SYMBOL TABLE
@@ -906,7 +906,7 @@ WRERR                             00000003
 WUE                               00000001
 Z                                 00000002
 _BOREN_OFF_2L                     000000FD
-MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE 17
+MPASM  5.43                     INIT.TEST.ASM   12-1-2013  14:52:24         PAGE 17
 
 
 SYMBOL TABLE
@@ -965,7 +965,7 @@ _IDLOC2                           00200002
 _IDLOC3                           00200003
 _IDLOC4                           00200004
 _IDLOC5                           00200005
-MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE 18
+MPASM  5.43                     INIT.TEST.ASM   12-1-2013  14:52:24         PAGE 18
 
 
 SYMBOL TABLE
@@ -1024,7 +1024,7 @@ _WDPS_8_2H                        000000E7
 _WDTEN_OFF_2H                     000000FE
 _WDTEN_ON_2H                      000000FF
 _WINEN_OFF_2H                     000000FF
-MPASM  5.43                     INIT.TEST.ASM   2-28-2012  19:14:15         PAGE 19
+MPASM  5.43                     INIT.TEST.ASM   12-1-2013  14:52:24         PAGE 19
 
 
 SYMBOL TABLE

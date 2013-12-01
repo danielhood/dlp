@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=midi.cv.X
+PROJECTNAME=midi.cv.v3.X
 
 # Active Configuration
 DEFAULTCONF=default

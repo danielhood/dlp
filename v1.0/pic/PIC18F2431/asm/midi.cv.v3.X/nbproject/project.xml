@@ -3,7 +3,7 @@
     <type>com.microchip.mplab.nbide.embedded.makeproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/make-project/1">
-            <name>midi.cv</name>
+            <name>midi.cv.v3</name>
             <creation-uuid>ff73c553-8821-42b8-81ea-e03be10493ce</creation-uuid>
             <make-project-type>0</make-project-type>
             <c-extensions/>
