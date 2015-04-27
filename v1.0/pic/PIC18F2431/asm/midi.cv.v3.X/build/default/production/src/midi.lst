@@ -1,4 +1,4 @@
-MPASM  5.43                          MIDI.ASM   12-1-2013  15:12:53         PAGE  1
+MPASM  5.43                          MIDI.ASM   9-20-2014  21:12:18         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,7 +57,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00038         endc
                       00039 
                       00040 
-MPASM  5.43                          MIDI.ASM   12-1-2013  15:12:53         PAGE  2
+MPASM  5.43                          MIDI.ASM   9-20-2014  21:12:18         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -116,7 +116,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00020 _SCALE_CV_NOTE  macro
                       00021         addlw   low CV_PITCH_DATA
                       00022         movwf   TBLPTRL         ; Address to read
-MPASM  5.43                          MIDI.ASM   12-1-2013  15:12:53         PAGE  3
+MPASM  5.43                          MIDI.ASM   9-20-2014  21:12:18         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -175,7 +175,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00000E                00073 _UPDATE_PITCH:
 00000E A001           00074         btfss   CV_FLAGS,CVF_PITCH
 000010 EF?? F???      00075         goto    _UPDATE_VELOCITY
-MPASM  5.43                          MIDI.ASM   12-1-2013  15:12:53         PAGE  4
+MPASM  5.43                          MIDI.ASM   9-20-2014  21:12:18         PAGE  4
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -234,7 +234,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00006E 4611               M         rlncf   TMP_CV_BYTE_L,F ; pushes the msbit of 7bit value into C
 000070 3A12               M         swapf   TMP_CV_BYTE_H,F
 000072 4212               M         rrncf   TMP_CV_BYTE_H,F
-MPASM  5.43                          MIDI.ASM   12-1-2013  15:12:53         PAGE  5
+MPASM  5.43                          MIDI.ASM   9-20-2014  21:12:18         PAGE  5
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -250,7 +250,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 000084 EF?? F???      00105         goto    _LOOP
                       00106 
                       00107         end
-MPASM  5.43                          MIDI.ASM   12-1-2013  15:12:53         PAGE  6
+MPASM  5.43                          MIDI.ASM   9-20-2014  21:12:18         PAGE  6
 
 
 SYMBOL TABLE
@@ -309,7 +309,7 @@ BFEMT                             00000003
 BFOVFL                            00000002
 BOR                               00000000
 BRFEN                             00000007
-MPASM  5.43                          MIDI.ASM   12-1-2013  15:12:53         PAGE  7
+MPASM  5.43                          MIDI.ASM   9-20-2014  21:12:18         PAGE  7
 
 
 SYMBOL TABLE
@@ -368,7 +368,7 @@ CCP2M1                            00000001
 CCP2M2                            00000002
 CCP2M3                            00000003
 CCP2X                             00000005
-MPASM  5.43                          MIDI.ASM   12-1-2013  15:12:53         PAGE  8
+MPASM  5.43                          MIDI.ASM   9-20-2014  21:12:18         PAGE  8
 
 
 SYMBOL TABLE
@@ -427,7 +427,7 @@ DTA0                              00000000
 DTA1                              00000001
 DTA2                              00000002
 DTA3                              00000003
-MPASM  5.43                          MIDI.ASM   12-1-2013  15:12:53         PAGE  9
+MPASM  5.43                          MIDI.ASM   9-20-2014  21:12:18         PAGE  9
 
 
 SYMBOL TABLE
@@ -486,7 +486,7 @@ GASEL0                            00000000
 GASEL1                            00000001
 GBSEL0                            00000004
 GBSEL1                            00000005
-MPASM  5.43                          MIDI.ASM   12-1-2013  15:12:53         PAGE 10
+MPASM  5.43                          MIDI.ASM   9-20-2014  21:12:18         PAGE 10
 
 
 SYMBOL TABLE
@@ -545,7 +545,7 @@ INTEDG2                           00000004
 IOFS                              00000002
 IPEN                              00000007
 IPR1                              00000F9F
-MPASM  5.43                          MIDI.ASM   12-1-2013  15:12:53         PAGE 11
+MPASM  5.43                          MIDI.ASM   9-20-2014  21:12:18         PAGE 11
 
 
 SYMBOL TABLE
@@ -604,7 +604,7 @@ MSG_PITCH                         0000000F
 MSG_VELOCITY                      00000010
 N                                 00000004
 NOT_A                             00000005
-MPASM  5.43                          MIDI.ASM   12-1-2013  15:12:53         PAGE 12
+MPASM  5.43                          MIDI.ASM   9-20-2014  21:12:18         PAGE 12
 
 
 SYMBOL TABLE
@@ -663,7 +663,7 @@ PIE1                              00000F9D
 PIE2                              00000FA0
 PIE3                              00000FA3
 PIR1                              00000F9E
-MPASM  5.43                          MIDI.ASM   12-1-2013  15:12:53         PAGE 13
+MPASM  5.43                          MIDI.ASM   9-20-2014  21:12:18         PAGE 13
 
 
 SYMBOL TABLE
@@ -722,7 +722,7 @@ PTCKPS0                           00000002
 PTCKPS1                           00000003
 PTCON0                            00000F7F
 PTCON1                            00000F7E
-MPASM  5.43                          MIDI.ASM   12-1-2013  15:12:53         PAGE 14
+MPASM  5.43                          MIDI.ASM   9-20-2014  21:12:18         PAGE 14
 
 
 SYMBOL TABLE
@@ -781,7 +781,7 @@ RC5                               00000005
 RC6                               00000006
 RC7                               00000007
 RCIDL                             00000006
-MPASM  5.43                          MIDI.ASM   12-1-2013  15:12:53         PAGE 15
+MPASM  5.43                          MIDI.ASM   9-20-2014  21:12:18         PAGE 15
 
 
 SYMBOL TABLE
@@ -840,7 +840,7 @@ SS                                00000006
 SSPADD                            00000FC8
 SSPBUF                            00000FC9
 SSPCON                            00000FC6
-MPASM  5.43                          MIDI.ASM   12-1-2013  15:12:53         PAGE 16
+MPASM  5.43                          MIDI.ASM   9-20-2014  21:12:18         PAGE 16
 
 
 SYMBOL TABLE
@@ -899,7 +899,7 @@ T1RUN                             00000006
 T1SYNC                            00000002
 T2CKPS0                           00000000
 T2CKPS1                           00000001
-MPASM  5.43                          MIDI.ASM   12-1-2013  15:12:53         PAGE 17
+MPASM  5.43                          MIDI.ASM   9-20-2014  21:12:18         PAGE 17
 
 
 SYMBOL TABLE
@@ -958,7 +958,7 @@ TMR5ON                            00000000
 TO                                00000003
 TOS                               00000FFD
 TOSH                              00000FFE
-MPASM  5.43                          MIDI.ASM   12-1-2013  15:12:53         PAGE 18
+MPASM  5.43                          MIDI.ASM   9-20-2014  21:12:18         PAGE 18
 
 
 SYMBOL TABLE
@@ -1017,7 +1017,7 @@ UA                                00000001
 UDIS                              00000001
 UP                                00000005
 UPDOWN                            00000005
-MPASM  5.43                          MIDI.ASM   12-1-2013  15:12:53         PAGE 19
+MPASM  5.43                          MIDI.ASM   9-20-2014  21:12:18         PAGE 19
 
 
 SYMBOL TABLE
@@ -1076,7 +1076,7 @@ _CPD_ON_5H                        0000007F
 _DEBUG_OFF_4L                     000000FF
 _DEBUG_ON_4L                      0000007F
 _DEVID1                           003FFFFE
-MPASM  5.43                          MIDI.ASM   12-1-2013  15:12:53         PAGE 20
+MPASM  5.43                          MIDI.ASM   9-20-2014  21:12:18         PAGE 20
 
 
 SYMBOL TABLE
@@ -1135,7 +1135,7 @@ _MOFFSET_SYS_EX_END               0000001C
 _MOFFSET_SYS_RESET                0000002C
 _MOFFSET_TR                       0000001A
 _MOFFSET_TT                       0000001E
-MPASM  5.43                          MIDI.ASM   12-1-2013  15:12:53         PAGE 21
+MPASM  5.43                          MIDI.ASM   9-20-2014  21:12:18         PAGE 21
 
 
 SYMBOL TABLE
@@ -1194,7 +1194,7 @@ _WINEN_OFF_2H                     000000FF
 _WINEN_ON_2H                      000000DF
 _WRT0_OFF_6L                      000000FF
 _WRT0_ON_6L                       000000FE
-MPASM  5.43                          MIDI.ASM   12-1-2013  15:12:53         PAGE 22
+MPASM  5.43                          MIDI.ASM   9-20-2014  21:12:18         PAGE 22
 
 
 SYMBOL TABLE

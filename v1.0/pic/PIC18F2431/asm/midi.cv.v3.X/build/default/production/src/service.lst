@@ -1,4 +1,4 @@
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE  1
+MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,7 +57,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00038         endc
                       00039 
                       00040 
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE  2
+MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -116,7 +116,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00020         endm
                       00021 
                       00022 _RESTORE_CTX    macro
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE  3
+MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -175,7 +175,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                             in
 000036 EF?? F???      00067         goto    _RC_CLEANUP
 00003A                00068 _PROCESS_SYS_EX_DATA:
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE  4
+MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE  4
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -234,7 +234,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 000084                00118 _MSTATE_NOTE_OFF:
 000084 B080           00119         btfsc   PORTA,0                 ; Check MIDI MODE
 000086 EF?? F???      00120         goto    _MSTATE_NOTE_OFF_MODE_1
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE  5
+MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE  5
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -293,7 +293,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0000F8 600F           00170         cpfslt  MSG_PITCH
 0000FA EF?? F???      00171         goto    _PROCESS_NOTE_OFF_GATE2
 0000FE                00172 _PROCESS_NOTE_OFF_GATE1:
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE  6
+MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE  6
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -352,7 +352,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00016C EF?? F???      00223         goto    _PROCESS_VELOCITY_NOTE_ON_M1
 000170                00224 _PROCSES_PITCH_NOTE_ON_M1:
 000170 C000 F00F      00225         movff   CUR_BYTE,MSG_PITCH
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE  7
+MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE  7
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -411,7 +411,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00276 
 0001EC                00277 _MSTATE_KP:
 0001EC EF?? F???      00278         goto    _RC_CLEANUP
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE  8
+MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE  8
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -470,7 +470,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 000266                00329 _CC04_OFF:
 000266 9605           00330         bcf     CV_GATE,3               ; Clear Gate
 000268 EF?? F???      00331         goto    _END_CVALUE
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE  9
+MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE  9
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -529,7 +529,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0002BA EF?? F???      00382         goto    _RC_CLEANUP
                       00383 
 0002BE                00384 _MSTATE_START_SONG:
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE 10
+MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE 10
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -588,7 +588,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00435         ; Check to see if we need to process the sys messge now (F6 and above do not have any addtional 
                             mesage bytes)
 000302 0EF6           00436         movlw   0xF6
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE 11
+MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE 11
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -601,7 +601,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00441 
                       00442 
                       00443         end
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE 12
+MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE 12
 
 
 SYMBOL TABLE
@@ -660,7 +660,7 @@ BFEMT                             00000003
 BFOVFL                            00000002
 BOR                               00000000
 BRFEN                             00000007
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE 13
+MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE 13
 
 
 SYMBOL TABLE
@@ -719,7 +719,7 @@ CCP2M1                            00000001
 CCP2M2                            00000002
 CCP2M3                            00000003
 CCP2X                             00000005
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE 14
+MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE 14
 
 
 SYMBOL TABLE
@@ -778,7 +778,7 @@ DTA1                              00000001
 DTA2                              00000002
 DTA3                              00000003
 DTA4                              00000004
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE 15
+MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE 15
 
 
 SYMBOL TABLE
@@ -837,7 +837,7 @@ GASEL1                            00000001
 GBSEL0                            00000004
 GBSEL1                            00000005
 GCSEL0                            00000002
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE 16
+MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE 16
 
 
 SYMBOL TABLE
@@ -896,7 +896,7 @@ IOFS                              00000002
 IPEN                              00000007
 IPR1                              00000F9F
 IPR2                              00000FA2
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE 17
+MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE 17
 
 
 SYMBOL TABLE
@@ -955,7 +955,7 @@ MSG_VELOCITY                      00000010
 N                                 00000004
 NOT_A                             00000005
 NOT_ADDRESS                       00000005
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE 18
+MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE 18
 
 
 SYMBOL TABLE
@@ -1014,7 +1014,7 @@ PIE2                              00000FA0
 PIE3                              00000FA3
 PIR1                              00000F9E
 PIR2                              00000FA1
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE 19
+MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE 19
 
 
 SYMBOL TABLE
@@ -1073,7 +1073,7 @@ PTCKPS1                           00000003
 PTCON0                            00000F7F
 PTCON1                            00000F7E
 PTDIR                             00000006
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE 20
+MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE 20
 
 
 SYMBOL TABLE
@@ -1132,7 +1132,7 @@ RC6                               00000006
 RC7                               00000007
 RCIDL                             00000006
 RCIE                              00000005
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE 21
+MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE 21
 
 
 SYMBOL TABLE
@@ -1191,7 +1191,7 @@ SSPADD                            00000FC8
 SSPBUF                            00000FC9
 SSPCON                            00000FC6
 SSPEN                             00000005
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE 22
+MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE 22
 
 
 SYMBOL TABLE
@@ -1250,7 +1250,7 @@ T1SYNC                            00000002
 T2CKPS0                           00000000
 T2CKPS1                           00000001
 T2CON                             00000FCA
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE 23
+MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE 23
 
 
 SYMBOL TABLE
@@ -1309,7 +1309,7 @@ TO                                00000003
 TOS                               00000FFD
 TOSH                              00000FFE
 TOSL                              00000FFD
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE 24
+MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE 24
 
 
 SYMBOL TABLE
@@ -1368,7 +1368,7 @@ UDIS                              00000001
 UP                                00000005
 UPDOWN                            00000005
 UP_DOWN                           00000005
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE 25
+MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE 25
 
 
 SYMBOL TABLE
@@ -1427,7 +1427,7 @@ _CP2_ON_5L                        000000FB
 _CP3_OFF_5L                       000000FF
 _CP3_ON_5L                        000000F7
 _CPB_OFF_5H                       000000FF
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE 26
+MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE 26
 
 
 SYMBOL TABLE
@@ -1486,7 +1486,7 @@ _MOFFSET_NOTE_OFF                 00000000
 _MOFFSET_NOTE_ON                  00000002
 _MOFFSET_PB                       0000000C
 _MOFFSET_PC                       00000008
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE 27
+MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE 27
 
 
 SYMBOL TABLE
@@ -1545,7 +1545,7 @@ _OSC_RC_1H                        000000FC
 _OSC_XT_1H                        000000F1
 _PROCESS_CC01                     00000206
 _PROCESS_CC02                     00000218
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE 28
+MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE 28
 
 
 SYMBOL TABLE
@@ -1604,7 +1604,7 @@ _WDPS_1_2H                        000000E1
 _WDPS_2048_2H                     000000F7
 _WDPS_256_2H                      000000F1
 _WDPS_2_2H                        000000E3
-MPASM  5.43                       SERVICE.ASM   12-1-2013  16:39:41         PAGE 29
+MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE 29
 
 
 SYMBOL TABLE
