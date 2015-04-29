@@ -4165,6 +4165,7 @@ The next version will have a 2nd duplicated OSC.</text>
 <junction x="-7.62" y="15.24"/>
 <pinref part="R9" gate="G$1" pin="1"/>
 <wire x1="-7.62" y1="25.4" x2="-7.62" y2="43.18" width="0.1524" layer="91"/>
+<junction x="-7.62" y="25.4"/>
 </segment>
 </net>
 <net name="N$EXP1" class="0">
@@ -4282,6 +4283,7 @@ The next version will have a 2nd duplicated OSC.</text>
 <wire x1="-7.62" y1="66.04" x2="2.54" y2="66.04" width="0.1524" layer="91"/>
 <pinref part="U$1" gate="G$1" pin="B"/>
 <wire x1="2.54" y1="66.04" x2="2.54" y2="63.5" width="0.1524" layer="91"/>
+<junction x="-7.62" y="66.04"/>
 </segment>
 </net>
 </nets>
