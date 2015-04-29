@@ -4281,17 +4281,7 @@ The next version will have a 2nd duplicated OSC.</text>
 <wire x1="-7.62" y1="83.82" x2="-7.62" y2="68.58" width="0.1524" layer="91"/>
 <pinref part="IC2" gate="A" pin="OUT"/>
 <wire x1="-17.78" y1="68.58" x2="-7.62" y2="68.58" width="0.1524" layer="91"/>
-<pinref part="D2" gate="G$1" pin="A"/>
-<pinref part="IC1" gate="A" pin="B1"/>
-<wire x1="10.16" y1="68.58" x2="5.08" y2="68.58" width="0.1524" layer="91"/>
-<wire x1="5.08" y1="68.58" x2="5.08" y2="66.04" width="0.1524" layer="91"/>
-<junction x="5.08" y="68.58"/>
-<wire x1="-2.54" y1="68.58" x2="5.08" y2="68.58" width="0.1524" layer="91"/>
-<wire x1="-2.54" y1="63.5" x2="-2.54" y2="68.58" width="0.1524" layer="91"/>
-<pinref part="V/OCT1" gate="G$1" pin="S"/>
-<wire x1="-7.62" y1="68.58" x2="-2.54" y2="68.58" width="0.1524" layer="91"/>
 <junction x="-7.62" y="68.58"/>
-<junction x="-2.54" y="68.58"/>
 </segment>
 </net>
 <net name="N$23" class="0">
@@ -4765,6 +4755,18 @@ The next version will have a 2nd duplicated OSC.</text>
 <pinref part="JP3" gate="A" pin="5"/>
 <wire x1="111.76" y1="-93.98" x2="124.46" y2="-93.98" width="0.1524" layer="91"/>
 <label x="124.46" y="-93.98" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="N$11" class="0">
+<segment>
+<pinref part="D2" gate="G$1" pin="A"/>
+<pinref part="IC1" gate="A" pin="B1"/>
+<wire x1="10.16" y1="68.58" x2="5.08" y2="68.58" width="0.1524" layer="91"/>
+<wire x1="5.08" y1="68.58" x2="5.08" y2="66.04" width="0.1524" layer="91"/>
+<junction x="5.08" y="68.58"/>
+<wire x1="-2.54" y1="68.58" x2="5.08" y2="68.58" width="0.1524" layer="91"/>
+<wire x1="-2.54" y1="63.5" x2="-2.54" y2="68.58" width="0.1524" layer="91"/>
+<pinref part="V/OCT1" gate="G$1" pin="S"/>
 </segment>
 </net>
 </nets>
