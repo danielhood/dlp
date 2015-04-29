@@ -3682,7 +3682,9 @@ headers.
 
 The next version will have a 2nd duplicated OSC.</text>
 <frame x1="-78.74" y1="-76.2" x2="210.82" y2="104.14" columns="8" rows="5" layer="91"/>
-<text x="7.62" y="76.2" size="1.778" layer="91">Try to replace with something cheaper?</text>
+<text x="7.62" y="76.2" size="1.778" layer="91">Try to replace with something cheaper?
+2N4401 looks stable: 100 hFE
+Fairchild's looks like what we need 2N4401BU</text>
 </plain>
 <instances>
 <instance part="Q1" gate="G$1" x="66.04" y="50.8"/>
