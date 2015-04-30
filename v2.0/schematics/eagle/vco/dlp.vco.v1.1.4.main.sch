@@ -3711,7 +3711,7 @@ Source: &lt;a href="http://www.bourns.com/pdfs/3314.pdf"&gt; Data sheet&lt;/a&gt
 <sheets>
 <sheet>
 <plain>
-<text x="119.38" y="116.84" size="1.778" layer="91">dlp.vco.v1.1.4 - Main
+<text x="106.68" y="111.76" size="1.778" layer="91">dlp.vco.v1.1.4 - Main
 
 - Simplified main board 
 - Excluded panel components
@@ -4690,7 +4690,7 @@ Source: &lt;a href="http://www.bourns.com/pdfs/3314.pdf"&gt; Data sheet&lt;/a&gt
 <segment>
 <pinref part="JP3" gate="A" pin="4"/>
 <wire x1="134.62" y1="-101.6" x2="142.24" y2="-101.6" width="0.1524" layer="91"/>
-<label x="157.48" y="-101.6" size="1.778" layer="95" rot="MR0"/>
+<label x="142.24" y="-101.6" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="IC3" gate="A" pin="-IN"/>
@@ -4706,7 +4706,7 @@ Source: &lt;a href="http://www.bourns.com/pdfs/3314.pdf"&gt; Data sheet&lt;/a&gt
 <segment>
 <pinref part="JP3" gate="A" pin="5"/>
 <wire x1="134.62" y1="-99.06" x2="142.24" y2="-99.06" width="0.1524" layer="91"/>
-<label x="157.48" y="-99.06" size="1.778" layer="95" rot="MR0"/>
+<label x="142.24" y="-99.06" size="1.778" layer="95"/>
 </segment>
 <segment>
 <wire x1="-27.94" y1="-68.58" x2="-10.16" y2="-68.58" width="0.1524" layer="91"/>
@@ -4718,7 +4718,7 @@ Source: &lt;a href="http://www.bourns.com/pdfs/3314.pdf"&gt; Data sheet&lt;/a&gt
 <segment>
 <pinref part="JP3" gate="A" pin="6"/>
 <wire x1="134.62" y1="-96.52" x2="142.24" y2="-96.52" width="0.1524" layer="91"/>
-<label x="157.48" y="-96.52" size="1.778" layer="95" rot="MR0"/>
+<label x="142.24" y="-96.52" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="R26" gate="G$1" pin="2"/>
@@ -4734,7 +4734,7 @@ Source: &lt;a href="http://www.bourns.com/pdfs/3314.pdf"&gt; Data sheet&lt;/a&gt
 <segment>
 <pinref part="JP3" gate="A" pin="7"/>
 <wire x1="134.62" y1="-93.98" x2="142.24" y2="-93.98" width="0.1524" layer="91"/>
-<label x="157.48" y="-93.98" size="1.778" layer="95" rot="MR0"/>
+<label x="142.24" y="-93.98" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="R31" gate="G$1" pin="2"/>
@@ -4750,7 +4750,7 @@ Source: &lt;a href="http://www.bourns.com/pdfs/3314.pdf"&gt; Data sheet&lt;/a&gt
 <segment>
 <pinref part="JP3" gate="A" pin="8"/>
 <wire x1="134.62" y1="-91.44" x2="142.24" y2="-91.44" width="0.1524" layer="91"/>
-<label x="157.48" y="-91.44" size="1.778" layer="95" rot="MR0"/>
+<label x="142.24" y="-91.44" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="R27" gate="G$1" pin="2"/>
@@ -4766,7 +4766,7 @@ Source: &lt;a href="http://www.bourns.com/pdfs/3314.pdf"&gt; Data sheet&lt;/a&gt
 <segment>
 <pinref part="JP3" gate="A" pin="9"/>
 <wire x1="134.62" y1="-88.9" x2="142.24" y2="-88.9" width="0.1524" layer="91"/>
-<label x="157.48" y="-88.9" size="1.778" layer="95" rot="MR0"/>
+<label x="142.24" y="-88.9" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="R32" gate="G$1" pin="2"/>
@@ -4782,7 +4782,7 @@ Source: &lt;a href="http://www.bourns.com/pdfs/3314.pdf"&gt; Data sheet&lt;/a&gt
 <segment>
 <pinref part="JP3" gate="A" pin="10"/>
 <wire x1="134.62" y1="-86.36" x2="142.24" y2="-86.36" width="0.1524" layer="91"/>
-<label x="157.48" y="-86.36" size="1.778" layer="95" rot="MR0"/>
+<label x="142.24" y="-86.36" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$18" class="0">
