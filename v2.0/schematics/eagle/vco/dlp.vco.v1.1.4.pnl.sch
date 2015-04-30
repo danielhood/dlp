@@ -571,8 +571,8 @@ Source: http://www.alphapotentiometers.net/html/16mm_pot_2.html</description>
 <part name="JP1" library="pinhead" deviceset="PINHD-1X10" device="" value="OSC1"/>
 <part name="JP2" library="pinhead" deviceset="PINHD-1X10" device="" value="OSC2"/>
 <part name="R1" library="_common" deviceset="R" device="0309/10" value="100K"/>
-<part name="R2" library="_common" deviceset="R" device="0309/10" value="100K"/>
-<part name="R3" library="_common" deviceset="R" device="0309/10" value="150K"/>
+<part name="R2" library="_common" deviceset="R" device="0309/10" value="180K"/>
+<part name="R3" library="_common" deviceset="R" device="0309/10" value="100K"/>
 <part name="SW-LEVEL2" library="_common" deviceset="R-VAR" device="" value="50K (log)"/>
 <part name="SQ-LEVEL2" library="_common" deviceset="R-VAR" device="" value="50K (log)"/>
 <part name="R4" library="pot" deviceset="3RP/1610G" device="" value="EXP-ATT"/>
