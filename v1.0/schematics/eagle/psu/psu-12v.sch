@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="6.5.0">
+<eagle version="7.2.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -8,20 +8,20 @@
 </settings>
 <grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
 <layers>
-<layer number="1" name="Top" color="4" fill="1" visible="yes" active="no"/>
-<layer number="16" name="Bottom" color="1" fill="1" visible="yes" active="no"/>
-<layer number="17" name="Pads" color="2" fill="1" visible="yes" active="no"/>
-<layer number="18" name="Vias" color="2" fill="1" visible="yes" active="no"/>
-<layer number="19" name="Unrouted" color="6" fill="1" visible="yes" active="no"/>
-<layer number="20" name="Dimension" color="15" fill="1" visible="yes" active="no"/>
-<layer number="21" name="tPlace" color="7" fill="1" visible="yes" active="no"/>
-<layer number="22" name="bPlace" color="7" fill="1" visible="yes" active="no"/>
-<layer number="23" name="tOrigins" color="15" fill="1" visible="yes" active="no"/>
-<layer number="24" name="bOrigins" color="15" fill="1" visible="yes" active="no"/>
-<layer number="25" name="tNames" color="7" fill="1" visible="yes" active="no"/>
-<layer number="26" name="bNames" color="7" fill="1" visible="yes" active="no"/>
-<layer number="27" name="tValues" color="7" fill="1" visible="yes" active="no"/>
-<layer number="28" name="bValues" color="7" fill="1" visible="yes" active="no"/>
+<layer number="1" name="Top" color="4" fill="1" visible="no" active="no"/>
+<layer number="16" name="Bottom" color="1" fill="1" visible="no" active="no"/>
+<layer number="17" name="Pads" color="2" fill="1" visible="no" active="no"/>
+<layer number="18" name="Vias" color="2" fill="1" visible="no" active="no"/>
+<layer number="19" name="Unrouted" color="6" fill="1" visible="no" active="no"/>
+<layer number="20" name="Dimension" color="15" fill="1" visible="no" active="no"/>
+<layer number="21" name="tPlace" color="7" fill="1" visible="no" active="no"/>
+<layer number="22" name="bPlace" color="7" fill="1" visible="no" active="no"/>
+<layer number="23" name="tOrigins" color="15" fill="1" visible="no" active="no"/>
+<layer number="24" name="bOrigins" color="15" fill="1" visible="no" active="no"/>
+<layer number="25" name="tNames" color="7" fill="1" visible="no" active="no"/>
+<layer number="26" name="bNames" color="7" fill="1" visible="no" active="no"/>
+<layer number="27" name="tValues" color="7" fill="1" visible="no" active="no"/>
+<layer number="28" name="bValues" color="7" fill="1" visible="no" active="no"/>
 <layer number="29" name="tStop" color="7" fill="3" visible="no" active="no"/>
 <layer number="30" name="bStop" color="7" fill="6" visible="no" active="no"/>
 <layer number="31" name="tCream" color="7" fill="4" visible="no" active="no"/>
@@ -30,8 +30,8 @@
 <layer number="34" name="bFinish" color="6" fill="6" visible="no" active="no"/>
 <layer number="35" name="tGlue" color="7" fill="4" visible="no" active="no"/>
 <layer number="36" name="bGlue" color="7" fill="5" visible="no" active="no"/>
-<layer number="37" name="tTest" color="7" fill="1" visible="yes" active="no"/>
-<layer number="38" name="bTest" color="7" fill="1" visible="yes" active="no"/>
+<layer number="37" name="tTest" color="7" fill="1" visible="no" active="no"/>
+<layer number="38" name="bTest" color="7" fill="1" visible="no" active="no"/>
 <layer number="39" name="tKeepout" color="4" fill="11" visible="no" active="no"/>
 <layer number="40" name="bKeepout" color="1" fill="11" visible="no" active="no"/>
 <layer number="41" name="tRestrict" color="4" fill="10" visible="no" active="no"/>
@@ -39,12 +39,12 @@
 <layer number="43" name="vRestrict" color="2" fill="10" visible="no" active="no"/>
 <layer number="44" name="Drills" color="7" fill="1" visible="no" active="no"/>
 <layer number="45" name="Holes" color="7" fill="1" visible="no" active="no"/>
-<layer number="46" name="Milling" color="3" fill="1" visible="yes" active="no"/>
-<layer number="47" name="Measures" color="7" fill="1" visible="yes" active="no"/>
-<layer number="48" name="Document" color="7" fill="1" visible="yes" active="no"/>
-<layer number="49" name="Reference" color="7" fill="1" visible="yes" active="no"/>
-<layer number="51" name="tDocu" color="7" fill="1" visible="yes" active="no"/>
-<layer number="52" name="bDocu" color="7" fill="1" visible="yes" active="no"/>
+<layer number="46" name="Milling" color="3" fill="1" visible="no" active="no"/>
+<layer number="47" name="Measures" color="7" fill="1" visible="no" active="no"/>
+<layer number="48" name="Document" color="7" fill="1" visible="no" active="no"/>
+<layer number="49" name="Reference" color="7" fill="1" visible="no" active="no"/>
+<layer number="51" name="tDocu" color="7" fill="1" visible="no" active="no"/>
+<layer number="52" name="bDocu" color="7" fill="1" visible="no" active="no"/>
 <layer number="91" name="Nets" color="2" fill="1" visible="yes" active="yes"/>
 <layer number="92" name="Busses" color="1" fill="1" visible="yes" active="yes"/>
 <layer number="93" name="Pins" color="2" fill="1" visible="no" active="yes"/>
@@ -859,11 +859,11 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <instance part="P+1" gate="1" x="40.64" y="78.74"/>
 <instance part="D1" gate="1" x="0" y="68.58"/>
 <instance part="D2" gate="1" x="0" y="63.5" rot="R180"/>
-<instance part="C1" gate="G$1" x="12.7" y="63.5" rot="R180"/>
-<instance part="C2" gate="G$1" x="12.7" y="53.34" rot="R180"/>
-<instance part="C3" gate="G$1" x="45.72" y="17.78" rot="R180"/>
-<instance part="C4" gate="G$1" x="2.54" y="15.24" rot="R180"/>
-<instance part="C5" gate="G$1" x="40.64" y="7.62" rot="R180"/>
+<instance part="C1" gate="G$1" x="12.7" y="63.5"/>
+<instance part="C2" gate="G$1" x="12.7" y="53.34"/>
+<instance part="C3" gate="G$1" x="45.72" y="17.78"/>
+<instance part="C4" gate="G$1" x="2.54" y="15.24"/>
+<instance part="C5" gate="G$1" x="40.64" y="7.62"/>
 <instance part="C6" gate="G$1" x="-17.78" y="15.24" rot="R180"/>
 <instance part="C7" gate="G$1" x="-7.62" y="15.24" rot="R180"/>
 <instance part="C8" gate="G$1" x="17.78" y="12.7" rot="R180"/>
@@ -893,28 +893,6 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <junction x="-12.7" y="63.5"/>
 </segment>
 </net>
-<net name="N$3" class="0">
-<segment>
-<pinref part="D1" gate="1" pin="C"/>
-<pinref part="C1" gate="G$1" pin="-"/>
-<wire x1="2.54" y1="68.58" x2="12.7" y2="68.58" width="0.1524" layer="91"/>
-<pinref part="IC1" gate="A1" pin="VI"/>
-<wire x1="12.7" y1="68.58" x2="17.78" y2="68.58" width="0.1524" layer="91"/>
-<junction x="12.7" y="68.58"/>
-</segment>
-</net>
-<net name="N$4" class="0">
-<segment>
-<pinref part="D2" gate="1" pin="A"/>
-<wire x1="2.54" y1="63.5" x2="5.08" y2="63.5" width="0.1524" layer="91"/>
-<wire x1="5.08" y1="63.5" x2="5.08" y2="48.26" width="0.1524" layer="91"/>
-<pinref part="C2" gate="G$1" pin="+"/>
-<wire x1="5.08" y1="48.26" x2="12.7" y2="48.26" width="0.1524" layer="91"/>
-<pinref part="IC2" gate="A1" pin="VI"/>
-<wire x1="12.7" y1="48.26" x2="17.78" y2="48.26" width="0.1524" layer="91"/>
-<junction x="12.7" y="48.26"/>
-</segment>
-</net>
 <net name="+12V" class="0">
 <segment>
 <pinref part="IC1" gate="A1" pin="VO"/>
@@ -927,9 +905,7 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 </segment>
 <segment>
 <pinref part="C10" gate="G$1" pin="2"/>
-<pinref part="C3" gate="G$1" pin="-"/>
 <wire x1="35.56" y1="22.86" x2="40.64" y2="22.86" width="0.1524" layer="91"/>
-<wire x1="45.72" y1="22.86" x2="40.64" y2="22.86" width="0.1524" layer="91"/>
 <pinref part="P+4" gate="1" pin="+12V"/>
 <wire x1="40.64" y1="22.86" x2="40.64" y2="25.4" width="0.1524" layer="91"/>
 <wire x1="35.56" y1="22.86" x2="22.86" y2="22.86" width="0.1524" layer="91"/>
@@ -940,6 +916,8 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <wire x1="22.86" y1="17.78" x2="27.94" y2="17.78" width="0.1524" layer="91"/>
 <junction x="22.86" y="17.78"/>
 <junction x="35.56" y="22.86"/>
+<pinref part="C3" gate="G$1" pin="+"/>
+<wire x1="40.64" y1="22.86" x2="45.72" y2="22.86" width="0.1524" layer="91"/>
 <junction x="40.64" y="22.86"/>
 </segment>
 </net>
@@ -956,52 +934,51 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <wire x1="-17.78" y1="20.32" x2="-7.62" y2="20.32" width="0.1524" layer="91"/>
 <pinref part="P+3" gate="1" pin="+5V"/>
 <wire x1="-7.62" y1="25.4" x2="-7.62" y2="20.32" width="0.1524" layer="91"/>
-<pinref part="C4" gate="G$1" pin="-"/>
-<wire x1="-7.62" y1="20.32" x2="2.54" y2="20.32" width="0.1524" layer="91"/>
 <junction x="-7.62" y="20.32"/>
+<pinref part="C4" gate="G$1" pin="+"/>
+<wire x1="-7.62" y1="20.32" x2="2.54" y2="20.32" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="0V" class="0">
 <segment>
-<pinref part="C1" gate="G$1" pin="+"/>
-<pinref part="C2" gate="G$1" pin="-"/>
-<pinref part="12VAC" gate="G$1" pin="3"/>
-<wire x1="-12.7" y1="58.42" x2="12.7" y2="58.42" width="0.1524" layer="91"/>
 <pinref part="IC1" gate="A1" pin="GND"/>
 <pinref part="IC2" gate="A1" pin="GND"/>
 <wire x1="27.94" y1="60.96" x2="27.94" y2="58.42" width="0.1524" layer="91"/>
 <wire x1="27.94" y1="55.88" x2="27.94" y2="58.42" width="0.1524" layer="91"/>
-<wire x1="27.94" y1="58.42" x2="12.7" y2="58.42" width="0.1524" layer="91"/>
-<wire x1="12.7" y1="58.42" x2="27.94" y2="58.42" width="0.1524" layer="91"/>
 <pinref part="IC3" gate="A1" pin="GND"/>
 <wire x1="27.94" y1="58.42" x2="53.34" y2="58.42" width="0.1524" layer="91"/>
 <wire x1="53.34" y1="58.42" x2="53.34" y2="60.96" width="0.1524" layer="91"/>
 <pinref part="GND1" gate="1" pin="0V"/>
 <wire x1="53.34" y1="58.42" x2="53.34" y2="55.88" width="0.1524" layer="91"/>
-<junction x="12.7" y="58.42"/>
 <junction x="27.94" y="58.42"/>
 <junction x="53.34" y="58.42"/>
-</segment>
-<segment>
-<pinref part="GND3" gate="1" pin="0V"/>
-<pinref part="C5" gate="G$1" pin="-"/>
-<wire x1="50.8" y1="12.7" x2="45.72" y2="12.7" width="0.1524" layer="91"/>
-<pinref part="C3" gate="G$1" pin="+"/>
-<wire x1="45.72" y1="12.7" x2="40.64" y2="12.7" width="0.1524" layer="91"/>
-<wire x1="40.64" y1="12.7" x2="35.56" y2="12.7" width="0.1524" layer="91"/>
-<pinref part="C10" gate="G$1" pin="1"/>
-<junction x="40.64" y="12.7"/>
-<junction x="45.72" y="12.7"/>
+<pinref part="C2" gate="G$1" pin="+"/>
+<pinref part="C1" gate="G$1" pin="-"/>
+<wire x1="12.7" y1="58.42" x2="27.94" y2="58.42" width="0.1524" layer="91"/>
+<junction x="12.7" y="58.42"/>
+<pinref part="12VAC" gate="G$1" pin="3"/>
+<wire x1="-12.7" y1="58.42" x2="12.7" y2="58.42" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="C6" gate="G$1" pin="1"/>
 <pinref part="C7" gate="G$1" pin="1"/>
 <wire x1="-17.78" y1="10.16" x2="-7.62" y2="10.16" width="0.1524" layer="91"/>
-<pinref part="C4" gate="G$1" pin="+"/>
-<wire x1="2.54" y1="10.16" x2="-7.62" y2="10.16" width="0.1524" layer="91"/>
 <pinref part="GND2" gate="1" pin="0V"/>
 <wire x1="-7.62" y1="10.16" x2="-7.62" y2="5.08" width="0.1524" layer="91"/>
 <junction x="-7.62" y="10.16"/>
+<pinref part="C4" gate="G$1" pin="-"/>
+<wire x1="-7.62" y1="10.16" x2="2.54" y2="10.16" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="C10" gate="G$1" pin="1"/>
+<pinref part="C5" gate="G$1" pin="+"/>
+<wire x1="35.56" y1="12.7" x2="40.64" y2="12.7" width="0.1524" layer="91"/>
+<pinref part="C3" gate="G$1" pin="-"/>
+<wire x1="40.64" y1="12.7" x2="45.72" y2="12.7" width="0.1524" layer="91"/>
+<pinref part="GND3" gate="1" pin="0V"/>
+<wire x1="45.72" y1="12.7" x2="50.8" y2="12.7" width="0.1524" layer="91"/>
+<junction x="40.64" y="12.7"/>
+<junction x="45.72" y="12.7"/>
 </segment>
 </net>
 <net name="-12V" class="0">
@@ -1012,17 +989,39 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <wire x1="40.64" y1="48.26" x2="40.64" y2="40.64" width="0.1524" layer="91"/>
 </segment>
 <segment>
+<pinref part="C5" gate="G$1" pin="-"/>
+<pinref part="P-2" gate="1" pin="-12V"/>
+<wire x1="40.64" y1="2.54" x2="40.64" y2="0" width="0.1524" layer="91"/>
 <pinref part="C8" gate="G$1" pin="1"/>
 <pinref part="C9" gate="G$1" pin="1"/>
 <wire x1="17.78" y1="7.62" x2="22.86" y2="7.62" width="0.1524" layer="91"/>
 <wire x1="27.94" y1="7.62" x2="22.86" y2="7.62" width="0.1524" layer="91"/>
 <wire x1="22.86" y1="7.62" x2="22.86" y2="2.54" width="0.1524" layer="91"/>
-<pinref part="C5" gate="G$1" pin="+"/>
-<wire x1="22.86" y1="2.54" x2="40.64" y2="2.54" width="0.1524" layer="91"/>
-<pinref part="P-2" gate="1" pin="-12V"/>
-<wire x1="40.64" y1="2.54" x2="40.64" y2="0" width="0.1524" layer="91"/>
-<junction x="40.64" y="2.54"/>
 <junction x="22.86" y="7.62"/>
+<wire x1="22.86" y1="2.54" x2="40.64" y2="2.54" width="0.1524" layer="91"/>
+<junction x="40.64" y="2.54"/>
+</segment>
+</net>
+<net name="N$3" class="0">
+<segment>
+<pinref part="D1" gate="1" pin="C"/>
+<pinref part="C1" gate="G$1" pin="+"/>
+<wire x1="2.54" y1="68.58" x2="12.7" y2="68.58" width="0.1524" layer="91"/>
+<pinref part="IC1" gate="A1" pin="VI"/>
+<wire x1="12.7" y1="68.58" x2="17.78" y2="68.58" width="0.1524" layer="91"/>
+<junction x="12.7" y="68.58"/>
+</segment>
+</net>
+<net name="N$5" class="0">
+<segment>
+<pinref part="IC2" gate="A1" pin="VI"/>
+<pinref part="C2" gate="G$1" pin="-"/>
+<wire x1="12.7" y1="48.26" x2="17.78" y2="48.26" width="0.1524" layer="91"/>
+<junction x="12.7" y="48.26"/>
+<pinref part="D2" gate="1" pin="A"/>
+<wire x1="2.54" y1="63.5" x2="5.08" y2="63.5" width="0.1524" layer="91"/>
+<wire x1="5.08" y1="63.5" x2="5.08" y2="48.26" width="0.1524" layer="91"/>
+<wire x1="5.08" y1="48.26" x2="12.7" y2="48.26" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
