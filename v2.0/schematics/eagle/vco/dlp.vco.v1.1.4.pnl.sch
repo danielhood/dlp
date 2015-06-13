@@ -567,18 +567,16 @@ Source: http://www.alphapotentiometers.net/html/16mm_pot_2.html</description>
 <part name="J6" library="_common" deviceset="JACK-M" device="" value="OSC OUT1"/>
 <part name="PWM.ATT1" library="_common" deviceset="R-VAR" device="" value="250K (lin)"/>
 <part name="R13" library="_common" deviceset="R" device="0309/10" value="100K"/>
-<part name="R16" library="_common" deviceset="R" device="0309/10" value="100K"/>
 <part name="JP1" library="pinhead" deviceset="PINHD-1X10" device="" value="OSC1"/>
 <part name="JP2" library="pinhead" deviceset="PINHD-1X10" device="" value="OSC2"/>
 <part name="R1" library="_common" deviceset="R" device="0309/10" value="100K"/>
-<part name="R2" library="_common" deviceset="R" device="0309/10" value="180K"/>
-<part name="R3" library="_common" deviceset="R" device="0309/10" value="100K"/>
 <part name="SW-LEVEL2" library="_common" deviceset="R-VAR" device="" value="50K (log)"/>
 <part name="SQ-LEVEL2" library="_common" deviceset="R-VAR" device="" value="50K (log)"/>
 <part name="R4" library="pot" deviceset="3RP/1610G" device="" value="EXP-ATT"/>
 <part name="R5" library="_common" deviceset="R" device="0309/10" value="100K"/>
 <part name="R6" library="_common" deviceset="R" device="0309/10" value="100K"/>
 <part name="TUNE2" library="_common" deviceset="R-VAR" device="" value="250K (lin)"/>
+<part name="J2" library="_common" deviceset="JACK-M" device="" value="EXP.IN2"/>
 </parts>
 <sheets>
 <sheet>
@@ -591,7 +589,7 @@ Panel board for simplified dual VCO with SQ andSAW.
 </plain>
 <instances>
 <instance part="J1" gate="G$1" x="5.08" y="17.78"/>
-<instance part="PWM1" gate="G$1" x="7.62" y="-20.32" rot="R270"/>
+<instance part="PWM1" gate="G$1" x="48.26" y="-10.16" rot="R270"/>
 <instance part="R14" gate="G$1" x="27.94" y="66.04" rot="R180"/>
 <instance part="R15" gate="G$1" x="17.78" y="35.56"/>
 <instance part="TUNE1" gate="G$1" x="2.54" y="35.56" rot="R270"/>
@@ -601,12 +599,9 @@ Panel board for simplified dual VCO with SQ andSAW.
 <instance part="J6" gate="G$1" x="149.86" y="55.88" rot="MR0"/>
 <instance part="PWM.ATT1" gate="G$1" x="12.7" y="10.16" rot="R270"/>
 <instance part="R13" gate="G$1" x="27.94" y="10.16"/>
-<instance part="R16" gate="G$1" x="27.94" y="-20.32"/>
 <instance part="JP1" gate="A" x="12.7" y="-53.34" rot="R180"/>
 <instance part="JP2" gate="A" x="55.88" y="-53.34" rot="R180"/>
-<instance part="R1" gate="G$1" x="81.28" y="-2.54"/>
-<instance part="R2" gate="G$1" x="66.04" y="2.54" rot="R90"/>
-<instance part="R3" gate="G$1" x="66.04" y="-7.62" rot="R90"/>
+<instance part="R1" gate="G$1" x="68.58" y="-10.16"/>
 <instance part="SW-LEVEL2" gate="G$1" x="147.32" y="10.16" rot="R180"/>
 <instance part="SQ-LEVEL2" gate="G$1" x="147.32" y="-20.32"/>
 <instance part="R4" gate="/1" x="48.26" y="66.04"/>
@@ -614,6 +609,7 @@ Panel board for simplified dual VCO with SQ andSAW.
 <instance part="R5" gate="G$1" x="86.36" y="66.04" rot="MR180"/>
 <instance part="R6" gate="G$1" x="96.52" y="35.56" rot="MR0"/>
 <instance part="TUNE2" gate="G$1" x="111.76" y="35.56" rot="MR270"/>
+<instance part="J2" gate="G$1" x="73.66" y="71.12" rot="MR0"/>
 </instances>
 <busses>
 </busses>
@@ -635,8 +631,8 @@ Panel board for simplified dual VCO with SQ andSAW.
 <net name="N$19" class="0">
 <segment>
 <pinref part="PWM1" gate="G$1" pin="P$1"/>
-<pinref part="R16" gate="G$1" pin="1"/>
-<wire x1="12.7" y1="-20.32" x2="22.86" y2="-20.32" width="0.1524" layer="91"/>
+<wire x1="53.34" y1="-10.16" x2="63.5" y2="-10.16" width="0.1524" layer="91"/>
+<pinref part="R1" gate="G$1" pin="1"/>
 </segment>
 </net>
 <net name="N$25" class="0">
@@ -679,9 +675,9 @@ Panel board for simplified dual VCO with SQ andSAW.
 </segment>
 <segment>
 <pinref part="PWM1" gate="G$1" pin="2"/>
-<wire x1="7.62" y1="-25.4" x2="7.62" y2="-27.94" width="0.1524" layer="91"/>
-<wire x1="7.62" y1="-27.94" x2="12.7" y2="-27.94" width="0.1524" layer="91"/>
-<label x="12.7" y="-27.94" size="1.778" layer="95"/>
+<wire x1="48.26" y1="-15.24" x2="48.26" y2="-17.78" width="0.1524" layer="91"/>
+<wire x1="48.26" y1="-17.78" x2="53.34" y2="-17.78" width="0.1524" layer="91"/>
+<label x="53.34" y="-17.78" size="1.778" layer="95"/>
 </segment>
 <segment>
 <wire x1="12.7" y1="2.54" x2="17.78" y2="2.54" width="0.1524" layer="91"/>
@@ -715,16 +711,14 @@ Panel board for simplified dual VCO with SQ andSAW.
 <label x="68.58" y="-60.96" size="1.778" layer="95"/>
 </segment>
 <segment>
-<wire x1="66.04" y1="-12.7" x2="66.04" y2="-17.78" width="0.1524" layer="91"/>
-<label x="66.04" y="-17.78" size="1.778" layer="95"/>
-<pinref part="R3" gate="G$1" pin="1"/>
-</segment>
-<segment>
 <label x="76.2" y="53.34" size="1.778" layer="95" rot="MR0"/>
 <wire x1="76.2" y1="58.42" x2="66.04" y2="58.42" width="0.1524" layer="91"/>
 <wire x1="76.2" y1="58.42" x2="76.2" y2="55.88" width="0.1524" layer="91"/>
 <pinref part="R4" gate="/2" pin="E"/>
 <wire x1="66.04" y1="58.42" x2="66.04" y2="60.96" width="0.1524" layer="91"/>
+<pinref part="J2" gate="G$1" pin="GND"/>
+<wire x1="76.2" y1="68.58" x2="76.2" y2="58.42" width="0.1524" layer="91"/>
+<junction x="76.2" y="58.42"/>
 </segment>
 </net>
 <net name="N$PNL.EXP1" class="0">
@@ -750,12 +744,8 @@ Panel board for simplified dual VCO with SQ andSAW.
 </segment>
 <segment>
 <pinref part="R13" gate="G$1" pin="2"/>
-<pinref part="R16" gate="G$1" pin="2"/>
-<wire x1="33.02" y1="10.16" x2="33.02" y2="-5.08" width="0.1524" layer="91"/>
-<label x="35.56" y="-5.08" size="1.778" layer="95"/>
-<wire x1="33.02" y1="-5.08" x2="33.02" y2="-20.32" width="0.1524" layer="91"/>
-<wire x1="33.02" y1="-5.08" x2="35.56" y2="-5.08" width="0.1524" layer="91"/>
-<junction x="33.02" y="-5.08"/>
+<label x="38.1" y="10.16" size="1.778" layer="95"/>
+<wire x1="33.02" y1="10.16" x2="38.1" y2="10.16" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$PNL.SW.LVL1A" class="0">
@@ -829,9 +819,9 @@ Panel board for simplified dual VCO with SQ andSAW.
 <net name="N$PNL.P12V" class="0">
 <segment>
 <pinref part="PWM1" gate="G$1" pin="1"/>
-<wire x1="7.62" y1="-15.24" x2="7.62" y2="-12.7" width="0.1524" layer="91"/>
-<wire x1="7.62" y1="-12.7" x2="10.16" y2="-12.7" width="0.1524" layer="91"/>
-<label x="10.16" y="-12.7" size="1.778" layer="95"/>
+<wire x1="48.26" y1="-5.08" x2="48.26" y2="-2.54" width="0.1524" layer="91"/>
+<wire x1="48.26" y1="-2.54" x2="50.8" y2="-2.54" width="0.1524" layer="91"/>
+<label x="50.8" y="-2.54" size="1.778" layer="95"/>
 </segment>
 <segment>
 <wire x1="2.54" y1="45.72" x2="5.08" y2="45.72" width="0.1524" layer="91"/>
@@ -848,11 +838,6 @@ Panel board for simplified dual VCO with SQ andSAW.
 <pinref part="JP2" gate="A" pin="3"/>
 <wire x1="58.42" y1="-58.42" x2="68.58" y2="-58.42" width="0.1524" layer="91"/>
 <label x="68.58" y="-58.42" size="1.778" layer="95"/>
-</segment>
-<segment>
-<wire x1="66.04" y1="7.62" x2="66.04" y2="10.16" width="0.1524" layer="91"/>
-<label x="66.04" y="10.16" size="1.778" layer="95"/>
-<pinref part="R2" gate="G$1" pin="2"/>
 </segment>
 <segment>
 <wire x1="111.76" y1="45.72" x2="109.22" y2="45.72" width="0.1524" layer="91"/>
@@ -884,8 +869,8 @@ Panel board for simplified dual VCO with SQ andSAW.
 </segment>
 <segment>
 <pinref part="R1" gate="G$1" pin="2"/>
-<label x="88.9" y="-2.54" size="1.778" layer="95"/>
-<wire x1="86.36" y1="-2.54" x2="88.9" y2="-2.54" width="0.1524" layer="91"/>
+<label x="76.2" y="-10.16" size="1.778" layer="95"/>
+<wire x1="73.66" y1="-10.16" x2="76.2" y2="-10.16" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$PNL.SW.LVL2A" class="0">
@@ -951,15 +936,6 @@ Panel board for simplified dual VCO with SQ andSAW.
 <label x="68.58" y="-40.64" size="1.778" layer="95"/>
 </segment>
 </net>
-<net name="N$1" class="0">
-<segment>
-<pinref part="R1" gate="G$1" pin="1"/>
-<wire x1="66.04" y1="-2.54" x2="76.2" y2="-2.54" width="0.1524" layer="91"/>
-<pinref part="R3" gate="G$1" pin="2"/>
-<pinref part="R2" gate="G$1" pin="1"/>
-<junction x="66.04" y="-2.54"/>
-</segment>
-</net>
 <net name="N$2" class="0">
 <segment>
 <pinref part="R14" gate="G$1" pin="1"/>
@@ -978,14 +954,10 @@ Panel board for simplified dual VCO with SQ andSAW.
 </net>
 <net name="N$4" class="0">
 <segment>
-<pinref part="R4" gate="/2" pin="A"/>
-<wire x1="66.04" y1="73.66" x2="66.04" y2="71.12" width="0.1524" layer="91"/>
 <pinref part="J4" gate="G$1" pin="HOT"/>
 <wire x1="48.26" y1="71.12" x2="48.26" y2="73.66" width="0.1524" layer="91"/>
 <wire x1="48.26" y1="73.66" x2="45.72" y2="73.66" width="0.1524" layer="91"/>
 <pinref part="R4" gate="/1" pin="E"/>
-<wire x1="66.04" y1="73.66" x2="48.26" y2="73.66" width="0.1524" layer="91"/>
-<junction x="48.26" y="73.66"/>
 </segment>
 </net>
 <net name="N$5" class="0">
@@ -995,6 +967,14 @@ Panel board for simplified dual VCO with SQ andSAW.
 <wire x1="81.28" y1="48.26" x2="60.96" y2="48.26" width="0.1524" layer="91"/>
 <pinref part="R4" gate="/2" pin="S"/>
 <wire x1="60.96" y1="48.26" x2="60.96" y2="66.04" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$6" class="0">
+<segment>
+<pinref part="R4" gate="/2" pin="A"/>
+<wire x1="68.58" y1="73.66" x2="66.04" y2="73.66" width="0.1524" layer="91"/>
+<wire x1="66.04" y1="73.66" x2="66.04" y2="71.12" width="0.1524" layer="91"/>
+<pinref part="J2" gate="G$1" pin="HOT"/>
 </segment>
 </net>
 </nets>
