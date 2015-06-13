@@ -96,18 +96,18 @@ type 0309, grid 10mm</description>
 <pad name="GND" x="-3.81" y="0" drill="0.8" shape="square"/>
 <pad name="HOT" x="3.81" y="0" drill="0.8" shape="square"/>
 <circle x="0" y="0" radius="3.5921" width="0.127" layer="21"/>
-<text x="-6.35" y="-2.54" size="1.27" layer="21">GND</text>
-<text x="2.54" y="-2.54" size="1.27" layer="21">HOT</text>
+<text x="-6.35" y="-3.175" size="1.27" layer="21">GND</text>
+<text x="2.54" y="-3.175" size="1.27" layer="21">HOT</text>
+<text x="-3.175" y="-1.905" size="1.27" layer="25">&gt;NAME</text>
+<text x="-4.445" y="1.27" size="1.27" layer="25">&gt;VALUE</text>
 </package>
 <package name="R-VAR">
 <pad name="R1" x="-2.54" y="0" drill="0.8" shape="square"/>
 <pad name="VAR" x="0" y="0" drill="0.8" shape="square"/>
 <pad name="R2" x="2.54" y="0" drill="0.8" shape="square"/>
-<circle x="0" y="2.54" radius="3.5921" width="0.127" layer="21"/>
-<circle x="0" y="2.54" radius="0.635" width="0.127" layer="21"/>
-<wire x1="0" y1="2.54" x2="-1.27" y2="1.27" width="0.127" layer="21"/>
-<wire x1="-1.27" y1="1.27" x2="-2.54" y2="0" width="0.127" layer="21"/>
-<wire x1="-1.27" y1="1.27" x2="1.27" y2="1.27" width="0.127" layer="21" curve="-270"/>
+<circle x="0" y="0" radius="3.5921" width="0.127" layer="21"/>
+<text x="-3.81" y="-2.54" size="1.27" layer="25">&gt;NAME</text>
+<text x="-3.81" y="1.27" size="1.27" layer="27">&gt;VALUE</text>
 </package>
 </packages>
 <symbols>
@@ -156,6 +156,9 @@ type 0309, grid 10mm</description>
 <vertex x="0" y="1.397"/>
 </polygon>
 <wire x1="0" y1="2.54" x2="0" y2="1.778" width="0.1524" layer="94"/>
+<text x="-4.572" y="0.508" size="1.778" layer="94">1</text>
+<text x="3.048" y="0.508" size="1.778" layer="94">3</text>
+<text x="0.508" y="2.794" size="1.778" layer="94">2</text>
 </symbol>
 </symbols>
 <devicesets>
@@ -192,7 +195,7 @@ type 0309, grid 10mm</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="R-VAR" uservalue="yes">
+<deviceset name="R-VAR" prefix="RV" uservalue="yes">
 <gates>
 <gate name="G$1" symbol="R-VAR-US" x="0" y="0"/>
 </gates>
@@ -453,99 +456,6 @@ type 0309, grid 10mm</description>
 </deviceset>
 </devicesets>
 </library>
-<library name="pot">
-<description>&lt;b&gt;Potentiometers&lt;/b&gt;&lt;p&gt;
-Beckman, Copal, Piher, Spectrol, Schukat&lt;p&gt;
-&lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;</description>
-<packages>
-<package name="3RP/1610G">
-<description>&lt;b&gt;16mm Potentiometer&lt;/b&gt; two level&lt;p&gt;
-Source: http://www.alphapotentiometers.net/html/16mm_pot_2.html</description>
-<wire x1="-8.35" y1="-3.7" x2="8.35" y2="-3.7" width="0.2032" layer="21"/>
-<wire x1="-8.35" y1="-5.7" x2="-7.25" y2="-5.7" width="0.2032" layer="21"/>
-<wire x1="-8.35" y1="-3.7" x2="-8.35" y2="-5.7" width="0.2032" layer="21"/>
-<wire x1="-7.25" y1="-5.7" x2="-7.25" y2="-3.8" width="0.2032" layer="21"/>
-<wire x1="-8.35" y1="-1.7" x2="8.35" y2="-1.7" width="0.2032" layer="21"/>
-<wire x1="-2.9" y1="-10.2" x2="-2.9" y2="-13.7" width="0.2032" layer="21"/>
-<wire x1="2.9" y1="-13.7" x2="2.9" y2="-10.2" width="0.2032" layer="21"/>
-<wire x1="-3.4" y1="-3.8" x2="-3.4" y2="-9.9" width="0.2032" layer="21"/>
-<wire x1="-3.4" y1="-9.9" x2="-2.9" y2="-10.2" width="0.2032" layer="21"/>
-<wire x1="2.9" y1="-10.2" x2="3.4" y2="-9.9" width="0.2032" layer="21"/>
-<wire x1="3.4" y1="-9.9" x2="3.4" y2="-3.8" width="0.2032" layer="21"/>
-<wire x1="-2.9" y1="-10.2" x2="2.9" y2="-10.2" width="0.2032" layer="21"/>
-<wire x1="-2.9" y1="-13.7" x2="2.9" y2="-13.7" width="0.2032" layer="21"/>
-<wire x1="-8.35" y1="-3.7" x2="-8.35" y2="7.6" width="0.2032" layer="21"/>
-<wire x1="8.35" y1="-3.7" x2="8.35" y2="7.6" width="0.2032" layer="21"/>
-<wire x1="-3.3" y1="-9.525" x2="3.3" y2="-9" width="0.2032" layer="21"/>
-<wire x1="-3.3" y1="-9.025" x2="3.3" y2="-8.5" width="0.2032" layer="21"/>
-<wire x1="-3.3" y1="-8.525" x2="3.3" y2="-8" width="0.2032" layer="21"/>
-<wire x1="-3.3" y1="-8.025" x2="3.3" y2="-7.5" width="0.2032" layer="21"/>
-<wire x1="-3.3" y1="-7.525" x2="3.3" y2="-7" width="0.2032" layer="21"/>
-<wire x1="-3.3" y1="-7.025" x2="3.3" y2="-6.5" width="0.2032" layer="21"/>
-<wire x1="-3.3" y1="-6.525" x2="3.3" y2="-6" width="0.2032" layer="21"/>
-<wire x1="-3.3" y1="-6.025" x2="3.3" y2="-5.5" width="0.2032" layer="21"/>
-<wire x1="-3.3" y1="-5.525" x2="3.3" y2="-5" width="0.2032" layer="21"/>
-<wire x1="-3.3" y1="-5.025" x2="3.3" y2="-4.5" width="0.2032" layer="21"/>
-<wire x1="-3.3" y1="-4.525" x2="3.3" y2="-4" width="0.2032" layer="21"/>
-<wire x1="-3.075" y1="-10.025" x2="3.3" y2="-9.5" width="0.2032" layer="21"/>
-<wire x1="-8.35" y1="7.6" x2="8.35" y2="7.6" width="0.2032" layer="21"/>
-<pad name="1-1" x="-5" y="0" drill="1.2" diameter="2.1844"/>
-<pad name="1-2" x="0" y="0" drill="1.2" diameter="2.1844"/>
-<pad name="1-3" x="5" y="0" drill="1.2" diameter="2.1844"/>
-<pad name="2-1" x="-5" y="5" drill="1.2" diameter="2.1844"/>
-<pad name="2-2" x="0" y="5" drill="1.2" diameter="2.1844"/>
-<pad name="2-3" x="5" y="5" drill="1.2" diameter="2.1844"/>
-<text x="-8.255" y="8.255" size="1.27" layer="25">&gt;NAME</text>
-<text x="-4.445" y="1.905" size="1.27" layer="27">&gt;VALUE</text>
-</package>
-</packages>
-<symbols>
-<symbol name="POT_EU-">
-<wire x1="-0.762" y1="2.54" x2="-0.762" y2="-2.54" width="0.254" layer="94"/>
-<wire x1="0.762" y1="-2.54" x2="0.762" y2="2.54" width="0.254" layer="94"/>
-<wire x1="2.54" y1="0" x2="1.651" y2="0" width="0.1524" layer="94"/>
-<wire x1="1.651" y1="0" x2="-1.8796" y2="1.7526" width="0.1524" layer="94"/>
-<wire x1="0.762" y1="2.54" x2="-0.762" y2="2.54" width="0.254" layer="94"/>
-<wire x1="-0.762" y1="-2.54" x2="0.762" y2="-2.54" width="0.254" layer="94"/>
-<wire x1="-2.1597" y1="1.2939" x2="-3.1989" y2="2.4495" width="0.1524" layer="94"/>
-<wire x1="-3.1989" y1="2.4495" x2="-1.7018" y2="2.2352" width="0.1524" layer="94"/>
-<wire x1="-2.54" y1="-2.54" x2="-2.54" y2="-0.508" width="0.1524" layer="94"/>
-<wire x1="-2.54" y1="-0.508" x2="-3.048" y2="-1.524" width="0.1524" layer="94"/>
-<wire x1="-2.54" y1="-0.508" x2="-2.032" y2="-1.524" width="0.1524" layer="94"/>
-<wire x1="-2.1597" y1="1.2939" x2="-1.7018" y2="2.2352" width="0.1524" layer="94"/>
-<text x="-5.969" y="-3.81" size="1.778" layer="95" rot="R90">&gt;NAME</text>
-<text x="-3.81" y="-3.81" size="1.778" layer="96" rot="R90">&gt;VALUE</text>
-<pin name="A" x="0" y="-5.08" visible="pad" length="short" direction="pas" rot="R90"/>
-<pin name="E" x="0" y="5.08" visible="pad" length="short" direction="pas" rot="R270"/>
-<pin name="S" x="5.08" y="0" visible="pad" length="short" direction="pas" rot="R180"/>
-</symbol>
-</symbols>
-<devicesets>
-<deviceset name="3RP/1610G" prefix="R" uservalue="yes">
-<description>&lt;b&gt;16mm Potentiometer&lt;/b&gt; two level&lt;p&gt;
-Source: http://www.alphapotentiometers.net/html/16mm_pot_2.html</description>
-<gates>
-<gate name="/1" symbol="POT_EU-" x="-5.08" y="0" addlevel="always"/>
-<gate name="/2" symbol="POT_EU-" x="10.16" y="0" addlevel="always"/>
-</gates>
-<devices>
-<device name="" package="3RP/1610G">
-<connects>
-<connect gate="/1" pin="A" pad="1-1"/>
-<connect gate="/1" pin="E" pad="1-3"/>
-<connect gate="/1" pin="S" pad="1-2"/>
-<connect gate="/2" pin="A" pad="2-1"/>
-<connect gate="/2" pin="E" pad="2-3"/>
-<connect gate="/2" pin="S" pad="2-2"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
-</devicesets>
-</library>
 </libraries>
 <attributes>
 </attributes>
@@ -557,26 +467,31 @@ Source: http://www.alphapotentiometers.net/html/16mm_pot_2.html</description>
 </classes>
 <parts>
 <part name="J1" library="_common" deviceset="JACK-M" device="" value="PWM IN1"/>
+<part name="PWM2" library="_common" deviceset="R-VAR" device="" value="250K (lin)"/>
+<part name="R2" library="_common" deviceset="R" device="0309/10" value="100K"/>
+<part name="R1" library="_common" deviceset="R" device="0309/10" value="100K"/>
+<part name="TNE1" library="_common" deviceset="R-VAR" device="" value="250K (lin)"/>
+<part name="J2" library="_common" deviceset="JACK-M" device="" value="EXP.IN1"/>
+<part name="SW1" library="_common" deviceset="R-VAR" device="" value="50K (log)"/>
+<part name="SQ1" library="_common" deviceset="R-VAR" device="" value="50K (log)"/>
+<part name="J4" library="_common" deviceset="JACK-M" device="" value="OSC OUT1"/>
 <part name="PWM1" library="_common" deviceset="R-VAR" device="" value="250K (lin)"/>
-<part name="R14" library="_common" deviceset="R" device="0309/10" value="100K"/>
-<part name="R15" library="_common" deviceset="R" device="0309/10" value="100K"/>
-<part name="TUNE1" library="_common" deviceset="R-VAR" device="" value="250K (lin)"/>
-<part name="J4" library="_common" deviceset="JACK-M" device="" value="EXP.IN1"/>
-<part name="SW-LEVEL1" library="_common" deviceset="R-VAR" device="" value="50K (log)"/>
-<part name="SQ-LEVEL1" library="_common" deviceset="R-VAR" device="" value="50K (log)"/>
-<part name="J6" library="_common" deviceset="JACK-M" device="" value="OSC OUT1"/>
-<part name="PWM.ATT1" library="_common" deviceset="R-VAR" device="" value="250K (lin)"/>
-<part name="R13" library="_common" deviceset="R" device="0309/10" value="100K"/>
+<part name="R4" library="_common" deviceset="R" device="0309/10" value="100K"/>
 <part name="JP1" library="pinhead" deviceset="PINHD-1X10" device="" value="OSC1"/>
 <part name="JP2" library="pinhead" deviceset="PINHD-1X10" device="" value="OSC2"/>
-<part name="R1" library="_common" deviceset="R" device="0309/10" value="100K"/>
-<part name="SW-LEVEL2" library="_common" deviceset="R-VAR" device="" value="50K (log)"/>
-<part name="SQ-LEVEL2" library="_common" deviceset="R-VAR" device="" value="50K (log)"/>
-<part name="R4" library="pot" deviceset="3RP/1610G" device="" value="EXP-ATT"/>
 <part name="R5" library="_common" deviceset="R" device="0309/10" value="100K"/>
+<part name="SW2" library="_common" deviceset="R-VAR" device="" value="50K (log)"/>
+<part name="RV10" library="_common" deviceset="R-VAR" device="" value="50K (log)"/>
 <part name="R6" library="_common" deviceset="R" device="0309/10" value="100K"/>
-<part name="TUNE2" library="_common" deviceset="R-VAR" device="" value="250K (lin)"/>
-<part name="J2" library="_common" deviceset="JACK-M" device="" value="EXP.IN2"/>
+<part name="R7" library="_common" deviceset="R" device="0309/10" value="100K"/>
+<part name="TNE2" library="_common" deviceset="R-VAR" device="" value="250K (lin)"/>
+<part name="J3" library="_common" deviceset="JACK-M" device="" value="EXP.IN2"/>
+<part name="EXP2" library="_common" deviceset="R-VAR" device="" value="250K (lin)"/>
+<part name="EXP1" library="_common" deviceset="R-VAR" device="" value="250K (lin)"/>
+<part name="R3" library="_common" deviceset="R" device="0309/10" value="100K"/>
+<part name="J5" library="_common" deviceset="JACK-M" device="" value="CV.IN"/>
+<part name="R8" library="_common" deviceset="R" device="0309/10" value="100K"/>
+<part name="R9" library="_common" deviceset="R" device="0309/10" value="100K"/>
 </parts>
 <sheets>
 <sheet>
@@ -589,58 +504,54 @@ Panel board for simplified dual VCO with SQ andSAW.
 </plain>
 <instances>
 <instance part="J1" gate="G$1" x="5.08" y="17.78"/>
-<instance part="PWM1" gate="G$1" x="48.26" y="-10.16" rot="R270"/>
-<instance part="R14" gate="G$1" x="27.94" y="66.04" rot="R180"/>
-<instance part="R15" gate="G$1" x="17.78" y="35.56"/>
-<instance part="TUNE1" gate="G$1" x="2.54" y="35.56" rot="R270"/>
-<instance part="J4" gate="G$1" x="40.64" y="71.12"/>
-<instance part="SW-LEVEL1" gate="G$1" x="-43.18" y="10.16" rot="R180"/>
-<instance part="SQ-LEVEL1" gate="G$1" x="-43.18" y="-20.32"/>
-<instance part="J6" gate="G$1" x="149.86" y="55.88" rot="MR0"/>
-<instance part="PWM.ATT1" gate="G$1" x="12.7" y="10.16" rot="R270"/>
-<instance part="R13" gate="G$1" x="27.94" y="10.16"/>
+<instance part="PWM2" gate="G$1" x="48.26" y="-10.16" rot="MR90"/>
+<instance part="R2" gate="G$1" x="27.94" y="66.04" rot="R180"/>
+<instance part="R1" gate="G$1" x="17.78" y="38.1"/>
+<instance part="TNE1" gate="G$1" x="2.54" y="38.1" rot="MR90"/>
+<instance part="J2" gate="G$1" x="40.64" y="71.12"/>
+<instance part="SW1" gate="G$1" x="-43.18" y="10.16" rot="MR180"/>
+<instance part="SQ1" gate="G$1" x="-43.18" y="-20.32"/>
+<instance part="J4" gate="G$1" x="149.86" y="55.88" rot="MR0"/>
+<instance part="PWM1" gate="G$1" x="12.7" y="10.16" rot="MR90"/>
+<instance part="R4" gate="G$1" x="27.94" y="10.16"/>
 <instance part="JP1" gate="A" x="12.7" y="-53.34" rot="R180"/>
 <instance part="JP2" gate="A" x="55.88" y="-53.34" rot="R180"/>
-<instance part="R1" gate="G$1" x="68.58" y="-10.16"/>
-<instance part="SW-LEVEL2" gate="G$1" x="147.32" y="10.16" rot="R180"/>
-<instance part="SQ-LEVEL2" gate="G$1" x="147.32" y="-20.32"/>
-<instance part="R4" gate="/1" x="48.26" y="66.04"/>
-<instance part="R4" gate="/2" x="66.04" y="66.04" rot="R180"/>
-<instance part="R5" gate="G$1" x="86.36" y="66.04" rot="MR180"/>
-<instance part="R6" gate="G$1" x="96.52" y="35.56" rot="MR0"/>
-<instance part="TUNE2" gate="G$1" x="111.76" y="35.56" rot="MR270"/>
-<instance part="J2" gate="G$1" x="73.66" y="71.12" rot="MR0"/>
+<instance part="R5" gate="G$1" x="68.58" y="-10.16"/>
+<instance part="SW2" gate="G$1" x="147.32" y="10.16" rot="MR180"/>
+<instance part="RV10" gate="G$1" x="147.32" y="-20.32"/>
+<instance part="R6" gate="G$1" x="86.36" y="66.04" rot="MR180"/>
+<instance part="R7" gate="G$1" x="96.52" y="38.1" rot="MR0"/>
+<instance part="TNE2" gate="G$1" x="111.76" y="38.1" rot="R90"/>
+<instance part="J3" gate="G$1" x="73.66" y="71.12" rot="MR0"/>
+<instance part="EXP2" gate="G$1" x="66.04" y="66.04" rot="R90"/>
+<instance part="EXP1" gate="G$1" x="48.26" y="66.04" rot="MR90"/>
+<instance part="R3" gate="G$1" x="27.94" y="20.32"/>
+<instance part="J5" gate="G$1" x="48.26" y="30.48"/>
+<instance part="R8" gate="G$1" x="27.94" y="38.1" rot="MR180"/>
+<instance part="R9" gate="G$1" x="86.36" y="38.1" rot="MR180"/>
 </instances>
 <busses>
 </busses>
 <nets>
 <net name="N$24" class="0">
 <segment>
-<pinref part="R15" gate="G$1" pin="1"/>
-<pinref part="TUNE1" gate="G$1" pin="P$1"/>
-<wire x1="12.7" y1="35.56" x2="7.62" y2="35.56" width="0.1524" layer="91"/>
+<pinref part="R1" gate="G$1" pin="1"/>
+<pinref part="TNE1" gate="G$1" pin="P$1"/>
+<wire x1="12.7" y1="38.1" x2="7.62" y2="38.1" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$10" class="0">
 <segment>
-<pinref part="PWM.ATT1" gate="G$1" pin="P$1"/>
-<pinref part="R13" gate="G$1" pin="1"/>
+<pinref part="PWM1" gate="G$1" pin="P$1"/>
+<pinref part="R4" gate="G$1" pin="1"/>
 <wire x1="22.86" y1="10.16" x2="17.78" y2="10.16" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$19" class="0">
 <segment>
-<pinref part="PWM1" gate="G$1" pin="P$1"/>
+<pinref part="PWM2" gate="G$1" pin="P$1"/>
 <wire x1="53.34" y1="-10.16" x2="63.5" y2="-10.16" width="0.1524" layer="91"/>
-<pinref part="R1" gate="G$1" pin="1"/>
-</segment>
-</net>
-<net name="N$25" class="0">
-<segment>
-<pinref part="J1" gate="G$1" pin="HOT"/>
-<wire x1="10.16" y1="20.32" x2="12.7" y2="20.32" width="0.1524" layer="91"/>
-<pinref part="PWM.ATT1" gate="G$1" pin="1"/>
-<wire x1="12.7" y1="20.32" x2="12.7" y2="15.24" width="0.1524" layer="91"/>
+<pinref part="R5" gate="G$1" pin="1"/>
 </segment>
 </net>
 <net name="N$PNL.N12V" class="0">
@@ -650,8 +561,8 @@ Panel board for simplified dual VCO with SQ andSAW.
 <pinref part="JP1" gate="A" pin="1"/>
 </segment>
 <segment>
-<pinref part="TUNE1" gate="G$1" pin="2"/>
-<wire x1="2.54" y1="27.94" x2="2.54" y2="30.48" width="0.1524" layer="91"/>
+<pinref part="TNE1" gate="G$1" pin="1"/>
+<wire x1="2.54" y1="27.94" x2="2.54" y2="33.02" width="0.1524" layer="91"/>
 <wire x1="2.54" y1="27.94" x2="5.08" y2="27.94" width="0.1524" layer="91"/>
 <label x="5.08" y="27.94" size="1.778" layer="95"/>
 </segment>
@@ -661,10 +572,10 @@ Panel board for simplified dual VCO with SQ andSAW.
 <label x="68.58" y="-63.5" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="TUNE2" gate="G$1" pin="2"/>
-<wire x1="111.76" y1="27.94" x2="111.76" y2="30.48" width="0.1524" layer="91"/>
-<wire x1="111.76" y1="27.94" x2="109.22" y2="27.94" width="0.1524" layer="91"/>
-<label x="109.22" y="27.94" size="1.778" layer="95" rot="MR0"/>
+<pinref part="TNE2" gate="G$1" pin="1"/>
+<wire x1="111.76" y1="30.48" x2="111.76" y2="33.02" width="0.1524" layer="91"/>
+<wire x1="111.76" y1="30.48" x2="109.22" y2="30.48" width="0.1524" layer="91"/>
+<label x="109.22" y="30.48" size="1.778" layer="95" rot="MR0"/>
 </segment>
 </net>
 <net name="N$PNL.0V" class="0">
@@ -674,14 +585,14 @@ Panel board for simplified dual VCO with SQ andSAW.
 <pinref part="JP1" gate="A" pin="2"/>
 </segment>
 <segment>
-<pinref part="PWM1" gate="G$1" pin="2"/>
+<pinref part="PWM2" gate="G$1" pin="1"/>
 <wire x1="48.26" y1="-15.24" x2="48.26" y2="-17.78" width="0.1524" layer="91"/>
 <wire x1="48.26" y1="-17.78" x2="53.34" y2="-17.78" width="0.1524" layer="91"/>
 <label x="53.34" y="-17.78" size="1.778" layer="95"/>
 </segment>
 <segment>
 <wire x1="12.7" y1="2.54" x2="17.78" y2="2.54" width="0.1524" layer="91"/>
-<pinref part="PWM.ATT1" gate="G$1" pin="2"/>
+<pinref part="PWM1" gate="G$1" pin="1"/>
 <wire x1="12.7" y1="2.54" x2="12.7" y2="5.08" width="0.1524" layer="91"/>
 <label x="17.78" y="2.54" size="1.778" layer="95"/>
 <pinref part="J1" gate="G$1" pin="GND"/>
@@ -692,15 +603,15 @@ Panel board for simplified dual VCO with SQ andSAW.
 <segment>
 <wire x1="48.26" y1="58.42" x2="48.26" y2="60.96" width="0.1524" layer="91"/>
 <label x="38.1" y="53.34" size="1.778" layer="95"/>
-<pinref part="J4" gate="G$1" pin="GND"/>
+<pinref part="J2" gate="G$1" pin="GND"/>
 <wire x1="38.1" y1="68.58" x2="38.1" y2="58.42" width="0.1524" layer="91"/>
 <wire x1="38.1" y1="58.42" x2="48.26" y2="58.42" width="0.1524" layer="91"/>
 <wire x1="38.1" y1="58.42" x2="38.1" y2="55.88" width="0.1524" layer="91"/>
 <junction x="38.1" y="58.42"/>
-<pinref part="R4" gate="/1" pin="A"/>
+<pinref part="EXP1" gate="G$1" pin="1"/>
 </segment>
 <segment>
-<pinref part="J6" gate="G$1" pin="GND"/>
+<pinref part="J4" gate="G$1" pin="GND"/>
 <wire x1="152.4" y1="53.34" x2="152.4" y2="50.8" width="0.1524" layer="91"/>
 <wire x1="152.4" y1="50.8" x2="154.94" y2="50.8" width="0.1524" layer="91"/>
 <label x="157.48" y="50.8" size="1.778" layer="95"/>
@@ -714,11 +625,16 @@ Panel board for simplified dual VCO with SQ andSAW.
 <label x="76.2" y="53.34" size="1.778" layer="95" rot="MR0"/>
 <wire x1="76.2" y1="58.42" x2="66.04" y2="58.42" width="0.1524" layer="91"/>
 <wire x1="76.2" y1="58.42" x2="76.2" y2="55.88" width="0.1524" layer="91"/>
-<pinref part="R4" gate="/2" pin="E"/>
 <wire x1="66.04" y1="58.42" x2="66.04" y2="60.96" width="0.1524" layer="91"/>
-<pinref part="J2" gate="G$1" pin="GND"/>
+<pinref part="J3" gate="G$1" pin="GND"/>
 <wire x1="76.2" y1="68.58" x2="76.2" y2="58.42" width="0.1524" layer="91"/>
 <junction x="76.2" y="58.42"/>
+<pinref part="EXP2" gate="G$1" pin="1"/>
+</segment>
+<segment>
+<wire x1="45.72" y1="27.94" x2="45.72" y2="25.4" width="0.1524" layer="91"/>
+<label x="45.72" y="22.86" size="1.778" layer="95"/>
+<pinref part="J5" gate="G$1" pin="GND"/>
 </segment>
 </net>
 <net name="N$PNL.EXP1" class="0">
@@ -728,12 +644,14 @@ Panel board for simplified dual VCO with SQ andSAW.
 <pinref part="JP1" gate="A" pin="4"/>
 </segment>
 <segment>
-<pinref part="R14" gate="G$1" pin="2"/>
+<pinref part="R2" gate="G$1" pin="2"/>
 <wire x1="22.86" y1="81.28" x2="22.86" y2="66.04" width="0.1524" layer="91"/>
-<pinref part="R15" gate="G$1" pin="2"/>
-<wire x1="22.86" y1="66.04" x2="22.86" y2="35.56" width="0.1524" layer="91"/>
+<pinref part="R1" gate="G$1" pin="2"/>
+<wire x1="22.86" y1="66.04" x2="22.86" y2="38.1" width="0.1524" layer="91"/>
 <junction x="22.86" y="66.04"/>
 <label x="22.86" y="81.28" size="1.778" layer="95"/>
+<pinref part="R8" gate="G$1" pin="1"/>
+<junction x="22.86" y="38.1"/>
 </segment>
 </net>
 <net name="N$PNL.PWM1" class="0">
@@ -743,9 +661,14 @@ Panel board for simplified dual VCO with SQ andSAW.
 <pinref part="JP1" gate="A" pin="5"/>
 </segment>
 <segment>
-<pinref part="R13" gate="G$1" pin="2"/>
+<pinref part="R4" gate="G$1" pin="2"/>
 <label x="38.1" y="10.16" size="1.778" layer="95"/>
-<wire x1="33.02" y1="10.16" x2="38.1" y2="10.16" width="0.1524" layer="91"/>
+<wire x1="33.02" y1="10.16" x2="35.56" y2="10.16" width="0.1524" layer="91"/>
+<pinref part="R3" gate="G$1" pin="2"/>
+<wire x1="35.56" y1="10.16" x2="38.1" y2="10.16" width="0.1524" layer="91"/>
+<wire x1="33.02" y1="20.32" x2="35.56" y2="20.32" width="0.1524" layer="91"/>
+<wire x1="35.56" y1="20.32" x2="35.56" y2="10.16" width="0.1524" layer="91"/>
+<junction x="35.56" y="10.16"/>
 </segment>
 </net>
 <net name="N$PNL.SW.LVL1A" class="0">
@@ -755,7 +678,7 @@ Panel board for simplified dual VCO with SQ andSAW.
 <pinref part="JP1" gate="A" pin="6"/>
 </segment>
 <segment>
-<pinref part="SW-LEVEL1" gate="G$1" pin="2"/>
+<pinref part="SW1" gate="G$1" pin="1"/>
 <wire x1="-48.26" y1="10.16" x2="-50.8" y2="10.16" width="0.1524" layer="91"/>
 <label x="-71.12" y="10.16" size="1.778" layer="95"/>
 </segment>
@@ -767,9 +690,9 @@ Panel board for simplified dual VCO with SQ andSAW.
 <pinref part="JP1" gate="A" pin="7"/>
 </segment>
 <segment>
-<pinref part="SW-LEVEL1" gate="G$1" pin="1"/>
+<pinref part="SW1" gate="G$1" pin="2"/>
 <wire x1="-38.1" y1="10.16" x2="-38.1" y2="5.08" width="0.1524" layer="91"/>
-<pinref part="SW-LEVEL1" gate="G$1" pin="P$1"/>
+<pinref part="SW1" gate="G$1" pin="P$1"/>
 <wire x1="-43.18" y1="5.08" x2="-38.1" y2="5.08" width="0.1524" layer="91"/>
 <wire x1="-38.1" y1="10.16" x2="-33.02" y2="10.16" width="0.1524" layer="91"/>
 <junction x="-38.1" y="10.16"/>
@@ -783,7 +706,7 @@ Panel board for simplified dual VCO with SQ andSAW.
 <pinref part="JP1" gate="A" pin="8"/>
 </segment>
 <segment>
-<pinref part="SQ-LEVEL1" gate="G$1" pin="1"/>
+<pinref part="SQ1" gate="G$1" pin="1"/>
 <wire x1="-48.26" y1="-20.32" x2="-50.8" y2="-20.32" width="0.1524" layer="91"/>
 <label x="-71.12" y="-20.32" size="1.778" layer="95"/>
 </segment>
@@ -795,9 +718,9 @@ Panel board for simplified dual VCO with SQ andSAW.
 <pinref part="JP1" gate="A" pin="9"/>
 </segment>
 <segment>
-<pinref part="SQ-LEVEL1" gate="G$1" pin="2"/>
+<pinref part="SQ1" gate="G$1" pin="2"/>
 <wire x1="-38.1" y1="-20.32" x2="-38.1" y2="-15.24" width="0.1524" layer="91"/>
-<pinref part="SQ-LEVEL1" gate="G$1" pin="P$1"/>
+<pinref part="SQ1" gate="G$1" pin="P$1"/>
 <wire x1="-43.18" y1="-15.24" x2="-38.1" y2="-15.24" width="0.1524" layer="91"/>
 <wire x1="-38.1" y1="-20.32" x2="-33.02" y2="-20.32" width="0.1524" layer="91"/>
 <junction x="-38.1" y="-20.32"/>
@@ -811,23 +734,23 @@ Panel board for simplified dual VCO with SQ andSAW.
 <pinref part="JP1" gate="A" pin="10"/>
 </segment>
 <segment>
-<pinref part="J6" gate="G$1" pin="HOT"/>
+<pinref part="J4" gate="G$1" pin="HOT"/>
 <wire x1="144.78" y1="58.42" x2="142.24" y2="58.42" width="0.1524" layer="91"/>
 <label x="121.92" y="58.42" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$PNL.P12V" class="0">
 <segment>
-<pinref part="PWM1" gate="G$1" pin="1"/>
+<pinref part="PWM2" gate="G$1" pin="2"/>
 <wire x1="48.26" y1="-5.08" x2="48.26" y2="-2.54" width="0.1524" layer="91"/>
 <wire x1="48.26" y1="-2.54" x2="50.8" y2="-2.54" width="0.1524" layer="91"/>
 <label x="50.8" y="-2.54" size="1.778" layer="95"/>
 </segment>
 <segment>
-<wire x1="2.54" y1="45.72" x2="5.08" y2="45.72" width="0.1524" layer="91"/>
 <label x="5.08" y="45.72" size="1.778" layer="95"/>
-<pinref part="TUNE1" gate="G$1" pin="1"/>
-<wire x1="2.54" y1="45.72" x2="2.54" y2="40.64" width="0.1524" layer="91"/>
+<pinref part="TNE1" gate="G$1" pin="2"/>
+<wire x1="5.08" y1="45.72" x2="2.54" y2="45.72" width="0.1524" layer="91"/>
+<wire x1="2.54" y1="45.72" x2="2.54" y2="43.18" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <wire x1="15.24" y1="-58.42" x2="27.94" y2="-58.42" width="0.1524" layer="91"/>
@@ -842,8 +765,13 @@ Panel board for simplified dual VCO with SQ andSAW.
 <segment>
 <wire x1="111.76" y1="45.72" x2="109.22" y2="45.72" width="0.1524" layer="91"/>
 <label x="109.22" y="45.72" size="1.778" layer="95" rot="MR0"/>
-<pinref part="TUNE2" gate="G$1" pin="1"/>
-<wire x1="111.76" y1="45.72" x2="111.76" y2="40.64" width="0.1524" layer="91"/>
+<pinref part="TNE2" gate="G$1" pin="2"/>
+<wire x1="111.76" y1="45.72" x2="111.76" y2="43.18" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<wire x1="12.7" y1="15.24" x2="17.78" y2="15.24" width="0.1524" layer="91"/>
+<label x="17.78" y="15.24" size="1.778" layer="95"/>
+<pinref part="PWM1" gate="G$1" pin="2"/>
 </segment>
 </net>
 <net name="N$PNL.EXP2" class="0">
@@ -853,12 +781,14 @@ Panel board for simplified dual VCO with SQ andSAW.
 <label x="68.58" y="-55.88" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="R5" gate="G$1" pin="2"/>
-<wire x1="91.44" y1="81.28" x2="91.44" y2="66.04" width="0.1524" layer="91"/>
 <pinref part="R6" gate="G$1" pin="2"/>
-<wire x1="91.44" y1="66.04" x2="91.44" y2="35.56" width="0.1524" layer="91"/>
+<wire x1="91.44" y1="81.28" x2="91.44" y2="66.04" width="0.1524" layer="91"/>
+<pinref part="R7" gate="G$1" pin="2"/>
+<wire x1="91.44" y1="66.04" x2="91.44" y2="38.1" width="0.1524" layer="91"/>
 <junction x="91.44" y="66.04"/>
 <label x="91.44" y="81.28" size="1.778" layer="95" rot="MR0"/>
+<pinref part="R9" gate="G$1" pin="2"/>
+<junction x="91.44" y="38.1"/>
 </segment>
 </net>
 <net name="N$PNL.PWM2" class="0">
@@ -868,7 +798,7 @@ Panel board for simplified dual VCO with SQ andSAW.
 <label x="68.58" y="-53.34" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="R1" gate="G$1" pin="2"/>
+<pinref part="R5" gate="G$1" pin="2"/>
 <label x="76.2" y="-10.16" size="1.778" layer="95"/>
 <wire x1="73.66" y1="-10.16" x2="76.2" y2="-10.16" width="0.1524" layer="91"/>
 </segment>
@@ -880,7 +810,7 @@ Panel board for simplified dual VCO with SQ andSAW.
 <label x="68.58" y="-50.8" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="SW-LEVEL2" gate="G$1" pin="2"/>
+<pinref part="SW2" gate="G$1" pin="1"/>
 <wire x1="142.24" y1="10.16" x2="139.7" y2="10.16" width="0.1524" layer="91"/>
 <label x="119.38" y="10.16" size="1.778" layer="95"/>
 </segment>
@@ -892,9 +822,9 @@ Panel board for simplified dual VCO with SQ andSAW.
 <label x="68.58" y="-48.26" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="SW-LEVEL2" gate="G$1" pin="1"/>
+<pinref part="SW2" gate="G$1" pin="2"/>
 <wire x1="152.4" y1="10.16" x2="152.4" y2="5.08" width="0.1524" layer="91"/>
-<pinref part="SW-LEVEL2" gate="G$1" pin="P$1"/>
+<pinref part="SW2" gate="G$1" pin="P$1"/>
 <wire x1="147.32" y1="5.08" x2="152.4" y2="5.08" width="0.1524" layer="91"/>
 <wire x1="152.4" y1="10.16" x2="157.48" y2="10.16" width="0.1524" layer="91"/>
 <junction x="152.4" y="10.16"/>
@@ -908,8 +838,8 @@ Panel board for simplified dual VCO with SQ andSAW.
 <label x="68.58" y="-45.72" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="SQ-LEVEL2" gate="G$1" pin="1"/>
-<wire x1="142.24" y1="-20.32" x2="139.7" y2="-20.32" width="0.1524" layer="91"/>
+<pinref part="RV10" gate="G$1" pin="1"/>
+<wire x1="142.24" y1="-20.32" x2="132.08" y2="-20.32" width="0.1524" layer="91"/>
 <label x="119.38" y="-20.32" size="1.778" layer="95"/>
 </segment>
 </net>
@@ -920,9 +850,9 @@ Panel board for simplified dual VCO with SQ andSAW.
 <label x="68.58" y="-43.18" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="SQ-LEVEL2" gate="G$1" pin="2"/>
+<pinref part="RV10" gate="G$1" pin="2"/>
 <wire x1="152.4" y1="-20.32" x2="152.4" y2="-15.24" width="0.1524" layer="91"/>
-<pinref part="SQ-LEVEL2" gate="G$1" pin="P$1"/>
+<pinref part="RV10" gate="G$1" pin="P$1"/>
 <wire x1="147.32" y1="-15.24" x2="152.4" y2="-15.24" width="0.1524" layer="91"/>
 <wire x1="152.4" y1="-20.32" x2="157.48" y2="-20.32" width="0.1524" layer="91"/>
 <junction x="152.4" y="-20.32"/>
@@ -938,43 +868,62 @@ Panel board for simplified dual VCO with SQ andSAW.
 </net>
 <net name="N$2" class="0">
 <segment>
-<pinref part="R14" gate="G$1" pin="1"/>
+<pinref part="R2" gate="G$1" pin="1"/>
 <wire x1="33.02" y1="66.04" x2="33.02" y2="48.26" width="0.1524" layer="91"/>
 <wire x1="33.02" y1="48.26" x2="53.34" y2="48.26" width="0.1524" layer="91"/>
-<pinref part="R4" gate="/1" pin="S"/>
 <wire x1="53.34" y1="48.26" x2="53.34" y2="66.04" width="0.1524" layer="91"/>
+<pinref part="EXP1" gate="G$1" pin="P$1"/>
 </segment>
 </net>
 <net name="N$3" class="0">
 <segment>
-<pinref part="R6" gate="G$1" pin="1"/>
-<pinref part="TUNE2" gate="G$1" pin="P$1"/>
-<wire x1="101.6" y1="35.56" x2="106.68" y2="35.56" width="0.1524" layer="91"/>
+<pinref part="R7" gate="G$1" pin="1"/>
+<pinref part="TNE2" gate="G$1" pin="P$1"/>
+<wire x1="101.6" y1="38.1" x2="106.68" y2="38.1" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$4" class="0">
 <segment>
-<pinref part="J4" gate="G$1" pin="HOT"/>
+<pinref part="J2" gate="G$1" pin="HOT"/>
 <wire x1="48.26" y1="71.12" x2="48.26" y2="73.66" width="0.1524" layer="91"/>
 <wire x1="48.26" y1="73.66" x2="45.72" y2="73.66" width="0.1524" layer="91"/>
-<pinref part="R4" gate="/1" pin="E"/>
+<pinref part="EXP1" gate="G$1" pin="2"/>
 </segment>
 </net>
 <net name="N$5" class="0">
 <segment>
-<pinref part="R5" gate="G$1" pin="1"/>
+<pinref part="R6" gate="G$1" pin="1"/>
 <wire x1="81.28" y1="66.04" x2="81.28" y2="48.26" width="0.1524" layer="91"/>
 <wire x1="81.28" y1="48.26" x2="60.96" y2="48.26" width="0.1524" layer="91"/>
-<pinref part="R4" gate="/2" pin="S"/>
 <wire x1="60.96" y1="48.26" x2="60.96" y2="66.04" width="0.1524" layer="91"/>
+<pinref part="EXP2" gate="G$1" pin="P$1"/>
 </segment>
 </net>
 <net name="N$6" class="0">
 <segment>
-<pinref part="R4" gate="/2" pin="A"/>
 <wire x1="68.58" y1="73.66" x2="66.04" y2="73.66" width="0.1524" layer="91"/>
 <wire x1="66.04" y1="73.66" x2="66.04" y2="71.12" width="0.1524" layer="91"/>
-<pinref part="J2" gate="G$1" pin="HOT"/>
+<pinref part="J3" gate="G$1" pin="HOT"/>
+<pinref part="EXP2" gate="G$1" pin="2"/>
+</segment>
+</net>
+<net name="N$1" class="0">
+<segment>
+<pinref part="J5" gate="G$1" pin="HOT"/>
+<wire x1="53.34" y1="33.02" x2="55.88" y2="33.02" width="0.1524" layer="91"/>
+<wire x1="55.88" y1="33.02" x2="55.88" y2="38.1" width="0.1524" layer="91"/>
+<pinref part="R9" gate="G$1" pin="1"/>
+<wire x1="55.88" y1="38.1" x2="81.28" y2="38.1" width="0.1524" layer="91"/>
+<pinref part="R8" gate="G$1" pin="2"/>
+<wire x1="33.02" y1="38.1" x2="55.88" y2="38.1" width="0.1524" layer="91"/>
+<junction x="55.88" y="38.1"/>
+</segment>
+</net>
+<net name="N$7" class="0">
+<segment>
+<pinref part="J1" gate="G$1" pin="HOT"/>
+<pinref part="R3" gate="G$1" pin="1"/>
+<wire x1="10.16" y1="20.32" x2="22.86" y2="20.32" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
