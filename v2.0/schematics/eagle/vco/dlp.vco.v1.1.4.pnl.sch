@@ -481,7 +481,7 @@ type 0309, grid 10mm</description>
 <part name="JP2" library="pinhead" deviceset="PINHD-1X10" device="" value="OSC2"/>
 <part name="R5" library="_common" deviceset="R" device="0309/10" value="100K"/>
 <part name="SW2" library="_common" deviceset="R-VAR" device="" value="50K (log)"/>
-<part name="RV10" library="_common" deviceset="R-VAR" device="" value="50K (log)"/>
+<part name="SQ2" library="_common" deviceset="R-VAR" device="" value="50K (log)"/>
 <part name="R6" library="_common" deviceset="R" device="0309/10" value="100K"/>
 <part name="R7" library="_common" deviceset="R" device="0309/10" value="100K"/>
 <part name="TNE2" library="_common" deviceset="R-VAR" device="" value="250K (lin)"/>
@@ -518,7 +518,7 @@ Panel board for simplified dual VCO with SQ andSAW.
 <instance part="JP2" gate="A" x="55.88" y="-53.34" rot="R180"/>
 <instance part="R5" gate="G$1" x="68.58" y="-10.16"/>
 <instance part="SW2" gate="G$1" x="147.32" y="10.16" rot="MR180"/>
-<instance part="RV10" gate="G$1" x="147.32" y="-20.32"/>
+<instance part="SQ2" gate="G$1" x="147.32" y="-20.32"/>
 <instance part="R6" gate="G$1" x="86.36" y="66.04" rot="MR180"/>
 <instance part="R7" gate="G$1" x="96.52" y="38.1" rot="MR0"/>
 <instance part="TNE2" gate="G$1" x="111.76" y="38.1" rot="R90"/>
@@ -838,7 +838,7 @@ Panel board for simplified dual VCO with SQ andSAW.
 <label x="68.58" y="-45.72" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="RV10" gate="G$1" pin="1"/>
+<pinref part="SQ2" gate="G$1" pin="1"/>
 <wire x1="142.24" y1="-20.32" x2="132.08" y2="-20.32" width="0.1524" layer="91"/>
 <label x="119.38" y="-20.32" size="1.778" layer="95"/>
 </segment>
@@ -850,9 +850,9 @@ Panel board for simplified dual VCO with SQ andSAW.
 <label x="68.58" y="-43.18" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="RV10" gate="G$1" pin="2"/>
+<pinref part="SQ2" gate="G$1" pin="2"/>
 <wire x1="152.4" y1="-20.32" x2="152.4" y2="-15.24" width="0.1524" layer="91"/>
-<pinref part="RV10" gate="G$1" pin="P$1"/>
+<pinref part="SQ2" gate="G$1" pin="P$1"/>
 <wire x1="147.32" y1="-15.24" x2="152.4" y2="-15.24" width="0.1524" layer="91"/>
 <wire x1="152.4" y1="-20.32" x2="157.48" y2="-20.32" width="0.1524" layer="91"/>
 <junction x="152.4" y="-20.32"/>

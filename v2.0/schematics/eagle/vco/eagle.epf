@@ -12,7 +12,7 @@ UsedLibrary="C:/Users/dhood/git/danielhood/dlp/v2.0/schematics/eagle/_common.v1.
 
 [Win_1]
 Type="Schematic Editor"
-Loc="375 165 974 564"
+Loc="332 293 931 692"
 State=0
 Number=2
 File="dlp.vco.v1.1.4.pnl.sch"
@@ -64,6 +64,6 @@ State=1
 Number=0
 
 [Desktop]
-Screen="1366 768"
+Screen="3200 1080"
 Window="Win_1"
 Window="Win_2"
