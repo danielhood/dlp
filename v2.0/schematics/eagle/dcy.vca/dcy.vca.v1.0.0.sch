@@ -3664,8 +3664,9 @@ Operational amplifiers,  comparators, voltage regulators, ADCs, DACs, etc.&lt;p&
 <sheets>
 <sheet>
 <plain>
-<text x="-63.5" y="134.62" size="1.778" layer="91">- Quad Decay Envelope
+<text x="58.42" y="137.16" size="1.778" layer="91">- Quad Decay Envelope
 - Single VCA</text>
+<frame x1="-281.94" y1="-71.12" x2="93.98" y2="152.4" columns="8" rows="5" layer="91"/>
 </plain>
 <instances>
 <instance part="R1" gate="G$1" x="-20.32" y="91.44" rot="R180"/>
