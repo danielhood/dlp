@@ -3525,7 +3525,7 @@ Operational amplifiers,  comparators, voltage regulators, ADCs, DACs, etc.&lt;p&
 </classes>
 <parts>
 <part name="R1" library="_common" deviceset="R" device="0309/10" value="10K"/>
-<part name="R2" library="_common" deviceset="R" device="0309/10" value="10K"/>
+<part name="R2" library="_common" deviceset="R" device="0309/10" value="390"/>
 <part name="R3" library="_common" deviceset="R" device="0309/10" value="2.2K"/>
 <part name="R4" library="_common" deviceset="R" device="0309/10" value="2.2K"/>
 <part name="R5" library="_common" deviceset="R" device="0309/10" value="390"/>
