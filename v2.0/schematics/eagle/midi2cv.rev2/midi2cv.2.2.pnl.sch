@@ -704,8 +704,8 @@ http://ca.mouser.com/Search/ProductDetail.aspx?R=ACJM-MV35-2Svirtualkey52380000v
 <device name="" package="ACJM-MV35-2S">
 <connects>
 <connect gate="G$1" pin="P$1" pad="P$1"/>
-<connect gate="G$1" pin="P$2" pad="P$2"/>
-<connect gate="G$1" pin="P$3" pad="P$3"/>
+<connect gate="G$1" pin="P$2" pad="P$3"/>
+<connect gate="G$1" pin="P$3" pad="P$2"/>
 </connects>
 <technologies>
 <technology name=""/>
