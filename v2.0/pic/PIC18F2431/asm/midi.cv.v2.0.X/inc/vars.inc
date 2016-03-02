@@ -73,3 +73,12 @@ _MOSSFEST_FD:		equ	0x28	; 0xFD
 _MOFFSET_AS:		equ	0x2A	; 0xFE
 _MOFFSET_SYS_RESET:	equ	0x2C	; 0xFF
 _MOFFSET_NONE:		equ	0x2E
+
+; GATE Mappings
+; Bits 0 to 4 of PORT_C represent gates
+; Bit 0 represents GATE 5 and Bit 4 represents GATE 1 in v2.0 to match the hardware layout
+GATE_1:		equ	0x04
+GATE_2:		equ	0x03
+GATE_3:		equ	0x02
+GATE_4:		equ	0x01
+GATE_5:		equ	0x00

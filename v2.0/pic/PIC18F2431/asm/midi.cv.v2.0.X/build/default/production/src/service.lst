@@ -1,4 +1,4 @@
-MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE  1
+MPASM  5.43                       SERVICE.ASM   3-1-2016  23:35:18         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,7 +57,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00038         endc
                       00039 
                       00040 
-MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE  2
+MPASM  5.43                       SERVICE.ASM   3-1-2016  23:35:18         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -98,6 +98,15 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
   0000002A            00073 _MOFFSET_AS:            equ     0x2A    ; 0xFE
   0000002C            00074 _MOFFSET_SYS_RESET:     equ     0x2C    ; 0xFF
   0000002E            00075 _MOFFSET_NONE:          equ     0x2E
+                      00076 
+                      00077 ; GATE Mappings
+                      00078 ; Bits 0 to 4 of PORT_C represent gates
+                      00079 ; Bit 0 represents GATE 5 and Bit 4 represents GATE 1 in v2.0 to match the hardware layout
+  00000004            00080 GATE_1:         equ     0x04
+  00000003            00081 GATE_2:         equ     0x03
+  00000002            00082 GATE_3:         equ     0x02
+  00000001            00083 GATE_4:         equ     0x01
+  00000000            00084 GATE_5:         equ     0x00
                       00005 
                       00006 ; ------------------------------------------------------------------------------
                       00007 ; Export global code refs
@@ -107,6 +116,12 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00011 
                       00012 
                       00013 ; ------------------------------------------------------------------------------
+MPASM  5.43                       SERVICE.ASM   3-1-2016  23:35:18         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
                       00014 ; Context SAVE/RESTORE macros
                       00015 ;
                       00016 _SAVE_CTX       macro
@@ -116,12 +131,6 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00020         endm
                       00021 
                       00022 _RESTORE_CTX    macro
-MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE  3
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
                       00023         movff   BSR_TMP,BSR     ; Restore bank select
                       00024         movf    W_TMP           ; Restore W
                       00025         movff   ST_TMP,STATUS   ; Restore STATUS
@@ -166,6 +175,12 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 000024 620A           00058         cpfseq  MIDI_STATE
 000026 EF?? F???      00059         goto    _CHECK_BYTE_TYPE
                       00060 
+MPASM  5.43                       SERVICE.ASM   3-1-2016  23:35:18         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
 00002A                00061 _MSTATE_SYS_EX:
 00002A 0EF7           00062         movlw   0xF7
 00002C 6200           00063         cpfseq  CUR_BYTE
@@ -175,12 +190,6 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                             in
 000036 EF?? F???      00067         goto    _RC_CLEANUP
 00003A                00068 _PROCESS_SYS_EX_DATA:
-MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE  4
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
 00003A C000 F006      00069         movff   CUR_BYTE,SYS_EX_DATA
 00003E EF?? F???      00070         goto    _RC_CLEANUP
                       00071 
@@ -225,6 +234,12 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00109 
 00007E                00110 _RC_CLEANUP:
 00007E 9A9E           00111         bcf     PIR1,RCIF       ; Clear Serial RX interrupt
+MPASM  5.43                       SERVICE.ASM   3-1-2016  23:35:18         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
 000080 EF?? F???      00112         goto    _EXIT_SERVICE
                       00113 
                       00114 
@@ -234,12 +249,6 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 000084                00118 _MSTATE_NOTE_OFF:
 000084 B080           00119         btfsc   PORTA,0                 ; Check MIDI MODE
 000086 EF?? F???      00120         goto    _MSTATE_NOTE_OFF_MODE_1
-MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE  5
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
 00008A B00C           00121         btfsc   MSG_COUNT,0
 00008C EF?? F???      00122         goto    _PROCESS_VELOCITY_NOTE_OFF
 000090                00123 _PROCSES_PITCH_NOTE_OFF:
@@ -258,7 +267,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0000AA 8001           00135         bsf     CV_FLAGS,CVF_PITCH              ; Flag PITCH and VELOCITY as updated
 0000AC C010 F003      00136         movff   MSG_VELOCITY,CV_VELOCITY
 0000B0 8201           00137         bsf     CV_FLAGS,CVF_VELOCITY
-0000B2 9005           00138         bcf     CV_GATE,0                       ; Clear GATE
+0000B2 9805           00138         bcf     CV_GATE,GATE_1                  ; Clear GATE
 0000B4                00139 _END_NOTE_OFF:
 0000B4 6A0C           00140         clrf    MSG_COUNT                       ; Reset message count
 0000B6 EF?? F???      00141         goto    _RC_CLEANUP
@@ -284,6 +293,12 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0000E0 600F           00161         cpfslt  MSG_PITCH
 0000E2 EF?? F???      00162         goto    _PROCESS_NOTE_OFF_GATE5
 0000E6 0E1B           00163         movlw   0x1B
+MPASM  5.43                       SERVICE.ASM   3-1-2016  23:35:18         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
 0000E8 600F           00164         cpfslt  MSG_PITCH
 0000EA EF?? F???      00165         goto    _PROCESS_NOTE_OFF_GATE4
 0000EE 0E1A           00166         movlw   0x1A
@@ -293,35 +308,29 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0000F8 600F           00170         cpfslt  MSG_PITCH
 0000FA EF?? F???      00171         goto    _PROCESS_NOTE_OFF_GATE2
 0000FE                00172 _PROCESS_NOTE_OFF_GATE1:
-MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE  6
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
 0000FE C010 F002      00173         movff   MSG_VELOCITY,CV_PITCH           ; PWM1
 000102 8001           00174         bsf     CV_FLAGS,CVF_PITCH
-000104 9005           00175         bcf     CV_GATE,0                       ; Clear GATE1
+000104 9805           00175         bcf     CV_GATE,GATE_1                  ; Clear GATE1
 000106 6A0C           00176         clrf    MSG_COUNT                       ; Reset message count
 000108 EF?? F???      00177         goto    _RC_CLEANUP
 00010C                00178 _PROCESS_NOTE_OFF_GATE2:
 00010C C010 F003      00179         movff   MSG_VELOCITY,CV_VELOCITY        ; PWM3
 000110 8201           00180         bsf     CV_FLAGS,CVF_VELOCITY
-000112 9205           00181         bcf     CV_GATE,1                       ; Clear GATE2
+000112 9605           00181         bcf     CV_GATE,GATE_2                  ; Clear GATE2
 000114 6A0C           00182         clrf    MSG_COUNT                       ; Reset message count
 000116 EF?? F???      00183         goto    _RC_CLEANUP
 00011A                00184 _PROCESS_NOTE_OFF_GATE3:
 00011A C010 F004      00185         movff   MSG_VELOCITY,CV_MOD             ; PWM5
 00011E 8401           00186         bsf     CV_FLAGS,CVF_MOD
-000120 9405           00187         bcf     CV_GATE,2                       ; Clear GATE3
+000120 9405           00187         bcf     CV_GATE,GATE_3                  ; Clear GATE3
 000122 6A0C           00188         clrf    MSG_COUNT                       ; Reset message count
 000124 EF?? F???      00189         goto    _RC_CLEANUP
 000128                00190 _PROCESS_NOTE_OFF_GATE4:
-000128 9605           00191         bcf     CV_GATE,3                       ; Clear GATE4
+000128 9205           00191         bcf     CV_GATE,GATE_4                  ; Clear GATE4
 00012A 6A0C           00192         clrf    MSG_COUNT                       ; Reset message count
 00012C EF?? F???      00193         goto    _RC_CLEANUP
 000130                00194 _PROCESS_NOTE_OFF_GATE5:
-000130 9805           00195         bcf     CV_GATE,4                       ; Clear GATE5
+000130 9005           00195         bcf     CV_GATE,GATE_5                  ; Clear GATE5
 000132 6A0C           00196         clrf    MSG_COUNT                       ; Reset message count
 000134 EF?? F???      00197         goto    _RC_CLEANUP
                       00198 
@@ -343,7 +352,13 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00015A 8001           00214         bsf     CV_FLAGS,CVF_PITCH              ; Flag PITCH and VELOCITY as updated
 00015C C010 F003      00215         movff   MSG_VELOCITY,CV_VELOCITY
 000160 8201           00216         bsf     CV_FLAGS,CVF_VELOCITY
-000162 8005           00217         bsf     CV_GATE,0                       ; Trigger GATE
+MPASM  5.43                       SERVICE.ASM   3-1-2016  23:35:18         PAGE  7
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+000162 8805           00217         bsf     CV_GATE,GATE_1                  ; Trigger GATE
 000164 6A0C           00218         clrf    MSG_COUNT                       ; Reset message count
 000166 EF?? F???      00219         goto    _RC_CLEANUP
                       00220 
@@ -352,12 +367,6 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00016C EF?? F???      00223         goto    _PROCESS_VELOCITY_NOTE_ON_M1
 000170                00224 _PROCSES_PITCH_NOTE_ON_M1:
 000170 C000 F00F      00225         movff   CUR_BYTE,MSG_PITCH
-MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE  7
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
 000174 2A0C           00226         incf    MSG_COUNT
 000176 EF?? F???      00227         goto    _RC_CLEANUP
 00017A                00228 _PROCESS_VELOCITY_NOTE_ON_M1:
@@ -385,38 +394,38 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0001B2                00250 _PROCESS_NOTE_ON_GATE1:
 0001B2 C010 F002      00251         movff   MSG_VELOCITY,CV_PITCH           ; PWM1
 0001B6 8001           00252         bsf     CV_FLAGS,CVF_PITCH
-0001B8 8005           00253         bsf     CV_GATE,0                       ; Trigger GATE1
+0001B8 8805           00253         bsf     CV_GATE,GATE_1                  ; Trigger GATE1
 0001BA 6A0C           00254         clrf    MSG_COUNT                       ; Reset message count
 0001BC EF?? F???      00255         goto    _RC_CLEANUP
 0001C0                00256 _PROCESS_NOTE_ON_GATE2:
 0001C0 C010 F003      00257         movff   MSG_VELOCITY,CV_VELOCITY        ; PWM3
 0001C4 8201           00258         bsf     CV_FLAGS,CVF_VELOCITY
-0001C6 8205           00259         bsf     CV_GATE,1                       ; Trigger GATE2
+0001C6 8605           00259         bsf     CV_GATE,GATE_2                  ; Trigger GATE2
 0001C8 6A0C           00260         clrf    MSG_COUNT                       ; Reset message count
 0001CA EF?? F???      00261         goto    _RC_CLEANUP
 0001CE                00262 _PROCESS_NOTE_ON_GATE3:
 0001CE C010 F004      00263         movff   MSG_VELOCITY,CV_MOD             ; PWM5
 0001D2 8401           00264         bsf     CV_FLAGS,CVF_MOD
-0001D4 8405           00265         bsf     CV_GATE,2                       ; Trigger GATE3
+0001D4 8405           00265         bsf     CV_GATE,GATE_3                  ; Trigger GATE3
 0001D6 6A0C           00266         clrf    MSG_COUNT                       ; Reset message count
 0001D8 EF?? F???      00267         goto    _RC_CLEANUP
 0001DC                00268 _PROCESS_NOTE_ON_GATE4:
-0001DC 8605           00269         bsf     CV_GATE,3                       ; Trigger GATE4
-0001DE 6A0C           00270         clrf    MSG_COUNT                       ; Reset message count
-0001E0 EF?? F???      00271         goto    _RC_CLEANUP
-0001E4                00272 _PROCESS_NOTE_ON_GATE5:
-0001E4 8805           00273         bsf     CV_GATE,4                       ; Trigger GATE5
-0001E6 6A0C           00274         clrf    MSG_COUNT                       ; Reset message count
-0001E8 EF?? F???      00275         goto    _RC_CLEANUP
-                      00276 
-0001EC                00277 _MSTATE_KP:
-0001EC EF?? F???      00278         goto    _RC_CLEANUP
-MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE  8
+0001DC 8205           00269         bsf     CV_GATE,GATE_4                  ; Trigger GATE4
+MPASM  5.43                       SERVICE.ASM   3-1-2016  23:35:18         PAGE  8
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
+0001DE 6A0C           00270         clrf    MSG_COUNT                       ; Reset message count
+0001E0 EF?? F???      00271         goto    _RC_CLEANUP
+0001E4                00272 _PROCESS_NOTE_ON_GATE5:
+0001E4 8005           00273         bsf     CV_GATE,GATE_5                  ; Trigger GATE5
+0001E6 6A0C           00274         clrf    MSG_COUNT                       ; Reset message count
+0001E8 EF?? F???      00275         goto    _RC_CLEANUP
+                      00276 
+0001EC                00277 _MSTATE_KP:
+0001EC EF?? F???      00278         goto    _RC_CLEANUP
                       00279 
 0001F0                00280 _MSTATE_CC:
 0001F0 B080           00281         btfsc   PORTA,0                 ; Check MIDI MODE
@@ -441,10 +450,10 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 000220 0E3F           00300         movlw   0x3F                    ; Check if > 63
 000222 6400           00301         cpfsgt  CUR_BYTE
 000224 EF?? F???      00302         goto    _CC02_OFF
-000228 8205           00303         bsf     CV_GATE,1               ; Trigger Gate
+000228 8605           00303         bsf     CV_GATE,GATE_2          ; Trigger Gate
 00022A EF?? F???      00304         goto    _END_CVALUE
 00022E                00305 _CC02_OFF:
-00022E 9205           00306         bcf     CV_GATE,1               ; Clear Gate
+00022E 9605           00306         bcf     CV_GATE,GATE_2          ; Clear Gate
 000230 EF?? F???      00307         goto    _END_CVALUE
 000234                00308 _PROCESS_CC03:
 000234 0E03           00309         movlw   0x03
@@ -453,29 +462,29 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00023C 0E3F           00312         movlw   0x3F                    ; Check if > 63
 00023E 6400           00313         cpfsgt  CUR_BYTE
 000240 EF?? F???      00314         goto    _CC03_OFF
-000244 8405           00315         bsf     CV_GATE,2               ; Trigger Gate
+000244 8405           00315         bsf     CV_GATE,GATE_3          ; Trigger Gate
 000246 EF?? F???      00316         goto    _END_CVALUE
 00024A                00317 _CC03_OFF:
-00024A 9405           00318         bcf     CV_GATE,2               ; Clear Gate
+00024A 9405           00318         bcf     CV_GATE,GATE_3          ; Clear Gate
 00024C EF?? F???      00319         goto    _END_CVALUE
 000250                00320 _PROCESS_CC04:
 000250 0E04           00321         movlw   0x04
 000252 620D           00322         cpfseq  CC_NUM                  ; Check CC Value
-000254 EF?? F???      00323         goto    _PROCESS_CC05           ; Try next CC Value
-000258 0E3F           00324         movlw   0x3F                    ; Check if > 63
-00025A 6400           00325         cpfsgt  CUR_BYTE
-00025C EF?? F???      00326         goto    _CC04_OFF
-000260 8605           00327         bsf     CV_GATE,3               ; Trigger Gate
-000262 EF?? F???      00328         goto    _END_CVALUE
-000266                00329 _CC04_OFF:
-000266 9605           00330         bcf     CV_GATE,3               ; Clear Gate
-000268 EF?? F???      00331         goto    _END_CVALUE
-MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE  9
+MPASM  5.43                       SERVICE.ASM   3-1-2016  23:35:18         PAGE  9
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
+000254 EF?? F???      00323         goto    _PROCESS_CC05           ; Try next CC Value
+000258 0E3F           00324         movlw   0x3F                    ; Check if > 63
+00025A 6400           00325         cpfsgt  CUR_BYTE
+00025C EF?? F???      00326         goto    _CC04_OFF
+000260 8205           00327         bsf     CV_GATE,GATE_4          ; Trigger Gate
+000262 EF?? F???      00328         goto    _END_CVALUE
+000266                00329 _CC04_OFF:
+000266 9205           00330         bcf     CV_GATE,GATE_4          ; Clear Gate
+000268 EF?? F???      00331         goto    _END_CVALUE
 00026C                00332 _PROCESS_CC05:
 00026C 0E05           00333         movlw   0x05
 00026E 620D           00334         cpfseq  CC_NUM                  ; Check CC Value
@@ -483,10 +492,10 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 000274 0E3F           00336         movlw   0x3F                    ; Check if > 63
 000276 6400           00337         cpfsgt  CUR_BYTE
 000278 EF?? F???      00338         goto    _CC05_OFF
-00027C 8805           00339         bsf     CV_GATE,4               ; Trigger Gate
+00027C 8005           00339         bsf     CV_GATE,GATE_5          ; Trigger Gate
 00027E EF?? F???      00340         goto    _END_CVALUE
 000282                00341 _CC05_OFF:
-000282 9805           00342         bcf     CV_GATE,4               ; Clear Gate
+000282 9005           00342         bcf     CV_GATE,GATE_5          ; Clear Gate
 000284 EF?? F???      00343         goto    _END_CVALUE
 000288                00344 _END_CVALUE:
 000288 6A0C           00345         clrf    MSG_COUNT               ; Reset message count
@@ -520,6 +529,12 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0002AE EF?? F???      00373         goto    _RC_CLEANUP
                       00374 
 0002B2                00375 _MSTATE_SYS_EX_END:
+MPASM  5.43                       SERVICE.ASM   3-1-2016  23:35:18         PAGE 10
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
 0002B2 EF?? F???      00376         goto    _RC_CLEANUP
                       00377 
 0002B6                00378 _MSTATE_TT:
@@ -529,12 +544,6 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0002BA EF?? F???      00382         goto    _RC_CLEANUP
                       00383 
 0002BE                00384 _MSTATE_START_SONG:
-MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE 10
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
 0002BE EF?? F???      00385         goto    _RC_CLEANUP
                       00386 
 0002C2                00387 _MSTATE_CONT_SONG:
@@ -579,6 +588,12 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0002F6                00426 _SET_SYSTEM_MSG:
 0002F6 5000           00427         movf    CUR_BYTE,W
 0002F8 0B0F           00428         andlw   0x0F            ; We only need the first nibble since we know this is a Sys message
+MPASM  5.43                       SERVICE.ASM   3-1-2016  23:35:18         PAGE 11
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
 0002FA 0F07           00429         addlw   0x07            ; Add 7 to scale this up
 0002FC                00430 _CREATE_OFFSET:
 0002FC 46E8           00431         rlncf   WREG            ; create an offset mapping by mult x 2
@@ -588,12 +603,6 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00435         ; Check to see if we need to process the sys messge now (F6 and above do not have any addtional 
                             mesage bytes)
 000302 0EF6           00436         movlw   0xF6
-MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE 11
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
 000304 6000           00437         cpfslt  CUR_BYTE
 000306 EF?? F???      00438         goto    _PROCESS_MESSAGE
                       00439 
@@ -601,7 +610,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00441 
                       00442 
                       00443         end
-MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE 12
+MPASM  5.43                       SERVICE.ASM   3-1-2016  23:35:18         PAGE 12
 
 
 SYMBOL TABLE
@@ -660,7 +669,7 @@ BFEMT                             00000003
 BFOVFL                            00000002
 BOR                               00000000
 BRFEN                             00000007
-MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE 13
+MPASM  5.43                       SERVICE.ASM   3-1-2016  23:35:18         PAGE 13
 
 
 SYMBOL TABLE
@@ -719,7 +728,7 @@ CCP2M1                            00000001
 CCP2M2                            00000002
 CCP2M3                            00000003
 CCP2X                             00000005
-MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE 14
+MPASM  5.43                       SERVICE.ASM   3-1-2016  23:35:18         PAGE 14
 
 
 SYMBOL TABLE
@@ -778,7 +787,7 @@ DTA1                              00000001
 DTA2                              00000002
 DTA3                              00000003
 DTA4                              00000004
-MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE 15
+MPASM  5.43                       SERVICE.ASM   3-1-2016  23:35:18         PAGE 15
 
 
 SYMBOL TABLE
@@ -834,15 +843,20 @@ FSR2H                             00000FDA
 FSR2L                             00000FD9
 GASEL0                            00000000
 GASEL1                            00000001
-GBSEL0                            00000004
-GBSEL1                            00000005
-GCSEL0                            00000002
-MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE 16
+GATE_1                            00000004
+GATE_2                            00000003
+GATE_3                            00000002
+MPASM  5.43                       SERVICE.ASM   3-1-2016  23:35:18         PAGE 16
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+GATE_4                            00000001
+GATE_5                            00000000
+GBSEL0                            00000004
+GBSEL1                            00000005
+GCSEL0                            00000002
 GCSEL1                            00000003
 GDSEL0                            00000006
 GDSEL1                            00000007
@@ -891,17 +905,17 @@ INTCON2                           00000FF1
 INTCON3                           00000FF0
 INTEDG0                           00000006
 INTEDG1                           00000005
-INTEDG2                           00000004
-IOFS                              00000002
-IPEN                              00000007
-IPR1                              00000F9F
-IPR2                              00000FA2
-MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE 17
+MPASM  5.43                       SERVICE.ASM   3-1-2016  23:35:18         PAGE 17
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+INTEDG2                           00000004
+IOFS                              00000002
+IPEN                              00000007
+IPR1                              00000F9F
+IPR2                              00000FA2
 IPR3                              00000FA5
 IRCF0                             00000004
 IRCF1                             00000005
@@ -950,17 +964,17 @@ MIDI_STATE                        0000000A
 MIDI_STATE_TMP                    0000000B
 MSG_CHAN                          0000000E
 MSG_COUNT                         0000000C
-MSG_PITCH                         0000000F
-MSG_VELOCITY                      00000010
-N                                 00000004
-NOT_A                             00000005
-NOT_ADDRESS                       00000005
-MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE 18
+MPASM  5.43                       SERVICE.ASM   3-1-2016  23:35:18         PAGE 18
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+MSG_PITCH                         0000000F
+MSG_VELOCITY                      00000010
+N                                 00000004
+NOT_A                             00000005
+NOT_ADDRESS                       00000005
 NOT_BOR                           00000000
 NOT_DONE                          00000001
 NOT_DOWN                          00000005
@@ -1009,17 +1023,17 @@ PDEC0                             00000000
 PDEC1                             00000001
 PEIE                              00000006
 PEIE_GIEL                         00000006
-PIE1                              00000F9D
-PIE2                              00000FA0
-PIE3                              00000FA3
-PIR1                              00000F9E
-PIR2                              00000FA1
-MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE 19
+MPASM  5.43                       SERVICE.ASM   3-1-2016  23:35:18         PAGE 19
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+PIE1                              00000F9D
+PIE2                              00000FA0
+PIE3                              00000FA3
+PIR1                              00000F9E
+PIR2                              00000FA1
 PIR3                              00000FA4
 PLUSW0                            00000FEB
 PLUSW1                            00000FE3
@@ -1068,17 +1082,17 @@ PROD                              00000FF3
 PRODH                             00000FF4
 PRODL                             00000FF3
 PSA                               00000003
-PTCKPS0                           00000002
-PTCKPS1                           00000003
-PTCON0                            00000F7F
-PTCON1                            00000F7E
-PTDIR                             00000006
-MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE 20
+MPASM  5.43                       SERVICE.ASM   3-1-2016  23:35:18         PAGE 20
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+PTCKPS0                           00000002
+PTCKPS1                           00000003
+PTCON0                            00000F7F
+PTCON1                            00000F7E
+PTDIR                             00000006
 PTEN                              00000007
 PTIE                              00000004
 PTIF                              00000004
@@ -1127,17 +1141,17 @@ RC1                               00000001
 RC2                               00000002
 RC3                               00000003
 RC4                               00000004
-RC5                               00000005
-RC6                               00000006
-RC7                               00000007
-RCIDL                             00000006
-RCIE                              00000005
-MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE 21
+MPASM  5.43                       SERVICE.ASM   3-1-2016  23:35:18         PAGE 21
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+RC5                               00000005
+RC6                               00000006
+RC7                               00000007
+RCIDL                             00000006
+RCIE                              00000005
 RCIF                              00000005
 RCIP                              00000005
 RCMT                              00000006
@@ -1186,17 +1200,17 @@ SPBRG                             00000FAF
 SPBRGH                            00000FB0
 SPEN                              00000007
 SREN                              00000005
-SS                                00000006
-SSPADD                            00000FC8
-SSPBUF                            00000FC9
-SSPCON                            00000FC6
-SSPEN                             00000005
-MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE 22
+MPASM  5.43                       SERVICE.ASM   3-1-2016  23:35:18         PAGE 22
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+SS                                00000006
+SSPADD                            00000FC8
+SSPBUF                            00000FC9
+SSPCON                            00000FC6
+SSPEN                             00000005
 SSPIE                             00000003
 SSPIF                             00000003
 SSPIP                             00000003
@@ -1245,17 +1259,17 @@ T1INSYNC                          00000002
 T1OSCEN                           00000003
 T1OSI                             00000001
 T1OSO                             00000000
-T1RUN                             00000006
-T1SYNC                            00000002
-T2CKPS0                           00000000
-T2CKPS1                           00000001
-T2CON                             00000FCA
-MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE 23
+MPASM  5.43                       SERVICE.ASM   3-1-2016  23:35:18         PAGE 23
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+T1RUN                             00000006
+T1SYNC                            00000002
+T2CKPS0                           00000000
+T2CKPS1                           00000001
+T2CON                             00000FCA
 T2OUTPS0                          00000003
 T2OUTPS1                          00000004
 T2OUTPS2                          00000005
@@ -1304,17 +1318,17 @@ TMR5IE                            00000000
 TMR5IF                            00000000
 TMR5IP                            00000000
 TMR5L                             00000F87
-TMR5ON                            00000000
-TO                                00000003
-TOS                               00000FFD
-TOSH                              00000FFE
-TOSL                              00000FFD
-MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE 24
+MPASM  5.43                       SERVICE.ASM   3-1-2016  23:35:18         PAGE 24
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+TMR5ON                            00000000
+TO                                00000003
+TOS                               00000FFD
+TOSH                              00000FFE
+TOSL                              00000FFD
 TOSU                              00000FFF
 TOUTPS0                           00000003
 TOUTPS1                           00000004
@@ -1363,17 +1377,17 @@ TXIF                              00000004
 TXIP                              00000004
 TXREG                             00000FAD
 TXSTA                             00000FAC
-UA                                00000001
-UDIS                              00000001
-UP                                00000005
-UPDOWN                            00000005
-UP_DOWN                           00000005
-MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE 25
+MPASM  5.43                       SERVICE.ASM   3-1-2016  23:35:18         PAGE 25
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+UA                                00000001
+UDIS                              00000001
+UP                                00000005
+UPDOWN                            00000005
+UP_DOWN                           00000005
 UP_NOT_DOWN                       00000005
 VCFG0                             00000006
 VCFG1                             00000007
@@ -1422,17 +1436,17 @@ _CP0_OFF_5L                       000000FF
 _CP0_ON_5L                        000000FE
 _CP1_OFF_5L                       000000FF
 _CP1_ON_5L                        000000FD
-_CP2_OFF_5L                       000000FF
-_CP2_ON_5L                        000000FB
-_CP3_OFF_5L                       000000FF
-_CP3_ON_5L                        000000F7
-_CPB_OFF_5H                       000000FF
-MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE 26
+MPASM  5.43                       SERVICE.ASM   3-1-2016  23:35:18         PAGE 26
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+_CP2_OFF_5L                       000000FF
+_CP2_ON_5L                        000000FB
+_CP3_OFF_5L                       000000FF
+_CP3_ON_5L                        000000F7
+_CPB_OFF_5H                       000000FF
 _CPB_ON_5H                        000000BF
 _CPD_OFF_5H                       000000FF
 _CPD_ON_5H                        0000007F
@@ -1481,17 +1495,17 @@ _MOFFSET_CONT_SONG                00000024
 _MOFFSET_CP                       0000000A
 _MOFFSET_F1                       00000010
 _MOFFSET_KP                       00000004
-_MOFFSET_NONE                     0000002E
-_MOFFSET_NOTE_OFF                 00000000
-_MOFFSET_NOTE_ON                  00000002
-_MOFFSET_PB                       0000000C
-_MOFFSET_PC                       00000008
-MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE 27
+MPASM  5.43                       SERVICE.ASM   3-1-2016  23:35:18         PAGE 27
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+_MOFFSET_NONE                     0000002E
+_MOFFSET_NOTE_OFF                 00000000
+_MOFFSET_NOTE_ON                  00000002
+_MOFFSET_PB                       0000000C
+_MOFFSET_PC                       00000008
 _MOFFSET_SP                       00000012
 _MOFFSET_SS                       00000014
 _MOFFSET_START_SONG               00000022
@@ -1540,17 +1554,17 @@ _OSC_IRC_1H                       000000F9
 _OSC_LP_1H                        000000F0
 _OSC_RC1_1H                       000000FA
 _OSC_RC2_1H                       000000F3
-_OSC_RCIO_1H                      000000F7
-_OSC_RC_1H                        000000FC
-_OSC_XT_1H                        000000F1
-_PROCESS_CC01                     00000206
-_PROCESS_CC02                     00000218
-MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE 28
+MPASM  5.43                       SERVICE.ASM   3-1-2016  23:35:18         PAGE 28
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+_OSC_RCIO_1H                      000000F7
+_OSC_RC_1H                        000000FC
+_OSC_XT_1H                        000000F1
+_PROCESS_CC01                     00000206
+_PROCESS_CC02                     00000218
 _PROCESS_CC03                     00000234
 _PROCESS_CC04                     00000250
 _PROCESS_CC05                     0000026C
@@ -1599,17 +1613,17 @@ _T1OSCMX_ON_3L                    000000FF
 _WDPS_1024_2H                     000000F5
 _WDPS_128_2H                      000000EF
 _WDPS_16384_2H                    000000FD
-_WDPS_16_2H                       000000E9
-_WDPS_1_2H                        000000E1
-_WDPS_2048_2H                     000000F7
-_WDPS_256_2H                      000000F1
-_WDPS_2_2H                        000000E3
-MPASM  5.43                       SERVICE.ASM   9-20-2014  21:12:18         PAGE 29
+MPASM  5.43                       SERVICE.ASM   3-1-2016  23:35:18         PAGE 29
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+_WDPS_16_2H                       000000E9
+_WDPS_1_2H                        000000E1
+_WDPS_2048_2H                     000000F7
+_WDPS_256_2H                      000000F1
+_WDPS_2_2H                        000000E3
 _WDPS_32768_2H                    000000FF
 _WDPS_32_2H                       000000EB
 _WDPS_4096_2H                     000000F9

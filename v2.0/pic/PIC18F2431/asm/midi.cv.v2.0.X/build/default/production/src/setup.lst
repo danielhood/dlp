@@ -1,4 +1,4 @@
-MPASM  5.43                         SETUP.ASM   9-20-2014  21:12:19         PAGE  1
+MPASM  5.43                         SETUP.ASM   3-1-2016  23:35:19         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,7 +57,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00040 
                       00041 ; ------------------------------------------------------------------------------
                       00042 ; Constants
-MPASM  5.43                         SETUP.ASM   9-20-2014  21:12:19         PAGE  2
+MPASM  5.43                         SETUP.ASM   3-1-2016  23:35:19         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -96,6 +96,15 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
   0000002A            00073 _MOFFSET_AS:            equ     0x2A    ; 0xFE
   0000002C            00074 _MOFFSET_SYS_RESET:     equ     0x2C    ; 0xFF
   0000002E            00075 _MOFFSET_NONE:          equ     0x2E
+                      00076 
+                      00077 ; GATE Mappings
+                      00078 ; Bits 0 to 4 of PORT_C represent gates
+                      00079 ; Bit 0 represents GATE 5 and Bit 4 represents GATE 1 in v2.0 to match the hardware layout
+  00000004            00080 GATE_1:         equ     0x04
+  00000003            00081 GATE_2:         equ     0x03
+  00000002            00082 GATE_3:         equ     0x02
+  00000001            00083 GATE_4:         equ     0x01
+  00000000            00084 GATE_5:         equ     0x00
                       00003 
                       00004 ; ------------------------------------------------------------------------------
                       00005 ; Export global code refs
@@ -107,6 +116,12 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00011 
                       00012 ; ------------------------------------------------------------------------------
                       00013 ; Setup routine
+MPASM  5.43                         SETUP.ASM   3-1-2016  23:35:19         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
                       00014 ;
                       00015 .SETUP  code                    ; Relocatable code for setup
 000000                00016 _SETUP:
@@ -116,12 +131,6 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 000002 6EB8           00020         movwf   ANSEL0
                       00021 
 000004 0E01           00022         movlw   b'00000001'     ; PORTA:        RA0 - Switch Input for MIDI Mode (Pitch/Mod vs Drum Trig
-MPASM  5.43                         SETUP.ASM   9-20-2014  21:12:19         PAGE  3
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
                             ger)
 000006 6E92           00023         movwf   TRISA           ;               RA1:4 - Output (Unused)
                       00024                                 ;               RA5 - Doesn't exist on this chip
@@ -166,6 +175,12 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00059 
                       00060 ; Serial RX Config (for MIDI IN)
 000026 98AC           00061         bcf     TXSTA,SYNC      ; Asynchronous
+MPASM  5.43                         SETUP.ASM   3-1-2016  23:35:19         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
 000028 94AC           00062         bcf     TXSTA,BRGH      ; Low spped BRG
 00002A 96AA           00063         bcf     BAUDCON,BRG16   ; 8 bit BRG
 00002C 90AA           00064         bcf     BAUDCON,ABDEN   ; Disable auto-baud detect
@@ -175,12 +190,6 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 000034 9CAB           00068         bcf     RCSTA,RX9       ; 8-bit data
 000036 88AB           00069         bsf     RCSTA,CREN      ; Enable RX
                       00070 
-MPASM  5.43                         SETUP.ASM   9-20-2014  21:12:19         PAGE  4
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
 000038 8A9D           00071         bsf     PIE1,RCIE       ; Enable Serial RX Interrupt
 00003A 8A9F           00072         bsf     IPR1,RCIP       ; Set to High Priority
                       00073 
@@ -221,7 +230,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 000066 0012           00108         return
                       00109 
                       00110         end
-MPASM  5.43                         SETUP.ASM   9-20-2014  21:12:19         PAGE  5
+MPASM  5.43                         SETUP.ASM   3-1-2016  23:35:19         PAGE  5
 
 
 SYMBOL TABLE
@@ -280,7 +289,7 @@ BFEMT                             00000003
 BFOVFL                            00000002
 BOR                               00000000
 BRFEN                             00000007
-MPASM  5.43                         SETUP.ASM   9-20-2014  21:12:19         PAGE  6
+MPASM  5.43                         SETUP.ASM   3-1-2016  23:35:19         PAGE  6
 
 
 SYMBOL TABLE
@@ -339,7 +348,7 @@ CCP2M1                            00000001
 CCP2M2                            00000002
 CCP2M3                            00000003
 CCP2X                             00000005
-MPASM  5.43                         SETUP.ASM   9-20-2014  21:12:19         PAGE  7
+MPASM  5.43                         SETUP.ASM   3-1-2016  23:35:19         PAGE  7
 
 
 SYMBOL TABLE
@@ -398,7 +407,7 @@ DTA0                              00000000
 DTA1                              00000001
 DTA2                              00000002
 DTA3                              00000003
-MPASM  5.43                         SETUP.ASM   9-20-2014  21:12:19         PAGE  8
+MPASM  5.43                         SETUP.ASM   3-1-2016  23:35:19         PAGE  8
 
 
 SYMBOL TABLE
@@ -455,14 +464,19 @@ FSR2H                             00000FDA
 FSR2L                             00000FD9
 GASEL0                            00000000
 GASEL1                            00000001
-GBSEL0                            00000004
-GBSEL1                            00000005
-MPASM  5.43                         SETUP.ASM   9-20-2014  21:12:19         PAGE  9
+GATE_1                            00000004
+GATE_2                            00000003
+MPASM  5.43                         SETUP.ASM   3-1-2016  23:35:19         PAGE  9
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+GATE_3                            00000002
+GATE_4                            00000001
+GATE_5                            00000000
+GBSEL0                            00000004
+GBSEL1                            00000005
 GCSEL0                            00000002
 GCSEL1                            00000003
 GDSEL0                            00000006
@@ -511,17 +525,17 @@ INTCON                            00000FF2
 INTCON2                           00000FF1
 INTCON3                           00000FF0
 INTEDG0                           00000006
-INTEDG1                           00000005
-INTEDG2                           00000004
-IOFS                              00000002
-IPEN                              00000007
-IPR1                              00000F9F
-MPASM  5.43                         SETUP.ASM   9-20-2014  21:12:19         PAGE 10
+MPASM  5.43                         SETUP.ASM   3-1-2016  23:35:19         PAGE 10
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+INTEDG1                           00000005
+INTEDG2                           00000004
+IOFS                              00000002
+IPEN                              00000007
+IPR1                              00000F9F
 IPR2                              00000FA2
 IPR3                              00000FA5
 IRCF0                             00000004
@@ -570,17 +584,17 @@ MCLR                              00000003
 MIDI_STATE                        0000000A
 MIDI_STATE_TMP                    0000000B
 MSG_CHAN                          0000000E
-MSG_COUNT                         0000000C
-MSG_PITCH                         0000000F
-MSG_VELOCITY                      00000010
-N                                 00000004
-NOT_A                             00000005
-MPASM  5.43                         SETUP.ASM   9-20-2014  21:12:19         PAGE 11
+MPASM  5.43                         SETUP.ASM   3-1-2016  23:35:19         PAGE 11
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+MSG_COUNT                         0000000C
+MSG_PITCH                         0000000F
+MSG_VELOCITY                      00000010
+N                                 00000004
+NOT_A                             00000005
 NOT_ADDRESS                       00000005
 NOT_BOR                           00000000
 NOT_DONE                          00000001
@@ -629,17 +643,17 @@ PDC2L                             00000F75
 PDEC0                             00000000
 PDEC1                             00000001
 PEIE                              00000006
-PEIE_GIEL                         00000006
-PIE1                              00000F9D
-PIE2                              00000FA0
-PIE3                              00000FA3
-PIR1                              00000F9E
-MPASM  5.43                         SETUP.ASM   9-20-2014  21:12:19         PAGE 12
+MPASM  5.43                         SETUP.ASM   3-1-2016  23:35:19         PAGE 12
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+PEIE_GIEL                         00000006
+PIE1                              00000F9D
+PIE2                              00000FA0
+PIE3                              00000FA3
+PIR1                              00000F9E
 PIR2                              00000FA1
 PIR3                              00000FA4
 PLUSW0                            00000FEB
@@ -688,17 +702,17 @@ PREINC2                           00000FDC
 PROD                              00000FF3
 PRODH                             00000FF4
 PRODL                             00000FF3
-PSA                               00000003
-PTCKPS0                           00000002
-PTCKPS1                           00000003
-PTCON0                            00000F7F
-PTCON1                            00000F7E
-MPASM  5.43                         SETUP.ASM   9-20-2014  21:12:19         PAGE 13
+MPASM  5.43                         SETUP.ASM   3-1-2016  23:35:19         PAGE 13
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+PSA                               00000003
+PTCKPS0                           00000002
+PTCKPS1                           00000003
+PTCON0                            00000F7F
+PTCON1                            00000F7E
 PTDIR                             00000006
 PTEN                              00000007
 PTIE                              00000004
@@ -747,17 +761,17 @@ RC0                               00000000
 RC1                               00000001
 RC2                               00000002
 RC3                               00000003
-RC4                               00000004
-RC5                               00000005
-RC6                               00000006
-RC7                               00000007
-RCIDL                             00000006
-MPASM  5.43                         SETUP.ASM   9-20-2014  21:12:19         PAGE 14
+MPASM  5.43                         SETUP.ASM   3-1-2016  23:35:19         PAGE 14
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+RC4                               00000004
+RC5                               00000005
+RC6                               00000006
+RC7                               00000007
+RCIDL                             00000006
 RCIE                              00000005
 RCIF                              00000005
 RCIP                              00000005
@@ -806,17 +820,17 @@ SMP                               00000007
 SPBRG                             00000FAF
 SPBRGH                            00000FB0
 SPEN                              00000007
-SREN                              00000005
-SS                                00000006
-SSPADD                            00000FC8
-SSPBUF                            00000FC9
-SSPCON                            00000FC6
-MPASM  5.43                         SETUP.ASM   9-20-2014  21:12:19         PAGE 15
+MPASM  5.43                         SETUP.ASM   3-1-2016  23:35:19         PAGE 15
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+SREN                              00000005
+SS                                00000006
+SSPADD                            00000FC8
+SSPBUF                            00000FC9
+SSPCON                            00000FC6
 SSPEN                             00000005
 SSPIE                             00000003
 SSPIF                             00000003
@@ -865,17 +879,17 @@ T1CON                             00000FCD
 T1INSYNC                          00000002
 T1OSCEN                           00000003
 T1OSI                             00000001
-T1OSO                             00000000
-T1RUN                             00000006
-T1SYNC                            00000002
-T2CKPS0                           00000000
-T2CKPS1                           00000001
-MPASM  5.43                         SETUP.ASM   9-20-2014  21:12:19         PAGE 16
+MPASM  5.43                         SETUP.ASM   3-1-2016  23:35:19         PAGE 16
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+T1OSO                             00000000
+T1RUN                             00000006
+T1SYNC                            00000002
+T2CKPS0                           00000000
+T2CKPS1                           00000001
 T2CON                             00000FCA
 T2OUTPS0                          00000003
 T2OUTPS1                          00000004
@@ -924,17 +938,17 @@ TMR5H                             00000F88
 TMR5IE                            00000000
 TMR5IF                            00000000
 TMR5IP                            00000000
-TMR5L                             00000F87
-TMR5ON                            00000000
-TO                                00000003
-TOS                               00000FFD
-TOSH                              00000FFE
-MPASM  5.43                         SETUP.ASM   9-20-2014  21:12:19         PAGE 17
+MPASM  5.43                         SETUP.ASM   3-1-2016  23:35:19         PAGE 17
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+TMR5L                             00000F87
+TMR5ON                            00000000
+TO                                00000003
+TOS                               00000FFD
+TOSH                              00000FFE
 TOSL                              00000FFD
 TOSU                              00000FFF
 TOUTPS0                           00000003
@@ -983,17 +997,17 @@ TXIE                              00000004
 TXIF                              00000004
 TXIP                              00000004
 TXREG                             00000FAD
-TXSTA                             00000FAC
-UA                                00000001
-UDIS                              00000001
-UP                                00000005
-UPDOWN                            00000005
-MPASM  5.43                         SETUP.ASM   9-20-2014  21:12:19         PAGE 18
+MPASM  5.43                         SETUP.ASM   3-1-2016  23:35:19         PAGE 18
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+TXSTA                             00000FAC
+UA                                00000001
+UDIS                              00000001
+UP                                00000005
+UPDOWN                            00000005
 UP_DOWN                           00000005
 UP_NOT_DOWN                       00000005
 VCFG0                             00000006
@@ -1042,17 +1056,17 @@ _CP3_OFF_5L                       000000FF
 _CP3_ON_5L                        000000F7
 _CPB_OFF_5H                       000000FF
 _CPB_ON_5H                        000000BF
-_CPD_OFF_5H                       000000FF
-_CPD_ON_5H                        0000007F
-_DEBUG_OFF_4L                     000000FF
-_DEBUG_ON_4L                      0000007F
-_DEVID1                           003FFFFE
-MPASM  5.43                         SETUP.ASM   9-20-2014  21:12:19         PAGE 19
+MPASM  5.43                         SETUP.ASM   3-1-2016  23:35:19         PAGE 19
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+_CPD_OFF_5H                       000000FF
+_CPD_ON_5H                        0000007F
+_DEBUG_OFF_4L                     000000FF
+_DEBUG_ON_4L                      0000007F
+_DEVID1                           003FFFFE
 _DEVID2                           003FFFFF
 _EBTR0_OFF_7L                     000000FF
 _EBTR0_ON_7L                      000000FE
@@ -1101,17 +1115,17 @@ _MOFFSET_START_SONG               00000022
 _MOFFSET_STOP_SONG                00000026
 _MOFFSET_SYS_EX                   0000000E
 _MOFFSET_SYS_EX_END               0000001C
-_MOFFSET_SYS_RESET                0000002C
-_MOFFSET_TR                       0000001A
-_MOFFSET_TT                       0000001E
-_MOFFSET_UBS                      00000018
-_MOSSFEST_F4                      00000016
-MPASM  5.43                         SETUP.ASM   9-20-2014  21:12:19         PAGE 20
+MPASM  5.43                         SETUP.ASM   3-1-2016  23:35:19         PAGE 20
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+_MOFFSET_SYS_RESET                0000002C
+_MOFFSET_TR                       0000001A
+_MOFFSET_TT                       0000001E
+_MOFFSET_UBS                      00000018
+_MOSSFEST_F4                      00000016
 _MOSSFEST_F9                      00000020
 _MOSSFEST_FD                      00000028
 _OSC_ECIO_1H                      000000F5
@@ -1160,17 +1174,17 @@ _WRT0_ON_6L                       000000FE
 _WRT1_OFF_6L                      000000FF
 _WRT1_ON_6L                       000000FD
 _WRT2_OFF_6L                      000000FF
-_WRT2_ON_6L                       000000FB
-_WRT3_OFF_6L                      000000FF
-_WRT3_ON_6L                       000000F7
-_WRTB_OFF_6H                      000000FF
-_WRTB_ON_6H                       000000BF
-MPASM  5.43                         SETUP.ASM   9-20-2014  21:12:19         PAGE 21
+MPASM  5.43                         SETUP.ASM   3-1-2016  23:35:19         PAGE 21
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+_WRT2_ON_6L                       000000FB
+_WRT3_OFF_6L                      000000FF
+_WRT3_ON_6L                       000000F7
+_WRTB_OFF_6H                      000000FF
+_WRTB_ON_6H                       000000BF
 _WRTC_OFF_6H                      000000FF
 _WRTC_ON_6H                       000000DF
 _WRTD_OFF_6H                      000000FF

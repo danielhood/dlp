@@ -135,7 +135,7 @@ _PUT_NOTE_OFF_LIVE:
 	bsf	CV_FLAGS,CVF_PITCH		; Flag PITCH and VELOCITY as updated
 	movff	MSG_VELOCITY,CV_VELOCITY
 	bsf	CV_FLAGS,CVF_VELOCITY
-	bcf	CV_GATE,0			; Clear GATE
+	bcf	CV_GATE,GATE_1			; Clear GATE
 _END_NOTE_OFF:
 	clrf	MSG_COUNT			; Reset message count
 	goto	_RC_CLEANUP
@@ -172,27 +172,27 @@ _PUT_NOTE_OFF_LIVE_M1:
 _PROCESS_NOTE_OFF_GATE1:
 	movff	MSG_VELOCITY,CV_PITCH		; PWM1
 	bsf	CV_FLAGS,CVF_PITCH
-	bcf	CV_GATE,0			; Clear GATE1
+	bcf	CV_GATE,GATE_1			; Clear GATE1
 	clrf	MSG_COUNT			; Reset message count
 	goto	_RC_CLEANUP
 _PROCESS_NOTE_OFF_GATE2:
 	movff	MSG_VELOCITY,CV_VELOCITY	; PWM3
 	bsf	CV_FLAGS,CVF_VELOCITY
-	bcf	CV_GATE,1			; Clear GATE2
+	bcf	CV_GATE,GATE_2			; Clear GATE2
 	clrf	MSG_COUNT			; Reset message count
 	goto	_RC_CLEANUP
 _PROCESS_NOTE_OFF_GATE3:
 	movff	MSG_VELOCITY,CV_MOD		; PWM5
 	bsf	CV_FLAGS,CVF_MOD
-	bcf	CV_GATE,2			; Clear GATE3
+	bcf	CV_GATE,GATE_3			; Clear GATE3
 	clrf	MSG_COUNT			; Reset message count
 	goto	_RC_CLEANUP
 _PROCESS_NOTE_OFF_GATE4:
-	bcf	CV_GATE,3			; Clear GATE4
+	bcf	CV_GATE,GATE_4			; Clear GATE4
 	clrf	MSG_COUNT			; Reset message count
 	goto	_RC_CLEANUP
 _PROCESS_NOTE_OFF_GATE5:
-	bcf	CV_GATE,4			; Clear GATE5
+	bcf	CV_GATE,GATE_5			; Clear GATE5
 	clrf	MSG_COUNT			; Reset message count
 	goto	_RC_CLEANUP
 
@@ -214,7 +214,7 @@ _PROCESS_VELOCITY_NOTE_ON:
 	bsf	CV_FLAGS,CVF_PITCH		; Flag PITCH and VELOCITY as updated
 	movff	MSG_VELOCITY,CV_VELOCITY
 	bsf	CV_FLAGS,CVF_VELOCITY
-	bsf	CV_GATE,0			; Trigger GATE
+	bsf	CV_GATE,GATE_1			; Trigger GATE
 	clrf	MSG_COUNT			; Reset message count
 	goto	_RC_CLEANUP
 
@@ -250,27 +250,27 @@ _PROCESS_VELOCITY_NOTE_ON_M1:
 _PROCESS_NOTE_ON_GATE1:
 	movff	MSG_VELOCITY,CV_PITCH		; PWM1
 	bsf	CV_FLAGS,CVF_PITCH
-	bsf	CV_GATE,0			; Trigger GATE1
+	bsf	CV_GATE,GATE_1			; Trigger GATE1
 	clrf	MSG_COUNT			; Reset message count
 	goto	_RC_CLEANUP
 _PROCESS_NOTE_ON_GATE2:
 	movff	MSG_VELOCITY,CV_VELOCITY	; PWM3
 	bsf	CV_FLAGS,CVF_VELOCITY
-	bsf	CV_GATE,1			; Trigger GATE2
+	bsf	CV_GATE,GATE_2			; Trigger GATE2
 	clrf	MSG_COUNT			; Reset message count
 	goto	_RC_CLEANUP
 _PROCESS_NOTE_ON_GATE3:
 	movff	MSG_VELOCITY,CV_MOD		; PWM5
 	bsf	CV_FLAGS,CVF_MOD
-	bsf	CV_GATE,2			; Trigger GATE3
+	bsf	CV_GATE,GATE_3			; Trigger GATE3
 	clrf	MSG_COUNT			; Reset message count
 	goto	_RC_CLEANUP
 _PROCESS_NOTE_ON_GATE4:
-	bsf	CV_GATE,3			; Trigger GATE4
+	bsf	CV_GATE,GATE_4			; Trigger GATE4
 	clrf	MSG_COUNT			; Reset message count
 	goto	_RC_CLEANUP
 _PROCESS_NOTE_ON_GATE5:
-	bsf	CV_GATE,4			; Trigger GATE5
+	bsf	CV_GATE,GATE_5			; Trigger GATE5
 	clrf	MSG_COUNT			; Reset message count
 	goto	_RC_CLEANUP
 
@@ -300,10 +300,10 @@ _PROCESS_CC02:
 	movlw	0x3F			; Check if > 63
 	cpfsgt	CUR_BYTE
 	goto	_CC02_OFF
-	bsf	CV_GATE,1		; Trigger Gate
+	bsf	CV_GATE,GATE_2		; Trigger Gate
 	goto	_END_CVALUE
 _CC02_OFF:
-	bcf	CV_GATE,1		; Clear Gate
+	bcf	CV_GATE,GATE_2		; Clear Gate
 	goto	_END_CVALUE
 _PROCESS_CC03:
 	movlw	0x03
@@ -312,10 +312,10 @@ _PROCESS_CC03:
 	movlw	0x3F			; Check if > 63
 	cpfsgt	CUR_BYTE
 	goto	_CC03_OFF
-	bsf	CV_GATE,2		; Trigger Gate
+	bsf	CV_GATE,GATE_3		; Trigger Gate
 	goto	_END_CVALUE
 _CC03_OFF:
-	bcf	CV_GATE,2		; Clear Gate
+	bcf	CV_GATE,GATE_3		; Clear Gate
 	goto	_END_CVALUE
 _PROCESS_CC04:
 	movlw	0x04
@@ -324,10 +324,10 @@ _PROCESS_CC04:
 	movlw	0x3F			; Check if > 63
 	cpfsgt	CUR_BYTE
 	goto	_CC04_OFF
-	bsf	CV_GATE,3		; Trigger Gate
+	bsf	CV_GATE,GATE_4		; Trigger Gate
 	goto	_END_CVALUE
 _CC04_OFF:
-	bcf	CV_GATE,3		; Clear Gate
+	bcf	CV_GATE,GATE_4		; Clear Gate
 	goto	_END_CVALUE
 _PROCESS_CC05:
 	movlw	0x05
@@ -336,10 +336,10 @@ _PROCESS_CC05:
 	movlw	0x3F			; Check if > 63
 	cpfsgt	CUR_BYTE
 	goto	_CC05_OFF
-	bsf	CV_GATE,4		; Trigger Gate
+	bsf	CV_GATE,GATE_5		; Trigger Gate
 	goto	_END_CVALUE
 _CC05_OFF:
-	bcf	CV_GATE,4		; Clear Gate
+	bcf	CV_GATE,GATE_5		; Clear Gate
 	goto	_END_CVALUE
 _END_CVALUE:
 	clrf	MSG_COUNT		; Reset message count
