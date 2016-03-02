@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="7.5.0">
+<eagle version="7.2.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -2610,18 +2610,18 @@ Mors</description>
 <sheets>
 <sheet>
 <plain>
-<text x="137.16" y="93.98" size="1.778" layer="97">MIDI to CV v2.0 (Multi Mode)
+<text x="137.16" y="93.98" size="1.778" layer="97">MIDI to CV v2.2 (Multi Mode)
 
 Either mode responds to all MIDI channels
 
-MODE0: Synth mode 
+MODE0: Synth mode (switch closed)
 - CV1: PITCH
 - CV2: VEL
 - CV3: MOD (CC1)
 - GATE1: GATE
 - GATE2-5: CC2-5 &gt; 63
 
-MODE1: Drum mode
+MODE1: Drum mode (switch open)
 - Responds to C1, C#1, D1, D#1, E1
 - CV1: VEL (C1)
 - CV2: VEL (C#1)
@@ -3142,30 +3142,6 @@ MODE1: Drum mode
 <junction x="27.94" y="111.76"/>
 </segment>
 </net>
-<net name="GATE1" class="0">
-<segment>
-<pinref part="JP2" gate="A" pin="2"/>
-<wire x1="-10.16" y1="109.22" x2="-17.78" y2="109.22" width="0.1524" layer="91"/>
-<label x="-22.86" y="109.22" size="1.778" layer="95"/>
-</segment>
-<segment>
-<pinref part="R1" gate="G$1" pin="1"/>
-<wire x1="-17.78" y1="88.9" x2="-20.32" y2="88.9" width="0.1524" layer="91"/>
-<label x="-25.4" y="88.9" size="1.778" layer="95"/>
-</segment>
-</net>
-<net name="GATE2" class="0">
-<segment>
-<pinref part="JP2" gate="A" pin="4"/>
-<wire x1="-10.16" y1="111.76" x2="-17.78" y2="111.76" width="0.1524" layer="91"/>
-<label x="-22.86" y="111.76" size="1.778" layer="95"/>
-</segment>
-<segment>
-<pinref part="R2" gate="G$1" pin="1"/>
-<wire x1="-17.78" y1="81.28" x2="-20.32" y2="81.28" width="0.1524" layer="91"/>
-<label x="-25.4" y="81.28" size="1.778" layer="95"/>
-</segment>
-</net>
 <net name="GATE3" class="0">
 <segment>
 <pinref part="JP2" gate="A" pin="6"/>
@@ -3176,30 +3152,6 @@ MODE1: Drum mode
 <pinref part="R3" gate="G$1" pin="1"/>
 <wire x1="-17.78" y1="73.66" x2="-20.32" y2="73.66" width="0.1524" layer="91"/>
 <label x="-25.4" y="73.66" size="1.778" layer="95"/>
-</segment>
-</net>
-<net name="GATE4" class="0">
-<segment>
-<pinref part="JP2" gate="A" pin="8"/>
-<wire x1="-10.16" y1="116.84" x2="-17.78" y2="116.84" width="0.1524" layer="91"/>
-<label x="-22.86" y="116.84" size="1.778" layer="95"/>
-</segment>
-<segment>
-<pinref part="R4" gate="G$1" pin="1"/>
-<wire x1="-17.78" y1="66.04" x2="-20.32" y2="66.04" width="0.1524" layer="91"/>
-<label x="-25.4" y="66.04" size="1.778" layer="95"/>
-</segment>
-</net>
-<net name="GATE5" class="0">
-<segment>
-<pinref part="JP2" gate="A" pin="9"/>
-<wire x1="-2.54" y1="119.38" x2="5.08" y2="119.38" width="0.1524" layer="91"/>
-<label x="5.08" y="119.38" size="1.778" layer="95"/>
-</segment>
-<segment>
-<pinref part="R5" gate="G$1" pin="2"/>
-<wire x1="-17.78" y1="58.42" x2="-20.32" y2="58.42" width="0.1524" layer="91"/>
-<label x="-25.4" y="58.42" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="CV2" class="0">
@@ -3236,6 +3188,54 @@ MODE1: Drum mode
 <pinref part="R12" gate="G$1" pin="2"/>
 <wire x1="147.32" y1="63.5" x2="149.86" y2="63.5" width="0.1524" layer="91"/>
 <label x="149.86" y="63.5" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="GATE5" class="0">
+<segment>
+<pinref part="R1" gate="G$1" pin="1"/>
+<wire x1="-17.78" y1="88.9" x2="-20.32" y2="88.9" width="0.1524" layer="91"/>
+<label x="-25.4" y="88.9" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="JP2" gate="A" pin="2"/>
+<wire x1="-10.16" y1="109.22" x2="-17.78" y2="109.22" width="0.1524" layer="91"/>
+<label x="-22.86" y="109.22" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="GATE4" class="0">
+<segment>
+<pinref part="R2" gate="G$1" pin="1"/>
+<wire x1="-17.78" y1="81.28" x2="-20.32" y2="81.28" width="0.1524" layer="91"/>
+<label x="-25.4" y="81.28" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="JP2" gate="A" pin="4"/>
+<wire x1="-10.16" y1="111.76" x2="-17.78" y2="111.76" width="0.1524" layer="91"/>
+<label x="-22.86" y="111.76" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="GATE2" class="0">
+<segment>
+<pinref part="R4" gate="G$1" pin="1"/>
+<wire x1="-17.78" y1="66.04" x2="-20.32" y2="66.04" width="0.1524" layer="91"/>
+<label x="-25.4" y="66.04" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="JP2" gate="A" pin="8"/>
+<wire x1="-10.16" y1="116.84" x2="-17.78" y2="116.84" width="0.1524" layer="91"/>
+<label x="-22.86" y="116.84" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="GATE1" class="0">
+<segment>
+<pinref part="R5" gate="G$1" pin="2"/>
+<wire x1="-17.78" y1="58.42" x2="-20.32" y2="58.42" width="0.1524" layer="91"/>
+<label x="-25.4" y="58.42" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="JP2" gate="A" pin="9"/>
+<wire x1="-2.54" y1="119.38" x2="5.08" y2="119.38" width="0.1524" layer="91"/>
+<label x="5.08" y="119.38" size="1.778" layer="95"/>
 </segment>
 </net>
 </nets>
