@@ -3660,6 +3660,7 @@ Operational amplifiers,  comparators, voltage regulators, ADCs, DACs, etc.&lt;p&
 <part name="JP11" library="pinhead" deviceset="PINHD-1X2" device="" value="ENV OUT"/>
 <part name="GND46" library="supply1" deviceset="0V" device=""/>
 <part name="GND47" library="supply1" deviceset="0V" device=""/>
+<part name="D5" library="_common" deviceset="1N4148" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -3667,6 +3668,7 @@ Operational amplifiers,  comparators, voltage regulators, ADCs, DACs, etc.&lt;p&
 <text x="58.42" y="137.16" size="1.778" layer="91">- Quad Decay Envelope
 - Single VCA</text>
 <frame x1="-281.94" y1="-71.12" x2="93.98" y2="152.4" columns="8" rows="5" layer="91"/>
+<text x="-144.78" y="134.62" size="1.778" layer="91">Need to test this, but i think all the dcy's need a diode here to prevent the cap drain through the op amp</text>
 </plain>
 <instances>
 <instance part="R1" gate="G$1" x="-20.32" y="91.44" rot="R180"/>
@@ -3825,6 +3827,7 @@ Operational amplifiers,  comparators, voltage regulators, ADCs, DACs, etc.&lt;p&
 <instance part="JP11" gate="G$1" x="83.82" y="-27.94" rot="MR180"/>
 <instance part="GND46" gate="1" x="76.2" y="-38.1"/>
 <instance part="GND47" gate="1" x="33.02" y="-40.64"/>
+<instance part="D5" gate="G$1" x="-152.4" y="119.38"/>
 </instances>
 <busses>
 </busses>
@@ -4342,17 +4345,9 @@ Operational amplifiers,  comparators, voltage regulators, ADCs, DACs, etc.&lt;p&
 <pinref part="IC4" gate="A" pin="OUT"/>
 <wire x1="-172.72" y1="111.76" x2="-157.48" y2="111.76" width="0.1524" layer="91"/>
 <wire x1="-157.48" y1="111.76" x2="-157.48" y2="119.38" width="0.1524" layer="91"/>
-<pinref part="IC4" gate="B" pin="+IN"/>
-<wire x1="-157.48" y1="119.38" x2="-149.86" y2="119.38" width="0.1524" layer="91"/>
-<pinref part="C3" gate="G$1" pin="+"/>
-<wire x1="-149.86" y1="119.38" x2="-139.7" y2="119.38" width="0.1524" layer="91"/>
-<wire x1="-139.7" y1="119.38" x2="-134.62" y2="119.38" width="0.1524" layer="91"/>
-<wire x1="-149.86" y1="119.38" x2="-149.86" y2="116.84" width="0.1524" layer="91"/>
-<pinref part="RV1" gate="G$1" pin="2"/>
-<wire x1="-139.7" y1="119.38" x2="-139.7" y2="109.22" width="0.1524" layer="91"/>
+<pinref part="D5" gate="G$1" pin="A"/>
+<wire x1="-157.48" y1="119.38" x2="-154.94" y2="119.38" width="0.1524" layer="91"/>
 <junction x="-157.48" y="119.38"/>
-<junction x="-139.7" y="119.38"/>
-<junction x="-149.86" y="119.38"/>
 </segment>
 </net>
 <net name="N$23" class="0">
@@ -4791,6 +4786,25 @@ Operational amplifiers,  comparators, voltage regulators, ADCs, DACs, etc.&lt;p&
 <wire x1="-20.32" y1="-53.34" x2="-20.32" y2="-43.18" width="0.1524" layer="91"/>
 <pinref part="IC5" gate="D" pin="I1"/>
 <wire x1="-20.32" y1="-43.18" x2="-15.24" y2="-43.18" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$63" class="0">
+<segment>
+<pinref part="IC4" gate="B" pin="+IN"/>
+<pinref part="RV1" gate="G$1" pin="2"/>
+<pinref part="C3" gate="G$1" pin="+"/>
+<wire x1="-149.86" y1="119.38" x2="-149.86" y2="116.84" width="0.1524" layer="91"/>
+<wire x1="-149.86" y1="119.38" x2="-139.7" y2="119.38" width="0.1524" layer="91"/>
+<wire x1="-139.7" y1="119.38" x2="-139.7" y2="109.22" width="0.1524" layer="91"/>
+<junction x="-139.7" y="119.38"/>
+<wire x1="-139.7" y1="119.38" x2="-134.62" y2="119.38" width="0.1524" layer="91"/>
+<pinref part="D5" gate="G$1" pin="C"/>
+<junction x="-149.86" y="119.38"/>
+</segment>
+</net>
+<net name="N$64" class="0">
+<segment>
+<wire x1="-152.4" y1="124.46" x2="-144.78" y2="132.08" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>

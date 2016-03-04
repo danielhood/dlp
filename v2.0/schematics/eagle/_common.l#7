@@ -269,20 +269,18 @@ grid 2.032 mm, diameter 5 mm</description>
 <pad name="GND" x="-3.81" y="0" drill="0.8" shape="square"/>
 <pad name="HOT" x="3.81" y="0" drill="0.8" shape="square"/>
 <circle x="0" y="0" radius="3.5921" width="0.127" layer="21"/>
-<text x="-6.35" y="-2.54" size="1.27" layer="21">GND</text>
-<text x="2.54" y="-2.54" size="1.27" layer="21">HOT</text>
+<text x="-6.35" y="-3.175" size="1.27" layer="21">GND</text>
+<text x="2.54" y="-3.175" size="1.27" layer="21">HOT</text>
+<text x="-3.175" y="-1.905" size="1.27" layer="25">&gt;NAME</text>
+<text x="-4.445" y="1.27" size="1.27" layer="25">&gt;VALUE</text>
 </package>
 <package name="R-VAR">
 <pad name="R1" x="-2.54" y="0" drill="0.8" shape="square"/>
 <pad name="VAR" x="0" y="0" drill="0.8" shape="square"/>
 <pad name="R2" x="2.54" y="0" drill="0.8" shape="square"/>
-<circle x="0" y="2.54" radius="3.5921" width="0.127" layer="21"/>
-<circle x="0" y="2.54" radius="0.635" width="0.127" layer="21"/>
-<wire x1="0" y1="2.54" x2="-1.27" y2="1.27" width="0.127" layer="21"/>
-<wire x1="-1.27" y1="1.27" x2="-2.54" y2="0" width="0.127" layer="21"/>
-<wire x1="-1.27" y1="1.27" x2="1.27" y2="1.27" width="0.127" layer="21" curve="-270"/>
-<text x="-5.08" y="3.81" size="1.27" layer="25">&gt;NAME</text>
-<text x="-5.08" y="1.27" size="1.27" layer="25">&gt;VALUE</text>
+<circle x="0" y="0" radius="3.5921" width="0.127" layer="21"/>
+<text x="-3.81" y="-2.54" size="1.27" layer="25">&gt;NAME</text>
+<text x="-3.81" y="1.27" size="1.27" layer="27">&gt;VALUE</text>
 </package>
 <package name="RTRIM3304W">
 <description>&lt;b&gt;Trimm resistor&lt;/b&gt; BOURNS&lt;p&gt;
@@ -1072,7 +1070,7 @@ high speed (Philips)</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="R-VAR" uservalue="yes">
+<deviceset name="R-VAR" prefix="RV" uservalue="yes">
 <gates>
 <gate name="G$1" symbol="R-VAR-US" x="0" y="0"/>
 </gates>
@@ -1277,6 +1275,18 @@ Source: http://ww1.microchip.com/downloads/en/devicedoc/39616d.pdf</description>
 <connect gate="G$1" pin="C" pad="3"/>
 <connect gate="G$1" pin="E" pad="1"/>
 </connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="2N3704">
+<gates>
+<gate name="G$1" symbol="NPN" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="TO92">
 <technologies>
 <technology name=""/>
 </technologies>
