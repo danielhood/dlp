@@ -1286,7 +1286,7 @@ Source: http://ww1.microchip.com/downloads/en/devicedoc/39616d.pdf</description>
 <gate name="G$1" symbol="NPN" x="0" y="0"/>
 </gates>
 <devices>
-<device name="ECB" package="TO92">
+<device name="" package="TO92">
 <connects>
 <connect gate="G$1" pin="B" pad="3"/>
 <connect gate="G$1" pin="C" pad="2"/>

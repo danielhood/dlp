@@ -1281,6 +1281,18 @@ Source: http://ww1.microchip.com/downloads/en/devicedoc/39616d.pdf</description>
 </device>
 </devices>
 </deviceset>
+<deviceset name="2N3704">
+<gates>
+<gate name="G$1" symbol="NPN" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="TO92">
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
 </devicesets>
 </library>
 </drawing>
