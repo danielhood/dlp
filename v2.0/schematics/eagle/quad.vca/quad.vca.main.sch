@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="7.2.0">
+<eagle version="7.5.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -6542,7 +6542,7 @@ http://www.musicfromouterspace.com/analogsynth_new/DUALVCA/DLLVCA001.html</text>
 <instance part="P+3" gate="1" x="5.08" y="81.28"/>
 <instance part="CVOFFS-A" gate="G$1" x="25.4" y="111.76" rot="R90"/>
 <instance part="BIAS-A" gate="G$1" x="33.02" y="15.24"/>
-<instance part="Q2" gate="G$1" x="50.8" y="71.12"/>
+<instance part="Q2" gate="G$1" x="50.8" y="71.12" rot="MR180"/>
 <instance part="Q1" gate="G$1" x="40.64" y="86.36"/>
 <instance part="IC1" gate="A" x="20.32" y="86.36" rot="MR180"/>
 <instance part="IC2" gate="OTA1" x="45.72" y="40.64"/>
@@ -6608,7 +6608,7 @@ http://www.musicfromouterspace.com/analogsynth_new/DUALVCA/DLLVCA001.html</text>
 <instance part="P+9" gate="1" x="139.7" y="81.28"/>
 <instance part="CVOFFS-B" gate="G$1" x="160.02" y="111.76" rot="R90"/>
 <instance part="BIAS-B" gate="G$1" x="167.64" y="15.24"/>
-<instance part="Q4" gate="G$1" x="185.42" y="71.12"/>
+<instance part="Q4" gate="G$1" x="185.42" y="71.12" rot="MR180"/>
 <instance part="Q3" gate="G$1" x="175.26" y="86.36"/>
 <instance part="GND14" gate="1" x="119.38" y="33.02"/>
 <instance part="GND13" gate="1" x="119.38" y="78.74"/>
@@ -6681,11 +6681,11 @@ http://www.musicfromouterspace.com/analogsynth_new/DUALVCA/DLLVCA001.html</text>
 <pinref part="R4" gate="G$1" pin="1"/>
 </segment>
 <segment>
-<pinref part="Q2" gate="G$1" pin="C"/>
-<wire x1="53.34" y1="76.2" x2="53.34" y2="78.74" width="0.1524" layer="91"/>
-<wire x1="53.34" y1="78.74" x2="60.96" y2="78.74" width="0.1524" layer="91"/>
 <pinref part="GND9" gate="1" pin="0V"/>
 <wire x1="60.96" y1="78.74" x2="60.96" y2="76.2" width="0.1524" layer="91"/>
+<pinref part="Q2" gate="G$1" pin="E"/>
+<wire x1="53.34" y1="76.2" x2="53.34" y2="78.74" width="0.1524" layer="91"/>
+<wire x1="53.34" y1="78.74" x2="60.96" y2="78.74" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="R7" gate="G$1" pin="1"/>
@@ -6734,11 +6734,11 @@ http://www.musicfromouterspace.com/analogsynth_new/DUALVCA/DLLVCA001.html</text>
 <pinref part="R27" gate="G$1" pin="1"/>
 </segment>
 <segment>
-<pinref part="Q4" gate="G$1" pin="C"/>
-<wire x1="187.96" y1="76.2" x2="187.96" y2="78.74" width="0.1524" layer="91"/>
-<wire x1="187.96" y1="78.74" x2="195.58" y2="78.74" width="0.1524" layer="91"/>
 <pinref part="GND20" gate="1" pin="0V"/>
 <wire x1="195.58" y1="78.74" x2="195.58" y2="76.2" width="0.1524" layer="91"/>
+<pinref part="Q4" gate="G$1" pin="E"/>
+<wire x1="187.96" y1="76.2" x2="187.96" y2="78.74" width="0.1524" layer="91"/>
+<wire x1="187.96" y1="78.74" x2="195.58" y2="78.74" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="R30" gate="G$1" pin="1"/>
@@ -6959,16 +6959,10 @@ http://www.musicfromouterspace.com/analogsynth_new/DUALVCA/DLLVCA001.html</text>
 <pinref part="Q1" gate="G$1" pin="E"/>
 <pinref part="R11" gate="G$1" pin="2"/>
 <wire x1="43.18" y1="81.28" x2="43.18" y2="71.12" width="0.1524" layer="91"/>
-<wire x1="43.18" y1="68.58" x2="43.18" y2="71.12" width="0.1524" layer="91"/>
 <pinref part="Q2" gate="G$1" pin="B"/>
+<wire x1="43.18" y1="71.12" x2="43.18" y2="68.58" width="0.1524" layer="91"/>
 <wire x1="43.18" y1="71.12" x2="45.72" y2="71.12" width="0.1524" layer="91"/>
 <junction x="43.18" y="71.12"/>
-</segment>
-</net>
-<net name="N$9" class="0">
-<segment>
-<pinref part="Q2" gate="G$1" pin="E"/>
-<pinref part="R13" gate="G$1" pin="2"/>
 </segment>
 </net>
 <net name="N$8" class="0">
@@ -7190,16 +7184,10 @@ http://www.musicfromouterspace.com/analogsynth_new/DUALVCA/DLLVCA001.html</text>
 <pinref part="Q3" gate="G$1" pin="E"/>
 <pinref part="R34" gate="G$1" pin="2"/>
 <wire x1="177.8" y1="81.28" x2="177.8" y2="71.12" width="0.1524" layer="91"/>
-<wire x1="177.8" y1="68.58" x2="177.8" y2="71.12" width="0.1524" layer="91"/>
 <pinref part="Q4" gate="G$1" pin="B"/>
-<wire x1="177.8" y1="71.12" x2="180.34" y2="71.12" width="0.1524" layer="91"/>
+<wire x1="177.8" y1="71.12" x2="177.8" y2="68.58" width="0.1524" layer="91"/>
+<wire x1="180.34" y1="71.12" x2="177.8" y2="71.12" width="0.1524" layer="91"/>
 <junction x="177.8" y="71.12"/>
-</segment>
-</net>
-<net name="N$30" class="0">
-<segment>
-<pinref part="Q4" gate="G$1" pin="E"/>
-<pinref part="R36" gate="G$1" pin="2"/>
 </segment>
 </net>
 <net name="N$31" class="0">
@@ -7341,6 +7329,18 @@ http://www.musicfromouterspace.com/analogsynth_new/DUALVCA/DLLVCA001.html</text>
 <pinref part="JP2" gate="A" pin="2"/>
 <wire x1="187.96" y1="53.34" x2="198.12" y2="53.34" width="0.1524" layer="91"/>
 <pinref part="IC2" gate="OTA2" pin="I_BIAS"/>
+</segment>
+</net>
+<net name="N$9" class="0">
+<segment>
+<pinref part="R13" gate="G$1" pin="2"/>
+<pinref part="Q2" gate="G$1" pin="C"/>
+</segment>
+</net>
+<net name="N$30" class="0">
+<segment>
+<pinref part="R36" gate="G$1" pin="2"/>
+<pinref part="Q4" gate="G$1" pin="C"/>
 </segment>
 </net>
 </nets>

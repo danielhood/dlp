@@ -4312,7 +4312,7 @@ body 3.9 mm/JEDEC MS-012AC</description>
 <part name="P-1" library="supply1" deviceset="-12V" device=""/>
 <part name="P+2" library="supply1" deviceset="+12V" device=""/>
 <part name="P-2" library="supply1" deviceset="-12V" device=""/>
-<part name="R7" library="resistor" deviceset="R-US_" device="0207/7" value="150"/>
+<part name="R7" library="resistor" deviceset="R-US_" device="0207/7" value="1K"/>
 <part name="R5" library="resistor" deviceset="R-US_" device="0207/7" value="100K"/>
 <part name="GND6" library="supply1" deviceset="0V" device=""/>
 <part name="GND7" library="supply1" deviceset="0V" device=""/>
@@ -4330,7 +4330,6 @@ body 3.9 mm/JEDEC MS-012AC</description>
 <part name="J8" library="jacks" deviceset="ACJM-MV35-2S" device="" value="OUT2"/>
 <part name="GND16" library="supply1" deviceset="0V" device=""/>
 <part name="P+9" library="supply1" deviceset="+12V" device=""/>
-<part name="Q4" library="_common" deviceset="2N3906" device=""/>
 <part name="Q3" library="_common" deviceset="2N3904" device=""/>
 <part name="GND14" library="supply1" deviceset="0V" device=""/>
 <part name="GND22" library="supply1" deviceset="0V" device=""/>
@@ -4342,7 +4341,7 @@ body 3.9 mm/JEDEC MS-012AC</description>
 <part name="R36" library="resistor" deviceset="R-US_" device="0207/7" value="20K"/>
 <part name="P-10" library="supply1" deviceset="-12V" device=""/>
 <part name="P+12" library="supply1" deviceset="+12V" device=""/>
-<part name="R30" library="resistor" deviceset="R-US_" device="0207/7" value="150"/>
+<part name="R30" library="resistor" deviceset="R-US_" device="0207/7" value="1K"/>
 <part name="R28" library="resistor" deviceset="R-US_" device="0207/7" value="100K"/>
 <part name="GND17" library="supply1" deviceset="0V" device=""/>
 <part name="GND18" library="supply1" deviceset="0V" device=""/>
@@ -4360,7 +4359,6 @@ body 3.9 mm/JEDEC MS-012AC</description>
 <part name="J6" library="jacks" deviceset="ACJM-MV35-2S" device="" value="OUT3"/>
 <part name="GND2" library="supply1" deviceset="0V" device=""/>
 <part name="P+4" library="supply1" deviceset="+12V" device=""/>
-<part name="Q5" library="_common" deviceset="2N3906" device=""/>
 <part name="Q6" library="_common" deviceset="2N3904" device=""/>
 <part name="IC4" library="ota" deviceset="LM13700" device="N"/>
 <part name="GND4" library="supply1" deviceset="0V" device=""/>
@@ -4373,7 +4371,7 @@ body 3.9 mm/JEDEC MS-012AC</description>
 <part name="R12" library="resistor" deviceset="R-US_" device="0207/7" value="20K"/>
 <part name="P-3" library="supply1" deviceset="-12V" device=""/>
 <part name="P+5" library="supply1" deviceset="+12V" device=""/>
-<part name="R16" library="resistor" deviceset="R-US_" device="0207/7" value="150"/>
+<part name="R16" library="resistor" deviceset="R-US_" device="0207/7" value="1K"/>
 <part name="R17" library="resistor" deviceset="R-US_" device="0207/7" value="100K"/>
 <part name="GND15" library="supply1" deviceset="0V" device=""/>
 <part name="GND21" library="supply1" deviceset="0V" device=""/>
@@ -4391,7 +4389,6 @@ body 3.9 mm/JEDEC MS-012AC</description>
 <part name="J11" library="jacks" deviceset="ACJM-MV35-2S" device="" value="OUT4"/>
 <part name="GND25" library="supply1" deviceset="0V" device=""/>
 <part name="P+10" library="supply1" deviceset="+12V" device=""/>
-<part name="Q7" library="_common" deviceset="2N3906" device=""/>
 <part name="Q8" library="_common" deviceset="2N3904" device=""/>
 <part name="GND26" library="supply1" deviceset="0V" device=""/>
 <part name="GND27" library="supply1" deviceset="0V" device=""/>
@@ -4403,7 +4400,7 @@ body 3.9 mm/JEDEC MS-012AC</description>
 <part name="R39" library="resistor" deviceset="R-US_" device="0207/7" value="20K"/>
 <part name="P-7" library="supply1" deviceset="-12V" device=""/>
 <part name="P+11" library="supply1" deviceset="+12V" device=""/>
-<part name="R40" library="resistor" deviceset="R-US_" device="0207/7" value="150"/>
+<part name="R40" library="resistor" deviceset="R-US_" device="0207/7" value="1K"/>
 <part name="R41" library="resistor" deviceset="R-US_" device="0207/7" value="100K"/>
 <part name="GND29" library="supply1" deviceset="0V" device=""/>
 <part name="GND30" library="supply1" deviceset="0V" device=""/>
@@ -4436,6 +4433,29 @@ body 3.9 mm/JEDEC MS-012AC</description>
 <part name="P+19" library="supply1" deviceset="+12V" device=""/>
 <part name="C8" library="_common" deviceset="CC-US" device="025-024X044" value="0.1uF"/>
 <part name="P-15" library="supply1" deviceset="-12V" device=""/>
+<part name="Q4" library="_common" deviceset="2N3906" device=""/>
+<part name="Q5" library="_common" deviceset="2N3906" device=""/>
+<part name="Q7" library="_common" deviceset="2N3906" device=""/>
+<part name="R49" library="resistor" deviceset="R-US_" device="0207/7" value="100K"/>
+<part name="R50" library="resistor" deviceset="R-US_" device="0207/7" value="220K"/>
+<part name="R51" library="resistor" deviceset="R-US_" device="0207/7" value="2.2M"/>
+<part name="P+20" library="supply1" deviceset="+12V" device=""/>
+<part name="P-16" library="supply1" deviceset="-12V" device=""/>
+<part name="R52" library="resistor" deviceset="R-US_" device="0207/7" value="100K"/>
+<part name="R53" library="resistor" deviceset="R-US_" device="0207/7" value="220K"/>
+<part name="R54" library="resistor" deviceset="R-US_" device="0207/7" value="2.2M"/>
+<part name="P+21" library="supply1" deviceset="+12V" device=""/>
+<part name="P-17" library="supply1" deviceset="-12V" device=""/>
+<part name="R55" library="resistor" deviceset="R-US_" device="0207/7" value="100K"/>
+<part name="R56" library="resistor" deviceset="R-US_" device="0207/7" value="220K"/>
+<part name="R57" library="resistor" deviceset="R-US_" device="0207/7" value="2.2M"/>
+<part name="P+22" library="supply1" deviceset="+12V" device=""/>
+<part name="P-18" library="supply1" deviceset="-12V" device=""/>
+<part name="R58" library="resistor" deviceset="R-US_" device="0207/7" value="100K"/>
+<part name="R59" library="resistor" deviceset="R-US_" device="0207/7" value="220K"/>
+<part name="R60" library="resistor" deviceset="R-US_" device="0207/7" value="2.2M"/>
+<part name="P+23" library="supply1" deviceset="+12V" device=""/>
+<part name="P-19" library="supply1" deviceset="-12V" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -4443,22 +4463,20 @@ body 3.9 mm/JEDEC MS-012AC</description>
 <text x="-17.78" y="10.16" size="1.778" layer="91">Adapted from Ray Wilson's RJWSoft Dual Log/Linear VCA:
 http://www.musicfromouterspace.com/analogsynth_new/DUALVCA/DLLVCA001.html</text>
 <text x="114.3" y="10.16" size="1.778" layer="91">NOTE: When we break off the panel board, normal each set of inputs togethr (CV's and IN's)</text>
-<text x="15.24" y="27.94" size="1.778" layer="91">Update Value</text>
-<text x="66.04" y="78.74" size="1.778" layer="91">Update Value</text>
 </plain>
 <instances>
 <instance part="J3" gate="G$1" x="-15.24" y="35.56"/>
 <instance part="J4" gate="G$1" x="104.14" y="25.4" rot="MR0"/>
 <instance part="GND5" gate="1" x="5.08" y="55.88"/>
 <instance part="P+3" gate="1" x="5.08" y="81.28"/>
-<instance part="Q2" gate="G$1" x="50.8" y="71.12"/>
+<instance part="Q2" gate="G$1" x="50.8" y="71.12" rot="MR180"/>
 <instance part="Q1" gate="G$1" x="40.64" y="86.36"/>
 <instance part="IC1" gate="A" x="20.32" y="86.36" rot="MR180"/>
 <instance part="IC2" gate="OTA1" x="45.72" y="40.64"/>
 <instance part="IC2" gate="BUF1" x="71.12" y="38.1"/>
 <instance part="IC2" gate="OTA2" x="180.34" y="40.64"/>
 <instance part="IC2" gate="BUF2" x="205.74" y="38.1"/>
-<instance part="IC2" gate="SUPPLY" x="223.52" y="86.36"/>
+<instance part="IC2" gate="SUPPLY" x="220.98" y="96.52"/>
 <instance part="GND3" gate="1" x="-15.24" y="33.02"/>
 <instance part="GND11" gate="1" x="104.14" y="22.86"/>
 <instance part="R3" gate="G$1" x="5.08" y="73.66" rot="R90"/>
@@ -4466,14 +4484,14 @@ http://www.musicfromouterspace.com/analogsynth_new/DUALVCA/DLLVCA001.html</text>
 <instance part="R9" gate="G$1" x="22.86" y="96.52"/>
 <instance part="GND9" gate="1" x="60.96" y="73.66"/>
 <instance part="R11" gate="G$1" x="43.18" y="63.5" rot="R90"/>
-<instance part="R13" gate="G$1" x="53.34" y="60.96" rot="R90"/>
+<instance part="R13" gate="G$1" x="53.34" y="55.88" rot="R90"/>
 <instance part="P-5" gate="1" x="43.18" y="53.34"/>
 <instance part="P+6" gate="1" x="43.18" y="99.06"/>
-<instance part="P+1" gate="1" x="223.52" y="96.52"/>
-<instance part="P-1" gate="1" x="223.52" y="76.2"/>
-<instance part="IC1" gate="P" x="231.14" y="86.36"/>
-<instance part="P+2" gate="1" x="231.14" y="96.52"/>
-<instance part="P-2" gate="1" x="231.14" y="76.2"/>
+<instance part="P+1" gate="1" x="220.98" y="106.68"/>
+<instance part="P-1" gate="1" x="220.98" y="86.36"/>
+<instance part="IC1" gate="P" x="228.6" y="96.52"/>
+<instance part="P+2" gate="1" x="228.6" y="106.68"/>
+<instance part="P-2" gate="1" x="228.6" y="86.36"/>
 <instance part="R7" gate="G$1" x="12.7" y="35.56" rot="R90"/>
 <instance part="R5" gate="G$1" x="5.08" y="43.18"/>
 <instance part="GND6" gate="1" x="12.7" y="25.4"/>
@@ -4492,7 +4510,6 @@ http://www.musicfromouterspace.com/analogsynth_new/DUALVCA/DLLVCA001.html</text>
 <instance part="J8" gate="G$1" x="238.76" y="25.4" rot="MR0"/>
 <instance part="GND16" gate="1" x="139.7" y="55.88"/>
 <instance part="P+9" gate="1" x="139.7" y="81.28"/>
-<instance part="Q4" gate="G$1" x="185.42" y="71.12"/>
 <instance part="Q3" gate="G$1" x="175.26" y="86.36"/>
 <instance part="GND14" gate="1" x="119.38" y="33.02"/>
 <instance part="GND22" gate="1" x="238.76" y="22.86"/>
@@ -4523,7 +4540,6 @@ http://www.musicfromouterspace.com/analogsynth_new/DUALVCA/DLLVCA001.html</text>
 <instance part="J6" gate="G$1" x="104.14" y="-71.12" rot="MR0"/>
 <instance part="GND2" gate="1" x="5.08" y="-40.64"/>
 <instance part="P+4" gate="1" x="5.08" y="-15.24"/>
-<instance part="Q5" gate="G$1" x="50.8" y="-25.4"/>
 <instance part="Q6" gate="G$1" x="40.64" y="-10.16"/>
 <instance part="IC4" gate="OTA1" x="45.72" y="-55.88"/>
 <instance part="IC4" gate="BUF1" x="71.12" y="-58.42"/>
@@ -4557,7 +4573,6 @@ http://www.musicfromouterspace.com/analogsynth_new/DUALVCA/DLLVCA001.html</text>
 <instance part="J11" gate="G$1" x="238.76" y="-71.12" rot="MR0"/>
 <instance part="GND25" gate="1" x="139.7" y="-40.64"/>
 <instance part="P+10" gate="1" x="139.7" y="-15.24"/>
-<instance part="Q7" gate="G$1" x="185.42" y="-25.4"/>
 <instance part="Q8" gate="G$1" x="175.26" y="-10.16"/>
 <instance part="GND26" gate="1" x="119.38" y="-63.5"/>
 <instance part="GND27" gate="1" x="238.76" y="-73.66"/>
@@ -4585,26 +4600,49 @@ http://www.musicfromouterspace.com/analogsynth_new/DUALVCA/DLLVCA001.html</text>
 <instance part="R48" gate="G$1" x="139.7" y="0" rot="R180"/>
 <instance part="IC1" gate="C" x="20.32" y="-10.16" rot="MR180"/>
 <instance part="IC1" gate="D" x="154.94" y="-10.16" rot="MR180"/>
-<instance part="IC4" gate="SUPPLY" x="238.76" y="86.36"/>
-<instance part="P+15" gate="1" x="238.76" y="96.52"/>
-<instance part="P-9" gate="1" x="238.76" y="76.2"/>
-<instance part="C1" gate="G$1" x="228.6" y="-15.24"/>
-<instance part="C2" gate="G$1" x="236.22" y="-15.24"/>
-<instance part="C3" gate="G$1" x="236.22" y="-25.4"/>
-<instance part="C4" gate="G$1" x="228.6" y="-25.4"/>
-<instance part="C5" gate="G$1" x="220.98" y="-15.24"/>
-<instance part="C6" gate="G$1" x="220.98" y="-25.4"/>
-<instance part="GND33" gate="1" x="251.46" y="-25.4"/>
-<instance part="P+16" gate="1" x="228.6" y="-7.62"/>
-<instance part="P+17" gate="1" x="220.98" y="-7.62"/>
-<instance part="P+18" gate="1" x="236.22" y="-7.62"/>
-<instance part="P-12" gate="1" x="220.98" y="-33.02"/>
-<instance part="P-13" gate="1" x="228.6" y="-33.02"/>
-<instance part="P-14" gate="1" x="236.22" y="-33.02"/>
-<instance part="C7" gate="G$1" x="243.84" y="-15.24"/>
-<instance part="P+19" gate="1" x="243.84" y="-7.62"/>
-<instance part="C8" gate="G$1" x="243.84" y="-25.4"/>
-<instance part="P-15" gate="1" x="243.84" y="-33.02"/>
+<instance part="IC4" gate="SUPPLY" x="236.22" y="96.52"/>
+<instance part="P+15" gate="1" x="236.22" y="106.68"/>
+<instance part="P-9" gate="1" x="236.22" y="86.36"/>
+<instance part="C1" gate="G$1" x="274.32" y="7.62"/>
+<instance part="C2" gate="G$1" x="281.94" y="7.62"/>
+<instance part="C3" gate="G$1" x="281.94" y="-2.54"/>
+<instance part="C4" gate="G$1" x="274.32" y="-2.54"/>
+<instance part="C5" gate="G$1" x="266.7" y="7.62"/>
+<instance part="C6" gate="G$1" x="266.7" y="-2.54"/>
+<instance part="GND33" gate="1" x="297.18" y="-2.54"/>
+<instance part="P+16" gate="1" x="274.32" y="15.24"/>
+<instance part="P+17" gate="1" x="266.7" y="15.24"/>
+<instance part="P+18" gate="1" x="281.94" y="15.24"/>
+<instance part="P-12" gate="1" x="266.7" y="-10.16"/>
+<instance part="P-13" gate="1" x="274.32" y="-10.16"/>
+<instance part="P-14" gate="1" x="281.94" y="-10.16"/>
+<instance part="C7" gate="G$1" x="289.56" y="7.62"/>
+<instance part="P+19" gate="1" x="289.56" y="15.24"/>
+<instance part="C8" gate="G$1" x="289.56" y="-2.54"/>
+<instance part="P-15" gate="1" x="289.56" y="-10.16"/>
+<instance part="Q4" gate="G$1" x="185.42" y="71.12" rot="MR180"/>
+<instance part="Q5" gate="G$1" x="185.42" y="-25.4" rot="MR180"/>
+<instance part="Q7" gate="G$1" x="50.8" y="-25.4" rot="MR180"/>
+<instance part="R49" gate="G$1" x="86.36" y="68.58" rot="R90"/>
+<instance part="R50" gate="G$1" x="86.36" y="58.42" rot="R90"/>
+<instance part="R51" gate="G$1" x="78.74" y="63.5" rot="R180"/>
+<instance part="P+20" gate="1" x="86.36" y="76.2"/>
+<instance part="P-16" gate="1" x="86.36" y="50.8"/>
+<instance part="R52" gate="G$1" x="220.98" y="68.58" rot="R90"/>
+<instance part="R53" gate="G$1" x="220.98" y="58.42" rot="R90"/>
+<instance part="R54" gate="G$1" x="213.36" y="63.5" rot="R180"/>
+<instance part="P+21" gate="1" x="220.98" y="76.2"/>
+<instance part="P-17" gate="1" x="220.98" y="50.8"/>
+<instance part="R55" gate="G$1" x="86.36" y="-27.94" rot="R90"/>
+<instance part="R56" gate="G$1" x="86.36" y="-38.1" rot="R90"/>
+<instance part="R57" gate="G$1" x="78.74" y="-33.02" rot="R180"/>
+<instance part="P+22" gate="1" x="86.36" y="-20.32"/>
+<instance part="P-18" gate="1" x="86.36" y="-45.72"/>
+<instance part="R58" gate="G$1" x="220.98" y="-27.94" rot="R90"/>
+<instance part="R59" gate="G$1" x="220.98" y="-38.1" rot="R90"/>
+<instance part="R60" gate="G$1" x="213.36" y="-33.02" rot="R180"/>
+<instance part="P+23" gate="1" x="220.98" y="-20.32"/>
+<instance part="P-19" gate="1" x="220.98" y="-45.72"/>
 </instances>
 <busses>
 </busses>
@@ -4627,11 +4665,11 @@ http://www.musicfromouterspace.com/analogsynth_new/DUALVCA/DLLVCA001.html</text>
 <pinref part="R4" gate="G$1" pin="1"/>
 </segment>
 <segment>
-<pinref part="Q2" gate="G$1" pin="C"/>
-<wire x1="53.34" y1="76.2" x2="53.34" y2="78.74" width="0.1524" layer="91"/>
 <wire x1="53.34" y1="78.74" x2="60.96" y2="78.74" width="0.1524" layer="91"/>
 <pinref part="GND9" gate="1" pin="0V"/>
 <wire x1="60.96" y1="78.74" x2="60.96" y2="76.2" width="0.1524" layer="91"/>
+<pinref part="Q2" gate="G$1" pin="E"/>
+<wire x1="53.34" y1="78.74" x2="53.34" y2="76.2" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="R7" gate="G$1" pin="1"/>
@@ -4669,11 +4707,11 @@ http://www.musicfromouterspace.com/analogsynth_new/DUALVCA/DLLVCA001.html</text>
 <pinref part="R27" gate="G$1" pin="1"/>
 </segment>
 <segment>
-<pinref part="Q4" gate="G$1" pin="C"/>
 <wire x1="187.96" y1="76.2" x2="187.96" y2="78.74" width="0.1524" layer="91"/>
 <wire x1="187.96" y1="78.74" x2="195.58" y2="78.74" width="0.1524" layer="91"/>
 <pinref part="GND20" gate="1" pin="0V"/>
 <wire x1="195.58" y1="78.74" x2="195.58" y2="76.2" width="0.1524" layer="91"/>
+<pinref part="Q4" gate="G$1" pin="E"/>
 </segment>
 <segment>
 <pinref part="R30" gate="G$1" pin="1"/>
@@ -4711,11 +4749,11 @@ http://www.musicfromouterspace.com/analogsynth_new/DUALVCA/DLLVCA001.html</text>
 <pinref part="R6" gate="G$1" pin="1"/>
 </segment>
 <segment>
-<pinref part="Q5" gate="G$1" pin="C"/>
 <wire x1="53.34" y1="-20.32" x2="53.34" y2="-17.78" width="0.1524" layer="91"/>
 <wire x1="53.34" y1="-17.78" x2="60.96" y2="-17.78" width="0.1524" layer="91"/>
 <pinref part="GND13" gate="1" pin="0V"/>
 <wire x1="60.96" y1="-17.78" x2="60.96" y2="-20.32" width="0.1524" layer="91"/>
+<pinref part="Q7" gate="G$1" pin="E"/>
 </segment>
 <segment>
 <pinref part="R16" gate="G$1" pin="1"/>
@@ -4753,11 +4791,11 @@ http://www.musicfromouterspace.com/analogsynth_new/DUALVCA/DLLVCA001.html</text>
 <pinref part="R31" gate="G$1" pin="1"/>
 </segment>
 <segment>
-<pinref part="Q7" gate="G$1" pin="C"/>
 <wire x1="187.96" y1="-20.32" x2="187.96" y2="-17.78" width="0.1524" layer="91"/>
 <wire x1="187.96" y1="-17.78" x2="195.58" y2="-17.78" width="0.1524" layer="91"/>
 <pinref part="GND28" gate="1" pin="0V"/>
 <wire x1="195.58" y1="-17.78" x2="195.58" y2="-20.32" width="0.1524" layer="91"/>
+<pinref part="Q5" gate="G$1" pin="E"/>
 </segment>
 <segment>
 <pinref part="R40" gate="G$1" pin="1"/>
@@ -4783,19 +4821,19 @@ http://www.musicfromouterspace.com/analogsynth_new/DUALVCA/DLLVCA001.html</text>
 <pinref part="C6" gate="G$1" pin="+"/>
 <pinref part="C1" gate="G$1" pin="2"/>
 <pinref part="C4" gate="G$1" pin="1"/>
-<wire x1="220.98" y1="-20.32" x2="228.6" y2="-20.32" width="0.1524" layer="91"/>
-<junction x="220.98" y="-20.32"/>
-<junction x="228.6" y="-20.32"/>
+<wire x1="266.7" y1="2.54" x2="274.32" y2="2.54" width="0.1524" layer="91"/>
+<junction x="266.7" y="2.54"/>
+<junction x="274.32" y="2.54"/>
 <pinref part="C2" gate="G$1" pin="2"/>
 <pinref part="C3" gate="G$1" pin="1"/>
-<wire x1="228.6" y1="-20.32" x2="236.22" y2="-20.32" width="0.1524" layer="91"/>
-<junction x="236.22" y="-20.32"/>
-<wire x1="236.22" y1="-20.32" x2="243.84" y2="-20.32" width="0.1524" layer="91"/>
+<wire x1="274.32" y1="2.54" x2="281.94" y2="2.54" width="0.1524" layer="91"/>
+<junction x="281.94" y="2.54"/>
+<wire x1="281.94" y1="2.54" x2="289.56" y2="2.54" width="0.1524" layer="91"/>
 <pinref part="GND33" gate="1" pin="0V"/>
-<wire x1="243.84" y1="-20.32" x2="251.46" y2="-20.32" width="0.1524" layer="91"/>
-<wire x1="251.46" y1="-20.32" x2="251.46" y2="-22.86" width="0.1524" layer="91"/>
+<wire x1="289.56" y1="2.54" x2="297.18" y2="2.54" width="0.1524" layer="91"/>
+<wire x1="297.18" y1="2.54" x2="297.18" y2="0" width="0.1524" layer="91"/>
 <pinref part="C7" gate="G$1" pin="2"/>
-<junction x="243.84" y="-20.32"/>
+<junction x="289.56" y="2.54"/>
 <pinref part="C8" gate="G$1" pin="1"/>
 </segment>
 </net>
@@ -4891,6 +4929,22 @@ http://www.musicfromouterspace.com/analogsynth_new/DUALVCA/DLLVCA001.html</text>
 <pinref part="C7" gate="G$1" pin="1"/>
 <pinref part="P+19" gate="1" pin="+12V"/>
 </segment>
+<segment>
+<pinref part="R49" gate="G$1" pin="2"/>
+<pinref part="P+20" gate="1" pin="+12V"/>
+</segment>
+<segment>
+<pinref part="R52" gate="G$1" pin="2"/>
+<pinref part="P+21" gate="1" pin="+12V"/>
+</segment>
+<segment>
+<pinref part="R55" gate="G$1" pin="2"/>
+<pinref part="P+22" gate="1" pin="+12V"/>
+</segment>
+<segment>
+<pinref part="R58" gate="G$1" pin="2"/>
+<pinref part="P+23" gate="1" pin="+12V"/>
+</segment>
 </net>
 <net name="N$3" class="0">
 <segment>
@@ -4979,6 +5033,22 @@ http://www.musicfromouterspace.com/analogsynth_new/DUALVCA/DLLVCA001.html</text>
 <pinref part="C8" gate="G$1" pin="2"/>
 <pinref part="P-15" gate="1" pin="-12V"/>
 </segment>
+<segment>
+<pinref part="R50" gate="G$1" pin="1"/>
+<pinref part="P-16" gate="1" pin="-12V"/>
+</segment>
+<segment>
+<pinref part="R53" gate="G$1" pin="1"/>
+<pinref part="P-17" gate="1" pin="-12V"/>
+</segment>
+<segment>
+<pinref part="R56" gate="G$1" pin="1"/>
+<pinref part="P-18" gate="1" pin="-12V"/>
+</segment>
+<segment>
+<pinref part="R59" gate="G$1" pin="1"/>
+<pinref part="P-19" gate="1" pin="-12V"/>
+</segment>
 </net>
 <net name="N$6" class="0">
 <segment>
@@ -4997,16 +5067,10 @@ http://www.musicfromouterspace.com/analogsynth_new/DUALVCA/DLLVCA001.html</text>
 <pinref part="Q1" gate="G$1" pin="E"/>
 <pinref part="R11" gate="G$1" pin="2"/>
 <wire x1="43.18" y1="81.28" x2="43.18" y2="71.12" width="0.1524" layer="91"/>
-<wire x1="43.18" y1="68.58" x2="43.18" y2="71.12" width="0.1524" layer="91"/>
 <pinref part="Q2" gate="G$1" pin="B"/>
+<wire x1="43.18" y1="71.12" x2="43.18" y2="68.58" width="0.1524" layer="91"/>
 <wire x1="43.18" y1="71.12" x2="45.72" y2="71.12" width="0.1524" layer="91"/>
 <junction x="43.18" y="71.12"/>
-</segment>
-</net>
-<net name="N$9" class="0">
-<segment>
-<pinref part="Q2" gate="G$1" pin="E"/>
-<pinref part="R13" gate="G$1" pin="2"/>
 </segment>
 </net>
 <net name="N$11" class="0">
@@ -5037,6 +5101,8 @@ http://www.musicfromouterspace.com/analogsynth_new/DUALVCA/DLLVCA001.html</text>
 <wire x1="60.96" y1="40.64" x2="63.5" y2="40.64" width="0.1524" layer="91"/>
 <pinref part="R14" gate="G$1" pin="1"/>
 <pinref part="R15" gate="G$1" pin="2"/>
+<pinref part="R51" gate="G$1" pin="2"/>
+<wire x1="73.66" y1="63.5" x2="71.12" y2="63.5" width="0.1524" layer="91"/>
 <junction x="71.12" y="63.5"/>
 </segment>
 </net>
@@ -5062,7 +5128,7 @@ http://www.musicfromouterspace.com/analogsynth_new/DUALVCA/DLLVCA001.html</text>
 <net name="N$21" class="0">
 <segment>
 <pinref part="IC2" gate="OTA1" pin="I_BIAS"/>
-<wire x1="53.34" y1="48.26" x2="53.34" y2="55.88" width="0.1524" layer="91"/>
+<wire x1="53.34" y1="48.26" x2="53.34" y2="50.8" width="0.1524" layer="91"/>
 <pinref part="R13" gate="G$1" pin="1"/>
 </segment>
 </net>
@@ -5117,15 +5183,9 @@ http://www.musicfromouterspace.com/analogsynth_new/DUALVCA/DLLVCA001.html</text>
 <pinref part="R34" gate="G$1" pin="2"/>
 <wire x1="177.8" y1="81.28" x2="177.8" y2="71.12" width="0.1524" layer="91"/>
 <wire x1="177.8" y1="68.58" x2="177.8" y2="71.12" width="0.1524" layer="91"/>
-<pinref part="Q4" gate="G$1" pin="B"/>
 <wire x1="177.8" y1="71.12" x2="180.34" y2="71.12" width="0.1524" layer="91"/>
 <junction x="177.8" y="71.12"/>
-</segment>
-</net>
-<net name="N$30" class="0">
-<segment>
-<pinref part="Q4" gate="G$1" pin="E"/>
-<pinref part="R36" gate="G$1" pin="2"/>
+<pinref part="Q4" gate="G$1" pin="B"/>
 </segment>
 </net>
 <net name="N$32" class="0">
@@ -5157,6 +5217,8 @@ http://www.musicfromouterspace.com/analogsynth_new/DUALVCA/DLLVCA001.html</text>
 <wire x1="195.58" y1="40.64" x2="198.12" y2="40.64" width="0.1524" layer="91"/>
 <wire x1="195.58" y1="63.5" x2="195.58" y2="40.64" width="0.1524" layer="91"/>
 <junction x="195.58" y="40.64"/>
+<pinref part="R54" gate="G$1" pin="2"/>
+<wire x1="205.74" y1="63.5" x2="208.28" y2="63.5" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$36" class="0">
@@ -5236,15 +5298,9 @@ http://www.musicfromouterspace.com/analogsynth_new/DUALVCA/DLLVCA001.html</text>
 <pinref part="R10" gate="G$1" pin="2"/>
 <wire x1="43.18" y1="-15.24" x2="43.18" y2="-25.4" width="0.1524" layer="91"/>
 <wire x1="43.18" y1="-27.94" x2="43.18" y2="-25.4" width="0.1524" layer="91"/>
-<pinref part="Q5" gate="G$1" pin="B"/>
 <wire x1="43.18" y1="-25.4" x2="45.72" y2="-25.4" width="0.1524" layer="91"/>
 <junction x="43.18" y="-25.4"/>
-</segment>
-</net>
-<net name="N$17" class="0">
-<segment>
-<pinref part="Q5" gate="G$1" pin="E"/>
-<pinref part="R12" gate="G$1" pin="2"/>
+<pinref part="Q7" gate="G$1" pin="B"/>
 </segment>
 </net>
 <net name="N$18" class="0">
@@ -5276,6 +5332,8 @@ http://www.musicfromouterspace.com/analogsynth_new/DUALVCA/DLLVCA001.html</text>
 <pinref part="R18" gate="G$1" pin="1"/>
 <pinref part="R21" gate="G$1" pin="2"/>
 <junction x="71.12" y="-33.02"/>
+<pinref part="R57" gate="G$1" pin="2"/>
+<wire x1="71.12" y1="-33.02" x2="73.66" y2="-33.02" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$22" class="0">
@@ -5355,15 +5413,9 @@ http://www.musicfromouterspace.com/analogsynth_new/DUALVCA/DLLVCA001.html</text>
 <pinref part="R35" gate="G$1" pin="2"/>
 <wire x1="177.8" y1="-15.24" x2="177.8" y2="-25.4" width="0.1524" layer="91"/>
 <wire x1="177.8" y1="-27.94" x2="177.8" y2="-25.4" width="0.1524" layer="91"/>
-<pinref part="Q7" gate="G$1" pin="B"/>
 <wire x1="177.8" y1="-25.4" x2="180.34" y2="-25.4" width="0.1524" layer="91"/>
 <junction x="177.8" y="-25.4"/>
-</segment>
-</net>
-<net name="N$41" class="0">
-<segment>
-<pinref part="Q7" gate="G$1" pin="E"/>
-<pinref part="R39" gate="G$1" pin="2"/>
+<pinref part="Q5" gate="G$1" pin="B"/>
 </segment>
 </net>
 <net name="N$42" class="0">
@@ -5395,6 +5447,8 @@ http://www.musicfromouterspace.com/analogsynth_new/DUALVCA/DLLVCA001.html</text>
 <wire x1="195.58" y1="-55.88" x2="198.12" y2="-55.88" width="0.1524" layer="91"/>
 <wire x1="195.58" y1="-33.02" x2="195.58" y2="-55.88" width="0.1524" layer="91"/>
 <junction x="195.58" y="-55.88"/>
+<pinref part="R60" gate="G$1" pin="2"/>
+<wire x1="205.74" y1="-33.02" x2="208.28" y2="-33.02" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$46" class="0">
@@ -5421,6 +5475,67 @@ http://www.musicfromouterspace.com/analogsynth_new/DUALVCA/DLLVCA001.html</text>
 <wire x1="187.96" y1="-48.26" x2="187.96" y2="-40.64" width="0.1524" layer="91"/>
 <pinref part="IC4" gate="OTA2" pin="I_BIAS"/>
 <pinref part="R39" gate="G$1" pin="1"/>
+</segment>
+</net>
+<net name="N$9" class="0">
+<segment>
+<pinref part="Q2" gate="G$1" pin="C"/>
+<pinref part="R13" gate="G$1" pin="2"/>
+<wire x1="53.34" y1="66.04" x2="53.34" y2="60.96" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$17" class="0">
+<segment>
+<pinref part="R36" gate="G$1" pin="2"/>
+<pinref part="Q4" gate="G$1" pin="C"/>
+</segment>
+</net>
+<net name="N$30" class="0">
+<segment>
+<pinref part="R39" gate="G$1" pin="2"/>
+<pinref part="Q5" gate="G$1" pin="C"/>
+</segment>
+</net>
+<net name="N$41" class="0">
+<segment>
+<pinref part="R12" gate="G$1" pin="2"/>
+<pinref part="Q7" gate="G$1" pin="C"/>
+</segment>
+</net>
+<net name="N$49" class="0">
+<segment>
+<pinref part="R49" gate="G$1" pin="1"/>
+<pinref part="R50" gate="G$1" pin="2"/>
+<pinref part="R51" gate="G$1" pin="1"/>
+<wire x1="83.82" y1="63.5" x2="86.36" y2="63.5" width="0.1524" layer="91"/>
+<junction x="86.36" y="63.5"/>
+</segment>
+</net>
+<net name="N$50" class="0">
+<segment>
+<pinref part="R52" gate="G$1" pin="1"/>
+<pinref part="R53" gate="G$1" pin="2"/>
+<pinref part="R54" gate="G$1" pin="1"/>
+<wire x1="218.44" y1="63.5" x2="220.98" y2="63.5" width="0.1524" layer="91"/>
+<junction x="220.98" y="63.5"/>
+</segment>
+</net>
+<net name="N$51" class="0">
+<segment>
+<pinref part="R55" gate="G$1" pin="1"/>
+<pinref part="R56" gate="G$1" pin="2"/>
+<pinref part="R57" gate="G$1" pin="1"/>
+<wire x1="83.82" y1="-33.02" x2="86.36" y2="-33.02" width="0.1524" layer="91"/>
+<junction x="86.36" y="-33.02"/>
+</segment>
+</net>
+<net name="N$52" class="0">
+<segment>
+<pinref part="R58" gate="G$1" pin="1"/>
+<pinref part="R59" gate="G$1" pin="2"/>
+<pinref part="R60" gate="G$1" pin="1"/>
+<wire x1="218.44" y1="-33.02" x2="220.98" y2="-33.02" width="0.1524" layer="91"/>
+<junction x="220.98" y="-33.02"/>
 </segment>
 </net>
 </nets>
