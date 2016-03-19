@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="7.2.0">
+<eagle version="7.5.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -67,7 +67,7 @@
 <wire x1="99.365" y1="0" x2="99.365" y2="41.9" width="0" layer="20"/>
 <wire x1="99.365" y1="41.9" x2="0" y2="41.9" width="0" layer="20"/>
 <wire x1="0" y1="41.9" x2="0" y2="0" width="0" layer="20"/>
-<text x="77.47" y="39.37" size="1.778" layer="25" font="vector">midi2cv.2.2.pnl</text>
+<text x="67.31" y="39.37" size="1.778" layer="25" font="vector">midi2cv.v2.0.rev2.pnl</text>
 <hole x="95.25" y="15.875" drill="3.2"/>
 </plain>
 <libraries>
