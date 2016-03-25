@@ -5,7 +5,7 @@
   <confs>
     <conf name="default" type="2">
       <platformToolSN>:=MPLABCommUSB:=04D8:=0033:=0002:=Microchip Technology Inc.:=PICkit 2 Microcontroller Programmer:=UP00B:=x:=en</platformToolSN>
-      <languageToolchainDir>C:\Program Files (x86)\Microchip\MPLABX\mpasmx</languageToolchainDir>
+      <languageToolchainDir>C:\Program Files (x86)\Microchip\MPLABX\v3.25\mpasmx</languageToolchainDir>
       <mdbdebugger version="1">
         <placeholder1>place holder 1</placeholder1>
         <placeholder2>place holder 2</placeholder2>

@@ -26,8 +26,12 @@
 	MSG_COUNT		; Counts the number of msg params passed
 	CC_NUM			; Holds the controller number for the CC message
 	MSG_CHAN		; Holds the working MIDI channel number
-	MSG_PITCH		; Holds the working pitch that may be pushed live
-	MSG_VELOCITY		; Holds the working velocity that may be pushed live
+	MSG_PITCH_CH1		; Holds the working pitches that may be pushed live
+	MSG_PITCH_CH2		; In Drum Mode (MODE1) only _CH1 is used
+	MSG_PITCH_CH3
+	MSG_VELOCITY_CH1	; Holds the working velocities that may be pushed live
+	MSG_VELOCITY_CH2	; In Drum Mode (MODE1) only _CH1 is used
+	MSG_VELOCITY_CH3
 
 ;------ midi.asm variables
 	TMP_CV_BYTE_L		; Holds a temp value for pushing CV values to the PWM registers
