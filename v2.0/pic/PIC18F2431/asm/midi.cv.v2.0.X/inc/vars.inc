@@ -10,6 +10,8 @@
 	CV_FLAGS		; Set of flags to indicate which PWM values have been updated
 
 	CV_PITCH		; Current value for note Pitch (or VEL1 in MODE1)
+	CV_PITCH_CH4		; Special tracking for pitch on CH 4 and 5 for MODE0
+	CV_PITCH_CH5
 	CV_VELOCITY		; Current value for note Velocity (or VEL2 in MODE1)
 	CV_MOD			; Current value for the Mod Wheel (or VEL3 in MODE1)
 	CV_GATE			; Current gate settings (bits 0-4) 
@@ -29,9 +31,9 @@
 	MSG_PITCH_CH1		; Holds the working pitches that may be pushed live
 	MSG_PITCH_CH2		; In Drum Mode (MODE1) only _CH1 is used
 	MSG_PITCH_CH3
-	MSG_VELOCITY_CH1	; Holds the working velocities that may be pushed live
-	MSG_VELOCITY_CH2	; In Drum Mode (MODE1) only _CH1 is used
-	MSG_VELOCITY_CH3
+	MSG_PITCH_CH4
+	MSG_PITCH_CH5
+	MSG_VELOCITY		; Holds the working velocities that may be pushed live
 
 ;------ midi.asm variables
 	TMP_CV_BYTE_L		; Holds a temp value for pushing CV values to the PWM registers
@@ -52,6 +54,8 @@ CV_NOTE_LKP:	equ	0x80	; EEPROM base Address CV Note data lookup
 CVF_PITCH:	equ	0x00	; MODE0
 CVF_VELOCITY:	equ	0x01	; MODE0
 CVF_MOD:	equ	0x02	; MODE0
+CVF_CV_4:	equ	0x03	; MODE0
+CVF_CV_5:	equ	0x04	; MODE0
 
 _MOFFSET_NOTE_OFF:	equ	0x00	; 0x8c
 _MOFFSET_NOTE_ON:	equ	0x02	; 0x9c
