@@ -1,0 +1,230 @@
+[p LITE_MODE AUTOSTATIC PIC14 PICREGULAR PICMID ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 16F819 ]
+[d frameptr 6 ]
+"42 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\altoft.c
+[v ___altoft __altoft `(f  1 e 3 0 ]
+"62 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\float.c
+[v ___ftpack __ftpack `(f  1 e 3 0 ]
+"254 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\frexp.c
+[v _frexp frexp `(d  1 e 3 0 ]
+"86 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\ftadd.c
+[v ___ftadd __ftadd `(f  1 e 3 0 ]
+"56 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\ftdiv.c
+[v ___ftdiv __ftdiv `(f  1 e 3 0 ]
+"4 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\ftge.c
+[v ___ftge __ftge `(b  1 e 0 0 ]
+"62 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\ftmul.c
+[v ___ftmul __ftmul `(f  1 e 3 0 ]
+"15 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\ftneg.c
+[v ___ftneg __ftneg `(f  1 e 3 0 ]
+"44 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\fttol.c
+[v ___fttol __fttol `(l  1 e 4 0 ]
+"28 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\lwtoft.c
+[v ___lwtoft __lwtoft `(f  1 e 3 0 ]
+"6 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\round.c
+[v _round round `(d  1 e 3 0 ]
+"13 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\trunc.c
+[v _trunc trunc `(d  1 e 3 0 ]
+"6 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\pic\eeprom.c
+[v _eecpymem eecpymem `(v  1 e 1 0 ]
+"39
+[v _memcpyee memcpyee `(v  1 e 1 0 ]
+"27 C:\Users\dhood\git\danielhood\dlp\v2.0\pic\PIC16F819\c\digital.noise.gen\digital.noise.gen.X\main.c
+[v _update_duty update_duty `(v  1 s 1 update_duty ]
+[v i1_update_duty update_duty `(v  1 s 1 i1_update_duty ]
+"43
+[v _main main `(v  1 e 1 0 ]
+"97
+[v _advance_wave advance_wave `(v  1 s 1 advance_wave ]
+"116
+[v _isr isr `II(v  1 s 1 isr ]
+"160 C:\Program Files (x86)\Microchip\xc8\v1.37\include\pic16f819.h
+[v _PORTA PORTA `VEuc  1 e 1 @5 ]
+"668
+[v _CCPR1L CCPR1L `VEuc  1 e 1 @21 ]
+"907
+[v _TRISA TRISA `VEuc  1 e 1 @133 ]
+"968
+[v _TRISB TRISB `VEuc  1 e 1 @134 ]
+"1231
+[v _PR2 PR2 `VEuc  1 e 1 @146 ]
+"1417
+[v _ADCON1 ADCON1 `VEuc  1 e 1 @159 ]
+"1587
+[v _CCP1M2 CCP1M2 `VEb  1 e 0 @186 ]
+"1589
+[v _CCP1M3 CCP1M3 `VEb  1 e 0 @187 ]
+"1591
+[v _CCP1X CCP1X `VEb  1 e 0 @189 ]
+"1593
+[v _CCP1Y CCP1Y `VEb  1 e 0 @188 ]
+"1621
+[v _GIE GIE `VEb  1 e 0 @95 ]
+"1645
+[v _IRCF0 IRCF0 `VEb  1 e 0 @1148 ]
+"1647
+[v _IRCF1 IRCF1 `VEb  1 e 0 @1149 ]
+"1649
+[v _IRCF2 IRCF2 `VEb  1 e 0 @1150 ]
+"1737
+[v _T0CS T0CS `VEb  1 e 0 @1037 ]
+"1749
+[v _T2CKPS0 T2CKPS0 `VEb  1 e 0 @144 ]
+"1751
+[v _T2CKPS1 T2CKPS1 `VEb  1 e 0 @145 ]
+"1753
+[v _TMR0IE TMR0IE `VEb  1 e 0 @93 ]
+"1755
+[v _TMR0IF TMR0IF `VEb  1 e 0 @90 ]
+"1769
+[v _TMR2ON TMR2ON `VEb  1 e 0 @146 ]
+"19 C:\Users\dhood\git\danielhood\dlp\v2.0\pic\PIC16F819\c\digital.noise.gen\digital.noise.gen.X\main.c
+[v _duty duty `ui  1 s 2 duty ]
+"20
+[v _delta delta `ui  1 s 2 delta ]
+"22
+[v _freq freq `d  1 s 3 freq ]
+"23
+[v _sample_rate sample_rate `d  1 s 3 sample_rate ]
+"24
+[v _duty_max duty_max `ui  1 s 2 duty_max ]
+"25
+[v _duty_max2 duty_max2 `ui  1 s 2 duty_max2 ]
+"43
+[v _main main `(v  1 e 1 0 ]
+{
+"87
+} 0
+"27
+[v _update_duty update_duty `(v  1 s 1 update_duty ]
+{
+[v update_duty@value value `ui  1 p 2 0 ]
+"41
+} 0
+"6 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\round.c
+[v _round round `(d  1 e 3 0 ]
+{
+"8
+[v round@f f `d  1 a 3 10 ]
+"6
+[v round@x x `d  1 p 3 7 ]
+"13
+} 0
+"13 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\trunc.c
+[v _trunc trunc `(d  1 e 3 0 ]
+{
+"15
+[v trunc@i i `d  1 a 3 66 ]
+"16
+[v trunc@expon expon `i  1 a 2 69 ]
+"13
+[v trunc@x x `d  1 p 3 62 ]
+"25
+} 0
+"254 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\frexp.c
+[v _frexp frexp `(d  1 e 3 0 ]
+{
+[v frexp@value value `d  1 p 3 0 ]
+[v frexp@eptr eptr `*.4i  1 p 1 3 ]
+"274
+} 0
+"44 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\fttol.c
+[v ___fttol __fttol `(l  1 e 4 0 ]
+{
+"47
+[v ___fttol@lval lval `ul  1 a 4 49 ]
+"46
+[v ___fttol@exp1 exp1 `uc  1 a 1 53 ]
+[v ___fttol@sign1 sign1 `uc  1 a 1 48 ]
+"44
+[v ___fttol@f1 f1 `f  1 p 3 40 ]
+"73
+} 0
+"42 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\altoft.c
+[v ___altoft __altoft `(f  1 e 3 0 ]
+{
+"44
+[v ___altoft@sign sign `uc  1 a 1 61 ]
+[v ___altoft@exp exp `uc  1 a 1 60 ]
+"42
+[v ___altoft@c c `l  1 p 4 54 ]
+"57
+} 0
+"15 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\ftneg.c
+[v ___ftneg __ftneg `(f  1 e 3 0 ]
+{
+[v ___ftneg@f1 f1 `f  1 p 3 71 ]
+"20
+} 0
+"86 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\ftadd.c
+[v ___ftadd __ftadd `(f  1 e 3 0 ]
+{
+"88
+[v ___ftadd@exp1 exp1 `uc  1 a 1 6 ]
+[v ___ftadd@exp2 exp2 `uc  1 a 1 5 ]
+[v ___ftadd@sign sign `uc  1 a 1 4 ]
+"86
+[v ___ftadd@f1 f1 `f  1 p 3 74 ]
+[v ___ftadd@f2 f2 `f  1 p 3 77 ]
+"148
+} 0
+"28 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\lwtoft.c
+[v ___lwtoft __lwtoft `(f  1 e 3 0 ]
+{
+[v ___lwtoft@c c `ui  1 p 2 8 ]
+"31
+} 0
+"62 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\ftmul.c
+[v ___ftmul __ftmul `(f  1 e 3 0 ]
+{
+"65
+[v ___ftmul@f3_as_product f3_as_product `um  1 a 3 35 ]
+"64
+[v ___ftmul@sign sign `uc  1 a 1 39 ]
+[v ___ftmul@cntr cntr `uc  1 a 1 38 ]
+[v ___ftmul@exp exp `uc  1 a 1 34 ]
+"62
+[v ___ftmul@f1 f1 `f  1 p 3 24 ]
+[v ___ftmul@f2 f2 `f  1 p 3 27 ]
+"157
+} 0
+"56 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\ftdiv.c
+[v ___ftdiv __ftdiv `(f  1 e 3 0 ]
+{
+"60
+[v ___ftdiv@f3 f3 `f  1 a 3 19 ]
+"59
+[v ___ftdiv@sign sign `uc  1 a 1 23 ]
+[v ___ftdiv@exp exp `uc  1 a 1 22 ]
+[v ___ftdiv@cntr cntr `uc  1 a 1 18 ]
+"56
+[v ___ftdiv@f2 f2 `f  1 p 3 8 ]
+[v ___ftdiv@f1 f1 `f  1 p 3 11 ]
+"86
+} 0
+"62 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\float.c
+[v ___ftpack __ftpack `(f  1 e 3 0 ]
+{
+[v ___ftpack@arg arg `um  1 p 3 0 ]
+[v ___ftpack@exp exp `uc  1 p 1 3 ]
+[v ___ftpack@sign sign `uc  1 p 1 4 ]
+"86
+} 0
+"116 C:\Users\dhood\git\danielhood\dlp\v2.0\pic\PIC16F819\c\digital.noise.gen\digital.noise.gen.X\main.c
+[v _isr isr `II(v  1 s 1 isr ]
+{
+"127
+} 0
+"97
+[v _advance_wave advance_wave `(v  1 s 1 advance_wave ]
+{
+"114
+} 0
+"27
+[v i1_update_duty update_duty `(v  1 s 1 i1_update_duty ]
+{
+[v i1update_duty@value value `ui  1 p 2 0 ]
+"41
+} 0
