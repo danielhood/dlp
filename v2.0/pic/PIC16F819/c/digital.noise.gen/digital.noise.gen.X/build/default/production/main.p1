@@ -933,52 +933,125 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :UE 74 ]
 }
 "97
-[v _advance_wave `(v ~T0 @X0 1 sf ]
-"98
+[v _xorgen `(uc ~T0 @X0 1 sf ]
 {
-[; ;main.c: 97: static void advance_wave()
-[; ;main.c: 98: {
-[e :U _advance_wave ]
+[; ;main.c: 97: static unsigned char xorgen(void) {
+[e :U _xorgen ]
 [f ]
-[; ;main.c: 109: update_duty(duty >> 4);
-"109
-[e ( _update_duty (1 >> _duty -> 4 `i ]
-[; ;main.c: 112: if (duty < delta) duty = duty_max2-duty;
+"98
+[v F804 `uc ~T0 @X0 1 s xx ]
+[i F804
+-> -> 143 `i `uc
+]
+"99
+[v F805 `uc ~T0 @X0 1 s x ]
+[i F805
+-> -> 101 `i `uc
+]
+"100
+[v F806 `uc ~T0 @X0 1 s y ]
+[i F806
+-> -> 43 `i `uc
+]
+"101
+[v F807 `uc ~T0 @X0 1 s z ]
+[i F807
+-> -> 195 `i `uc
+]
+"102
+[v F808 `uc ~T0 @X0 1 s w ]
+[i F808
+-> -> 244 `i `uc
+]
+"103
+[v F809 `uc ~T0 @X0 1 s v ]
+[i F809
+-> -> 93 `i `uc
+]
+"104
+[v F810 `uc ~T0 @X0 1 s u ]
+[i F810
+-> -> 112 `i `uc
+]
+"105
+[v F811 `uc ~T0 @X0 1 s s ]
+[i F811
+-> -> 145 `i `uc
+]
+"107
+[v _t `uc ~T0 @X0 1 a ]
+[; ;main.c: 98: static unsigned char xx = 143;
+[; ;main.c: 99: static unsigned char x = 101;
+[; ;main.c: 100: static unsigned char y = 43;
+[; ;main.c: 101: static unsigned char z = 195;
+[; ;main.c: 102: static unsigned char w = 244;
+[; ;main.c: 103: static unsigned char v = 93;
+[; ;main.c: 104: static unsigned char u = 112;
+[; ;main.c: 105: static unsigned char s = 145;
+[; ;main.c: 107: unsigned char t = (x ^ (x >> 3));
+[e = _t -> ^ -> F805 `i >> -> F805 `i -> 3 `i `uc ]
+[; ;main.c: 108: x = y; y = z; z = w; w = v; v = u; u = s; s = xx;
+"108
+[e = F805 F806 ]
+[e = F806 F807 ]
+[e = F807 F808 ]
+[e = F808 F809 ]
+[e = F809 F810 ]
+[e = F810 F811 ]
+[e = F811 F804 ]
+[; ;main.c: 110: xx = (xx ^ (xx << 2)) ^ (t ^ (t << 4));
+"110
+[e = F804 -> ^ ^ -> F804 `i << -> F804 `i -> 2 `i ^ -> _t `i << -> _t `i -> 4 `i `uc ]
+[; ;main.c: 112: return (y * y + 1) * xx;
 "112
-[e $ ! < _duty _delta 76  ]
-[e = _duty - _duty_max2 _duty ]
-[e :U 76 ]
-[; ;main.c: 113: duty = duty - delta;
+[e ) -> * + * -> F806 `i -> F806 `i -> 1 `i -> F804 `i `uc ]
+[e $UE 75  ]
+[; ;main.c: 113: }
 "113
-[e = _duty - _duty _delta ]
-[; ;main.c: 114: }
-"114
 [e :UE 75 ]
 }
-[v F805 `(v ~T0 @X0 1 tf ]
+"115
+[v _advance_wave `(v ~T0 @X0 1 sf ]
 "116
-[v _isr `IF805 ~T0 @X0 1 s ]
 {
-[; ;main.c: 116: static void interrupt isr(void) {
+[; ;main.c: 115: static void advance_wave()
+[; ;main.c: 116: {
+[e :U _advance_wave ]
+[f ]
+[; ;main.c: 127: update_duty(duty >> 4);
+"127
+[e ( _update_duty (1 >> _duty -> 4 `i ]
+[; ;main.c: 133: duty = xorgen();
+"133
+[e = _duty -> ( _xorgen ..  `ui ]
+[; ;main.c: 134: }
+"134
+[e :UE 76 ]
+}
+[v F816 `(v ~T0 @X0 1 tf ]
+"136
+[v _isr `IF816 ~T0 @X0 1 s ]
+{
+[; ;main.c: 136: static void interrupt isr(void) {
 [e :U _isr ]
 [f ]
-[; ;main.c: 117: if (TMR0IF)
-"117
+[; ;main.c: 137: if (TMR0IF)
+"137
 [e $ ! _TMR0IF 78  ]
-[; ;main.c: 118: {
-"118
+[; ;main.c: 138: {
+"138
 {
-[; ;main.c: 119: TMR0IF = 0;
-"119
+[; ;main.c: 139: TMR0IF = 0;
+"139
 [e = _TMR0IF -> -> 0 `i `b ]
-[; ;main.c: 125: advance_wave();
-"125
+[; ;main.c: 145: advance_wave();
+"145
 [e ( _advance_wave ..  ]
-"126
+"146
 }
 [e :U 78 ]
-[; ;main.c: 126: }
-[; ;main.c: 127: }
-"127
+[; ;main.c: 146: }
+[; ;main.c: 147: }
+"147
 [e :UE 77 ]
 }

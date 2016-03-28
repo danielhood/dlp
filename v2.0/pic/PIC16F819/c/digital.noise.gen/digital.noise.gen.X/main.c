@@ -59,10 +59,10 @@ void main(void) {
 
     // PWM Mode on RB3
     PR2 = 0xFF;     // Maximum PWM period
-    update_duty(duty);  // Set inital PWM duty cycle
+    update_duty(duty);  // Set initial PWM duty cycle
 
     TRISB = 0;      // Port B outputs
-    T2CKPS1 = 0;    // Prescalre of 1
+    T2CKPS1 = 0;    // Prescaler of 1
     T2CKPS0 = 0;
     CCP1M3 = 1;     // Enable PWM Mode
     CCP1M2 = 1;
@@ -72,7 +72,7 @@ void main(void) {
     T0CS = 0;   // Timer mode
     //PSA = 1;    // Prescaler for WDT
     //PS2 = 0;    // 1:2 (as low as we can go
-    //PS1 = 0;    //  Produces a 9,765.625 Hz interupt
+    //PS1 = 0;    //  Produces a 9,765.625 Hz interrupt
     //PS0 = 0;
     TMR0IE = 1; // Enable interrupt
     GIE = 1;    // Enable global interrupts
@@ -94,6 +94,24 @@ static unsigned int convert_to_duty(double value)
     return (unsigned int)result;
 }
 
+static unsigned char xorgen(void) {
+    static unsigned char xx = 143;
+    static unsigned char x = 101;
+    static unsigned char y = 43;
+    static unsigned char z = 195;
+    static unsigned char w = 244;
+    static unsigned char v = 93;
+    static unsigned char u = 112;
+    static unsigned char s = 145;
+    
+    unsigned char t = (x ^ (x >> 3));
+    x = y; y = z; z = w; w = v; v = u; u = s; s = xx;
+    
+    xx = (xx ^ (xx << 2)) ^ (t ^ (t << 4));
+    
+    return (y * y + 1) * xx;
+}
+
 static void advance_wave()
 {
     //update_duty(convert_to_duty(curr_sample));
@@ -106,11 +124,13 @@ static void advance_wave()
         //if (freq < 200) freq = 2000;
     //}
 
-    update_duty(duty >> 4);                  // Set the last calcualted sample right away
+    update_duty(duty >> 4);                  // Set the last calculated sample right away
 
     // Use integer math as we don't have the cycles for float
-    if (duty < delta) duty = duty_max2-duty;    // constrain wave to the 10-bit resolution
-    duty = duty - delta;
+    //if (duty < delta) duty = duty_max2-duty;    // constrain wave to the 10-bit resolution
+    //duty = duty - delta;
+    
+    duty = xorgen();
 }
 
 static void interrupt isr(void) {

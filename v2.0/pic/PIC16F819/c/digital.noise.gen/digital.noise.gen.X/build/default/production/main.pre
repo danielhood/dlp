@@ -1085,15 +1085,32 @@ double result = duty_max*value;
 return (unsigned int)result;
 }
 
+static unsigned char xorgen(void) {
+static unsigned char xx = 143;
+static unsigned char x = 101;
+static unsigned char y = 43;
+static unsigned char z = 195;
+static unsigned char w = 244;
+static unsigned char v = 93;
+static unsigned char u = 112;
+static unsigned char s = 145;
+
+unsigned char t = (x ^ (x >> 3));
+x = y; y = z; z = w; w = v; v = u; u = s; s = xx;
+
+xx = (xx ^ (xx << 2)) ^ (t ^ (t << 4));
+
+return (y * y + 1) * xx;
+}
+
 static void advance_wave()
 {
 
-# 109
+# 127
 update_duty(duty >> 4);
 
-
-if (duty < delta) duty = duty_max2-duty;
-duty = duty - delta;
+# 133
+duty = xorgen();
 }
 
 static void interrupt isr(void) {
@@ -1101,7 +1118,7 @@ if (TMR0IF)
 {
 TMR0IF = 0;
 
-# 125
+# 145
 advance_wave();
 }
 }
