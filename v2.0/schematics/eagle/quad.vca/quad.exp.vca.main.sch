@@ -4716,7 +4716,7 @@ body 3.9 mm/JEDEC MS-012AC</description>
 <part name="IC2" library="ota" deviceset="LM13700" device="N"/>
 <part name="R2" library="resistor" deviceset="R-US_" device="0207/7" value="100K"/>
 <part name="R3" library="resistor" deviceset="R-US_" device="0207/7" value="2K"/>
-<part name="R6" library="resistor" deviceset="R-US_" device="0207/7" value="2K"/>
+<part name="R6" library="resistor" deviceset="R-US_" device="0207/7" value="4.7K"/>
 <part name="GND6" library="supply1" deviceset="0V" device=""/>
 <part name="R7" library="resistor" deviceset="R-US_" device="0207/7" value="120K"/>
 <part name="R8" library="resistor" deviceset="R-US_" device="0207/7" value="20K"/>
@@ -4738,7 +4738,7 @@ body 3.9 mm/JEDEC MS-012AC</description>
 <part name="Q3" library="_common" deviceset="2N3904" device=""/>
 <part name="R17" library="resistor" deviceset="R-US_" device="0207/7" value="100K"/>
 <part name="R18" library="resistor" deviceset="R-US_" device="0207/7" value="2K"/>
-<part name="R21" library="resistor" deviceset="R-US_" device="0207/7" value="2K"/>
+<part name="R21" library="resistor" deviceset="R-US_" device="0207/7" value="4.7K"/>
 <part name="GND14" library="supply1" deviceset="0V" device=""/>
 <part name="R22" library="resistor" deviceset="R-US_" device="0207/7" value="120K"/>
 <part name="R23" library="resistor" deviceset="R-US_" device="0207/7" value="20K"/>
@@ -4757,7 +4757,7 @@ body 3.9 mm/JEDEC MS-012AC</description>
 <part name="IC3" library="ota" deviceset="LM13700" device="N"/>
 <part name="R32" library="resistor" deviceset="R-US_" device="0207/7" value="100K"/>
 <part name="R33" library="resistor" deviceset="R-US_" device="0207/7" value="2K"/>
-<part name="R36" library="resistor" deviceset="R-US_" device="0207/7" value="2K"/>
+<part name="R36" library="resistor" deviceset="R-US_" device="0207/7" value="4.7K"/>
 <part name="GND22" library="supply1" deviceset="0V" device=""/>
 <part name="R37" library="resistor" deviceset="R-US_" device="0207/7" value="120K"/>
 <part name="R38" library="resistor" deviceset="R-US_" device="0207/7" value="20K"/>
@@ -4775,7 +4775,7 @@ body 3.9 mm/JEDEC MS-012AC</description>
 <part name="Q7" library="_common" deviceset="2N3904" device=""/>
 <part name="R47" library="resistor" deviceset="R-US_" device="0207/7" value="100K"/>
 <part name="R48" library="resistor" deviceset="R-US_" device="0207/7" value="2K"/>
-<part name="R51" library="resistor" deviceset="R-US_" device="0207/7" value="2K"/>
+<part name="R51" library="resistor" deviceset="R-US_" device="0207/7" value="4.7K"/>
 <part name="GND30" library="supply1" deviceset="0V" device=""/>
 <part name="R52" library="resistor" deviceset="R-US_" device="0207/7" value="120K"/>
 <part name="R53" library="resistor" deviceset="R-US_" device="0207/7" value="20K"/>
