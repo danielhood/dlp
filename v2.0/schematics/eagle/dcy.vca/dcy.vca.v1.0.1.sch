@@ -3431,8 +3431,8 @@ Operational amplifiers,  comparators, voltage regulators, ADCs, DACs, etc.&lt;p&
 <sheets>
 <sheet>
 <plain>
-<text x="58.42" y="137.16" size="1.778" layer="91">- Quad Decay Envelope
-- Single VCA</text>
+<text x="55.88" y="134.62" size="1.778" layer="91">- Quad Decay Envelope
+- Main Board</text>
 <frame x1="-281.94" y1="-71.12" x2="93.98" y2="152.4" columns="8" rows="5" layer="91"/>
 <text x="-160.02" y="99.06" size="1.778" layer="97">2.2uF is the 
 minium for this</text>
