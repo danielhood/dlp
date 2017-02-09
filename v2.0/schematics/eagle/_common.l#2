@@ -2402,7 +2402,7 @@ high speed (Philips)</description>
 <gate name="G$1" symbol="D" x="0" y="0"/>
 </gates>
 <devices>
-<device name="DO35-7" package="DO35-7">
+<device name="-7" package="DO35-7">
 <connects>
 <connect gate="G$1" pin="A" pad="A"/>
 <connect gate="G$1" pin="C" pad="C"/>
@@ -2411,7 +2411,7 @@ high speed (Philips)</description>
 <technology name=""/>
 </technologies>
 </device>
-<device name="DO34-5" package="DO34-5">
+<device name="" package="DO34-5">
 <connects>
 <connect gate="G$1" pin="A" pad="A"/>
 <connect gate="G$1" pin="C" pad="C"/>
@@ -2917,7 +2917,7 @@ Source: http://ww1.microchip.com/downloads/en/devicedoc/39616d.pdf</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="1N5232B-TR" prefix="D">
+<deviceset name="1N5232B" prefix="D">
 <description>ZENER DIODE 500mW 5.6V DO-35; Zener Voltage Vz Typ:5.6V; Power Dissipation Pd:500mW; Diode Case Style:DO-35; No. of Pins:2; Operating Temperature Max:175 C;</description>
 <gates>
 <gate name="G$1" symbol="DZ" x="0" y="0"/>

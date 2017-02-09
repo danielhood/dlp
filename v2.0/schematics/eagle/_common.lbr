@@ -2437,6 +2437,15 @@ high speed (Philips)</description>
 <technology name=""/>
 </technologies>
 </device>
+<device name="" package="0207/7">
+<connects>
+<connect gate="G$1" pin="1" pad="1"/>
+<connect gate="G$1" pin="2" pad="2"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
 </devices>
 </deviceset>
 <deviceset name="CC-US" prefix="C" uservalue="yes">
