@@ -863,6 +863,7 @@ diameter 1.8 mm, horizontal, grid 5.08 mm</description>
 <pinref part="U$1" gate="G$1" pin="P$4"/>
 <wire x1="58.42" y1="-5.08" x2="58.42" y2="-20.32" width="0.1524" layer="91"/>
 <wire x1="116.84" y1="-20.32" x2="58.42" y2="-20.32" width="0.1524" layer="91"/>
+<junction x="116.84" y="-5.08"/>
 </segment>
 </net>
 <net name="N$3" class="0">
