@@ -25,12 +25,12 @@ ifeq ($(TYPE_IMAGE), DEBUG_RUN)
 IMAGE_TYPE=debug
 OUTPUT_SUFFIX=cof
 DEBUGGABLE_SUFFIX=cof
-FINAL_IMAGE=dist/${CND_CONF}/${IMAGE_TYPE}/midi.cv.v2.0.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
+FINAL_IMAGE=dist/${CND_CONF}/${IMAGE_TYPE}/midi.clock.v1.0.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
 else
 IMAGE_TYPE=production
 OUTPUT_SUFFIX=hex
 DEBUGGABLE_SUFFIX=cof
-FINAL_IMAGE=dist/${CND_CONF}/${IMAGE_TYPE}/midi.cv.v2.0.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
+FINAL_IMAGE=dist/${CND_CONF}/${IMAGE_TYPE}/midi.clock.v1.0.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
 endif
 
 # Object Directory
@@ -40,11 +40,11 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/src/config.o ${OBJECTDIR}/src/init.test.o ${OBJECTDIR}/src/midi.o ${OBJECTDIR}/src/service.o ${OBJECTDIR}/src/setup.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/src/config.o.d ${OBJECTDIR}/src/init.test.o.d ${OBJECTDIR}/src/midi.o.d ${OBJECTDIR}/src/service.o.d ${OBJECTDIR}/src/setup.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/src/config.o ${OBJECTDIR}/src/midi.o ${OBJECTDIR}/src/service.o ${OBJECTDIR}/src/setup.o ${OBJECTDIR}/src/init.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/src/config.o.d ${OBJECTDIR}/src/midi.o.d ${OBJECTDIR}/src/service.o.d ${OBJECTDIR}/src/setup.o.d ${OBJECTDIR}/src/init.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/src/config.o ${OBJECTDIR}/src/init.test.o ${OBJECTDIR}/src/midi.o ${OBJECTDIR}/src/service.o ${OBJECTDIR}/src/setup.o
+OBJECTFILES=${OBJECTDIR}/src/config.o ${OBJECTDIR}/src/midi.o ${OBJECTDIR}/src/service.o ${OBJECTDIR}/src/setup.o ${OBJECTDIR}/src/init.o
 
 
 CFLAGS=
@@ -76,7 +76,7 @@ MP_AR_DIR="C:\Program Files (x86)\Microchip\MPLABX\mpasmx"
 # MP_BC_DIR is not defined
 
 .build-conf:  ${BUILD_SUBPROJECTS}
-	${MAKE}  -f nbproject/Makefile-default.mk dist/${CND_CONF}/${IMAGE_TYPE}/midi.cv.v2.0.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
+	${MAKE}  -f nbproject/Makefile-default.mk dist/${CND_CONF}/${IMAGE_TYPE}/midi.clock.v1.0.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
 
 MP_PROCESSOR_OPTION=18f2431
 MP_LINKER_DEBUG_OPTION= -u_DEBUGCODESTART=0x3dc0 -u_DEBUGCODELEN=0x240 -u_DEBUGDATASTART=0x2f4 -u_DEBUGDATALEN=0xb
@@ -88,12 +88,6 @@ ${OBJECTDIR}/src/config.o: src/config.asm  nbproject/Makefile-${CND_CONF}.mk
 	@${RM} ${OBJECTDIR}/src/config.o.d 
 	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/config.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -d__DEBUG -d__MPLAB_DEBUGGER_PICKIT2=1 -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/config.lst\" -e\"${OBJECTDIR}/src/config.err\" $(ASM_OPTIONS)   -o\"${OBJECTDIR}/src/config.o\" src/config.asm 
 	@${DEP_GEN} -d ${OBJECTDIR}/src/config.o 
-	
-${OBJECTDIR}/src/init.test.o: src/init.test.asm  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} ${OBJECTDIR}/src 
-	@${RM} ${OBJECTDIR}/src/init.test.o.d 
-	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/init.test.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -d__DEBUG -d__MPLAB_DEBUGGER_PICKIT2=1 -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/init.test.lst\" -e\"${OBJECTDIR}/src/init.test.err\" $(ASM_OPTIONS)   -o\"${OBJECTDIR}/src/init.test.o\" src/init.test.asm 
-	@${DEP_GEN} -d ${OBJECTDIR}/src/init.test.o 
 	
 ${OBJECTDIR}/src/midi.o: src/midi.asm  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/src 
@@ -113,18 +107,18 @@ ${OBJECTDIR}/src/setup.o: src/setup.asm  nbproject/Makefile-${CND_CONF}.mk
 	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/setup.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -d__DEBUG -d__MPLAB_DEBUGGER_PICKIT2=1 -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/setup.lst\" -e\"${OBJECTDIR}/src/setup.err\" $(ASM_OPTIONS)   -o\"${OBJECTDIR}/src/setup.o\" src/setup.asm 
 	@${DEP_GEN} -d ${OBJECTDIR}/src/setup.o 
 	
+${OBJECTDIR}/src/init.o: src/init.asm  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/src 
+	@${RM} ${OBJECTDIR}/src/init.o.d 
+	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/init.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -d__DEBUG -d__MPLAB_DEBUGGER_PICKIT2=1 -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/init.lst\" -e\"${OBJECTDIR}/src/init.err\" $(ASM_OPTIONS)   -o\"${OBJECTDIR}/src/init.o\" src/init.asm 
+	@${DEP_GEN} -d ${OBJECTDIR}/src/init.o 
+	
 else
 ${OBJECTDIR}/src/config.o: src/config.asm  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/src 
 	@${RM} ${OBJECTDIR}/src/config.o.d 
 	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/config.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/config.lst\" -e\"${OBJECTDIR}/src/config.err\" $(ASM_OPTIONS)   -o\"${OBJECTDIR}/src/config.o\" src/config.asm 
 	@${DEP_GEN} -d ${OBJECTDIR}/src/config.o 
-	
-${OBJECTDIR}/src/init.test.o: src/init.test.asm  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} ${OBJECTDIR}/src 
-	@${RM} ${OBJECTDIR}/src/init.test.o.d 
-	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/init.test.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/init.test.lst\" -e\"${OBJECTDIR}/src/init.test.err\" $(ASM_OPTIONS)   -o\"${OBJECTDIR}/src/init.test.o\" src/init.test.asm 
-	@${DEP_GEN} -d ${OBJECTDIR}/src/init.test.o 
 	
 ${OBJECTDIR}/src/midi.o: src/midi.asm  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/src 
@@ -144,18 +138,24 @@ ${OBJECTDIR}/src/setup.o: src/setup.asm  nbproject/Makefile-${CND_CONF}.mk
 	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/setup.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/setup.lst\" -e\"${OBJECTDIR}/src/setup.err\" $(ASM_OPTIONS)   -o\"${OBJECTDIR}/src/setup.o\" src/setup.asm 
 	@${DEP_GEN} -d ${OBJECTDIR}/src/setup.o 
 	
+${OBJECTDIR}/src/init.o: src/init.asm  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/src 
+	@${RM} ${OBJECTDIR}/src/init.o.d 
+	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/init.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/init.lst\" -e\"${OBJECTDIR}/src/init.err\" $(ASM_OPTIONS)   -o\"${OBJECTDIR}/src/init.o\" src/init.asm 
+	@${DEP_GEN} -d ${OBJECTDIR}/src/init.o 
+	
 endif
 
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: link
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
-dist/${CND_CONF}/${IMAGE_TYPE}/midi.cv.v2.0.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}: ${OBJECTFILES}  nbproject/Makefile-${CND_CONF}.mk
+dist/${CND_CONF}/${IMAGE_TYPE}/midi.clock.v1.0.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}: ${OBJECTFILES}  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} dist/${CND_CONF}/${IMAGE_TYPE} 
-	${MP_LD} $(MP_EXTRA_LD_PRE)   -p$(MP_PROCESSOR_OPTION)  -w -x -u_DEBUG -z__ICD2RAM=1    -z__MPLAB_BUILD=1  -z__MPLAB_DEBUG=1 -z__MPLAB_DEBUGGER_PICKIT2=1 $(MP_LINKER_DEBUG_OPTION) -odist/${CND_CONF}/${IMAGE_TYPE}/midi.cv.v2.0.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}  ${OBJECTFILES}     
+	${MP_LD} $(MP_EXTRA_LD_PRE)   -p$(MP_PROCESSOR_OPTION)  -w -x -u_DEBUG -z__ICD2RAM=1    -z__MPLAB_BUILD=1  -z__MPLAB_DEBUG=1 -z__MPLAB_DEBUGGER_PICKIT2=1 $(MP_LINKER_DEBUG_OPTION) -odist/${CND_CONF}/${IMAGE_TYPE}/midi.clock.v1.0.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}  ${OBJECTFILES}     
 else
-dist/${CND_CONF}/${IMAGE_TYPE}/midi.cv.v2.0.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}: ${OBJECTFILES}  nbproject/Makefile-${CND_CONF}.mk
+dist/${CND_CONF}/${IMAGE_TYPE}/midi.clock.v1.0.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}: ${OBJECTFILES}  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} dist/${CND_CONF}/${IMAGE_TYPE} 
-	${MP_LD} $(MP_EXTRA_LD_PRE)   -p$(MP_PROCESSOR_OPTION)  -w     -z__MPLAB_BUILD=1  -odist/${CND_CONF}/${IMAGE_TYPE}/midi.cv.v2.0.X.${IMAGE_TYPE}.${DEBUGGABLE_SUFFIX}  ${OBJECTFILES}     
+	${MP_LD} $(MP_EXTRA_LD_PRE)   -p$(MP_PROCESSOR_OPTION)  -w     -z__MPLAB_BUILD=1  -odist/${CND_CONF}/${IMAGE_TYPE}/midi.clock.v1.0.X.${IMAGE_TYPE}.${DEBUGGABLE_SUFFIX}  ${OBJECTFILES}     
 endif
 
 

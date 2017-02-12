@@ -21,10 +21,10 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>src/config.asm</itemPath>
-      <itemPath>src/init.test.asm</itemPath>
       <itemPath>src/midi.asm</itemPath>
       <itemPath>src/service.asm</itemPath>
       <itemPath>src/setup.asm</itemPath>
+      <itemPath>src/init.asm</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -65,8 +65,8 @@
       </makeCustomizationType>
       <MPASMWIN-AS>
         <property key="default.radix" value="HEX"/>
-        <property key="hex.output.format" value="INHX32"/>
         <property key="enable.case.sensitivity" value="true"/>
+        <property key="hex.output.format" value="INHX32"/>
         <property key="preprocessor.macros" value=""/>
         <property key="warning.level" value="0"/>
         <property key="cross.reference.file" value=""/>

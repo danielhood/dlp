@@ -70,38 +70,58 @@ _MAIN:
 	movwf	PDC2H
 
 _LOOP:
-_UPDATE_PITCH:
-	btfss	CV_FLAGS,CVF_PITCH
-	goto	_UPDATE_VELOCITY
-	movf	CV_PITCH,W
-	_SCALE_CV_NOTE		; Scales W, returning result in W
-	_SPLIT_CV_VALUE2
-	movff	TMP_CV_BYTE_H,PDC0H
-	movff	TMP_CV_BYTE_L,PDC0L
-	bcf	CV_FLAGS,CVF_PITCH
+;_UPDATE_CV1:
+;	btfss	CV_FLAGS,CVF_PITCH
+;	goto	_UPDATE_CV2
+;	movf	CV_PITCH,W
+;	_SCALE_CV_NOTE		; Scales W, returning result in W
+;	_SPLIT_CV_VALUE2
+;	movff	TMP_CV_BYTE_H,PDC0H
+;	movff	TMP_CV_BYTE_L,PDC0L
+;	bcf	CV_FLAGS,CVF_PITCH
+;
+;_UPDATE_CV2:
+;	btfss	CV_FLAGS,CVF_VELOCITY
+;	goto	_UPDATE_CV3
+;	movf	CV_VELOCITY,W
+;	rlncf	WREG		; Double the value since we're using a period of 256 instead of 128
+;	_SPLIT_CV_VALUE2
+;	movff	TMP_CV_BYTE_H,PDC1H
+;	movff	TMP_CV_BYTE_L,PDC1L
+;	bcf	CV_FLAGS,CVF_VELOCITY
+;
+;_UPDATE_CV3:
+;	btfss	CV_FLAGS,CVF_MOD
+;	goto	_UPDATE_GATES
+;	movf	CV_MOD,W
+;	rlncf	WREG		; Double the value since we're using a period of 256 instead of 128
+;	_SPLIT_CV_VALUE2
+;	movff	TMP_CV_BYTE_H,PDC2H
+;	movff	TMP_CV_BYTE_L,PDC2L
+;	bcf	CV_FLAGS,CVF_MOD
 
-_UPDATE_VELOCITY:
-	btfss	CV_FLAGS,CVF_VELOCITY
-	goto	_UPDATE_MOD
-	movf	CV_VELOCITY,W
-	rlncf	WREG		; Double the value since we're using a period of 256 instead of 128
-	_SPLIT_CV_VALUE2
-	movff	TMP_CV_BYTE_H,PDC1H
-	movff	TMP_CV_BYTE_L,PDC1L
-	bcf	CV_FLAGS,CVF_VELOCITY
+_UPDATE_GATES:
+	;movff	CV_GATE,PORTC
+	;goto	_LOOP
 
-_UPDATE_MOD:
-	btfss	CV_FLAGS,CVF_MOD
-	goto	_UPDATE_GATE
-	movf	CV_MOD,W
-	rlncf	WREG		; Double the value since we're using a period of 256 instead of 128
-	_SPLIT_CV_VALUE2
-	movff	TMP_CV_BYTE_H,PDC2H
-	movff	TMP_CV_BYTE_L,PDC2L
-	bcf	CV_FLAGS,CVF_MOD
+	;movff	CLOCK_DIVIDER,PORTC
+	;goto	_LOOP
 
-_UPDATE_GATE:
-	movff	CV_GATE,PORTC		; Simply apply current gate settings directly to PORTC
+	movf	CV_GATE,W
+	rlncf	WREG		; Shift 16ths to open fist bit to store base clock
+	andlw	0xFE		; bit could be dirty
+	movwf	CV_GATE_TMP
+	movf	CLOCK_DIVIDER,W
+	rrncf	WREG		; Divide base clock (tripples) by 4
+	rrncf	WREG
+	andlw	0x01
+	addwf	CV_GATE_TMP,W	; Inject base clock into port set
+	movwf	PORTC		; Apply gate settings directly to PORTC
+
+	; TODO: cycle through a sin or triangle way to generate clock sync'd LFO's on CV outs
+	; TODO: revisit MIDI state tracking to see if we can do it efficiently
+	; TODO: test main MIDI2CV program to see if it handles clock sync
+
 	goto	_LOOP
 
 	end

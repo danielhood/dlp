@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=midi.cv.v2.0.X
+PROJECTNAME=midi.clock.v1.0.X
 
 # Active Configuration
 DEFAULTCONF=default

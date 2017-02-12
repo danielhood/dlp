@@ -21,7 +21,7 @@ _SAVE_CTX	macro
 
 _RESTORE_CTX	macro
 	movff	BSR_TMP,BSR	; Restore bank select
-	movf	W_TMP		; Restore W
+	movf	W_TMP,W		; Restore W
 	movff	ST_TMP,STATUS	; Restore STATUS
 	endm
 

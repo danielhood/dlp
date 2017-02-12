@@ -14,7 +14,10 @@
 	CV_PITCH_CH5
 	CV_VELOCITY		; Current value for note Velocity (or VEL2 in MODE1)
 	CV_MOD			; Current value for the Mod Wheel (or VEL3 in MODE1)
-	CV_GATE			; Current gate settings (bits 0-4) 
+	CV_GATE			; Current gate settings (bits 0-4)
+	CV_GATE_TMP
+	CLOCK_COUNTER		; Counter for midi clock to derrive timings (reset on 6)
+	CLOCK_DIVIDER		; Stored binary divided MIDI clock (not reset)
 
 	SYS_EX_DATA		; Current Sysex byte (set to 0xF7 if no data)
 
