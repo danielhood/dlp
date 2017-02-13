@@ -8,7 +8,7 @@
 ;
 	global	_MAIN
 
-	extern CV_PITCH_DATA
+	extern LFO_SINE_DATA_24
 
 
 ; ------------------------------------------------------------------------------
@@ -17,12 +17,12 @@
 ;	Use program memory lookup.
 ;	EEPROM lookups seemed to only return 00's.
 ;
-_SCALE_CV_NOTE	macro
-	addlw	low CV_PITCH_DATA
-	movwf	TBLPTRL		; Address to read
-	tblrd	*
-	movf	TABLAT,W	; W = table data
-	endm
+;_SCALE_CV_NOTE	macro
+;	addlw	low CV_PITCH_DATA
+;	movwf	TBLPTRL		; Address to read
+;	tblrd	*
+;	movf	TABLAT,W	; W = table data
+;	endm
 
 ; -----------------------------------------------------------------------------
 ; Lookup value in SINE_24_DATA table
@@ -30,9 +30,10 @@ _SCALE_CV_NOTE	macro
 ;
 _LOOKUP_LFO_SINE_24 macro
 	addlw	LFO_SINE_DATA_24	; Add offset to table base
-	movwf	TLPTRL
+	movwf	TBLPTRL
 	tblrd	*
-	movf	TBLAT,W			; W = table data
+	movf	TABLAT,W			; W = table data
+	endm
 
 ; ------------------------------------------------------------------------------
 ; Macro to split the 7 bits across the high and low PWM output registers
@@ -80,8 +81,8 @@ _MAIN:
 
 _LOOP:
 _UPDATE_CV1:
-	btfss	CV_FLAGS,CFV_PITCH
-	goto	_UPDATE_CV2
+	btfss	CV_FLAGS,CV_PITCH
+	goto	_UPDATE_GATES
 	movf	CLOCK_COUNTER_24,W
 	_LOOKUP_LFO_SINE_24		; returning result in W
 	_SPLIT_CV_VALUE2
@@ -109,13 +110,13 @@ _UPDATE_CV3:
 ;	movff	TMP_CV_BYTE_L,PDC2L
 ;	bcf	CV_FLAGS,CVF_MOD
 
-_UPDATE_GATES:
 	;movff	CV_GATE,PORTC
 	;goto	_LOOP
 
 	;movff	CLOCK_DIVIDER,PORTC
 	;goto	_LOOP
 
+_UPDATE_GATES:
 	movf	CV_GATE,W
 	rlncf	WREG		; Shift 16ths to open fist bit to store base clock
 	andlw	0xFE		; bit could be dirty

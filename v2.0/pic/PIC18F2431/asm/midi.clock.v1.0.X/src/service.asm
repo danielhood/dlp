@@ -66,7 +66,7 @@ _HANDLE_RC:
 	clrf	CLOCK_COUNTER
 _CLOCK_COUNTER_24:
 	incf	CLOCK_COUNTER_24,F
-	movlw	24
+	movlw	0x18				; Reset every 24
 	cpfseq	CLOCK_COUNTER_24
 	goto	_CLOCK_COUNTER_24_END
 	clrf	CLOCK_COUNTER_24
@@ -78,8 +78,9 @@ _NOT_CLOCK:
 	movlw	0xFA				; Song start
 	cpfseq	CUR_BYTE
 	goto	_NOT_SONG_START
-	clrf	CV_GATE				; Reset clock
+	clrf	CV_GATE				; Reset clocks
 	clrf	CLOCK_COUNTER
+	clrf	CLOCK_COUNTER_24
 	goto	_RC_CLEANUP
 
 _NOT_SONG_START:

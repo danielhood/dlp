@@ -6,7 +6,7 @@
 ;
 	global	_SETUP
 
-	extern CV_PITCH_DATA
+	extern LFO_SINE_DATA_24
 
 
 ; ------------------------------------------------------------------------------
@@ -94,9 +94,9 @@ _SETUP:
 	movwf	SYS_EX_DATA
 
 ; Setup Table memory pointers
-	movlw	high CV_PITCH_DATA
+	movlw	high LFO_SINE_DATA_24
 	movwf	TBLPTRH		; Select the program block with data (0x3000)
-	movlw	upper CV_PITCH_DATA
+	movlw	upper LFO_SINE_DATA_24
 	movwf	TBLPTRU		; Select the program block with data (0x3000)
 
 
