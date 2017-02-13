@@ -61,9 +61,17 @@ _HANDLE_RC:
 	incf	CLOCK_DIVIDER,F
 	movlw	0x03				; Check if we need to increment the gates (every 3)
 	cpfseq	CLOCK_COUNTER
-	goto	_RC_CLEANUP
+	goto	_CLOCK_COUNTER_24
 	incf	CV_GATE,F
 	clrf	CLOCK_COUNTER
+_CLOCK_COUNTER_24:
+	incf	CLOCK_COUNTER_24,F
+	movlw	24
+	cpfseq	CLOCK_COUNTER_24
+	goto	_CLOCK_COUNTER_24_END
+	clrf	CLOCK_COUNTER_24
+_CLOCK_COUNTER_24_END:
+	bsf	CV_FLAGS,CV_PITCH		; Notify update for PITCH
 	goto	_RC_CLEANUP
 
 _NOT_CLOCK:

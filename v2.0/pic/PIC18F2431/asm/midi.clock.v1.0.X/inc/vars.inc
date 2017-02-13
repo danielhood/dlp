@@ -17,6 +17,7 @@
 	CV_GATE			; Current gate settings (bits 0-4)
 	CV_GATE_TMP
 	CLOCK_COUNTER		; Counter for midi clock to derrive timings (reset on 6)
+	CLOCK_COUNTER_24	; Counter for midi clock reset every 24
 	CLOCK_DIVIDER		; Stored binary divided MIDI clock (not reset)
 
 	SYS_EX_DATA		; Current Sysex byte (set to 0xF7 if no data)

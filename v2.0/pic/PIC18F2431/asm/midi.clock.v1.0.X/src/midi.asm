@@ -24,6 +24,15 @@ _SCALE_CV_NOTE	macro
 	movf	TABLAT,W	; W = table data
 	endm
 
+; -----------------------------------------------------------------------------
+; Lookup value in SINE_24_DATA table
+; W must contain a value between 0 and 23
+;
+_LOOKUP_LFO_SINE_24 macro
+	addlw	LFO_SINE_DATA_24	; Add offset to table base
+	movwf	TLPTRL
+	tblrd	*
+	movf	TBLAT,W			; W = table data
 
 ; ------------------------------------------------------------------------------
 ; Macro to split the 7 bits across the high and low PWM output registers
@@ -70,17 +79,17 @@ _MAIN:
 	movwf	PDC2H
 
 _LOOP:
-;_UPDATE_CV1:
-;	btfss	CV_FLAGS,CVF_PITCH
-;	goto	_UPDATE_CV2
-;	movf	CV_PITCH,W
-;	_SCALE_CV_NOTE		; Scales W, returning result in W
-;	_SPLIT_CV_VALUE2
-;	movff	TMP_CV_BYTE_H,PDC0H
-;	movff	TMP_CV_BYTE_L,PDC0L
-;	bcf	CV_FLAGS,CVF_PITCH
-;
-;_UPDATE_CV2:
+_UPDATE_CV1:
+	btfss	CV_FLAGS,CFV_PITCH
+	goto	_UPDATE_CV2
+	movf	CLOCK_COUNTER_24,W
+	_LOOKUP_LFO_SINE_24		; returning result in W
+	_SPLIT_CV_VALUE2
+	movff	TMP_CV_BYTE_H,PDC0H
+	movff	TMP_CV_BYTE_L,PDC0L
+	bcf	CV_FLAGS,CVF_PITCH
+
+_UPDATE_CV2:
 ;	btfss	CV_FLAGS,CVF_VELOCITY
 ;	goto	_UPDATE_CV3
 ;	movf	CV_VELOCITY,W
@@ -90,7 +99,7 @@ _LOOP:
 ;	movff	TMP_CV_BYTE_L,PDC1L
 ;	bcf	CV_FLAGS,CVF_VELOCITY
 ;
-;_UPDATE_CV3:
+_UPDATE_CV3:
 ;	btfss	CV_FLAGS,CVF_MOD
 ;	goto	_UPDATE_GATES
 ;	movf	CV_MOD,W
