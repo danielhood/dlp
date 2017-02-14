@@ -64,6 +64,7 @@ _HANDLE_RC:
 	goto	_CLOCK_COUNTER_24
 	incf	CV_GATE,F
 	clrf	CLOCK_COUNTER
+
 _CLOCK_COUNTER_24:
 	incf	CLOCK_COUNTER_24,F
 	movlw	0x18				; Reset every 24
@@ -71,7 +72,25 @@ _CLOCK_COUNTER_24:
 	goto	_CLOCK_COUNTER_24_END
 	clrf	CLOCK_COUNTER_24
 _CLOCK_COUNTER_24_END:
-	bsf	CV_FLAGS,CV_PITCH		; Notify update for PITCH
+	bsf	CV_FLAGS,CV_VELOCITY		; Notify update for VELOCITY (CV2)
+
+_CLOCK_COUNTER_32:
+	incf	CLOCK_COUNTER_32,F
+	movlw	0x20				; Reset every 32
+	cpfseq	CLOCK_COUNTER_32
+	goto	_CLOCK_COUNTER_32_END
+	clrf	CLOCK_COUNTER_32
+_CLOCK_COUNTER_32_END:
+	bsf	CV_FLAGS,CV_MOD			; Notify update for MOD (CV3)
+
+_CLOCK_COUNTER_96:
+	incf	CLOCK_COUNTER_96,F
+	movlw	0x60				; Reset every 96
+	cpfseq	CLOCK_COUNTER_96
+	goto	_CLOCK_COUNTER_96_END
+	clrf	CLOCK_COUNTER_96
+_CLOCK_COUNTER_96_END:
+	bsf	CV_FLAGS,CV_PITCH		; Notify update for PITCH (CV1)
 	goto	_RC_CLEANUP
 
 _NOT_CLOCK:

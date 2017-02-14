@@ -28,7 +28,7 @@ vector<int> gen_sine(int steps)
 
 int main()
 {
-	int steps = 24;
+	int steps = 32;
 	vector<int> seq = gen_sine(steps);
 
 	for (int i = 0; i < steps; i++) {

@@ -1,0 +1,7 @@
+gpasm -w1 -p p18f2431 src/midi.asm --mpasm-compatible -c -o tmp/midi.o
+gpasm -w1 -p p18f2431 src/service.asm --mpasm-compatible -c -o tmp/service.o
+gpasm -w1 -p p18f2431 src/init.asm --mpasm-compatible -c -o tmp/init.o
+gpasm -w1 -p p18f2431 src/config.asm --mpasm-compatible -c -o tmp/config.o
+gpasm -w1 -p p18f2431 src/setup.asm --mpasm-compatible -c -o tmp/setup.o
+
+gplink -m -c -s /usr/share/gputils/lkr/18f2431_g.lkr -o tmp/midi-clock tmp/midi.o tmp/service.o tmp/init.o tmp/config.o tmp/setup.o

@@ -9,6 +9,9 @@
 	global	_MAIN
 
 	extern LFO_SINE_DATA_24
+	extern LFO_SINE_DATA_32
+	extern LFO_SINE_DATA_96
+
 
 
 ; ------------------------------------------------------------------------------
@@ -30,6 +33,28 @@
 ;
 _LOOKUP_LFO_SINE_24 macro
 	addlw	LFO_SINE_DATA_24	; Add offset to table base
+	movwf	TBLPTRL
+	tblrd	*
+	movf	TABLAT,W			; W = table data
+	endm
+
+; -----------------------------------------------------------------------------
+; Lookup value in SINE_32_DATA table
+; W must contain a value between 0 and 31
+;
+_LOOKUP_LFO_SINE_32 macro
+	addlw	LFO_SINE_DATA_32	; Add offset to table base
+	movwf	TBLPTRL
+	tblrd	*
+	movf	TABLAT,W			; W = table data
+	endm
+
+; -----------------------------------------------------------------------------
+; Lookup value in SINE_96_DATA table
+; W must contain a value between 0 and 95
+;
+_LOOKUP_LFO_SINE_96 macro
+	addlw	LFO_SINE_DATA_96	; Add offset to table base
 	movwf	TBLPTRL
 	tblrd	*
 	movf	TABLAT,W			; W = table data
@@ -82,33 +107,31 @@ _MAIN:
 _LOOP:
 _UPDATE_CV1:
 	btfss	CV_FLAGS,CV_PITCH
-	goto	_UPDATE_GATES
-	movf	CLOCK_COUNTER_24,W
-	_LOOKUP_LFO_SINE_24		; returning result in W
+	goto	_UPDATE_CV2
+	movf	CLOCK_COUNTER_96,W
+	_LOOKUP_LFO_SINE_96		; returning result in W
 	_SPLIT_CV_VALUE2
 	movff	TMP_CV_BYTE_H,PDC0H
 	movff	TMP_CV_BYTE_L,PDC0L
 	bcf	CV_FLAGS,CVF_PITCH
 
 _UPDATE_CV2:
-;	btfss	CV_FLAGS,CVF_VELOCITY
-;	goto	_UPDATE_CV3
-;	movf	CV_VELOCITY,W
-;	rlncf	WREG		; Double the value since we're using a period of 256 instead of 128
-;	_SPLIT_CV_VALUE2
-;	movff	TMP_CV_BYTE_H,PDC1H
-;	movff	TMP_CV_BYTE_L,PDC1L
-;	bcf	CV_FLAGS,CVF_VELOCITY
-;
+	btfss	CV_FLAGS,CVF_VELOCITY
+	goto	_UPDATE_CV3
+	movf	CLOCK_COUNTER_24,W
+	_LOOKUP_LFO_SINE_24
+	movff	TMP_CV_BYTE_H,PDC1H
+	movff	TMP_CV_BYTE_L,PDC1L
+	bcf	CV_FLAGS,CVF_VELOCITY
+
 _UPDATE_CV3:
-;	btfss	CV_FLAGS,CVF_MOD
-;	goto	_UPDATE_GATES
-;	movf	CV_MOD,W
-;	rlncf	WREG		; Double the value since we're using a period of 256 instead of 128
-;	_SPLIT_CV_VALUE2
-;	movff	TMP_CV_BYTE_H,PDC2H
-;	movff	TMP_CV_BYTE_L,PDC2L
-;	bcf	CV_FLAGS,CVF_MOD
+	btfss	CV_FLAGS,CVF_MOD
+	goto	_UPDATE_GATES
+	movf	CLOCK_COUNTER_32,W
+	_LOOKUP_LFO_SINE_32
+	movff	TMP_CV_BYTE_H,PDC2H
+	movff	TMP_CV_BYTE_L,PDC2L
+	bcf	CV_FLAGS,CVF_MOD
 
 	;movff	CV_GATE,PORTC
 	;goto	_LOOP
