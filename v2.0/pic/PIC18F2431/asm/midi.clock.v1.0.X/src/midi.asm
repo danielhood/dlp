@@ -116,9 +116,9 @@ _UPDATE_CV1:
 	goto	_UPDATE_CV2
 	movf	CLOCK_COUNTER_96,W
 	_LOOKUP_LFO_SINE_96		; returning result in W
-	_SPLIT_CV_VALUE2
-	movff	TMP_CV_BYTE_H,PDC0H
-	movff	TMP_CV_BYTE_L,PDC0L
+	movwf	CV_PITCH_TARGET		; set new target
+	movlw	DELAY_96		; reset delay counter
+	movwf	CV_PITCH_DELAY
 	bcf	CV_FLAGS,CVF_PITCH
 
 _UPDATE_CV2:
@@ -126,19 +126,19 @@ _UPDATE_CV2:
 	goto	_UPDATE_CV3
 	movf	CLOCK_COUNTER_24,W
 	_LOOKUP_LFO_SINE_24
-	_SPLIT_CV_VALUE2
-	movff	TMP_CV_BYTE_H,PDC1H
-	movff	TMP_CV_BYTE_L,PDC1L
+	movwf	CV_VEL_TARGET		; set new target
+	movlw	DELAY_24		; reset delay counter
+	movwf	CV_VEL_DELAY
 	bcf	CV_FLAGS,CVF_VELOCITY
 
 _UPDATE_CV3:
 	btfss	CV_FLAGS,CVF_MOD
-	goto	_UPDATE_GATES
+	goto	_CHECK_PITCH
 	movf	CLOCK_COUNTER_32,W
 	_LOOKUP_LFO_SINE_32
-	_SPLIT_CV_VALUE2
-	movff	TMP_CV_BYTE_H,PDC2H
-	movff	TMP_CV_BYTE_L,PDC2L
+	movwf	CV_MOD_TARGET		; set new target
+	movlw	DELAY_32		; reset delay counter
+	movwf	CV_MOD_DELAY
 	bcf	CV_FLAGS,CVF_MOD
 
 	;movff	CV_GATE,PORTC
@@ -146,6 +146,76 @@ _UPDATE_CV3:
 
 	;movff	CLOCK_DIVIDER,PORTC
 	;goto	_LOOP
+
+
+_CHECK_PITCH:
+	movf	CV_PITCH_TARGET,W	; Check to see if target matches curvalue
+	cpfseq	CV_PITCH
+	goto	_UPDATE_PITCH_CHECK
+	goto	_CHECK_VEL
+_UPDATE_PITCH_CHECK:
+	decfsz	CV_PITCH_DELAY,F	; Check counter
+	goto	_CHECK_VEL
+	movf	CV_PITCH,W
+	cpfsgt	CV_PITCH_TARGET		; increment or decrement?
+	goto	_DEC_PITCH
+	incf	CV_PITCH,F
+	goto	_UPDATE_PITCH
+_DEC_PITCH:
+	decf	CV_PITCH,F
+_UPDATE_PITCH:
+	movf	CV_PITCH,W
+	_SPLIT_CV_VALUE2
+	movff	TMP_CV_BYTE_H,PDC0H
+	movff	TMP_CV_BYTE_L,PDC0L
+	movlw	DELAY_96		; reset delay counter
+	movwf	CV_PITCH_DELAY
+
+_CHECK_VEL:
+	movf	CV_VEL_TARGET,W	; Check to see if target matches curvalue
+	cpfseq	CV_VELOCITY
+	goto	_UPDATE_VEL_CHECK
+	goto	_CHECK_MOD
+_UPDATE_VEL_CHECK:
+	decfsz	CV_VEL_DELAY,F	; Check counter
+	goto	_CHECK_MOD
+	movf	CV_VELOCITY,W
+	cpfsgt	CV_VEL_TARGET		; increment or decrement?
+	goto	_DEC_VEL
+	incf	CV_VELOCITY,F
+	goto	_UPDATE_VEL
+_DEC_VEL:
+	decf	CV_VELOCITY,F
+_UPDATE_VEL:
+	movf	CV_VELOCITY,W
+	_SPLIT_CV_VALUE2
+	movff	TMP_CV_BYTE_H,PDC1H
+	movff	TMP_CV_BYTE_L,PDC1L
+	movlw	DELAY_24		; reset delay counter
+	movwf	CV_VEL_DELAY
+
+_CHECK_MOD:
+	movf	CV_MOD_TARGET,W	; Check to see if target matches curvalue
+	cpfseq	CV_MOD
+	goto	_UPDATE_MOD_CHECK
+	goto	_UPDATE_GATES
+_UPDATE_MOD_CHECK:
+	decfsz	CV_MOD_DELAY,F	; Check counter
+	goto	_UPDATE_GATES
+	movf	CV_MOD,W
+	cpfsgt	CV_MOD_TARGET		; increment or decrement?
+	goto	_DEC_MOD
+	incf	CV_MOD,F
+	goto	_UPDATE_MOD
+_DEC_MOD:
+	decf	CV_MOD,F
+_UPDATE_MOD:
+	movf	CV_MOD,W
+	_SPLIT_CV_VALUE2
+	movff	TMP_CV_BYTE_H,PDC2H
+	movff	TMP_CV_BYTE_L,PDC2L
+	movlw	DELAY_32		; reset delay counter
+	movwf	CV_MOD_DELAY
 
 _UPDATE_GATES:
 	movf	CV_GATE,W

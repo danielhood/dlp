@@ -24,6 +24,13 @@
 
 	SYS_EX_DATA		; Current Sysex byte (set to 0xF7 if no data)
 
+	CV_PITCH_TARGET		; Current target for pitch
+	CV_PITCH_DELAY		; Delay counter for pitch target resolution
+	CV_VEL_TARGET		; Current target for velocity
+	CV_VEL_DELAY		; Delay counter for velocity target resolution
+	CV_MOD_TARGET		; Current target for mod
+	CV_MOD_DELAY		; Delay counter for mod target resolution
+
 ;------ service.asm variables
 	W_TMP			; Storage for W register during interrupt
 	ST_TMP			; Storage for STATUS register during interrupt
@@ -96,3 +103,7 @@ GATE_2:		equ	0x03
 GATE_3:		equ	0x02
 GATE_4:		equ	0x01
 GATE_5:		equ	0x00
+
+DELAY_96	equ	0x80
+DELAY_32	equ	0x80
+DELAY_24	equ	0x80

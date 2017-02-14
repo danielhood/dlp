@@ -1,4 +1,4 @@
-MPASM  5.43                          MIDI.ASM   2-13-2017  22:35:20         PAGE  1
+MPASM  5.43                          MIDI.ASM   2-13-2017  23:26:15         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -43,90 +43,101 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00024 
   0000000E            00025         SYS_EX_DATA             ; Current Sysex byte (set to 0xF7 if no data)
                       00026 
-                      00027 ;------ service.asm variables
-  0000000F            00028         W_TMP                   ; Storage for W register during interrupt
-  00000010            00029         ST_TMP                  ; Storage for STATUS register during interrupt
-  00000011            00030         BSR_TMP                 ; Storage for BSR register during interrupt
-                      00031 
-  00000012            00032         MIDI_STATE              ; Current midi state offset
-  00000013            00033         MIDI_STATE_TMP          ; Used to store the last midi state when in SysEx mode
-  00000014            00034         MSG_COUNT               ; Counts the number of msg params passed
-  00000015            00035         CC_NUM                  ; Holds the controller number for the CC message
-  00000016            00036         MSG_CHAN                ; Holds the working MIDI channel number
-  00000017            00037         MSG_PITCH_CH1           ; Holds the working pitches that may be pushed live
-  00000018            00038         MSG_PITCH_CH2           ; In Drum Mode (MODE1) only _CH1 is used
-  00000019            00039         MSG_PITCH_CH3
-  0000001A            00040         MSG_PITCH_CH4
-MPASM  5.43                          MIDI.ASM   2-13-2017  22:35:20         PAGE  2
+  0000000F            00027         CV_PITCH_TARGET         ; Current target for pitch
+  00000010            00028         CV_PITCH_DELAY          ; Delay counter for pitch target resolution
+  00000011            00029         CV_VEL_TARGET           ; Current target for velocity
+  00000012            00030         CV_VEL_DELAY            ; Delay counter for velocity target resolution
+  00000013            00031         CV_MOD_TARGET           ; Current target for mod
+  00000014            00032         CV_MOD_DELAY            ; Delay counter for mod target resolution
+                      00033 
+                      00034 ;------ service.asm variables
+  00000015            00035         W_TMP                   ; Storage for W register during interrupt
+  00000016            00036         ST_TMP                  ; Storage for STATUS register during interrupt
+  00000017            00037         BSR_TMP                 ; Storage for BSR register during interrupt
+                      00038 
+  00000018            00039         MIDI_STATE              ; Current midi state offset
+  00000019            00040         MIDI_STATE_TMP          ; Used to store the last midi state when in SysEx mode
+MPASM  5.43                          MIDI.ASM   2-13-2017  23:26:15         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-  0000001B            00041         MSG_PITCH_CH5
-  0000001C            00042         MSG_VELOCITY            ; Holds the working velocities that may be pushed live
-                      00043 
-                      00044 ;------ midi.asm variables
-  0000001D            00045         TMP_CV_BYTE_L           ; Holds a temp value for pushing CV values to the PWM registers
-  0000001E            00046         TMP_CV_BYTE_H
-                      00047 
-                      00048 ;------ midi.read.int.asm variables (entry point)
-                      00049 
-                      00050         endc
-                      00051 
-                      00052 
-                      00053 ; ------------------------------------------------------------------------------
-                      00054 ; Constants
-                      00055 ;
-  00000000            00056 CV_DATA_LKP:    equ     0x00    ; EEPROM base Address of CV Controller data lookup
-  00000080            00057 CV_NOTE_LKP:    equ     0x80    ; EEPROM base Address CV Note data lookup
+  0000001A            00041         MSG_COUNT               ; Counts the number of msg params passed
+  0000001B            00042         CC_NUM                  ; Holds the controller number for the CC message
+  0000001C            00043         MSG_CHAN                ; Holds the working MIDI channel number
+  0000001D            00044         MSG_PITCH_CH1           ; Holds the working pitches that may be pushed live
+  0000001E            00045         MSG_PITCH_CH2           ; In Drum Mode (MODE1) only _CH1 is used
+  0000001F            00046         MSG_PITCH_CH3
+  00000020            00047         MSG_PITCH_CH4
+  00000021            00048         MSG_PITCH_CH5
+  00000022            00049         MSG_VELOCITY            ; Holds the working velocities that may be pushed live
+                      00050 
+                      00051 ;------ midi.asm variables
+  00000023            00052         TMP_CV_BYTE_L           ; Holds a temp value for pushing CV values to the PWM registers
+  00000024            00053         TMP_CV_BYTE_H
+                      00054 
+                      00055 ;------ midi.read.int.asm variables (entry point)
+                      00056 
+                      00057         endc
                       00058 
-                      00059 ; CV_FLAGS
-  00000000            00060 CVF_PITCH:      equ     0x00    ; MODE0
-  00000001            00061 CVF_VELOCITY:   equ     0x01    ; MODE0
-  00000002            00062 CVF_MOD:        equ     0x02    ; MODE0
-  00000003            00063 CVF_CV_4:       equ     0x03    ; MODE0
-  00000004            00064 CVF_CV_5:       equ     0x04    ; MODE0
+                      00059 
+                      00060 ; ------------------------------------------------------------------------------
+                      00061 ; Constants
+                      00062 ;
+  00000000            00063 CV_DATA_LKP:    equ     0x00    ; EEPROM base Address of CV Controller data lookup
+  00000080            00064 CV_NOTE_LKP:    equ     0x80    ; EEPROM base Address CV Note data lookup
                       00065 
-  00000000            00066 _MOFFSET_NOTE_OFF:      equ     0x00    ; 0x8c
-  00000002            00067 _MOFFSET_NOTE_ON:       equ     0x02    ; 0x9c
-  00000004            00068 _MOFFSET_KP:            equ     0x04    ; 0xAc
-  00000006            00069 _MOFFSET_CC:            equ     0x06    ; 0xBc
-  00000008            00070 _MOFFSET_PC:            equ     0x08    ; 0xCc
-  0000000A            00071 _MOFFSET_CP:            equ     0x0A    ; 0xDc
-  0000000C            00072 _MOFFSET_PB:            equ     0x0C    ; 0xEc
-  0000000E            00073 _MOFFSET_SYS_EX:        equ     0x0E    ; 0xF0
-  00000010            00074 _MOFFSET_F1:            equ     0x10    ; 0xF1
-  00000012            00075 _MOFFSET_SP:            equ     0x12    ; 0xF2
-  00000014            00076 _MOFFSET_SS:            equ     0x14    ; 0xF3
-  00000016            00077 _MOSSFEST_F4:           equ     0x16    ; 0xF4
-  00000018            00078 _MOFFSET_UBS:           equ     0x18    ; 0xF5
-  0000001A            00079 _MOFFSET_TR:            equ     0x1A    ; 0xF6
-  0000001C            00080 _MOFFSET_SYS_EX_END:    equ     0x1C    ; 0xF7
-  0000001E            00081 _MOFFSET_TT:            equ     0x1E    ; 0xF8
-  00000020            00082 _MOSSFEST_F9:           equ     0x20    ; 0xF9
-  00000022            00083 _MOFFSET_START_SONG:    equ     0x22    ; 0xFA
-  00000024            00084 _MOFFSET_CONT_SONG:     equ     0x24    ; 0xFB
-  00000026            00085 _MOFFSET_STOP_SONG:     equ     0x26    ; 0xFC
-  00000028            00086 _MOSSFEST_FD:           equ     0x28    ; 0xFD
-  0000002A            00087 _MOFFSET_AS:            equ     0x2A    ; 0xFE
-  0000002C            00088 _MOFFSET_SYS_RESET:     equ     0x2C    ; 0xFF
-  0000002E            00089 _MOFFSET_NONE:          equ     0x2E
-                      00090 
-                      00091 ; GATE Mappings
-                      00092 ; Bits 0 to 4 of PORT_C represent gates
-                      00093 ; Bit 0 represents GATE 5 and Bit 4 represents GATE 1 in v2.0 to match the hardware layout
-MPASM  5.43                          MIDI.ASM   2-13-2017  22:35:20         PAGE  3
+                      00066 ; CV_FLAGS
+  00000000            00067 CVF_PITCH:      equ     0x00    ; MODE0
+  00000001            00068 CVF_VELOCITY:   equ     0x01    ; MODE0
+  00000002            00069 CVF_MOD:        equ     0x02    ; MODE0
+  00000003            00070 CVF_CV_4:       equ     0x03    ; MODE0
+  00000004            00071 CVF_CV_5:       equ     0x04    ; MODE0
+                      00072 
+  00000000            00073 _MOFFSET_NOTE_OFF:      equ     0x00    ; 0x8c
+  00000002            00074 _MOFFSET_NOTE_ON:       equ     0x02    ; 0x9c
+  00000004            00075 _MOFFSET_KP:            equ     0x04    ; 0xAc
+  00000006            00076 _MOFFSET_CC:            equ     0x06    ; 0xBc
+  00000008            00077 _MOFFSET_PC:            equ     0x08    ; 0xCc
+  0000000A            00078 _MOFFSET_CP:            equ     0x0A    ; 0xDc
+  0000000C            00079 _MOFFSET_PB:            equ     0x0C    ; 0xEc
+  0000000E            00080 _MOFFSET_SYS_EX:        equ     0x0E    ; 0xF0
+  00000010            00081 _MOFFSET_F1:            equ     0x10    ; 0xF1
+  00000012            00082 _MOFFSET_SP:            equ     0x12    ; 0xF2
+  00000014            00083 _MOFFSET_SS:            equ     0x14    ; 0xF3
+  00000016            00084 _MOSSFEST_F4:           equ     0x16    ; 0xF4
+  00000018            00085 _MOFFSET_UBS:           equ     0x18    ; 0xF5
+  0000001A            00086 _MOFFSET_TR:            equ     0x1A    ; 0xF6
+  0000001C            00087 _MOFFSET_SYS_EX_END:    equ     0x1C    ; 0xF7
+  0000001E            00088 _MOFFSET_TT:            equ     0x1E    ; 0xF8
+  00000020            00089 _MOSSFEST_F9:           equ     0x20    ; 0xF9
+  00000022            00090 _MOFFSET_START_SONG:    equ     0x22    ; 0xFA
+  00000024            00091 _MOFFSET_CONT_SONG:     equ     0x24    ; 0xFB
+  00000026            00092 _MOFFSET_STOP_SONG:     equ     0x26    ; 0xFC
+  00000028            00093 _MOSSFEST_FD:           equ     0x28    ; 0xFD
+MPASM  5.43                          MIDI.ASM   2-13-2017  23:26:15         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-  00000004            00094 GATE_1:         equ     0x04
-  00000003            00095 GATE_2:         equ     0x03
-  00000002            00096 GATE_3:         equ     0x02
-  00000001            00097 GATE_4:         equ     0x01
-  00000000            00098 GATE_5:         equ     0x00
+  0000002A            00094 _MOFFSET_AS:            equ     0x2A    ; 0xFE
+  0000002C            00095 _MOFFSET_SYS_RESET:     equ     0x2C    ; 0xFF
+  0000002E            00096 _MOFFSET_NONE:          equ     0x2E
+                      00097 
+                      00098 ; GATE Mappings
+                      00099 ; Bits 0 to 4 of PORT_C represent gates
+                      00100 ; Bit 0 represents GATE 5 and Bit 4 represents GATE 1 in v2.0 to match the hardware layout
+  00000004            00101 GATE_1:         equ     0x04
+  00000003            00102 GATE_2:         equ     0x03
+  00000002            00103 GATE_3:         equ     0x02
+  00000001            00104 GATE_4:         equ     0x01
+  00000000            00105 GATE_5:         equ     0x00
+                      00106 
+  00000080            00107 DELAY_96        equ     0x80
+  00000080            00108 DELAY_32        equ     0x80
+  00000080            00109 DELAY_24        equ     0x80
                       00005 
                       00006 ; ------------------------------------------------------------------------------
                       00007 ; Export global code refs
@@ -164,6 +175,12 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00039         tblrd   *
                       00040         movf    TABLAT,W                        ; W = table data
                       00041         endm
+MPASM  5.43                          MIDI.ASM   2-13-2017  23:26:15         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
                       00042 
                       00043 ; -----------------------------------------------------------------------------
                       00044 ; Lookup value in SINE_32_DATA table
@@ -175,12 +192,6 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00050         addlw   low LFO_SINE_DATA_32    ; Add offset to table base
                       00051         movwf   TBLPTRL
                       00052         tblrd   *
-MPASM  5.43                          MIDI.ASM   2-13-2017  22:35:20         PAGE  4
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
                       00053         movf    TABLAT,W                        ; W = table data
                       00054         endm
                       00055 
@@ -223,6 +234,12 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00092         rlncf   TMP_CV_BYTE_L,F
                       00093         rlncf   TMP_CV_BYTE_L,F ; pushes the msbit of 7bit value into C
                       00094         swapf   TMP_CV_BYTE_H,F
+MPASM  5.43                          MIDI.ASM   2-13-2017  23:26:15         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
                       00095         rrncf   TMP_CV_BYTE_H,F
                       00096         rrncf   TMP_CV_BYTE_H,F
                       00097         endm
@@ -234,12 +251,6 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 000000                00103 _MAIN:
 000000 6A80           00104         clrf    PORTA           ; Clear PORTA
 000002 6A81           00105         clrf    PORTB           ; Clear PORTB
-MPASM  5.43                          MIDI.ASM   2-13-2017  22:35:20         PAGE  5
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
 000004 6A82           00106         clrf    PORTC           ; Clear PORTC
                       00107 
 000006 0E00           00108         movlw   b'00000000'     ; Set the high byte to 0
@@ -259,75 +270,48 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 000018 6EF6               M         movwf   TBLPTRL
 00001A 0008               M         tblrd   *
 00001C 50F5               M         movf    TABLAT,W                        ; W = table data
-                      00119         _SPLIT_CV_VALUE2
-                          M         ;rlncf  WREG            ; Double the value since we're using a period of 256 instead of 128
-00001E 6E1D               M         movwf   TMP_CV_BYTE_L   ; W should contain the 8bit CV value
-000020 0BC0               M         andlw   0xC0
-000022 6E1E               M         movwf   TMP_CV_BYTE_H   ;
-000024 461D               M         rlncf   TMP_CV_BYTE_L,F
-000026 461D               M         rlncf   TMP_CV_BYTE_L,F ; pushes the msbit of 7bit value into C
-000028 3A1E               M         swapf   TMP_CV_BYTE_H,F
-00002A 421E               M         rrncf   TMP_CV_BYTE_H,F
-00002C 421E               M         rrncf   TMP_CV_BYTE_H,F
-00002E C01E FF78      00120         movff   TMP_CV_BYTE_H,PDC0H
-000032 C01D FF79      00121         movff   TMP_CV_BYTE_L,PDC0L
-000036 9001           00122         bcf     CV_FLAGS,CVF_PITCH
+00001E 6E0F           00119         movwf   CV_PITCH_TARGET         ; set new target
+000020 0E80           00120         movlw   DELAY_96                ; reset delay counter
+000022 6E10           00121         movwf   CV_PITCH_DELAY
+000024 9001           00122         bcf     CV_FLAGS,CVF_PITCH
                       00123 
-000038                00124 _UPDATE_CV2:
-000038 A201           00125         btfss   CV_FLAGS,CVF_VELOCITY
-00003A EF?? F???      00126         goto    _UPDATE_CV3
-00003E 500A           00127         movf    CLOCK_COUNTER_24,W
+000026                00124 _UPDATE_CV2:
+000026 A201           00125         btfss   CV_FLAGS,CVF_VELOCITY
+000028 EF?? F???      00126         goto    _UPDATE_CV3
+00002C 500A           00127         movf    CLOCK_COUNTER_24,W
                       00128         _LOOKUP_LFO_SINE_24
                           M         ;movlw  high LFO_SINE_DATA_24
                           M         ;movwf  TBLPTRH         ; Select the program block with data (0x3000)
-000040 0F??               M         addlw   low LFO_SINE_DATA_24    ; Add offset to table base
-000042 6EF6               M         movwf   TBLPTRL
-000044 0008               M         tblrd   *
-000046 50F5               M         movf    TABLAT,W                        ; W = table data
-                      00129         _SPLIT_CV_VALUE2
-                          M         ;rlncf  WREG            ; Double the value since we're using a period of 256 instead of 128
-000048 6E1D               M         movwf   TMP_CV_BYTE_L   ; W should contain the 8bit CV value
-00004A 0BC0               M         andlw   0xC0
-00004C 6E1E               M         movwf   TMP_CV_BYTE_H   ;
-00004E 461D               M         rlncf   TMP_CV_BYTE_L,F
-000050 461D               M         rlncf   TMP_CV_BYTE_L,F ; pushes the msbit of 7bit value into C
-000052 3A1E               M         swapf   TMP_CV_BYTE_H,F
-000054 421E               M         rrncf   TMP_CV_BYTE_H,F
-MPASM  5.43                          MIDI.ASM   2-13-2017  22:35:20         PAGE  6
+00002E 0F??               M         addlw   low LFO_SINE_DATA_24    ; Add offset to table base
+000030 6EF6               M         movwf   TBLPTRL
+000032 0008               M         tblrd   *
+000034 50F5               M         movf    TABLAT,W                        ; W = table data
+000036 6E11           00129         movwf   CV_VEL_TARGET           ; set new target
+000038 0E80           00130         movlw   DELAY_24                ; reset delay counter
+00003A 6E12           00131         movwf   CV_VEL_DELAY
+00003C 9201           00132         bcf     CV_FLAGS,CVF_VELOCITY
+                      00133 
+00003E                00134 _UPDATE_CV3:
+00003E A401           00135         btfss   CV_FLAGS,CVF_MOD
+MPASM  5.43                          MIDI.ASM   2-13-2017  23:26:15         PAGE  6
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-000056 421E               M         rrncf   TMP_CV_BYTE_H,F
-000058 C01E FF76      00130         movff   TMP_CV_BYTE_H,PDC1H
-00005C C01D FF77      00131         movff   TMP_CV_BYTE_L,PDC1L
-000060 9201           00132         bcf     CV_FLAGS,CVF_VELOCITY
-                      00133 
-000062                00134 _UPDATE_CV3:
-000062 A401           00135         btfss   CV_FLAGS,CVF_MOD
-000064 EF?? F???      00136         goto    _UPDATE_GATES
-000068 500B           00137         movf    CLOCK_COUNTER_32,W
+000040 EF?? F???      00136         goto    _CHECK_PITCH
+000044 500B           00137         movf    CLOCK_COUNTER_32,W
                       00138         _LOOKUP_LFO_SINE_32
                           M         ;movlw  high LFO_SINE_DATA_32
                           M         ;movwf  TBLPTRH         ; Select the program block with data (0x3000)
-00006A 0F??               M         addlw   low LFO_SINE_DATA_32    ; Add offset to table base
-00006C 6EF6               M         movwf   TBLPTRL
-00006E 0008               M         tblrd   *
-000070 50F5               M         movf    TABLAT,W                        ; W = table data
-                      00139         _SPLIT_CV_VALUE2
-                          M         ;rlncf  WREG            ; Double the value since we're using a period of 256 instead of 128
-000072 6E1D               M         movwf   TMP_CV_BYTE_L   ; W should contain the 8bit CV value
-000074 0BC0               M         andlw   0xC0
-000076 6E1E               M         movwf   TMP_CV_BYTE_H   ;
-000078 461D               M         rlncf   TMP_CV_BYTE_L,F
-00007A 461D               M         rlncf   TMP_CV_BYTE_L,F ; pushes the msbit of 7bit value into C
-00007C 3A1E               M         swapf   TMP_CV_BYTE_H,F
-00007E 421E               M         rrncf   TMP_CV_BYTE_H,F
-000080 421E               M         rrncf   TMP_CV_BYTE_H,F
-000082 C01E FF74      00140         movff   TMP_CV_BYTE_H,PDC2H
-000086 C01D FF75      00141         movff   TMP_CV_BYTE_L,PDC2L
-00008A 9401           00142         bcf     CV_FLAGS,CVF_MOD
+000046 0F??               M         addlw   low LFO_SINE_DATA_32    ; Add offset to table base
+000048 6EF6               M         movwf   TBLPTRL
+00004A 0008               M         tblrd   *
+00004C 50F5               M         movf    TABLAT,W                        ; W = table data
+00004E 6E13           00139         movwf   CV_MOD_TARGET           ; set new target
+000050 0E80           00140         movlw   DELAY_32                ; reset delay counter
+000052 6E14           00141         movwf   CV_MOD_DELAY
+000054 9401           00142         bcf     CV_FLAGS,CVF_MOD
                       00143 
                       00144         ;movff  CV_GATE,PORTC
                       00145         ;goto   _LOOP
@@ -335,32 +319,135 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00147         ;movff  CLOCK_DIVIDER,PORTC
                       00148         ;goto   _LOOP
                       00149 
-00008C                00150 _UPDATE_GATES:
-00008C 5007           00151         movf    CV_GATE,W
-00008E 46E8           00152         rlncf   WREG            ; Shift 16ths to open fist bit to store base clock
-000090 0BFE           00153         andlw   0xFE            ; bit could be dirty
-000092 6E08           00154         movwf   CV_GATE_TMP
-000094 500D           00155         movf    CLOCK_DIVIDER,W
-000096 42E8           00156         rrncf   WREG            ; Divide base clock (tripples) by 4
-000098 42E8           00157         rrncf   WREG
-00009A 0B01           00158         andlw   0x01
-00009C 2408           00159         addwf   CV_GATE_TMP,W   ; Inject base clock into port set
-00009E 6E82           00160         movwf   PORTC           ; Apply gate settings directly to PORTC
-                      00161 
-                      00162         ; TODO: cycle through a sin or triangle way to generate clock sync'd LFO's on CV outs
-                      00163         ; TODO: revisit MIDI state tracking to see if we can do it efficiently
-                      00164         ; TODO: test main MIDI2CV program to see if it handles clock sync
-                      00165 
-0000A0 EF?? F???      00166         goto    _LOOP
-MPASM  5.43                          MIDI.ASM   2-13-2017  22:35:20         PAGE  7
+                      00150 
+000056                00151 _CHECK_PITCH:
+000056 500F           00152         movf    CV_PITCH_TARGET,W       ; Check to see if target matches curvalue
+000058 6202           00153         cpfseq  CV_PITCH
+00005A EF?? F???      00154         goto    _UPDATE_PITCH_CHECK
+00005E EF?? F???      00155         goto    _CHECK_VEL
+000062                00156 _UPDATE_PITCH_CHECK:
+000062 2E10           00157         decfsz  CV_PITCH_DELAY,F        ; Check counter
+000064 EF?? F???      00158         goto    _CHECK_VEL
+000068 5002           00159         movf    CV_PITCH,W
+00006A 640F           00160         cpfsgt  CV_PITCH_TARGET         ; increment or decrement?
+00006C EF?? F???      00161         goto    _DEC_PITCH
+000070 2A02           00162         incf    CV_PITCH,F
+000072 EF?? F???      00163         goto    _UPDATE_PITCH
+000076                00164 _DEC_PITCH:
+000076 0602           00165         decf    CV_PITCH,F
+000078                00166 _UPDATE_PITCH:
+000078 5002           00167         movf    CV_PITCH,W
+                      00168         _SPLIT_CV_VALUE2
+                          M         ;rlncf  WREG            ; Double the value since we're using a period of 256 instead of 128
+00007A 6E23               M         movwf   TMP_CV_BYTE_L   ; W should contain the 8bit CV value
+00007C 0BC0               M         andlw   0xC0
+00007E 6E24               M         movwf   TMP_CV_BYTE_H   ;
+000080 4623               M         rlncf   TMP_CV_BYTE_L,F
+000082 4623               M         rlncf   TMP_CV_BYTE_L,F ; pushes the msbit of 7bit value into C
+000084 3A24               M         swapf   TMP_CV_BYTE_H,F
+000086 4224               M         rrncf   TMP_CV_BYTE_H,F
+000088 4224               M         rrncf   TMP_CV_BYTE_H,F
+00008A C024 FF78      00169         movff   TMP_CV_BYTE_H,PDC0H
+00008E C023 FF79      00170         movff   TMP_CV_BYTE_L,PDC0L
+000092 0E80           00171         movlw   DELAY_96                ; reset delay counter
+000094 6E10           00172         movwf   CV_PITCH_DELAY
+                      00173 
+MPASM  5.43                          MIDI.ASM   2-13-2017  23:26:15         PAGE  7
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-                      00167 
-                      00168         end
-MPASM  5.43                          MIDI.ASM   2-13-2017  22:35:20         PAGE  8
+000096                00174 _CHECK_VEL:
+000096 5011           00175         movf    CV_VEL_TARGET,W ; Check to see if target matches curvalue
+000098 6205           00176         cpfseq  CV_VELOCITY
+00009A EF?? F???      00177         goto    _UPDATE_VEL_CHECK
+00009E EF?? F???      00178         goto    _CHECK_MOD
+0000A2                00179 _UPDATE_VEL_CHECK:
+0000A2 2E12           00180         decfsz  CV_VEL_DELAY,F  ; Check counter
+0000A4 EF?? F???      00181         goto    _CHECK_MOD
+0000A8 5005           00182         movf    CV_VELOCITY,W
+0000AA 6411           00183         cpfsgt  CV_VEL_TARGET           ; increment or decrement?
+0000AC EF?? F???      00184         goto    _DEC_VEL
+0000B0 2A05           00185         incf    CV_VELOCITY,F
+0000B2 EF?? F???      00186         goto    _UPDATE_VEL
+0000B6                00187 _DEC_VEL:
+0000B6 0605           00188         decf    CV_VELOCITY,F
+0000B8                00189 _UPDATE_VEL:
+0000B8 5005           00190         movf    CV_VELOCITY,W
+                      00191         _SPLIT_CV_VALUE2
+                          M         ;rlncf  WREG            ; Double the value since we're using a period of 256 instead of 128
+0000BA 6E23               M         movwf   TMP_CV_BYTE_L   ; W should contain the 8bit CV value
+0000BC 0BC0               M         andlw   0xC0
+0000BE 6E24               M         movwf   TMP_CV_BYTE_H   ;
+0000C0 4623               M         rlncf   TMP_CV_BYTE_L,F
+0000C2 4623               M         rlncf   TMP_CV_BYTE_L,F ; pushes the msbit of 7bit value into C
+0000C4 3A24               M         swapf   TMP_CV_BYTE_H,F
+0000C6 4224               M         rrncf   TMP_CV_BYTE_H,F
+0000C8 4224               M         rrncf   TMP_CV_BYTE_H,F
+0000CA C024 FF76      00192         movff   TMP_CV_BYTE_H,PDC1H
+0000CE C023 FF77      00193         movff   TMP_CV_BYTE_L,PDC1L
+0000D2 0E80           00194         movlw   DELAY_24                ; reset delay counter
+0000D4 6E12           00195         movwf   CV_VEL_DELAY
+                      00196 
+0000D6                00197 _CHECK_MOD:
+0000D6 5013           00198         movf    CV_MOD_TARGET,W ; Check to see if target matches curvalue
+0000D8 6206           00199         cpfseq  CV_MOD
+0000DA EF?? F???      00200         goto    _UPDATE_MOD_CHECK
+0000DE EF?? F???      00201         goto    _UPDATE_GATES
+0000E2                00202 _UPDATE_MOD_CHECK:
+0000E2 2E14           00203         decfsz  CV_MOD_DELAY,F  ; Check counter
+0000E4 EF?? F???      00204         goto    _UPDATE_GATES
+0000E8 5006           00205         movf    CV_MOD,W
+0000EA 6413           00206         cpfsgt  CV_MOD_TARGET           ; increment or decrement?
+0000EC EF?? F???      00207         goto    _DEC_MOD
+0000F0 2A06           00208         incf    CV_MOD,F
+0000F2 EF?? F???      00209         goto    _UPDATE_MOD
+0000F6                00210 _DEC_MOD:
+0000F6 0606           00211         decf    CV_MOD,F
+0000F8                00212 _UPDATE_MOD:
+0000F8 5006           00213         movf    CV_MOD,W
+                      00214         _SPLIT_CV_VALUE2
+                          M         ;rlncf  WREG            ; Double the value since we're using a period of 256 instead of 128
+0000FA 6E23               M         movwf   TMP_CV_BYTE_L   ; W should contain the 8bit CV value
+0000FC 0BC0               M         andlw   0xC0
+MPASM  5.43                          MIDI.ASM   2-13-2017  23:26:15         PAGE  8
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0000FE 6E24               M         movwf   TMP_CV_BYTE_H   ;
+000100 4623               M         rlncf   TMP_CV_BYTE_L,F
+000102 4623               M         rlncf   TMP_CV_BYTE_L,F ; pushes the msbit of 7bit value into C
+000104 3A24               M         swapf   TMP_CV_BYTE_H,F
+000106 4224               M         rrncf   TMP_CV_BYTE_H,F
+000108 4224               M         rrncf   TMP_CV_BYTE_H,F
+00010A C024 FF74      00215         movff   TMP_CV_BYTE_H,PDC2H
+00010E C023 FF75      00216         movff   TMP_CV_BYTE_L,PDC2L
+000112 0E80           00217         movlw   DELAY_32                ; reset delay counter
+000114 6E14           00218         movwf   CV_MOD_DELAY
+                      00219 
+000116                00220 _UPDATE_GATES:
+000116 5007           00221         movf    CV_GATE,W
+000118 46E8           00222         rlncf   WREG            ; Shift 16ths to open fist bit to store base clock
+00011A 0BFE           00223         andlw   0xFE            ; bit could be dirty
+00011C 6E08           00224         movwf   CV_GATE_TMP
+00011E 500D           00225         movf    CLOCK_DIVIDER,W
+000120 42E8           00226         rrncf   WREG            ; Divide base clock (tripples) by 4
+000122 42E8           00227         rrncf   WREG
+000124 0B01           00228         andlw   0x01
+000126 2408           00229         addwf   CV_GATE_TMP,W   ; Inject base clock into port set
+000128 6E82           00230         movwf   PORTC           ; Apply gate settings directly to PORTC
+                      00231 
+                      00232         ; TODO: cycle through a sin or triangle way to generate clock sync'd LFO's on CV outs
+                      00233         ; TODO: revisit MIDI state tracking to see if we can do it efficiently
+                      00234         ; TODO: test main MIDI2CV program to see if it handles clock sync
+                      00235 
+00012A EF?? F???      00236         goto    _LOOP
+                      00237 
+                      00238         end
+MPASM  5.43                          MIDI.ASM   2-13-2017  23:26:15         PAGE  9
 
 
 SYMBOL TABLE
@@ -419,7 +506,7 @@ BFEMT                             00000003
 BFOVFL                            00000002
 BOR                               00000000
 BRFEN                             00000007
-MPASM  5.43                          MIDI.ASM   2-13-2017  22:35:20         PAGE  9
+MPASM  5.43                          MIDI.ASM   2-13-2017  23:26:15         PAGE 10
 
 
 SYMBOL TABLE
@@ -428,7 +515,7 @@ SYMBOL TABLE
 BRG16                             00000003
 BRGH                              00000002
 BSR                               00000FE0
-BSR_TMP                           00000011
+BSR_TMP                           00000017
 C                                 00000000
 CAP1BUFH                          00000F69
 CAP1BUFL                          00000F68
@@ -478,7 +565,7 @@ CCP2M1                            00000001
 CCP2M2                            00000002
 CCP2M3                            00000003
 CCP2X                             00000005
-MPASM  5.43                          MIDI.ASM   2-13-2017  22:35:20         PAGE 10
+MPASM  5.43                          MIDI.ASM   2-13-2017  23:26:15         PAGE 11
 
 
 SYMBOL TABLE
@@ -491,7 +578,7 @@ CCPR1L                            00000FBE
 CCPR2                             00000FBB
 CCPR2H                            00000FBC
 CCPR2L                            00000FBB
-CC_NUM                            00000015
+CC_NUM                            0000001B
 CFGS                              00000006
 CK                                00000006
 CKE                               00000006
@@ -516,11 +603,17 @@ CV_FLAGS                          00000001
 CV_GATE                           00000007
 CV_GATE_TMP                       00000008
 CV_MOD                            00000006
+CV_MOD_DELAY                      00000014
+CV_MOD_TARGET                     00000013
 CV_NOTE_LKP                       00000080
 CV_PITCH                          00000002
 CV_PITCH_CH4                      00000003
 CV_PITCH_CH5                      00000004
+CV_PITCH_DELAY                    00000010
+CV_PITCH_TARGET                   0000000F
 CV_VELOCITY                       00000005
+CV_VEL_DELAY                      00000012
+CV_VEL_TARGET                     00000011
 D                                 00000005
 DATA_ADDRESS                      00000005
 DC                                00000001
@@ -531,18 +624,21 @@ DC2B1                             00000005
 DDRA                              TRISA
 DDRB                              TRISB
 DDRC                              TRISC
-DDRD                              TRISD
-DDRE                              TRISE
-DFLTCON                           00000F60
-DONE                              00000001
-DOWN                              00000005
-DT0                               00000000
-MPASM  5.43                          MIDI.ASM   2-13-2017  22:35:20         PAGE 11
+MPASM  5.43                          MIDI.ASM   2-13-2017  23:26:15         PAGE 12
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+DDRD                              TRISD
+DDRE                              TRISE
+DELAY_24                          00000080
+DELAY_32                          00000080
+DELAY_96                          00000080
+DFLTCON                           00000F60
+DONE                              00000001
+DOWN                              00000005
+DT0                               00000000
 DT1                               00000001
 DT2                               00000002
 DT3                               00000003
@@ -587,6 +683,12 @@ FLTBMOD                           00000005
 FLTBS                             00000006
 FLTCK0                            00000000
 FLTCK1                            00000001
+MPASM  5.43                          MIDI.ASM   2-13-2017  23:26:15         PAGE 13
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
 FLTCK2                            00000002
 FLTCON                            00000003
 FLTCONFIG                         00000F6C
@@ -596,12 +698,6 @@ FSR0                              00000000
 FSR0H                             00000FEA
 FSR0L                             00000FE9
 FSR1                              00000001
-MPASM  5.43                          MIDI.ASM   2-13-2017  22:35:20         PAGE 12
-
-
-SYMBOL TABLE
-  LABEL                             VALUE 
-
 FSR1H                             00000FE2
 FSR1L                             00000FE1
 FSR2                              00000002
@@ -646,6 +742,12 @@ INT0E                             00000004
 INT0F                             00000001
 INT0IE                            00000004
 INT0IF                            00000001
+MPASM  5.43                          MIDI.ASM   2-13-2017  23:26:15         PAGE 14
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
 INT1                              00000004
 INT1E                             00000003
 INT1F                             00000000
@@ -655,12 +757,6 @@ INT1IP                            00000006
 INT1P                             00000006
 INT2                              00000005
 INT2E                             00000004
-MPASM  5.43                          MIDI.ASM   2-13-2017  22:35:20         PAGE 13
-
-
-SYMBOL TABLE
-  LABEL                             VALUE 
-
 INT2F                             00000001
 INT2IE                            00000004
 INT2IF                            00000001
@@ -705,6 +801,12 @@ LATC1                             00000001
 LATC2                             00000002
 LATC3                             00000003
 LATC4                             00000004
+MPASM  5.43                          MIDI.ASM   2-13-2017  23:26:15         PAGE 15
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
 LATC5                             00000005
 LATC6                             00000006
 LATC7                             00000007
@@ -714,12 +816,6 @@ LFO_SINE_DATA_96                  00000000
 LVDCON                            00000FD2
 LVDEN                             00000004
 LVDIE                             00000002
-MPASM  5.43                          MIDI.ASM   2-13-2017  22:35:20         PAGE 14
-
-
-SYMBOL TABLE
-  LABEL                             VALUE 
-
 LVDIF                             00000002
 LVDIP                             00000002
 LVDL0                             00000000
@@ -729,16 +825,16 @@ LVDL3                             00000003
 MAXCNTH                           00000F65
 MAXCNTL                           00000F64
 MCLR                              00000003
-MIDI_STATE                        00000012
-MIDI_STATE_TMP                    00000013
-MSG_CHAN                          00000016
-MSG_COUNT                         00000014
-MSG_PITCH_CH1                     00000017
-MSG_PITCH_CH2                     00000018
-MSG_PITCH_CH3                     00000019
-MSG_PITCH_CH4                     0000001A
-MSG_PITCH_CH5                     0000001B
-MSG_VELOCITY                      0000001C
+MIDI_STATE                        00000018
+MIDI_STATE_TMP                    00000019
+MSG_CHAN                          0000001C
+MSG_COUNT                         0000001A
+MSG_PITCH_CH1                     0000001D
+MSG_PITCH_CH2                     0000001E
+MSG_PITCH_CH3                     0000001F
+MSG_PITCH_CH4                     00000020
+MSG_PITCH_CH5                     00000021
+MSG_VELOCITY                      00000022
 N                                 00000004
 NOT_A                             00000005
 NOT_ADDRESS                       00000005
@@ -764,6 +860,12 @@ NOT_WRITE                         00000002
 OERR                              00000001
 OSC1                              00000007
 OSC2                              00000006
+MPASM  5.43                          MIDI.ASM   2-13-2017  23:26:15         PAGE 16
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
 OSCCON                            00000FD3
 OSCTUNE                           00000F9B
 OSFIE                             00000007
@@ -773,12 +875,6 @@ OSTS                              00000003
 OSYNC                             00000000
 OV                                00000003
 OVDCOND                           00000F6B
-MPASM  5.43                          MIDI.ASM   2-13-2017  22:35:20         PAGE 15
-
-
-SYMBOL TABLE
-  LABEL                             VALUE 
-
 OVDCONS                           00000F6A
 P                                 00000004
 PC                                00000FF9
@@ -823,6 +919,12 @@ POSTINC0                          00000FEE
 POSTINC1                          00000FE6
 POSTINC2                          00000FDE
 POUT0                             00000000
+MPASM  5.43                          MIDI.ASM   2-13-2017  23:26:15         PAGE 17
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
 POUT1                             00000001
 POUT2                             00000002
 POUT3                             00000003
@@ -832,12 +934,6 @@ POUT6                             00000006
 POUT7                             00000007
 POVD0                             00000000
 POVD1                             00000001
-MPASM  5.43                          MIDI.ASM   2-13-2017  22:35:20         PAGE 16
-
-
-SYMBOL TABLE
-  LABEL                             VALUE 
-
 POVD2                             00000002
 POVD3                             00000003
 POVD4                             00000004
@@ -882,6 +978,12 @@ PWMEN2                            00000006
 QEICON                            00000FB6
 QEIM0                             00000002
 QEIM1                             00000003
+MPASM  5.43                          MIDI.ASM   2-13-2017  23:26:15         PAGE 18
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
 QEIM2                             00000004
 R                                 00000002
 RA0                               00000000
@@ -891,12 +993,6 @@ RA3                               00000003
 RA4                               00000004
 RA6                               00000006
 RA7                               00000007
-MPASM  5.43                          MIDI.ASM   2-13-2017  22:35:20         PAGE 17
-
-
-SYMBOL TABLE
-  LABEL                             VALUE 
-
 RB0                               00000000
 RB1                               00000001
 RB2                               00000002
@@ -941,6 +1037,12 @@ S                                 00000003
 SASEL0                            00000000
 SASEL1                            00000001
 SBSEL0                            00000004
+MPASM  5.43                          MIDI.ASM   2-13-2017  23:26:15         PAGE 19
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
 SBSEL1                            00000005
 SCK                               00000005
 SCKP                              00000004
@@ -950,12 +1052,6 @@ SCS1                              00000001
 SCSEL0                            00000002
 SCSEL1                            00000003
 SDA                               00000004
-MPASM  5.43                          MIDI.ASM   2-13-2017  22:35:20         PAGE 18
-
-
-SYMBOL TABLE
-  LABEL                             VALUE 
-
 SDI                               00000004
 SDO                               00000007
 SDSEL0                            00000006
@@ -1000,21 +1096,21 @@ STKPTR0                           00000000
 STKPTR1                           00000001
 STKPTR2                           00000002
 STKPTR3                           00000003
+MPASM  5.43                          MIDI.ASM   2-13-2017  23:26:15         PAGE 20
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
 STKPTR4                           00000004
 STKUNF                            00000006
-ST_TMP                            00000010
+ST_TMP                            00000016
 SWDTEN                            00000000
 SYNC                              00000004
 SYS_EX_DATA                       0000000E
 T016BIT                           00000006
 T0CKI                             00000003
 T0CON                             00000FD5
-MPASM  5.43                          MIDI.ASM   2-13-2017  22:35:20         PAGE 19
-
-
-SYMBOL TABLE
-  LABEL                             VALUE 
-
 T0CS                              00000005
 T0IE                              00000005
 T0IF                              00000002
@@ -1056,9 +1152,15 @@ TBLPTR                            00000FF6
 TBLPTRH                           00000FF7
 TBLPTRL                           00000FF6
 TBLPTRU                           00000FF8
-TMP_CV_BYTE_H                     0000001E
-TMP_CV_BYTE_L                     0000001D
+TMP_CV_BYTE_H                     00000024
+TMP_CV_BYTE_L                     00000023
 TMR0                              00000FD6
+MPASM  5.43                          MIDI.ASM   2-13-2017  23:26:15         PAGE 21
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
 TMR0H                             00000FD7
 TMR0IE                            00000005
 TMR0IF                            00000002
@@ -1068,12 +1170,6 @@ TMR0ON                            00000007
 TMR1                              00000FCE
 TMR1CS                            00000001
 TMR1H                             00000FCF
-MPASM  5.43                          MIDI.ASM   2-13-2017  22:35:20         PAGE 20
-
-
-SYMBOL TABLE
-  LABEL                             VALUE 
-
 TMR1IE                            00000000
 TMR1IF                            00000000
 TMR1IP                            00000000
@@ -1118,6 +1214,12 @@ TRISB4                            00000004
 TRISB5                            00000005
 TRISB6                            00000006
 TRISB7                            00000007
+MPASM  5.43                          MIDI.ASM   2-13-2017  23:26:15         PAGE 22
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
 TRISC                             00000F94
 TRISC0                            00000000
 TRISC1                            00000001
@@ -1127,12 +1229,6 @@ TRISC4                            00000004
 TRISC5                            00000005
 TRISC6                            00000006
 TRISC7                            00000007
-MPASM  5.43                          MIDI.ASM   2-13-2017  22:35:20         PAGE 21
-
-
-SYMBOL TABLE
-  LABEL                             VALUE 
-
 TRMT                              00000001
 TUN0                              00000000
 TUN1                              00000001
@@ -1172,26 +1268,29 @@ WREG                              00000FE8
 WREN                              00000002
 WRERR                             00000003
 WUE                               00000001
-W_TMP                             0000000F
+W_TMP                             00000015
 Z                                 00000002
 _BOREN_OFF_2L                     000000FD
 _BOREN_ON_2L                      000000FF
 _BORV_20_2L                       000000FF
+MPASM  5.43                          MIDI.ASM   2-13-2017  23:26:15         PAGE 23
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
 _BORV_27_2L                       000000FB
 _BORV_42_2L                       000000F7
 _BORV_45_2L                       000000F3
+_CHECK_MOD                        000000D6
+_CHECK_PITCH                      00000056
+_CHECK_VEL                        00000096
 _CONFIG1H                         00300001
 _CONFIG2H                         00300003
 _CONFIG2L                         00300002
 _CONFIG3H                         00300005
 _CONFIG3L                         00300004
 _CONFIG4L                         00300006
-MPASM  5.43                          MIDI.ASM   2-13-2017  22:35:20         PAGE 22
-
-
-SYMBOL TABLE
-  LABEL                             VALUE 
-
 _CONFIG5H                         00300009
 _CONFIG5L                         00300008
 _CONFIG6H                         0030000B
@@ -1212,6 +1311,9 @@ _CPD_OFF_5H                       000000FF
 _CPD_ON_5H                        0000007F
 _DEBUG_OFF_4L                     000000FF
 _DEBUG_ON_4L                      0000007F
+_DEC_MOD                          000000F6
+_DEC_PITCH                        00000076
+_DEC_VEL                          000000B6
 _DEVID1                           003FFFFE
 _DEVID2                           003FFFFF
 _EBTR0_OFF_7L                     000000FF
@@ -1230,6 +1332,12 @@ _HPOL_HIGH_3L                     000000FF
 _HPOL_LOW_3L                      000000EF
 _IDLOC0                           00200000
 _IDLOC1                           00200001
+MPASM  5.43                          MIDI.ASM   2-13-2017  23:26:15         PAGE 24
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
 _IDLOC2                           00200002
 _IDLOC3                           00200003
 _IDLOC4                           00200004
@@ -1245,12 +1353,6 @@ _LOOP                             0000000E
 _LPOL_HIGH_3L                     000000FF
 _LPOL_LOW_3L                      000000F7
 _LVP_OFF_4L                       000000FB
-MPASM  5.43                          MIDI.ASM   2-13-2017  22:35:20         PAGE 23
-
-
-SYMBOL TABLE
-  LABEL                             VALUE 
-
 _LVP_ON_4L                        000000FF
 _MAIN                             00000000
 _MCLRE_OFF_3H                     0000007F
@@ -1289,6 +1391,12 @@ _OSC_LP_1H                        000000F0
 _OSC_RC1_1H                       000000FA
 _OSC_RC2_1H                       000000F3
 _OSC_RCIO_1H                      000000F7
+MPASM  5.43                          MIDI.ASM   2-13-2017  23:26:15         PAGE 25
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
 _OSC_RC_1H                        000000FC
 _OSC_XT_1H                        000000F1
 _PWMPIN_OFF_3L                    000000FF
@@ -1302,15 +1410,15 @@ _STVREN_ON_4L                     000000FF
 _T1OSCMX_OFF_3L                   000000DF
 _T1OSCMX_ON_3L                    000000FF
 _UPDATE_CV1                       0000000E
-_UPDATE_CV2                       00000038
-_UPDATE_CV3                       00000062
-MPASM  5.43                          MIDI.ASM   2-13-2017  22:35:20         PAGE 24
-
-
-SYMBOL TABLE
-  LABEL                             VALUE 
-
-_UPDATE_GATES                     0000008C
+_UPDATE_CV2                       00000026
+_UPDATE_CV3                       0000003E
+_UPDATE_GATES                     00000116
+_UPDATE_MOD                       000000F8
+_UPDATE_MOD_CHECK                 000000E2
+_UPDATE_PITCH                     00000078
+_UPDATE_PITCH_CHECK               00000062
+_UPDATE_VEL                       000000B8
+_UPDATE_VEL_CHECK                 000000A2
 _WDPS_1024_2H                     000000F5
 _WDPS_128_2H                      000000EF
 _WDPS_16384_2H                    000000FD
@@ -1342,6 +1450,12 @@ _WRT3_ON_6L                       000000F7
 _WRTB_OFF_6H                      000000FF
 _WRTB_ON_6H                       000000BF
 _WRTC_OFF_6H                      000000FF
+MPASM  5.43                          MIDI.ASM   2-13-2017  23:26:15         PAGE 26
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
 _WRTC_ON_6H                       000000DF
 _WRTD_OFF_6H                      000000FF
 _WRTD_ON_6H                       0000007F
