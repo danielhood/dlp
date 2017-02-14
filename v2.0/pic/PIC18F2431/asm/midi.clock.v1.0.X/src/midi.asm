@@ -32,7 +32,9 @@
 ; W must contain a value between 0 and 23
 ;
 _LOOKUP_LFO_SINE_24 macro
-	addlw	LFO_SINE_DATA_24	; Add offset to table base
+	;movlw	high LFO_SINE_DATA_24
+	;movwf	TBLPTRH		; Select the program block with data (0x3000)
+	addlw	low LFO_SINE_DATA_24	; Add offset to table base
 	movwf	TBLPTRL
 	tblrd	*
 	movf	TABLAT,W			; W = table data
@@ -43,7 +45,9 @@ _LOOKUP_LFO_SINE_24 macro
 ; W must contain a value between 0 and 31
 ;
 _LOOKUP_LFO_SINE_32 macro
-	addlw	LFO_SINE_DATA_32	; Add offset to table base
+	;movlw	high LFO_SINE_DATA_32
+	;movwf	TBLPTRH		; Select the program block with data (0x3000)
+	addlw	low LFO_SINE_DATA_32	; Add offset to table base
 	movwf	TBLPTRL
 	tblrd	*
 	movf	TABLAT,W			; W = table data
@@ -54,7 +58,9 @@ _LOOKUP_LFO_SINE_32 macro
 ; W must contain a value between 0 and 95
 ;
 _LOOKUP_LFO_SINE_96 macro
-	addlw	LFO_SINE_DATA_96	; Add offset to table base
+	;movlw	high LFO_SINE_DATA_96
+	;movwf	TBLPTRH		; Select the program block with data (0x3000)
+	addlw	low LFO_SINE_DATA_96	; Add offset to table base
 	movwf	TBLPTRL
 	tblrd	*
 	movf	TABLAT,W			; W = table data
@@ -106,7 +112,7 @@ _MAIN:
 
 _LOOP:
 _UPDATE_CV1:
-	btfss	CV_FLAGS,CV_PITCH
+	btfss	CV_FLAGS,CVF_PITCH
 	goto	_UPDATE_CV2
 	movf	CLOCK_COUNTER_96,W
 	_LOOKUP_LFO_SINE_96		; returning result in W
@@ -120,6 +126,7 @@ _UPDATE_CV2:
 	goto	_UPDATE_CV3
 	movf	CLOCK_COUNTER_24,W
 	_LOOKUP_LFO_SINE_24
+	_SPLIT_CV_VALUE2
 	movff	TMP_CV_BYTE_H,PDC1H
 	movff	TMP_CV_BYTE_L,PDC1L
 	bcf	CV_FLAGS,CVF_VELOCITY
@@ -129,6 +136,7 @@ _UPDATE_CV3:
 	goto	_UPDATE_GATES
 	movf	CLOCK_COUNTER_32,W
 	_LOOKUP_LFO_SINE_32
+	_SPLIT_CV_VALUE2
 	movff	TMP_CV_BYTE_H,PDC2H
 	movff	TMP_CV_BYTE_L,PDC2L
 	bcf	CV_FLAGS,CVF_MOD

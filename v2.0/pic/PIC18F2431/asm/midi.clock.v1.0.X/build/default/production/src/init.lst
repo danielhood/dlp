@@ -1,4 +1,4 @@
-MPASM  5.43                          INIT.ASM   2-13-2017  10:55:07         PAGE  1
+MPASM  5.43                          INIT.ASM   2-13-2017  22:35:23         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -41,51 +41,77 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
   0000                00026         extern  _SETUP          ; Setup code
                       00027         
   0000                00028         global  LFO_SINE_DATA_24
-                      00029 
-                      00030 ; ------------------------------------------------------------------------------
-                      00031 ; Main entry and RESET vector
-                      00032 ;
-                      00033 .RIVEC  org     0x0000
-000000 EC?? F???      00034         call    _SETUP          ; Init hardware
-000004 EF?? F???      00035         goto    _MAIN           ; Main app code
-                      00036 
-                      00037 
-                      00038 ; ------------------------------------------------------------------------------
-                      00039 ; High-Priority Interrupt Vector
-                      00040 ;
-                      00041 .HIVEC  org     0x0008
-000008 EF?? F???      00042         goto    _SERVICE_HI     ; Points to interrupt service routine
-                      00043 
-                      00044 
-MPASM  5.43                          INIT.ASM   2-13-2017  10:55:07         PAGE  2
+  0000                00029         global  LFO_SINE_DATA_32
+  0000                00030         global  LFO_SINE_DATA_96
+                      00031 
+                      00032 
+                      00033 ; ------------------------------------------------------------------------------
+                      00034 ; Main entry and RESET vector
+                      00035 ;
+                      00036 .RIVEC  org     0x0000
+000000 EC?? F???      00037         call    _SETUP          ; Init hardware
+000004 EF?? F???      00038         goto    _MAIN           ; Main app code
+                      00039 
+                      00040 
+                      00041 ; ------------------------------------------------------------------------------
+                      00042 ; High-Priority Interrupt Vector
+                      00043 ;
+                      00044 .HIVEC  org     0x0008
+MPASM  5.43                          INIT.ASM   2-13-2017  22:35:23         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-                      00045 ; ------------------------------------------------------------------------------
-                      00046 ; Lo-Priority Interrupt Vector
-                      00047 ;
-                      00048 .LIVEC  org     0x0018
-000018 EF?? F???      00049         goto    _SERVICE_LO     ; Points to interrupt service routine
-                      00050 
-                      00051 
-                      00052 ; ------------------------------------------------------------------------------
-                      00053 ; Program Data
-                      00054 ;
-                      00055 
-                      00056 ; 24 steps gives us a period over a quareter note, stepped every time we get a TT MIDI message
-00001C                00057 LFO_SINE_DATA_24:
-00001C 0400 2511 5E3F 00058         db      0x00,0x04,0x11,0x25,0x3f,0x5e,0x7f,0xa0,0xbf,0xd9,0xed,0xfa
+000008 EF?? F???      00045         goto    _SERVICE_HI     ; Points to interrupt service routine
+                      00046 
+                      00047 
+                      00048 ; ------------------------------------------------------------------------------
+                      00049 ; Lo-Priority Interrupt Vector
+                      00050 ;
+                      00051 .LIVEC  org     0x0018
+000018 EF?? F???      00052         goto    _SERVICE_LO     ; Points to interrupt service routine
+                      00053 
+                      00054 
+                      00055 ; ------------------------------------------------------------------------------
+                      00056 ; Program Data
+                      00057 ;
+                      00058 
+                      00059 ; 24 steps gives us a period over a quareter note, stepped every time we get a TT MIDI message
+00001C                00060 LFO_SINE_DATA_24:
+00001C 0400 2511 5E3F 00061         db      0x00,0x04,0x11,0x25,0x3f,0x5e,0x7f,0xa0,0xbf,0xd9,0xed,0xfa
        A07F D9BF FAED 
-000028 FAFF D9ED A0BF 00059         db      0xff,0xfa,0xed,0xd9,0xbf,0xa0,0x7f,0x5e,0x3f,0x25,0x11,0x04
+000028 FAFF D9ED A0BF 00062         db      0xff,0xfa,0xed,0xd9,0xbf,0xa0,0x7f,0x5e,0x3f,0x25,0x11,0x04
        5E7F 253F 0411 
-                      00060 
-                      00061 
-                      00062 
                       00063 
-                      00064         end
-MPASM  5.43                          INIT.ASM   2-13-2017  10:55:07         PAGE  3
+000034                00064 LFO_SINE_DATA_32:
+000034 0200 1509 3825 00065         db      0x00,0x02,0x09,0x15,0x25,0x38,0x4e,0x66,0x7f,0x98,0xb0,0xc6
+       664E 987F C6B0 
+000040 E9D9 FCF5 FCFF 00066         db      0xd9,0xe9,0xf5,0xfc,0xff,0xfc,0xf5,0xe9,0xd9,0xc6,0xb0,0x98
+       E9F5 C6D9 98B0 
+00004C 667F 384E 1525 00067         db      0x7f,0x66,0x4e,0x38,0x25,0x15,0x09,0x02
+       0209 
+                      00068 
+000054                00069 LFO_SINE_DATA_96:
+000054 0000 0201 0604 00070         db      0x00,0x00,0x01,0x02,0x04,0x06,0x09,0x0d,0x11,0x15,0x1a,0x1f
+       0D09 1511 1F1A 
+000060 2B25 3831 473F 00071         db      0x25,0x2b,0x31,0x38,0x3f,0x47,0x4e,0x56,0x5e,0x66,0x6e,0x77
+       564E 665E 776E 
+00006C 877F 9890 A8A0 00072         db      0x7f,0x87,0x90,0x98,0xa0,0xa8,0xb0,0xb7,0xbf,0xc6,0xcd,0xd3
+       B7B0 C6BF D3CD 
+000078 DFD9 E9E4 F1ED 00073         db      0xd9,0xdf,0xe4,0xe9,0xed,0xf1,0xf5,0xf8,0xfa,0xfc,0xfd,0xfe
+       F8F5 FCFA FEFD 
+000084 FEFF FCFD F8FA 00074         db      0xff,0xfe,0xfd,0xfc,0xfa,0xf8,0xf5,0xf1,0xed,0xe9,0xe4,0xdf
+       F1F5 E9ED DFE4 
+000090 D3D9 C6CD B7BF 00075         db      0xd9,0xd3,0xcd,0xc6,0xbf,0xb7,0xb0,0xa8,0xa0,0x98,0x90,0x87
+       A8B0 98A0 8790 
+00009C 777F 666E 565E 00076         db      0x7f,0x77,0x6e,0x66,0x5e,0x56,0x4e,0x47,0x3f,0x38,0x31,0x2b
+       474E 383F 2B31 
+0000A8 1F25 151A 0D11 00077         db      0x25,0x1f,0x1a,0x15,0x11,0x0d,0x09,0x06,0x04,0x02,0x01,0x00
+       0609 0204 0001 
+                      00078 
+                      00079         end
+MPASM  5.43                          INIT.ASM   2-13-2017  22:35:23         PAGE  3
 
 
 SYMBOL TABLE
@@ -144,7 +170,7 @@ BAUDCON                           00000FAA
 BAUDCTL                           00000FAA
 BF                                00000000
 BFEMT                             00000003
-MPASM  5.43                          INIT.ASM   2-13-2017  10:55:07         PAGE  4
+MPASM  5.43                          INIT.ASM   2-13-2017  22:35:23         PAGE  4
 
 
 SYMBOL TABLE
@@ -203,7 +229,7 @@ CCP2IP                            00000000
 CCP2M0                            00000000
 CCP2M1                            00000001
 CCP2M2                            00000002
-MPASM  5.43                          INIT.ASM   2-13-2017  10:55:07         PAGE  5
+MPASM  5.43                          INIT.ASM   2-13-2017  22:35:23         PAGE  5
 
 
 SYMBOL TABLE
@@ -262,7 +288,7 @@ D_A                               00000005
 D_NOT_A                           00000005
 EEADR                             00000FA9
 EECON1                            00000FA6
-MPASM  5.43                          INIT.ASM   2-13-2017  10:55:07         PAGE  6
+MPASM  5.43                          INIT.ASM   2-13-2017  22:35:23         PAGE  6
 
 
 SYMBOL TABLE
@@ -321,7 +347,7 @@ GIE_GIEH                          00000007
 GO                                00000001
 GODONE                            00000001
 GO_DONE                           00000001
-MPASM  5.43                          INIT.ASM   2-13-2017  10:55:07         PAGE  7
+MPASM  5.43                          INIT.ASM   2-13-2017  22:35:23         PAGE  7
 
 
 SYMBOL TABLE
@@ -380,7 +406,7 @@ LATA                              00000F89
 LATA0                             00000000
 LATA1                             00000001
 LATA2                             00000002
-MPASM  5.43                          INIT.ASM   2-13-2017  10:55:07         PAGE  8
+MPASM  5.43                          INIT.ASM   2-13-2017  22:35:23         PAGE  8
 
 
 SYMBOL TABLE
@@ -409,6 +435,8 @@ LATC5                             00000005
 LATC6                             00000006
 LATC7                             00000007
 LFO_SINE_DATA_24                  0000001C
+LFO_SINE_DATA_32                  00000034
+LFO_SINE_DATA_96                  00000054
 LVDCON                            00000FD2
 LVDEN                             00000004
 LVDIE                             00000002
@@ -437,14 +465,14 @@ NOT_RBPU                          00000007
 NOT_RESEN                         00000006
 NOT_RI                            00000004
 NOT_SS                            00000006
-NOT_T1SYNC                        00000002
-NOT_T5SYNC                        00000002
-MPASM  5.43                          INIT.ASM   2-13-2017  10:55:07         PAGE  9
+MPASM  5.43                          INIT.ASM   2-13-2017  22:35:23         PAGE  9
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+NOT_T1SYNC                        00000002
+NOT_T5SYNC                        00000002
 NOT_TO                            00000003
 NOT_VELM                          00000007
 NOT_W                             00000002
@@ -496,14 +524,14 @@ PORTA                             00000F80
 PORTB                             00000F81
 PORTC                             00000F82
 PORTE                             00000F84
-POSCNTH                           00000F67
-POSCNTL                           00000F66
-MPASM  5.43                          INIT.ASM   2-13-2017  10:55:07         PAGE 10
+MPASM  5.43                          INIT.ASM   2-13-2017  22:35:23         PAGE 10
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+POSCNTH                           00000F67
+POSCNTL                           00000F66
 POSTDEC0                          00000FED
 POSTDEC1                          00000FE5
 POSTDEC2                          00000FDD
@@ -555,14 +583,14 @@ PTOPS1                            00000005
 PTOPS2                            00000006
 PTOPS3                            00000007
 PTPERH                            00000F7A
-PTPERL                            00000F7B
-PWMCON0                           00000F6F
-MPASM  5.43                          INIT.ASM   2-13-2017  10:55:07         PAGE 11
+MPASM  5.43                          INIT.ASM   2-13-2017  22:35:23         PAGE 11
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+PTPERL                            00000F7B
+PWMCON0                           00000F6F
 PWMCON1                           00000F6E
 PWMEN0                            00000004
 PWMEN1                            00000005
@@ -614,14 +642,14 @@ READ_WRITE                        00000002
 RESEN                             00000006
 RI                                00000004
 RX                                00000007
-RX9                               00000006
-RX9D                              00000000
-MPASM  5.43                          INIT.ASM   2-13-2017  10:55:07         PAGE 12
+MPASM  5.43                          INIT.ASM   2-13-2017  22:35:23         PAGE 12
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+RX9                               00000006
+RX9D                              00000000
 RXDTP                             00000005
 R_NOT_W                           00000002
 R_W                               00000002
@@ -673,14 +701,14 @@ SSRC0                             00000000
 SSRC1                             00000001
 SSRC2                             00000002
 SSRC3                             00000003
-SSRC4                             00000004
-STATUS                            00000FD8
-MPASM  5.43                          INIT.ASM   2-13-2017  10:55:07         PAGE 13
+MPASM  5.43                          INIT.ASM   2-13-2017  22:35:23         PAGE 13
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+SSRC4                             00000004
+STATUS                            00000FD8
 STKFUL                            00000007
 STKOVF                            00000007
 STKPTR                            00000FFC
@@ -732,14 +760,14 @@ TABLAT                            00000FF5
 TBIE                              00000004
 TBIF                              00000004
 TBIP                              00000004
-TBLPTR                            00000FF6
-TBLPTRH                           00000FF7
-MPASM  5.43                          INIT.ASM   2-13-2017  10:55:07         PAGE 14
+MPASM  5.43                          INIT.ASM   2-13-2017  22:35:23         PAGE 14
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+TBLPTR                            00000FF6
+TBLPTRH                           00000FF7
 TBLPTRL                           00000FF6
 TBLPTRU                           00000FF8
 TMR0                              00000FD6
@@ -791,14 +819,14 @@ TRISB                             00000F93
 TRISB0                            00000000
 TRISB1                            00000001
 TRISB2                            00000002
-TRISB3                            00000003
-TRISB4                            00000004
-MPASM  5.43                          INIT.ASM   2-13-2017  10:55:07         PAGE 15
+MPASM  5.43                          INIT.ASM   2-13-2017  22:35:23         PAGE 15
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+TRISB3                            00000003
+TRISB4                            00000004
 TRISB5                            00000005
 TRISB6                            00000006
 TRISB7                            00000007
@@ -850,14 +878,14 @@ WREG                              00000FE8
 WREN                              00000002
 WRERR                             00000003
 WUE                               00000001
-Z                                 00000002
-_BOREN_OFF_2L                     000000FD
-MPASM  5.43                          INIT.ASM   2-13-2017  10:55:07         PAGE 16
+MPASM  5.43                          INIT.ASM   2-13-2017  22:35:23         PAGE 16
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+Z                                 00000002
+_BOREN_OFF_2L                     000000FD
 _BOREN_ON_2L                      000000FF
 _BORV_20_2L                       000000FF
 _BORV_27_2L                       000000FB
@@ -909,14 +937,14 @@ _IDLOC0                           00200000
 _IDLOC1                           00200001
 _IDLOC2                           00200002
 _IDLOC3                           00200003
-_IDLOC4                           00200004
-_IDLOC5                           00200005
-MPASM  5.43                          INIT.ASM   2-13-2017  10:55:07         PAGE 17
+MPASM  5.43                          INIT.ASM   2-13-2017  22:35:23         PAGE 17
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+_IDLOC4                           00200004
+_IDLOC5                           00200005
 _IDLOC6                           00200006
 _IDLOC7                           00200007
 _IESO_OFF_1H                      0000007F
@@ -968,14 +996,14 @@ _WDPS_64_2H                       000000ED
 _WDPS_8192_2H                     000000FB
 _WDPS_8_2H                        000000E7
 _WDTEN_OFF_2H                     000000FE
-_WDTEN_ON_2H                      000000FF
-_WINEN_OFF_2H                     000000FF
-MPASM  5.43                          INIT.ASM   2-13-2017  10:55:07         PAGE 18
+MPASM  5.43                          INIT.ASM   2-13-2017  22:35:23         PAGE 18
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+_WDTEN_ON_2H                      000000FF
+_WINEN_OFF_2H                     000000FF
 _WINEN_ON_2H                      000000DF
 _WRT0_OFF_6L                      000000FF
 _WRT0_ON_6L                       000000FE

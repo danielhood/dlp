@@ -7,7 +7,8 @@
 	global	_SETUP
 
 	extern LFO_SINE_DATA_24
-
+	extern LFO_SINE_DATA_32
+	extern LFO_SINE_DATA_96
 
 ; ------------------------------------------------------------------------------
 ; Setup routine
@@ -94,11 +95,10 @@ _SETUP:
 	movwf	SYS_EX_DATA
 
 ; Setup Table memory pointers
+	movlw	upper LFO_SINE_DATA_24		; Will be the same for all tables, only need to set H and L bytes each lookup
+	movwf	TBLPTRU		; Select the program block with data (0x3000)
 	movlw	high LFO_SINE_DATA_24
 	movwf	TBLPTRH		; Select the program block with data (0x3000)
-	movlw	upper LFO_SINE_DATA_24
-	movwf	TBLPTRU		; Select the program block with data (0x3000)
-
 
 ; Enable Interrupts
 	bsf	RCON,IPEN	; Enable interrupt priorities
