@@ -3758,7 +3758,7 @@ Operational amplifiers,  comparators, voltage regulators, ADCs, DACs, etc.&lt;p&
 <part name="GND12" library="supply1" deviceset="0V" device=""/>
 <part name="P+4" library="supply1" deviceset="+12V" device=""/>
 <part name="C8" library="_common" deviceset="CE-US" device="E2-5" value="10uF"/>
-<part name="$1_155_$_2017-02-10_16-01-20" library="_common" deviceset="R-VAR" device="" value="50K (A)"/>
+<part name="RV4" library="_common" deviceset="R-VAR" device="" value="50K (A)"/>
 <part name="R36" library="_common" deviceset="R" device="" value="1K"/>
 <part name="R35" library="rcl" deviceset="R-TRIMM" device="3339P" value="100K"/>
 <part name="GND28" library="supply1" deviceset="0V" device=""/>
@@ -3948,7 +3948,7 @@ minium for this</text>
 <instance part="IC6" gate="D" x="-165.1" y="-50.8"/>
 <instance part="IC6" gate="C" x="-116.84" y="-48.26" rot="MR180"/>
 <instance part="C8" gate="G$1" x="-142.24" y="-55.88" rot="MR0"/>
-<instance part="$1_155_$_2017-02-10_16-01-20" gate="G$1" x="-132.08" y="-55.88" rot="R90"/>
+<instance part="RV4" gate="G$1" x="-132.08" y="-55.88" rot="R90"/>
 <instance part="R36" gate="G$1" x="-109.22" y="-58.42" rot="MR90"/>
 <instance part="R35" gate="G$1" x="-109.22" y="-35.56" rot="R180"/>
 <instance part="GND28" gate="1" x="-99.06" y="-38.1" rot="MR0"/>
@@ -4999,14 +4999,14 @@ minium for this</text>
 <net name="N$70" class="0">
 <segment>
 <pinref part="IC6" gate="C" pin="+IN"/>
-<pinref part="$1_155_$_2017-02-10_16-01-20" gate="G$1" pin="2"/>
+<pinref part="RV4" gate="G$1" pin="2"/>
 <wire x1="-147.32" y1="-50.8" x2="-142.24" y2="-50.8" width="0.1524" layer="91"/>
 <wire x1="-142.24" y1="-50.8" x2="-137.16" y2="-50.8" width="0.1524" layer="91"/>
 <wire x1="-137.16" y1="-50.8" x2="-132.08" y2="-50.8" width="0.1524" layer="91"/>
 <junction x="-132.08" y="-50.8"/>
 <wire x1="-132.08" y1="-50.8" x2="-124.46" y2="-50.8" width="0.1524" layer="91"/>
 <pinref part="D8" gate="G$1" pin="C"/>
-<pinref part="$1_155_$_2017-02-10_16-01-20" gate="G$1" pin="P$1"/>
+<pinref part="RV4" gate="G$1" pin="P$1"/>
 <wire x1="-137.16" y1="-55.88" x2="-137.16" y2="-50.8" width="0.1524" layer="91"/>
 <junction x="-137.16" y="-50.8"/>
 <pinref part="C8" gate="G$1" pin="+"/>
@@ -5015,7 +5015,7 @@ minium for this</text>
 </net>
 <net name="N$71" class="0">
 <segment>
-<pinref part="$1_155_$_2017-02-10_16-01-20" gate="G$1" pin="1"/>
+<pinref part="RV4" gate="G$1" pin="1"/>
 <pinref part="R28" gate="G$1" pin="2"/>
 <wire x1="-132.08" y1="-60.96" x2="-132.08" y2="-63.5" width="0.1524" layer="91"/>
 </segment>
