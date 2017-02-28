@@ -879,103 +879,103 @@ design rules under a new name.</description>
 </pass>
 </autorouter>
 <elements>
-<element name="C1" library="_common" package="E2-5" value="2.2uF" x="20.955" y="40.64" smashed="yes" rot="R270">
+<element name="C1" library="_common" package="E2-5" value="2.2uF" x="20.955" y="40.64" locked="yes" smashed="yes" rot="R270">
 <attribute name="NAME" x="19.05" y="36.576" size="1.27" layer="25" ratio="10"/>
 <attribute name="VALUE" x="18.796" y="38.1" size="1.27" layer="27" ratio="10" rot="R270"/>
 </element>
-<element name="C10" library="_common" package="C025-024X044" value="0.1uF" x="8.255" y="40.64" smashed="yes" rot="R90">
+<element name="C10" library="_common" package="C025-024X044" value="0.1uF" x="8.255" y="40.64" locked="yes" smashed="yes" rot="R90">
 <attribute name="NAME" x="10.033" y="44.323" size="1.27" layer="25" ratio="10" rot="R180"/>
 <attribute name="VALUE" x="10.922" y="38.862" size="1.27" layer="27" ratio="10" rot="R90"/>
 </element>
-<element name="C11" library="_common" package="C025-024X044" value="0.01uF" x="66.04" y="45.72" smashed="yes" rot="R270">
+<element name="C11" library="_common" package="C025-024X044" value="0.01uF" x="66.04" y="45.72" locked="yes" smashed="yes" rot="R270">
 <attribute name="NAME" x="67.437" y="48.768" size="1.27" layer="25" ratio="10" rot="R270"/>
 <attribute name="VALUE" x="63.373" y="47.498" size="1.27" layer="27" ratio="10" rot="R270"/>
 </element>
-<element name="C12" library="_common" package="E2-5" value="4.7uF" x="33.655" y="18.415" smashed="yes">
+<element name="C12" library="_common" package="E2-5" value="4.7uF" x="33.655" y="18.415" locked="yes" smashed="yes">
 <attribute name="NAME" x="30.48" y="14.986" size="1.27" layer="25" ratio="10"/>
 <attribute name="VALUE" x="36.195" y="16.256" size="1.27" layer="27" ratio="10"/>
 </element>
-<element name="C13" library="_common" package="E2-5" value="4.7uF" x="33.655" y="24.13" smashed="yes">
+<element name="C13" library="_common" package="E2-5" value="4.7uF" x="33.655" y="24.13" locked="yes" smashed="yes">
 <attribute name="NAME" x="29.845" y="20.701" size="1.27" layer="25" ratio="10"/>
 <attribute name="VALUE" x="36.195" y="21.971" size="1.27" layer="27" ratio="10"/>
 </element>
-<element name="C14" library="_common" package="C025-024X044" value="15pF" x="60.96" y="38.1" smashed="yes" rot="R180">
+<element name="C14" library="_common" package="C025-024X044" value="15pF" x="60.96" y="38.1" locked="yes" smashed="yes" rot="R180">
 <attribute name="NAME" x="59.182" y="39.497" size="1.27" layer="25" ratio="10"/>
 <attribute name="VALUE" x="62.738" y="40.767" size="1.27" layer="27" ratio="10" rot="R180"/>
 </element>
-<element name="C15" library="_common" package="E2-5" value="4.7uF" x="33.655" y="29.845" smashed="yes">
+<element name="C15" library="_common" package="E2-5" value="4.7uF" x="33.655" y="29.845" locked="yes" smashed="yes">
 <attribute name="NAME" x="30.48" y="26.416" size="1.27" layer="25" ratio="10"/>
 <attribute name="VALUE" x="36.195" y="27.686" size="1.27" layer="27" ratio="10"/>
 </element>
-<element name="C16" library="_common" package="C025-024X044" value="15pF" x="60.96" y="35.56" smashed="yes" rot="R180">
+<element name="C16" library="_common" package="C025-024X044" value="15pF" x="60.96" y="35.56" locked="yes" smashed="yes" rot="R180">
 <attribute name="NAME" x="57.277" y="37.338" size="1.27" layer="25" ratio="10" rot="R270"/>
 <attribute name="VALUE" x="62.738" y="38.227" size="1.27" layer="27" ratio="10" rot="R180"/>
 </element>
-<element name="C2" library="_common" package="C025-024X044" value="0.1uF" x="44.45" y="36.83" smashed="yes" rot="R90">
+<element name="C2" library="_common" package="C025-024X044" value="0.1uF" x="44.45" y="36.83" locked="yes" smashed="yes" rot="R90">
 <attribute name="NAME" x="46.228" y="38.862" size="1.27" layer="25" ratio="10" rot="R90"/>
 <attribute name="VALUE" x="47.117" y="35.052" size="1.27" layer="27" ratio="10" rot="R90"/>
 </element>
-<element name="C3" library="_common" package="C025-024X044" value="0.1uF" x="59.69" y="31.75" smashed="yes" rot="R90">
+<element name="C3" library="_common" package="C025-024X044" value="0.1uF" x="59.69" y="31.75" locked="yes" smashed="yes" rot="R90">
 <attribute name="NAME" x="63.373" y="30.988" size="1.27" layer="25" ratio="10" rot="R180"/>
 <attribute name="VALUE" x="62.357" y="29.972" size="1.27" layer="27" ratio="10" rot="R90"/>
 </element>
-<element name="C4" library="_common" package="C025-024X044" value="0.01uF" x="15.875" y="40.64" smashed="yes" rot="R270">
+<element name="C4" library="_common" package="C025-024X044" value="0.01uF" x="15.875" y="40.64" locked="yes" smashed="yes" rot="R270">
 <attribute name="NAME" x="14.732" y="42.672" size="1.27" layer="25" ratio="10"/>
 <attribute name="VALUE" x="13.208" y="42.418" size="1.27" layer="27" ratio="10" rot="R270"/>
 </element>
-<element name="C5" library="_common" package="E2-5" value="10uF" x="5.715" y="13.335" smashed="yes" rot="R270">
+<element name="C5" library="_common" package="E2-5" value="10uF" x="5.715" y="13.335" locked="yes" smashed="yes" rot="R270">
 <attribute name="NAME" x="2.54" y="9.906" size="1.27" layer="25" ratio="10"/>
 <attribute name="VALUE" x="3.556" y="10.795" size="1.27" layer="27" ratio="10" rot="R270"/>
 </element>
-<element name="C6" library="_common" package="C025-024X044" value="0.1uF" x="12.065" y="40.64" smashed="yes" rot="R270">
+<element name="C6" library="_common" package="C025-024X044" value="0.1uF" x="12.065" y="40.64" locked="yes" smashed="yes" rot="R270">
 <attribute name="NAME" x="10.287" y="42.672" size="1.27" layer="25" ratio="10"/>
 <attribute name="VALUE" x="9.398" y="42.418" size="1.27" layer="27" ratio="10" rot="R270"/>
 </element>
-<element name="C7" library="_common" package="C025-024X044" value="0.01uF" x="63.5" y="45.72" smashed="yes" rot="R90">
+<element name="C7" library="_common" package="C025-024X044" value="0.01uF" x="63.5" y="45.72" locked="yes" smashed="yes" rot="R90">
 <attribute name="NAME" x="65.913" y="45.847" size="1.27" layer="25" ratio="10" rot="R90"/>
 <attribute name="VALUE" x="66.167" y="43.942" size="1.27" layer="27" ratio="10" rot="R90"/>
 </element>
-<element name="C8" library="_common" package="C025-024X044" value="0.1uF" x="35.56" y="10.16" smashed="yes" rot="R180">
+<element name="C8" library="_common" package="C025-024X044" value="0.1uF" x="35.56" y="10.16" locked="yes" smashed="yes" rot="R180">
 <attribute name="NAME" x="31.877" y="11.303" size="1.27" layer="25" ratio="10" rot="R270"/>
 <attribute name="VALUE" x="37.338" y="12.827" size="1.27" layer="27" ratio="10" rot="R180"/>
 </element>
-<element name="C9" library="_common" package="E2-5" value="10uF" x="5.715" y="19.685" smashed="yes" rot="R270">
+<element name="C9" library="_common" package="E2-5" value="10uF" x="5.715" y="19.685" locked="yes" smashed="yes" rot="R270">
 <attribute name="NAME" x="2.54" y="16.256" size="1.27" layer="25" ratio="10"/>
 <attribute name="VALUE" x="3.556" y="17.145" size="1.27" layer="27" ratio="10" rot="R270"/>
 </element>
-<element name="D1" library="_common" package="DO34-5" value="1N4148" x="86.36" y="13.97" smashed="yes">
+<element name="D1" library="_common" package="DO34-5" value="1N4148" x="86.36" y="13.97" locked="yes" smashed="yes">
 <attribute name="NAME" x="92.075" y="12.954" size="1.27" layer="25" ratio="10" rot="R90"/>
 <attribute name="VALUE" x="84.709" y="11.43" size="1.27" layer="27" ratio="10"/>
 </element>
-<element name="D2" library="_common" package="DO34-5" value="1N4148" x="86.36" y="22.225" smashed="yes">
+<element name="D2" library="_common" package="DO34-5" value="1N4148" x="86.36" y="22.225" locked="yes" smashed="yes">
 <attribute name="NAME" x="92.075" y="21.209" size="1.27" layer="25" ratio="10" rot="R90"/>
 <attribute name="VALUE" x="84.709" y="19.685" size="1.27" layer="27" ratio="10"/>
 </element>
-<element name="D3" library="_common" package="DO34-5" value="1N4148" x="43.18" y="10.16" smashed="yes" rot="R180">
+<element name="D3" library="_common" package="DO34-5" value="1N4148" x="43.18" y="10.16" locked="yes" smashed="yes" rot="R180">
 <attribute name="NAME" x="46.736" y="12.065" size="1.27" layer="25" ratio="10" rot="R180"/>
 <attribute name="VALUE" x="44.831" y="12.7" size="1.27" layer="27" ratio="10" rot="R180"/>
 </element>
-<element name="D4" library="_common" package="DO34-5" value="1N4148" x="63.5" y="25.4" smashed="yes" rot="R180">
+<element name="D4" library="_common" package="DO34-5" value="1N4148" x="63.5" y="25.4" locked="yes" smashed="yes" rot="R180">
 <attribute name="NAME" x="57.785" y="26.416" size="1.27" layer="25" ratio="10" rot="R270"/>
 <attribute name="VALUE" x="65.151" y="27.94" size="1.27" layer="27" ratio="10" rot="R180"/>
 </element>
-<element name="D5" library="_common" package="DO34-5" value="1N4148" x="63.5" y="17.78" smashed="yes" rot="R180">
+<element name="D5" library="_common" package="DO34-5" value="1N4148" x="63.5" y="17.78" locked="yes" smashed="yes" rot="R180">
 <attribute name="NAME" x="57.785" y="18.796" size="1.27" layer="25" ratio="10" rot="R270"/>
 <attribute name="VALUE" x="65.151" y="20.32" size="1.27" layer="27" ratio="10" rot="R180"/>
 </element>
-<element name="D6" library="_common" package="DO34-5" value="1N4148" x="15.24" y="31.75" smashed="yes" rot="R180">
+<element name="D6" library="_common" package="DO34-5" value="1N4148" x="15.24" y="31.75" locked="yes" smashed="yes" rot="R180">
 <attribute name="NAME" x="9.525" y="32.766" size="1.27" layer="25" ratio="10" rot="R270"/>
 <attribute name="VALUE" x="16.891" y="34.29" size="1.27" layer="27" ratio="10" rot="R180"/>
 </element>
-<element name="D7" library="_common" package="DO34-5" value="1N4148" x="15.24" y="24.13" smashed="yes" rot="R180">
+<element name="D7" library="_common" package="DO34-5" value="1N4148" x="15.24" y="24.13" locked="yes" smashed="yes" rot="R180">
 <attribute name="NAME" x="9.525" y="25.146" size="1.27" layer="25" ratio="10" rot="R270"/>
 <attribute name="VALUE" x="16.891" y="26.67" size="1.27" layer="27" ratio="10" rot="R180"/>
 </element>
-<element name="IC1" library="linear" package="DIL14" value="LM324N" x="74.93" y="20.32" smashed="yes" rot="R90">
+<element name="IC1" library="linear" package="DIL14" value="LM324N" x="74.93" y="20.32" locked="yes" smashed="yes" rot="R90">
 <attribute name="NAME" x="76.073" y="14.224" size="1.27" layer="25" ratio="10" rot="R180"/>
 <attribute name="VALUE" x="75.565" y="13.589" size="1.27" layer="27" ratio="10" rot="R90"/>
 </element>
-<element name="IC2" library="_common" package="DIL28-3" value="PIC18F2431DIP" x="52.07" y="31.75" smashed="yes" rot="R90">
+<element name="IC2" library="_common" package="DIL28-3" value="PIC18F2431DIP" x="52.07" y="31.75" locked="yes" smashed="yes" rot="R90">
 <attribute name="OC_FARNELL" value="" x="52.07" y="31.75" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="OC_NEWARK" value="" x="52.07" y="31.75" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="MPN" value="PIC18F2431-I/SP" x="52.07" y="31.75" size="1.778" layer="27" rot="R90" display="off"/>
@@ -983,15 +983,15 @@ design rules under a new name.</description>
 <attribute name="NAME" x="53.975" y="17.653" size="1.778" layer="25" ratio="10" rot="R180"/>
 <attribute name="VALUE" x="53.0098" y="16.002" size="1.778" layer="27" ratio="10" rot="R90"/>
 </element>
-<element name="IC3" library="_common" package="DIL14" value="TL084P" x="20.32" y="14.605" smashed="yes" rot="R180">
+<element name="IC3" library="_common" package="DIL14" value="TL084P" x="20.32" y="14.605" locked="yes" smashed="yes" rot="R180">
 <attribute name="NAME" x="26.416" y="15.748" size="1.27" layer="25" ratio="10" rot="R270"/>
 <attribute name="VALUE" x="27.051" y="15.24" size="1.27" layer="27" ratio="10" rot="R180"/>
 </element>
-<element name="IC4" library="linear" package="DIL14" value="LM324N" x="34.925" y="44.45" smashed="yes">
+<element name="IC4" library="linear" package="DIL14" value="LM324N" x="34.925" y="44.45" locked="yes" smashed="yes">
 <attribute name="NAME" x="28.829" y="43.307" size="1.27" layer="25" ratio="10" rot="R90"/>
 <attribute name="VALUE" x="28.194" y="43.815" size="1.27" layer="27" ratio="10"/>
 </element>
-<element name="IC5" library="_common" package="DIL08" value="TL082P" x="25.4" y="26.67" smashed="yes" rot="R90">
+<element name="IC5" library="_common" package="DIL08" value="TL082P" x="25.4" y="26.67" locked="yes" smashed="yes" rot="R90">
 <attribute name="NAME" x="26.416" y="24.511" size="1.27" layer="25" ratio="10" rot="R180"/>
 <attribute name="VALUE" x="26.035" y="23.114" size="1.27" layer="27" ratio="10" rot="R90"/>
 </element>
@@ -1019,11 +1019,11 @@ design rules under a new name.</description>
 <attribute name="NAME" x="32.055" y="7.46" size="1.27" layer="25" rot="R180"/>
 <attribute name="VALUE" x="34.5" y="8.2" size="1.27" layer="27" rot="R180"/>
 </element>
-<element name="JP1" library="pinhead" package="2X08" value="PWR" x="13.335" y="46.99" smashed="yes">
+<element name="JP1" library="pinhead" package="2X08" value="PWR" x="13.335" y="46.99" locked="yes" smashed="yes">
 <attribute name="NAME" x="0.635" y="49.53" size="1.27" layer="25" ratio="10" rot="SR270"/>
 <attribute name="VALUE" x="3.175" y="42.545" size="1.27" layer="27"/>
 </element>
-<element name="JP2" library="pinhead" package="2X05" value="TO PNL" x="3.81" y="30.48" smashed="yes" rot="MR270">
+<element name="JP2" library="pinhead" package="2X05" value="TO PNL" x="3.81" y="30.48" locked="yes" smashed="yes" rot="MR270">
 <attribute name="NAME" x="1.27" y="39.37" size="1.27" layer="26" ratio="10" rot="SMR180"/>
 <attribute name="VALUE" x="8.255" y="36.83" size="1.27" layer="28" rot="MR270"/>
 </element>
@@ -1035,7 +1035,7 @@ design rules under a new name.</description>
 <attribute name="NAME" x="90.805" y="6.604" size="1.27" layer="25" ratio="10" rot="R180"/>
 <attribute name="VALUE" x="88.9" y="4.191" size="1.27" layer="27" ratio="10" rot="R180"/>
 </element>
-<element name="Q1" library="crystal" package="HC49/S" value="20MHz" x="66.04" y="36.83" smashed="yes" rot="R90">
+<element name="Q1" library="crystal" package="HC49/S" value="20MHz" x="66.04" y="36.83" locked="yes" smashed="yes" rot="R90">
 <attribute name="OC_FARNELL" value="1667008" x="66.04" y="36.83" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="OC_NEWARK" value="unknown" x="66.04" y="36.83" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="MPN" value="" x="66.04" y="36.83" size="1.778" layer="27" rot="R90" display="off"/>
@@ -1043,135 +1043,135 @@ design rules under a new name.</description>
 <attribute name="NAME" x="70.358" y="38.735" size="1.27" layer="25" ratio="10" rot="R90"/>
 <attribute name="VALUE" x="69.977" y="31.75" size="1.27" layer="27" ratio="10" rot="R90"/>
 </element>
-<element name="R1" library="_common" package="0207/7" value="100K" x="86.36" y="11.43" smashed="yes">
+<element name="R1" library="_common" package="0207/7" value="100K" x="86.36" y="11.43" locked="yes" smashed="yes">
 <attribute name="NAME" x="85.09" y="10.922" size="1.27" layer="25" ratio="10"/>
 <attribute name="VALUE" x="84.074" y="10.8712" size="1.27" layer="27" ratio="10"/>
 </element>
-<element name="R10" library="_common" package="0207/7" value="10K" x="53.34" y="11.43" smashed="yes">
+<element name="R10" library="_common" package="0207/7" value="10K" x="53.34" y="11.43" locked="yes" smashed="yes">
 <attribute name="NAME" x="52.07" y="10.922" size="1.27" layer="25" ratio="10"/>
 <attribute name="VALUE" x="51.054" y="10.8712" size="1.27" layer="27" ratio="10"/>
 </element>
-<element name="R11" library="_common" package="0207/7" value="100K" x="63.5" y="15.24" smashed="yes">
+<element name="R11" library="_common" package="0207/7" value="100K" x="63.5" y="15.24" locked="yes" smashed="yes">
 <attribute name="NAME" x="62.23" y="14.605" size="1.27" layer="25" ratio="10"/>
 <attribute name="VALUE" x="61.214" y="14.6812" size="1.27" layer="27" ratio="10"/>
 </element>
-<element name="R12" library="_common" package="0207/7" value="1K" x="74.93" y="36.83" smashed="yes" rot="R180">
+<element name="R12" library="_common" package="0207/7" value="1K" x="74.93" y="36.83" locked="yes" smashed="yes" rot="R180">
 <attribute name="NAME" x="76.835" y="37.338" size="1.27" layer="25" ratio="10" rot="R180"/>
 <attribute name="VALUE" x="77.216" y="37.3888" size="1.27" layer="27" ratio="10" rot="R180"/>
 </element>
-<element name="R13" library="_common" package="0207/7" value="100K" x="63.5" y="20.32" smashed="yes">
+<element name="R13" library="_common" package="0207/7" value="100K" x="63.5" y="20.32" locked="yes" smashed="yes">
 <attribute name="NAME" x="62.23" y="19.812" size="1.27" layer="25" ratio="10"/>
 <attribute name="VALUE" x="61.214" y="19.7612" size="1.27" layer="27" ratio="10"/>
 </element>
-<element name="R14" library="_common" package="0207/7" value="390" x="41.275" y="20.32" smashed="yes" rot="R180">
+<element name="R14" library="_common" package="0207/7" value="390" x="41.275" y="20.32" locked="yes" smashed="yes" rot="R180">
 <attribute name="NAME" x="43.18" y="20.828" size="1.27" layer="25" ratio="10" rot="R180"/>
 <attribute name="VALUE" x="43.561" y="20.8788" size="1.27" layer="27" ratio="10" rot="R180"/>
 </element>
-<element name="R15" library="_common" package="0207/7" value="22K" x="83.82" y="44.45" smashed="yes" rot="R270">
+<element name="R15" library="_common" package="0207/7" value="22K" x="83.82" y="44.45" locked="yes" smashed="yes" rot="R270">
 <attribute name="NAME" x="83.312" y="45.72" size="1.27" layer="25" ratio="10" rot="R270"/>
 <attribute name="VALUE" x="83.2612" y="46.736" size="1.27" layer="27" ratio="10" rot="R270"/>
 </element>
-<element name="R16" library="_common" package="0207/7" value="22K" x="86.36" y="44.45" smashed="yes" rot="R90">
+<element name="R16" library="_common" package="0207/7" value="22K" x="86.36" y="44.45" locked="yes" smashed="yes" rot="R90">
 <attribute name="NAME" x="86.868" y="42.545" size="1.27" layer="25" ratio="10" rot="R90"/>
 <attribute name="VALUE" x="86.9188" y="42.164" size="1.27" layer="27" ratio="10" rot="R90"/>
 </element>
-<element name="R17" library="_common" package="0207/7" value="22K" x="88.9" y="44.45" smashed="yes" rot="R90">
+<element name="R17" library="_common" package="0207/7" value="22K" x="88.9" y="44.45" locked="yes" smashed="yes" rot="R90">
 <attribute name="NAME" x="89.408" y="42.545" size="1.27" layer="25" ratio="10" rot="R90"/>
 <attribute name="VALUE" x="89.4588" y="42.164" size="1.27" layer="27" ratio="10" rot="R90"/>
 </element>
-<element name="R18" library="_common" package="0207/7" value="22K" x="91.44" y="44.45" smashed="yes" rot="R90">
+<element name="R18" library="_common" package="0207/7" value="22K" x="91.44" y="44.45" locked="yes" smashed="yes" rot="R90">
 <attribute name="NAME" x="91.948" y="42.545" size="1.27" layer="25" ratio="10" rot="R90"/>
 <attribute name="VALUE" x="91.9988" y="42.164" size="1.27" layer="27" ratio="10" rot="R90"/>
 </element>
-<element name="R19" library="_common" package="0207/7" value="390" x="41.275" y="22.86" smashed="yes" rot="R180">
+<element name="R19" library="_common" package="0207/7" value="390" x="41.275" y="22.86" locked="yes" smashed="yes" rot="R180">
 <attribute name="NAME" x="43.18" y="23.368" size="1.27" layer="25" ratio="10" rot="R180"/>
 <attribute name="VALUE" x="43.561" y="23.4188" size="1.27" layer="27" ratio="10" rot="R180"/>
 </element>
-<element name="R2" library="_common" package="0207/7" value="1K" x="63.5" y="12.7" smashed="yes" rot="R180">
+<element name="R2" library="_common" package="0207/7" value="1K" x="63.5" y="12.7" locked="yes" smashed="yes" rot="R180">
 <attribute name="NAME" x="64.77" y="13.335" size="1.27" layer="25" ratio="10" rot="R180"/>
 <attribute name="VALUE" x="65.786" y="13.2588" size="1.27" layer="27" ratio="10" rot="R180"/>
 </element>
-<element name="R20" library="_common" package="0207/7" value="1K" x="76.2" y="44.45" smashed="yes" rot="R270">
+<element name="R20" library="_common" package="0207/7" value="1K" x="76.2" y="44.45" locked="yes" smashed="yes" rot="R270">
 <attribute name="NAME" x="75.692" y="46.355" size="1.27" layer="25" ratio="10" rot="R270"/>
 <attribute name="VALUE" x="75.6412" y="46.736" size="1.27" layer="27" ratio="10" rot="R270"/>
 </element>
-<element name="R21" library="_common" package="0207/7" value="390" x="41.275" y="27.94" smashed="yes" rot="R180">
+<element name="R21" library="_common" package="0207/7" value="390" x="41.275" y="27.94" locked="yes" smashed="yes" rot="R180">
 <attribute name="NAME" x="43.18" y="28.448" size="1.27" layer="25" ratio="10" rot="R180"/>
 <attribute name="VALUE" x="43.561" y="28.4988" size="1.27" layer="27" ratio="10" rot="R180"/>
 </element>
-<element name="R22" library="_common" package="0207/7" value="1K" x="73.66" y="44.45" smashed="yes" rot="R270">
+<element name="R22" library="_common" package="0207/7" value="1K" x="73.66" y="44.45" locked="yes" smashed="yes" rot="R270">
 <attribute name="NAME" x="73.152" y="46.355" size="1.27" layer="25" ratio="10" rot="R270"/>
 <attribute name="VALUE" x="73.1012" y="46.736" size="1.27" layer="27" ratio="10" rot="R270"/>
 </element>
-<element name="R23" library="_common" package="0207/7" value="100K" x="15.24" y="29.21" smashed="yes" rot="R180">
+<element name="R23" library="_common" package="0207/7" value="100K" x="15.24" y="29.21" locked="yes" smashed="yes" rot="R180">
 <attribute name="NAME" x="16.51" y="29.718" size="1.27" layer="25" ratio="10" rot="R180"/>
 <attribute name="VALUE" x="17.526" y="29.7688" size="1.27" layer="27" ratio="10" rot="R180"/>
 </element>
-<element name="R24" library="_common" package="0207/7" value="390" x="41.275" y="17.78" smashed="yes" rot="R180">
+<element name="R24" library="_common" package="0207/7" value="390" x="41.275" y="17.78" locked="yes" smashed="yes" rot="R180">
 <attribute name="NAME" x="43.18" y="18.288" size="1.27" layer="25" ratio="10" rot="R180"/>
 <attribute name="VALUE" x="43.561" y="18.3388" size="1.27" layer="27" ratio="10" rot="R180"/>
 </element>
-<element name="R25" library="_common" package="0207/7" value="100K" x="15.24" y="34.29" smashed="yes">
+<element name="R25" library="_common" package="0207/7" value="100K" x="15.24" y="34.29" locked="yes" smashed="yes">
 <attribute name="NAME" x="13.97" y="33.782" size="1.27" layer="25" ratio="10"/>
 <attribute name="VALUE" x="12.954" y="33.7312" size="1.27" layer="27" ratio="10"/>
 </element>
-<element name="R26" library="_common" package="0207/7" value="22K" x="27.94" y="36.83" smashed="yes" rot="R180">
+<element name="R26" library="_common" package="0207/7" value="22K" x="27.94" y="36.83" locked="yes" smashed="yes" rot="R180">
 <attribute name="NAME" x="29.845" y="37.338" size="1.27" layer="25" ratio="10" rot="R180"/>
 <attribute name="VALUE" x="30.226" y="37.3888" size="1.27" layer="27" ratio="10" rot="R180"/>
 </element>
-<element name="R27" library="_common" package="0207/7" value="22K" x="27.94" y="34.29" smashed="yes">
+<element name="R27" library="_common" package="0207/7" value="22K" x="27.94" y="34.29" locked="yes" smashed="yes">
 <attribute name="NAME" x="26.67" y="33.782" size="1.27" layer="25" ratio="10"/>
 <attribute name="VALUE" x="25.654" y="33.7312" size="1.27" layer="27" ratio="10"/>
 </element>
-<element name="R28" library="_common" package="0207/7" value="390" x="41.275" y="25.4" smashed="yes" rot="R180">
+<element name="R28" library="_common" package="0207/7" value="390" x="41.275" y="25.4" locked="yes" smashed="yes" rot="R180">
 <attribute name="NAME" x="43.18" y="25.908" size="1.27" layer="25" ratio="10" rot="R180"/>
 <attribute name="VALUE" x="43.561" y="25.9588" size="1.27" layer="27" ratio="10" rot="R180"/>
 </element>
-<element name="R29" library="_common" package="0207/7" value="100K" x="15.24" y="21.59" smashed="yes" rot="R180">
+<element name="R29" library="_common" package="0207/7" value="100K" x="15.24" y="21.59" locked="yes" smashed="yes" rot="R180">
 <attribute name="NAME" x="17.145" y="22.098" size="1.27" layer="25" ratio="10" rot="R180"/>
 <attribute name="VALUE" x="17.526" y="22.1488" size="1.27" layer="27" ratio="10" rot="R180"/>
 </element>
-<element name="R3" library="_common" package="0207/7" value="100K" x="86.36" y="16.51" smashed="yes" rot="R180">
+<element name="R3" library="_common" package="0207/7" value="100K" x="86.36" y="16.51" locked="yes" smashed="yes" rot="R180">
 <attribute name="NAME" x="86.995" y="17.018" size="1.27" layer="25" ratio="10" rot="R180"/>
 <attribute name="VALUE" x="88.646" y="17.0688" size="1.27" layer="27" ratio="10" rot="R180"/>
 </element>
-<element name="R30" library="_common" package="0207/7" value="100K" x="15.24" y="26.67" smashed="yes">
+<element name="R30" library="_common" package="0207/7" value="100K" x="15.24" y="26.67" locked="yes" smashed="yes">
 <attribute name="NAME" x="13.335" y="26.162" size="1.27" layer="25" ratio="10"/>
 <attribute name="VALUE" x="12.954" y="26.1112" size="1.27" layer="27" ratio="10"/>
 </element>
-<element name="R31" library="_common" package="0207/7" value="390" x="41.275" y="30.48" smashed="yes" rot="R180">
+<element name="R31" library="_common" package="0207/7" value="390" x="41.275" y="30.48" locked="yes" smashed="yes" rot="R180">
 <attribute name="NAME" x="43.18" y="30.988" size="1.27" layer="25" ratio="10" rot="R180"/>
 <attribute name="VALUE" x="43.561" y="31.0388" size="1.27" layer="27" ratio="10" rot="R180"/>
 </element>
-<element name="R32" library="_common" package="0207/7" value="22K" x="38.1" y="36.83" smashed="yes">
+<element name="R32" library="_common" package="0207/7" value="22K" x="38.1" y="36.83" locked="yes" smashed="yes">
 <attribute name="NAME" x="36.83" y="36.322" size="1.27" layer="25" ratio="10"/>
 <attribute name="VALUE" x="35.814" y="36.2712" size="1.27" layer="27" ratio="10"/>
 </element>
-<element name="R33" library="_common" package="0207/7" value="22K" x="38.1" y="34.29" smashed="yes">
+<element name="R33" library="_common" package="0207/7" value="22K" x="38.1" y="34.29" locked="yes" smashed="yes">
 <attribute name="NAME" x="36.83" y="33.782" size="1.27" layer="25" ratio="10"/>
 <attribute name="VALUE" x="35.814" y="33.7312" size="1.27" layer="27" ratio="10"/>
 </element>
-<element name="R4" library="_common" package="0207/7" value="100K" x="86.36" y="19.685" smashed="yes">
+<element name="R4" library="_common" package="0207/7" value="100K" x="86.36" y="19.685" locked="yes" smashed="yes">
 <attribute name="NAME" x="85.09" y="19.177" size="1.27" layer="25" ratio="10"/>
 <attribute name="VALUE" x="84.074" y="19.1262" size="1.27" layer="27" ratio="10"/>
 </element>
-<element name="R5" library="_common" package="0207/7" value="1K" x="74.93" y="31.75" smashed="yes" rot="R180">
+<element name="R5" library="_common" package="0207/7" value="1K" x="74.93" y="31.75" locked="yes" smashed="yes" rot="R180">
 <attribute name="NAME" x="76.2" y="32.258" size="1.27" layer="25" ratio="10" rot="R180"/>
 <attribute name="VALUE" x="77.216" y="32.3088" size="1.27" layer="27" ratio="10" rot="R180"/>
 </element>
-<element name="R6" library="_common" package="0207/7" value="100K" x="86.36" y="24.765" smashed="yes" rot="R180">
+<element name="R6" library="_common" package="0207/7" value="100K" x="86.36" y="24.765" locked="yes" smashed="yes" rot="R180">
 <attribute name="NAME" x="87.63" y="25.273" size="1.27" layer="25" ratio="10" rot="R180"/>
 <attribute name="VALUE" x="88.646" y="25.3238" size="1.27" layer="27" ratio="10" rot="R180"/>
 </element>
-<element name="R7" library="_common" package="0207/7" value="100K" x="63.5" y="27.94" smashed="yes">
+<element name="R7" library="_common" package="0207/7" value="100K" x="63.5" y="27.94" locked="yes" smashed="yes">
 <attribute name="NAME" x="62.23" y="27.432" size="1.27" layer="25" ratio="10"/>
 <attribute name="VALUE" x="61.214" y="27.3812" size="1.27" layer="27" ratio="10"/>
 </element>
-<element name="R8" library="_common" package="0207/7" value="1K" x="74.93" y="34.29" smashed="yes" rot="R180">
+<element name="R8" library="_common" package="0207/7" value="1K" x="74.93" y="34.29" locked="yes" smashed="yes" rot="R180">
 <attribute name="NAME" x="76.2" y="34.798" size="1.27" layer="25" ratio="10" rot="R180"/>
 <attribute name="VALUE" x="77.216" y="34.8488" size="1.27" layer="27" ratio="10" rot="R180"/>
 </element>
-<element name="R9" library="_common" package="0207/7" value="100K" x="63.5" y="22.86" smashed="yes">
+<element name="R9" library="_common" package="0207/7" value="100K" x="63.5" y="22.86" locked="yes" smashed="yes">
 <attribute name="NAME" x="62.23" y="22.352" size="1.27" layer="25" ratio="10"/>
 <attribute name="VALUE" x="61.214" y="22.3012" size="1.27" layer="27" ratio="10"/>
 </element>
@@ -1179,7 +1179,7 @@ design rules under a new name.</description>
 <attribute name="NAME" x="77.46" y="0.825" size="1.27" layer="25"/>
 <attribute name="VALUE" x="76.19" y="7.52" size="1.27" layer="27"/>
 </element>
-<element name="S1" library="switch-dil" package="DIP04S" value="MODE/TRGT/SET" x="87.63" y="34.29" smashed="yes">
+<element name="S1" library="switch-dil" package="DIP04S" value="MODE/TRGT/SET" x="87.63" y="34.29" locked="yes" smashed="yes">
 <attribute name="OC_FARNELL" value="unknown" x="87.63" y="34.29" size="1.778" layer="27" display="off"/>
 <attribute name="OC_NEWARK" value="unknown" x="87.63" y="34.29" size="1.778" layer="27" display="off"/>
 <attribute name="MPN" value="" x="87.63" y="34.29" size="1.778" layer="27" display="off"/>
@@ -1187,7 +1187,7 @@ design rules under a new name.</description>
 <attribute name="NAME" x="82.169" y="31.115" size="1.27" layer="25" ratio="10" rot="R90"/>
 <attribute name="VALUE" x="88.138" y="39.116" size="1.27" layer="27" ratio="10"/>
 </element>
-<element name="SV1" library="con-lstb" package="MA04-1" value="PROGRAM" x="38.735" y="13.97" smashed="yes">
+<element name="SV1" library="con-lstb" package="MA04-1" value="PROGRAM" x="38.735" y="13.97" locked="yes" smashed="yes">
 <attribute name="OC_FARNELL" value="unknown" x="38.735" y="13.97" size="1.778" layer="27" display="off"/>
 <attribute name="OC_NEWARK" value="unknown" x="38.735" y="13.97" size="1.778" layer="27" display="off"/>
 <attribute name="MPN" value="" x="38.735" y="13.97" size="1.778" layer="27" display="off"/>
