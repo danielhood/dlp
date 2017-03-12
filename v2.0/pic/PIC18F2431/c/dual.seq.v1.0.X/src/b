@@ -1,0 +1,3 @@
+gcc -c maintest.c -o build/maintest.o -I .
+gcc -c seq.c -o build/seq.o -I .
+gcc -o test build/seq.o build/maintest.o
