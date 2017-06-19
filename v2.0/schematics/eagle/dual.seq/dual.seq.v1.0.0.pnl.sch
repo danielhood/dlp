@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="7.7.0">
+<eagle version="7.2.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -496,6 +496,11 @@ type 0207, grid 7.5 mm</description>
 <plain>
 <text x="-10.16" y="119.38" size="1.778" layer="97">Dual Seq v1.0.0</text>
 <frame x1="-38.1" y1="0" x2="111.76" y2="134.62" columns="8" rows="5" layer="91"/>
+<text x="-20.32" y="73.66" size="1.778" layer="91">NOTE:
+This is upside down...
+need to flip cable, 
+and also create a rev1.0.1 
+with the correct pin mappings.</text>
 </plain>
 <instances>
 <instance part="GND3" gate="1" x="58.42" y="104.14"/>
@@ -754,4 +759,10 @@ type 0207, grid 7.5 mm</description>
 </sheets>
 </schematic>
 </drawing>
+<compatibility>
+<note version="6.3" minversion="6.2.2" severity="warning">
+Since Version 6.2.2 text objects can contain more than one line,
+which will not be processed correctly with this version.
+</note>
+</compatibility>
 </eagle>
