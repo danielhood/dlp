@@ -1,12 +1,17 @@
-#pragma once
+#ifndef __seq_H
+#define __seq_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-void seq_init();
-void seq_tick(unsigned int seqidx);
-unsigned short seq_get(unsigned int seqidx);
+void seq_init(unsigned short patLen);
+void seq_tick(unsigned short seqidx);
+unsigned short seq_get(unsigned short seqidx);
+void seq_set(unsigned short seqidx, unsigned short val);
+
 #ifdef __cplusplus
 }
+#endif
+
 #endif

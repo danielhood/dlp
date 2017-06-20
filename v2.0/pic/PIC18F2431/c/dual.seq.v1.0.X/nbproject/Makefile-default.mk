@@ -40,11 +40,11 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/src/main.o ${OBJECTDIR}/setup.o ${OBJECTDIR}/clock.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/src/main.o.d ${OBJECTDIR}/setup.o.d ${OBJECTDIR}/clock.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/src/main.o ${OBJECTDIR}/setup.o ${OBJECTDIR}/src/seq.o ${OBJECTDIR}/src/clock.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/src/main.o.d ${OBJECTDIR}/setup.o.d ${OBJECTDIR}/src/seq.o.d ${OBJECTDIR}/src/clock.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/src/main.o ${OBJECTDIR}/setup.o ${OBJECTDIR}/clock.o
+OBJECTFILES=${OBJECTDIR}/src/main.o ${OBJECTDIR}/setup.o ${OBJECTDIR}/src/seq.o ${OBJECTDIR}/src/clock.o
 
 
 CFLAGS=
@@ -102,11 +102,17 @@ ${OBJECTDIR}/setup.o: setup.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_PICKIT2=1 -p$(MP_PROCESSOR_OPTION)   -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/setup.o   setup.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/setup.o 
 	
-${OBJECTDIR}/clock.o: clock.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} ${OBJECTDIR} 
-	@${RM} ${OBJECTDIR}/clock.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_PICKIT2=1 -p$(MP_PROCESSOR_OPTION)   -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/clock.o   clock.c 
-	@${DEP_GEN} -d ${OBJECTDIR}/clock.o 
+${OBJECTDIR}/src/seq.o: src/seq.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/src 
+	@${RM} ${OBJECTDIR}/src/seq.o.d 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_PICKIT2=1 -p$(MP_PROCESSOR_OPTION)   -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/src/seq.o   src/seq.c 
+	@${DEP_GEN} -d ${OBJECTDIR}/src/seq.o 
+	
+${OBJECTDIR}/src/clock.o: src/clock.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/src 
+	@${RM} ${OBJECTDIR}/src/clock.o.d 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_PICKIT2=1 -p$(MP_PROCESSOR_OPTION)   -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/src/clock.o   src/clock.c 
+	@${DEP_GEN} -d ${OBJECTDIR}/src/clock.o 
 	
 else
 ${OBJECTDIR}/src/main.o: src/main.c  nbproject/Makefile-${CND_CONF}.mk
@@ -121,11 +127,17 @@ ${OBJECTDIR}/setup.o: setup.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION)   -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/setup.o   setup.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/setup.o 
 	
-${OBJECTDIR}/clock.o: clock.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} ${OBJECTDIR} 
-	@${RM} ${OBJECTDIR}/clock.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION)   -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/clock.o   clock.c 
-	@${DEP_GEN} -d ${OBJECTDIR}/clock.o 
+${OBJECTDIR}/src/seq.o: src/seq.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/src 
+	@${RM} ${OBJECTDIR}/src/seq.o.d 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION)   -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/src/seq.o   src/seq.c 
+	@${DEP_GEN} -d ${OBJECTDIR}/src/seq.o 
+	
+${OBJECTDIR}/src/clock.o: src/clock.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/src 
+	@${RM} ${OBJECTDIR}/src/clock.o.d 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION)   -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/src/clock.o   src/clock.c 
+	@${DEP_GEN} -d ${OBJECTDIR}/src/clock.o 
 	
 endif
 
