@@ -70,6 +70,7 @@
 <wire x1="0" y1="50.79" x2="0" y2="0" width="0" layer="20"/>
 <text x="93.98" y="25.4" size="1.27" layer="25" rot="R270">DLP Dual Seq
 Main v1.0.0</text>
+<text x="73.66" y="7.62" size="1.778" layer="1">Move 2mm -&gt;</text>
 </plain>
 <libraries>
 <library name="_common">
