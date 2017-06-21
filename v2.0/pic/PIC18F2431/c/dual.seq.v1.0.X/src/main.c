@@ -11,125 +11,11 @@
 #include <p18f2431.h>
 
 #include "device_config.h"
-#include "clock.h"
 #include "setup.h"
+#include "buttons.h"
+#include "leds.h"
+#include "clock.h"
 #include "seq.h"
-
-// Forward defs
-void InterruptHandlerHigh(void);
-
-unsigned short encoderValue = 0;
-
-void delay (int loop)
-{
-    int j;
-    int i;
-    for (j = 1; j <= loop; j++) {
-        for (i = 0; i < 10000; i++);
-    }
-}
-
-void mode_off(void) {
-    // Clear PWM
-    //PDC2H = 0x00;
-    //PDC2L = 0x00;
-    
-    // For now mode toggles write mode, and target specifies gate value
-
-}
-
-void mode_on(void) {
-    // Load PWM
-    //PDC2H = 0x3F;
-    //PDC2L = 0xFF;
-
-    seq_set(0, encoderValue);
-    seq_set(1, encoderValue);
-    seq_set(2, encoderValue);
-}
-
-void target_off(void) {
-    encoderValue = 0;
-}
-
-void target_on(void) {
-    encoderValue = 1;
-}
-
-void set_off(void) {
-
-}
-
-void set_on(void) {
-
-}
-
-
-void main() {
-    setup_ports();
-
-    seq_init(16);
-
-    // Current test:
-    //  Trigger sets current encoder value
-    //  Mode enables gate write on all seq patterns
-    //  Clock 1 ticks pattern 1
-    //  Clock 2 ticks pattern 2 and 3
-    //  Clock low clears gates
-
-    while (1) {
-        //delay(1);   // We will likely need a bit of delay to de-bounce switches
-        
-        //PORTBbits.RB5 = !PORTBbits.RB5;  // Toggle Gate 3 for testing
-        //PORTBbits.RB5 = 1;
-
-//        PORTBbits.RB5 = !PORTCbits.RC0;
-//
-        // Inputs are normally high
-        if (PORTCbits.RC0) {
-            mode_off();
-        } else {
-            mode_on();
-        }
-
-        if (PORTCbits.RC1) {
-            target_off();
-        } else {
-            target_on();
-        }
-
-        if (PORTCbits.RC1) {
-            set_off();
-        } else {
-            set_on();
-        }
-
-        // Clear gates on clock low
-        if (!PORTCbits.RC4) {
-            PORTBbits.RB0 = 0;
-        }
-
-        if (!PORTCbits.RC5) {
-            PORTBbits.RB2 = 0;
-            PORTBbits.RB5 = 0;
-        }
-
-    }
-}
-
-
-
-//----------------------------------------------------------------------------
-// High priority interrupt vector
-
-#pragma code InterruptVectorHigh = 0x08
-void
-InterruptVectorHigh (void)
-{
-  _asm
-    goto InterruptHandlerHigh //jump to interrupt routine
-  _endasm
-}
 
 //----------------------------------------------------------------------------
 // High priority interrupt routine
@@ -148,3 +34,80 @@ void InterruptHandlerHigh (void)
         clock_tick(1);              // Tick
     }
 }
+
+//----------------------------------------------------------------------------
+// Low priority interrupt routine
+
+#pragma code
+#pragma interrupt InterruptHandlerLow
+
+void InterruptHandlerLow (void)
+{
+    if (INTCONbits.TMR0IF) {       // check Timer0
+        INTCONbits.TMR0IF = 0;     // clear interrupt flag
+        leds_blink();              // Update led state
+    }
+}
+
+//----------------------------------------------------------------------------
+// Interrupt vectors
+
+#pragma code InterruptVectorHigh = 0x08
+void
+InterruptVectorHigh (void)
+{
+  _asm
+    goto InterruptHandlerHigh //jump to interrupt routine
+  _endasm
+}
+
+#pragma code InterruptVectorLow = 0x18
+void
+InterruptVectorLow (void)
+{
+  _asm
+    goto InterruptHandlerLow //jump to interrupt routine
+  _endasm
+}
+
+
+#pragma code
+void delay (int loop)
+{
+    int j;
+    int i;
+    for (j = 1; j <= loop; j++) {
+        for (i = 0; i < 10000; i++);
+    }
+}
+
+void main() {
+
+    // Current Functionality:
+    //      Very functional gate/trigger sequencer:
+    //      - Mode toggles current encoder value, indicated by mode led
+    //      - Target selects active pattern (none, 1, 2, 3), indicated by target led
+    //      - Set triggers write of encoder value to current step in target pattern
+    //      - Clock 1 ticks pattern 1
+    //      - Clock 2 ticks patterns 2 and 3
+    //
+    //  Next Steps:
+    //      - Get A/D working for encoder
+    //      - Sequence both gate/trigger and CV for each step
+    //      - Implement modes:
+    //          - CV edit for step
+    //          - Trigger edit for step
+    //          - Gate width
+    //          - Apply presets (selected by encoder and applied by set?)
+    //
+
+    setup();
+    seq_init(16);
+    leds_init();
+    
+    while (1) {
+        clock_check();
+        buttons_check();
+    }
+}
+

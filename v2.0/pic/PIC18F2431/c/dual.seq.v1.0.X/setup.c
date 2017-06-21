@@ -39,30 +39,42 @@ void setup_pwm(void) {
 }
 
 void setup_interrupts(void) {
-    // Set interrupts for clock triggers and AD conversion
-    INTCON = 0x00;   // Disable global interrupts (and Int0) for now
+    
+    INTCON = 0x00;   // Disable global interrupts
 
-    //PIE1 = 0x40;    // Enabled A/D converter
-    PIE1 = 0x00;    // TODO: Disabled A/D converter for now
+    // Interrupts for A/D conversion
+    PIE1 = 0x00;    // Disable all initially
+    //PIE1bits.ADIE = 1    // Enable A/D converter
     PIE2 = 0x00;    // Nothing needed here; all disabled
     PIE3 = 0x00;    // Nothing needed here; all disabled
 
-
-
+    // Interrupts for clock triggers
     INTCON2 = 0xFF; // Int1 and Int2 rising edge triggered
     INTCON3 = 0xD8; // Int1 and Int2 are high priority (vector at 0x0008), and enabled
 
-    INTCONbits.GIEH = 1; // Enable global interrupts
+    // Interrupts for Timer0 (LED blink)
+    INTCONbits.TMR0IE = 1;  // Enable Timer0 Interrupt
+    INTCON2bits.TMR0IP = 0; // Low priority
+
+    RCONbits.IPEN = 1;      // Turn on priority levels, otherwise everything flows through high interrupt
+
+    INTCONbits.GIEH = 1;    // Enable global interrupts (high)
+    INTCONbits.GIEL = 1;    // Enable global interrupts (low)
 }
 
-void setup_ports(void) {
+void setup_leds(void) {
+    T0CONbits.TMR0ON = 1;   // Enable timer0
+    T0CONbits.T016BIT = 0;  // 16-bit timer
+    T0CONbits.T0CS = 0;     // Interal clock (Fosc/4)
+    T0CONbits.PSA = 0;      // Assign prescaler
+    T0CONbits.T0PS = 2;     // 1:8 Prescale value
+}
+
+void setup(void) {
     setup_io();
-
     setup_analog();
-    
     setup_pwm();
-
+    setup_leds();
     setup_interrupts();
-    
 }
 

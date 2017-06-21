@@ -18,3 +18,15 @@ void clock_tick(unsigned int clockIdx) {
         //PORTBbits.RB2 = !PORTBbits.RB2; // Gate 2
     }
 }
+
+void clock_check(void) {
+    // Clear gates on clock low
+    if (!PORTCbits.RC4) {
+        PORTBbits.RB0 = 0;
+    }
+
+    if (!PORTCbits.RC5) {
+        PORTBbits.RB2 = 0;
+        PORTBbits.RB5 = 0;
+    }
+}
