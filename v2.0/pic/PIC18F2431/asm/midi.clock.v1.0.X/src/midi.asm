@@ -226,7 +226,8 @@ _UPDATE_GATES:
 	rrncf	WREG		; Divide base clock (tripples) by 4
 	rrncf	WREG
 	andlw	0x01
-	addwf	CV_GATE_TMP,W	; Inject base clock into port set
+	addwf	CV_GATE_TMP,F	; Inject base clock into port set
+	comf	CV_GATE_TMP,W	; Invert the bits so ports start at 1
 	movwf	PORTC		; Apply gate settings directly to PORTC
 
 	; TODO: cycle through a sin or triangle way to generate clock sync'd LFO's on CV outs
