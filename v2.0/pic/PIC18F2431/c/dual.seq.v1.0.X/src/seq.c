@@ -25,27 +25,41 @@ void seq_init(unsigned short patLen) {
 }
 
 short check_seqidx(unsigned short seqidx) {
-    return (seqidx >= SEQ_COUNT);
+    return (seqidx < SEQ_COUNT);
 }
 
-void seq_tick(unsigned short seqidx) {
-    if (check_seqidx(seqidx)) return;
+void seq_tick(unsigned short seqidx, unsigned direction) {
+    if (!check_seqidx(seqidx)) return;
 
-    if (patidx[seqidx] >= currentPatternLength-1) {
-        patidx[seqidx] = 0;
+    if (direction) {
+        if (patidx[seqidx] <= 0) {
+            patidx[seqidx] = currentPatternLength-1;
+        } else {
+            --patidx[seqidx];
+        }
     } else {
-        ++patidx[seqidx];
+        if (patidx[seqidx] >= currentPatternLength-1) {
+            patidx[seqidx] = 0;
+        } else {
+            ++patidx[seqidx];
+        }
     }
 }
 
+void seq_reset(unsigned short seqidx) {
+    if (!check_seqidx(seqidx)) return;
+
+    patidx[seqidx] = 0;
+}
+
 unsigned short seq_get(unsigned short seqidx) {
-    if (check_seqidx(seqidx)) return 0;
+    if (!check_seqidx(seqidx)) return 0;
 
     return pattern[seqidx][patidx[seqidx]];
 }
 
 void seq_set(unsigned short seqidx, unsigned short val) {
-    if (check_seqidx(seqidx)) return;
+    if (!check_seqidx(seqidx)) return;
 
     pattern[seqidx][patidx[seqidx]] = val;
 }

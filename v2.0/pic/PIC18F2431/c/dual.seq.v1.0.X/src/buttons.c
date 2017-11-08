@@ -31,7 +31,7 @@ void cv_set_all(void) {
 }
 
 void start_debounce(void) {
-    debounce = 1000;
+    debounce = 500;
 }
 
 unsigned short buttons_debouncing(void) {
@@ -93,16 +93,13 @@ void buttons_set_off(void) {
 }
 
 void buttons_set_on(void) {
-    if (!state_set) {
-        state_set = !state_set;
-        start_debounce();
-        
-        // Update current seq position with encoder value
-        // TODO: Track both gate and CV values for each step
-        if (active_pattern > 0) {
-            seq_set(active_pattern-1, buttons_encoderValue);
-        }
+    // We don't check toggle on set button on since we need to support holding
+    // the button down to write multiple steps
+    start_debounce();
+    if (active_pattern > 0) {
+        seq_set(active_pattern-1, buttons_encoderValue);
     }
+
 }
 
 void buttons_check(void) {

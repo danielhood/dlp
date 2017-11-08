@@ -1,5 +1,33 @@
 #include <p18f2431.h>
 
+
+/*******************
+ * I/O Mappings
+ *
+ * PORTA0: LVL (Analog)
+ * PORTA1: RST1
+ * PORTA2: RST2
+ * PORTA3: DIR1
+ * PORTA4: DIR2
+ *
+ * PORTB0: GATE1
+ * PORTB1: CV1 (PWM1)
+ * PORTB2: GATE2
+ * PORTB3: CV2 (PWM3)
+ * PORTB4: CV3 (PWM5)
+ * PORTB5: GATE3
+ *
+ * PORTC0: MODE
+ * PORTC1: TARGET
+ * PORTC2: SET
+ * PORTC3: (MISC)
+ * PORTC4: CK1
+ * PORTC5: CK2
+ * PORTC6: LED MODE
+ * PORTC7: LED TARGET
+ *
+ */
+
 void setup_io(void) {
     TRISA = 0xFF;   // All input
     TRISB = 0x00;   // All output
@@ -19,7 +47,8 @@ void setup_analog(void) {
     ADCON3 = 0x00;  // TODO: Interrupt and trigger config
     ADCHS = 0x00;   // Group selects
 
-    ANSEL0 = 0x1F;  // AN<0:54> analog; RC<5:7> digital
+    //ANSEL0 = 0x1F;  // AN<0:4> analog; RC<5:7> digital
+    ANSEL0 = 0x01;  // AN<0:0> analog; RC<1:7> digital (unless we want RST/DIR to be analog)
 }
 
 void setup_pwm(void) {
