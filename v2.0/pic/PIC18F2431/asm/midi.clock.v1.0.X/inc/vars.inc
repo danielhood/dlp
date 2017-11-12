@@ -21,6 +21,7 @@
 	CLOCK_COUNTER_32	; Counter for midi clock reset every 32 ticks (thrid note)
 	CLOCK_COUNTER_96	; Counter for midi clock reset every 96 ticks (whole note)
 	CLOCK_DIVIDER		; Stored binary divided MIDI clock (not reset)
+	SONG_START_INV		; Inverted song start (0 indicates song start signal which lasts for 1 clock cycle)
 
 	SYS_EX_DATA		; Current Sysex byte (set to 0xF7 if no data)
 

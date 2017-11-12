@@ -1,4 +1,4 @@
-MPASM  5.43                         SETUP.ASM   11-5-2017  17:02:57         PAGE  1
+MPASM  5.43                         SETUP.ASM   11-12-2017  12:35:36         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -38,104 +38,106 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
   0000000B            00021         CLOCK_COUNTER_32        ; Counter for midi clock reset every 32 ticks (thrid note)
   0000000C            00022         CLOCK_COUNTER_96        ; Counter for midi clock reset every 96 ticks (whole note)
   0000000D            00023         CLOCK_DIVIDER           ; Stored binary divided MIDI clock (not reset)
-                      00024 
-  0000000E            00025         SYS_EX_DATA             ; Current Sysex byte (set to 0xF7 if no data)
-                      00026 
-  0000000F            00027         CV_PITCH_TARGET         ; Current target for pitch
-  00000010            00028         CV_PITCH_DELAY          ; Delay counter for pitch target resolution
-  00000011            00029         CV_VEL_TARGET           ; Current target for velocity
-  00000012            00030         CV_VEL_DELAY            ; Delay counter for velocity target resolution
-  00000013            00031         CV_MOD_TARGET           ; Current target for mod
-  00000014            00032         CV_MOD_DELAY            ; Delay counter for mod target resolution
-                      00033 
-                      00034 ;------ service.asm variables
-  00000015            00035         W_TMP                   ; Storage for W register during interrupt
-  00000016            00036         ST_TMP                  ; Storage for STATUS register during interrupt
-  00000017            00037         BSR_TMP                 ; Storage for BSR register during interrupt
-                      00038 
-  00000018            00039         MIDI_STATE              ; Current midi state offset
-  00000019            00040         MIDI_STATE_TMP          ; Used to store the last midi state when in SysEx mode
-  0000001A            00041         MSG_COUNT               ; Counts the number of msg params passed
-  0000001B            00042         CC_NUM                  ; Holds the controller number for the CC message
-MPASM  5.43                         SETUP.ASM   11-5-2017  17:02:57         PAGE  2
+  0000000E            00024         SONG_START_INV          ; Inverted song start (0 indicates song start signal which lasts for 1 c
+                            lock cycle)
+                      00025 
+  0000000F            00026         SYS_EX_DATA             ; Current Sysex byte (set to 0xF7 if no data)
+                      00027 
+  00000010            00028         CV_PITCH_TARGET         ; Current target for pitch
+  00000011            00029         CV_PITCH_DELAY          ; Delay counter for pitch target resolution
+  00000012            00030         CV_VEL_TARGET           ; Current target for velocity
+  00000013            00031         CV_VEL_DELAY            ; Delay counter for velocity target resolution
+  00000014            00032         CV_MOD_TARGET           ; Current target for mod
+  00000015            00033         CV_MOD_DELAY            ; Delay counter for mod target resolution
+                      00034 
+                      00035 ;------ service.asm variables
+  00000016            00036         W_TMP                   ; Storage for W register during interrupt
+  00000017            00037         ST_TMP                  ; Storage for STATUS register during interrupt
+  00000018            00038         BSR_TMP                 ; Storage for BSR register during interrupt
+                      00039 
+  00000019            00040         MIDI_STATE              ; Current midi state offset
+  0000001A            00041         MIDI_STATE_TMP          ; Used to store the last midi state when in SysEx mode
+MPASM  5.43                         SETUP.ASM   11-12-2017  12:35:36         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-  0000001C            00043         MSG_CHAN                ; Holds the working MIDI channel number
-  0000001D            00044         MSG_PITCH_CH1           ; Holds the working pitches that may be pushed live
-  0000001E            00045         MSG_PITCH_CH2           ; In Drum Mode (MODE1) only _CH1 is used
-  0000001F            00046         MSG_PITCH_CH3
-  00000020            00047         MSG_PITCH_CH4
-  00000021            00048         MSG_PITCH_CH5
-  00000022            00049         MSG_VELOCITY            ; Holds the working velocities that may be pushed live
-                      00050 
-                      00051 ;------ midi.asm variables
-  00000023            00052         TMP_CV_BYTE_L           ; Holds a temp value for pushing CV values to the PWM registers
-  00000024            00053         TMP_CV_BYTE_H
-                      00054 
-                      00055 ;------ midi.read.int.asm variables (entry point)
-                      00056 
-                      00057         endc
-                      00058 
+  0000001B            00042         MSG_COUNT               ; Counts the number of msg params passed
+  0000001C            00043         CC_NUM                  ; Holds the controller number for the CC message
+  0000001D            00044         MSG_CHAN                ; Holds the working MIDI channel number
+  0000001E            00045         MSG_PITCH_CH1           ; Holds the working pitches that may be pushed live
+  0000001F            00046         MSG_PITCH_CH2           ; In Drum Mode (MODE1) only _CH1 is used
+  00000020            00047         MSG_PITCH_CH3
+  00000021            00048         MSG_PITCH_CH4
+  00000022            00049         MSG_PITCH_CH5
+  00000023            00050         MSG_VELOCITY            ; Holds the working velocities that may be pushed live
+                      00051 
+                      00052 ;------ midi.asm variables
+  00000024            00053         TMP_CV_BYTE_L           ; Holds a temp value for pushing CV values to the PWM registers
+  00000025            00054         TMP_CV_BYTE_H
+                      00055 
+                      00056 ;------ midi.read.int.asm variables (entry point)
+                      00057 
+                      00058         endc
                       00059 
-                      00060 ; ------------------------------------------------------------------------------
-                      00061 ; Constants
-                      00062 ;
-  00000000            00063 CV_DATA_LKP:    equ     0x00    ; EEPROM base Address of CV Controller data lookup
-  00000080            00064 CV_NOTE_LKP:    equ     0x80    ; EEPROM base Address CV Note data lookup
-                      00065 
-                      00066 ; CV_FLAGS
-  00000000            00067 CVF_PITCH:      equ     0x00    ; MODE0
-  00000001            00068 CVF_VELOCITY:   equ     0x01    ; MODE0
-  00000002            00069 CVF_MOD:        equ     0x02    ; MODE0
-  00000003            00070 CVF_CV_4:       equ     0x03    ; MODE0
-  00000004            00071 CVF_CV_5:       equ     0x04    ; MODE0
-                      00072 
-  00000000            00073 _MOFFSET_NOTE_OFF:      equ     0x00    ; 0x8c
-  00000002            00074 _MOFFSET_NOTE_ON:       equ     0x02    ; 0x9c
-  00000004            00075 _MOFFSET_KP:            equ     0x04    ; 0xAc
-  00000006            00076 _MOFFSET_CC:            equ     0x06    ; 0xBc
-  00000008            00077 _MOFFSET_PC:            equ     0x08    ; 0xCc
-  0000000A            00078 _MOFFSET_CP:            equ     0x0A    ; 0xDc
-  0000000C            00079 _MOFFSET_PB:            equ     0x0C    ; 0xEc
-  0000000E            00080 _MOFFSET_SYS_EX:        equ     0x0E    ; 0xF0
-  00000010            00081 _MOFFSET_F1:            equ     0x10    ; 0xF1
-  00000012            00082 _MOFFSET_SP:            equ     0x12    ; 0xF2
-  00000014            00083 _MOFFSET_SS:            equ     0x14    ; 0xF3
-  00000016            00084 _MOSSFEST_F4:           equ     0x16    ; 0xF4
-  00000018            00085 _MOFFSET_UBS:           equ     0x18    ; 0xF5
-  0000001A            00086 _MOFFSET_TR:            equ     0x1A    ; 0xF6
-  0000001C            00087 _MOFFSET_SYS_EX_END:    equ     0x1C    ; 0xF7
-  0000001E            00088 _MOFFSET_TT:            equ     0x1E    ; 0xF8
-  00000020            00089 _MOSSFEST_F9:           equ     0x20    ; 0xF9
-  00000022            00090 _MOFFSET_START_SONG:    equ     0x22    ; 0xFA
-  00000024            00091 _MOFFSET_CONT_SONG:     equ     0x24    ; 0xFB
-  00000026            00092 _MOFFSET_STOP_SONG:     equ     0x26    ; 0xFC
-  00000028            00093 _MOSSFEST_FD:           equ     0x28    ; 0xFD
-  0000002A            00094 _MOFFSET_AS:            equ     0x2A    ; 0xFE
-  0000002C            00095 _MOFFSET_SYS_RESET:     equ     0x2C    ; 0xFF
-MPASM  5.43                         SETUP.ASM   11-5-2017  17:02:57         PAGE  3
+                      00060 
+                      00061 ; ------------------------------------------------------------------------------
+                      00062 ; Constants
+                      00063 ;
+  00000000            00064 CV_DATA_LKP:    equ     0x00    ; EEPROM base Address of CV Controller data lookup
+  00000080            00065 CV_NOTE_LKP:    equ     0x80    ; EEPROM base Address CV Note data lookup
+                      00066 
+                      00067 ; CV_FLAGS
+  00000000            00068 CVF_PITCH:      equ     0x00    ; MODE0
+  00000001            00069 CVF_VELOCITY:   equ     0x01    ; MODE0
+  00000002            00070 CVF_MOD:        equ     0x02    ; MODE0
+  00000003            00071 CVF_CV_4:       equ     0x03    ; MODE0
+  00000004            00072 CVF_CV_5:       equ     0x04    ; MODE0
+                      00073 
+  00000000            00074 _MOFFSET_NOTE_OFF:      equ     0x00    ; 0x8c
+  00000002            00075 _MOFFSET_NOTE_ON:       equ     0x02    ; 0x9c
+  00000004            00076 _MOFFSET_KP:            equ     0x04    ; 0xAc
+  00000006            00077 _MOFFSET_CC:            equ     0x06    ; 0xBc
+  00000008            00078 _MOFFSET_PC:            equ     0x08    ; 0xCc
+  0000000A            00079 _MOFFSET_CP:            equ     0x0A    ; 0xDc
+  0000000C            00080 _MOFFSET_PB:            equ     0x0C    ; 0xEc
+  0000000E            00081 _MOFFSET_SYS_EX:        equ     0x0E    ; 0xF0
+  00000010            00082 _MOFFSET_F1:            equ     0x10    ; 0xF1
+  00000012            00083 _MOFFSET_SP:            equ     0x12    ; 0xF2
+  00000014            00084 _MOFFSET_SS:            equ     0x14    ; 0xF3
+  00000016            00085 _MOSSFEST_F4:           equ     0x16    ; 0xF4
+  00000018            00086 _MOFFSET_UBS:           equ     0x18    ; 0xF5
+  0000001A            00087 _MOFFSET_TR:            equ     0x1A    ; 0xF6
+  0000001C            00088 _MOFFSET_SYS_EX_END:    equ     0x1C    ; 0xF7
+  0000001E            00089 _MOFFSET_TT:            equ     0x1E    ; 0xF8
+  00000020            00090 _MOSSFEST_F9:           equ     0x20    ; 0xF9
+  00000022            00091 _MOFFSET_START_SONG:    equ     0x22    ; 0xFA
+  00000024            00092 _MOFFSET_CONT_SONG:     equ     0x24    ; 0xFB
+  00000026            00093 _MOFFSET_STOP_SONG:     equ     0x26    ; 0xFC
+  00000028            00094 _MOSSFEST_FD:           equ     0x28    ; 0xFD
+MPASM  5.43                         SETUP.ASM   11-12-2017  12:35:36         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-  0000002E            00096 _MOFFSET_NONE:          equ     0x2E
-                      00097 
-                      00098 ; GATE Mappings
-                      00099 ; Bits 0 to 4 of PORT_C represent gates
-                      00100 ; Bit 0 represents GATE 5 and Bit 4 represents GATE 1 in v2.0 to match the hardware layout
-  00000004            00101 GATE_1:         equ     0x04
-  00000003            00102 GATE_2:         equ     0x03
-  00000002            00103 GATE_3:         equ     0x02
-  00000001            00104 GATE_4:         equ     0x01
-  00000000            00105 GATE_5:         equ     0x00
-                      00106 
-  00000080            00107 DELAY_96        equ     0x80
-  00000080            00108 DELAY_32        equ     0x80
-  00000080            00109 DELAY_24        equ     0x80
+  0000002A            00095 _MOFFSET_AS:            equ     0x2A    ; 0xFE
+  0000002C            00096 _MOFFSET_SYS_RESET:     equ     0x2C    ; 0xFF
+  0000002E            00097 _MOFFSET_NONE:          equ     0x2E
+                      00098 
+                      00099 ; GATE Mappings
+                      00100 ; Bits 0 to 4 of PORT_C represent gates
+                      00101 ; Bit 0 represents GATE 5 and Bit 4 represents GATE 1 in v2.0 to match the hardware layout
+  00000004            00102 GATE_1:         equ     0x04
+  00000003            00103 GATE_2:         equ     0x03
+  00000002            00104 GATE_3:         equ     0x02
+  00000001            00105 GATE_4:         equ     0x01
+  00000000            00106 GATE_5:         equ     0x00
+                      00107 
+  00000080            00108 DELAY_96        equ     0x80
+  00000080            00109 DELAY_32        equ     0x80
+  00000080            00110 DELAY_24        equ     0x80
                       00003 
                       00004 ; ------------------------------------------------------------------------------
                       00005 ; Export global code refs
@@ -173,14 +175,14 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00036 
                       00037 ; PWM Config (for CV out)
 000010 0E02           00038         movlw   b'00000010'     ; No Pre-scale, No Post-scale, Continuous w/no interrupts
-000012 6E7F           00039         movwf   PTCON0          ; Timer clock runs at FOSC/4 = 5MHz
-                      00040 
-MPASM  5.43                         SETUP.ASM   11-5-2017  17:02:57         PAGE  4
+MPASM  5.43                         SETUP.ASM   11-12-2017  12:35:36         PAGE  4
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
+000012 6E7F           00039         movwf   PTCON0          ; Timer clock runs at FOSC/4 = 5MHz
+                      00040 
 000014 0E80           00041         movlw   b'10000000'     ; Time base enabled, count up (ignored)
 000016 6E7E           00042         movwf   PTCON1
                       00043 
@@ -223,7 +225,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00076 
                       00077 ; Setup vars
 00003E 6A00           00078         clrf    CUR_BYTE
-000040 6A1A           00079         clrf    MSG_COUNT
+000040 6A1B           00079         clrf    MSG_COUNT
                       00080 
 000042 6A01           00081         clrf    CV_FLAGS
 000044 6A02           00082         clrf    CV_PITCH
@@ -232,20 +234,20 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00004A 6A07           00085         clrf    CV_GATE
                       00086 
 00004C 0E2E           00087         movlw   _MOFFSET_NONE   ; Set inital midi state
-00004E 6E18           00088         movwf   MIDI_STATE
-                      00089         
-MPASM  5.43                         SETUP.ASM   11-5-2017  17:02:57         PAGE  5
+MPASM  5.43                         SETUP.ASM   11-12-2017  12:35:36         PAGE  5
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
+00004E 6E19           00088         movwf   MIDI_STATE
+                      00089         
 000050 0E01           00090         movlw   0x01
-000052 6E1C           00091         movwf   MSG_CHAN        ; Default to channel 1
+000052 6E1D           00091         movwf   MSG_CHAN        ; Default to channel 1
                       00092 
                       00093 
 000054 0EF7           00094         movlw   0xF7            ; Set SysEx data to deault state
-000056 6E0E           00095         movwf   SYS_EX_DATA
+000056 6E0F           00095         movwf   SYS_EX_DATA
                       00096 
                       00097 ; Setup Table memory pointers
 000058 0E??           00098         movlw   upper LFO_SINE_DATA_24          ; Will be the same for all tables, only need to set H an
@@ -262,7 +264,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 000066 0012           00108         return
                       00109 
                       00110         end
-MPASM  5.43                         SETUP.ASM   11-5-2017  17:02:57         PAGE  6
+MPASM  5.43                         SETUP.ASM   11-12-2017  12:35:36         PAGE  6
 
 
 SYMBOL TABLE
@@ -321,7 +323,7 @@ BFEMT                             00000003
 BFOVFL                            00000002
 BOR                               00000000
 BRFEN                             00000007
-MPASM  5.43                         SETUP.ASM   11-5-2017  17:02:57         PAGE  7
+MPASM  5.43                         SETUP.ASM   11-12-2017  12:35:36         PAGE  7
 
 
 SYMBOL TABLE
@@ -330,7 +332,7 @@ SYMBOL TABLE
 BRG16                             00000003
 BRGH                              00000002
 BSR                               00000FE0
-BSR_TMP                           00000017
+BSR_TMP                           00000018
 C                                 00000000
 CAP1BUFH                          00000F69
 CAP1BUFL                          00000F68
@@ -380,7 +382,7 @@ CCP2M1                            00000001
 CCP2M2                            00000002
 CCP2M3                            00000003
 CCP2X                             00000005
-MPASM  5.43                         SETUP.ASM   11-5-2017  17:02:57         PAGE  8
+MPASM  5.43                         SETUP.ASM   11-12-2017  12:35:36         PAGE  8
 
 
 SYMBOL TABLE
@@ -393,7 +395,7 @@ CCPR1L                            00000FBE
 CCPR2                             00000FBB
 CCPR2H                            00000FBC
 CCPR2L                            00000FBB
-CC_NUM                            0000001B
+CC_NUM                            0000001C
 CFGS                              00000006
 CK                                00000006
 CKE                               00000006
@@ -418,17 +420,17 @@ CV_FLAGS                          00000001
 CV_GATE                           00000007
 CV_GATE_TMP                       00000008
 CV_MOD                            00000006
-CV_MOD_DELAY                      00000014
-CV_MOD_TARGET                     00000013
+CV_MOD_DELAY                      00000015
+CV_MOD_TARGET                     00000014
 CV_NOTE_LKP                       00000080
 CV_PITCH                          00000002
 CV_PITCH_CH4                      00000003
 CV_PITCH_CH5                      00000004
-CV_PITCH_DELAY                    00000010
-CV_PITCH_TARGET                   0000000F
+CV_PITCH_DELAY                    00000011
+CV_PITCH_TARGET                   00000010
 CV_VELOCITY                       00000005
-CV_VEL_DELAY                      00000012
-CV_VEL_TARGET                     00000011
+CV_VEL_DELAY                      00000013
+CV_VEL_TARGET                     00000012
 D                                 00000005
 DATA_ADDRESS                      00000005
 DC                                00000001
@@ -439,7 +441,7 @@ DC2B1                             00000005
 DDRA                              TRISA
 DDRB                              TRISB
 DDRC                              TRISC
-MPASM  5.43                         SETUP.ASM   11-5-2017  17:02:57         PAGE  9
+MPASM  5.43                         SETUP.ASM   11-12-2017  12:35:36         PAGE  9
 
 
 SYMBOL TABLE
@@ -498,7 +500,7 @@ FLTBMOD                           00000005
 FLTBS                             00000006
 FLTCK0                            00000000
 FLTCK1                            00000001
-MPASM  5.43                         SETUP.ASM   11-5-2017  17:02:57         PAGE 10
+MPASM  5.43                         SETUP.ASM   11-12-2017  12:35:36         PAGE 10
 
 
 SYMBOL TABLE
@@ -557,7 +559,7 @@ INT0E                             00000004
 INT0F                             00000001
 INT0IE                            00000004
 INT0IF                            00000001
-MPASM  5.43                         SETUP.ASM   11-5-2017  17:02:57         PAGE 11
+MPASM  5.43                         SETUP.ASM   11-12-2017  12:35:36         PAGE 11
 
 
 SYMBOL TABLE
@@ -616,7 +618,7 @@ LATC1                             00000001
 LATC2                             00000002
 LATC3                             00000003
 LATC4                             00000004
-MPASM  5.43                         SETUP.ASM   11-5-2017  17:02:57         PAGE 12
+MPASM  5.43                         SETUP.ASM   11-12-2017  12:35:36         PAGE 12
 
 
 SYMBOL TABLE
@@ -640,16 +642,16 @@ LVDL3                             00000003
 MAXCNTH                           00000F65
 MAXCNTL                           00000F64
 MCLR                              00000003
-MIDI_STATE                        00000018
-MIDI_STATE_TMP                    00000019
-MSG_CHAN                          0000001C
-MSG_COUNT                         0000001A
-MSG_PITCH_CH1                     0000001D
-MSG_PITCH_CH2                     0000001E
-MSG_PITCH_CH3                     0000001F
-MSG_PITCH_CH4                     00000020
-MSG_PITCH_CH5                     00000021
-MSG_VELOCITY                      00000022
+MIDI_STATE                        00000019
+MIDI_STATE_TMP                    0000001A
+MSG_CHAN                          0000001D
+MSG_COUNT                         0000001B
+MSG_PITCH_CH1                     0000001E
+MSG_PITCH_CH2                     0000001F
+MSG_PITCH_CH3                     00000020
+MSG_PITCH_CH4                     00000021
+MSG_PITCH_CH5                     00000022
+MSG_VELOCITY                      00000023
 N                                 00000004
 NOT_A                             00000005
 NOT_ADDRESS                       00000005
@@ -675,7 +677,7 @@ NOT_WRITE                         00000002
 OERR                              00000001
 OSC1                              00000007
 OSC2                              00000006
-MPASM  5.43                         SETUP.ASM   11-5-2017  17:02:57         PAGE 13
+MPASM  5.43                         SETUP.ASM   11-12-2017  12:35:36         PAGE 13
 
 
 SYMBOL TABLE
@@ -734,7 +736,7 @@ POSTINC0                          00000FEE
 POSTINC1                          00000FE6
 POSTINC2                          00000FDE
 POUT0                             00000000
-MPASM  5.43                         SETUP.ASM   11-5-2017  17:02:57         PAGE 14
+MPASM  5.43                         SETUP.ASM   11-12-2017  12:35:36         PAGE 14
 
 
 SYMBOL TABLE
@@ -793,7 +795,7 @@ PWMEN2                            00000006
 QEICON                            00000FB6
 QEIM0                             00000002
 QEIM1                             00000003
-MPASM  5.43                         SETUP.ASM   11-5-2017  17:02:57         PAGE 15
+MPASM  5.43                         SETUP.ASM   11-12-2017  12:35:36         PAGE 15
 
 
 SYMBOL TABLE
@@ -852,7 +854,7 @@ S                                 00000003
 SASEL0                            00000000
 SASEL1                            00000001
 SBSEL0                            00000004
-MPASM  5.43                         SETUP.ASM   11-5-2017  17:02:57         PAGE 16
+MPASM  5.43                         SETUP.ASM   11-12-2017  12:35:36         PAGE 16
 
 
 SYMBOL TABLE
@@ -880,6 +882,7 @@ SEVTCMPH                          00000F70
 SEVTCMPL                          00000F71
 SEVTDIR                           00000003
 SMP                               00000007
+SONG_START_INV                    0000000E
 SPBRG                             00000FAF
 SPBRGH                            00000FB0
 SPEN                              00000007
@@ -910,19 +913,19 @@ STKPTR                            00000FFC
 STKPTR0                           00000000
 STKPTR1                           00000001
 STKPTR2                           00000002
-STKPTR3                           00000003
-MPASM  5.43                         SETUP.ASM   11-5-2017  17:02:57         PAGE 17
+MPASM  5.43                         SETUP.ASM   11-12-2017  12:35:36         PAGE 17
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+STKPTR3                           00000003
 STKPTR4                           00000004
 STKUNF                            00000006
-ST_TMP                            00000016
+ST_TMP                            00000017
 SWDTEN                            00000000
 SYNC                              00000004
-SYS_EX_DATA                       0000000E
+SYS_EX_DATA                       0000000F
 T016BIT                           00000006
 T0CKI                             00000003
 T0CON                             00000FD5
@@ -967,15 +970,15 @@ TBLPTR                            00000FF6
 TBLPTRH                           00000FF7
 TBLPTRL                           00000FF6
 TBLPTRU                           00000FF8
-TMP_CV_BYTE_H                     00000024
-TMP_CV_BYTE_L                     00000023
-TMR0                              00000FD6
-MPASM  5.43                         SETUP.ASM   11-5-2017  17:02:57         PAGE 18
+TMP_CV_BYTE_H                     00000025
+TMP_CV_BYTE_L                     00000024
+MPASM  5.43                         SETUP.ASM   11-12-2017  12:35:36         PAGE 18
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+TMR0                              00000FD6
 TMR0H                             00000FD7
 TMR0IE                            00000005
 TMR0IF                            00000002
@@ -1028,13 +1031,13 @@ TRISB3                            00000003
 TRISB4                            00000004
 TRISB5                            00000005
 TRISB6                            00000006
-TRISB7                            00000007
-MPASM  5.43                         SETUP.ASM   11-5-2017  17:02:57         PAGE 19
+MPASM  5.43                         SETUP.ASM   11-12-2017  12:35:36         PAGE 19
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+TRISB7                            00000007
 TRISC                             00000F94
 TRISC0                            00000000
 TRISC1                            00000001
@@ -1083,17 +1086,17 @@ WREG                              00000FE8
 WREN                              00000002
 WRERR                             00000003
 WUE                               00000001
-W_TMP                             00000015
+W_TMP                             00000016
 Z                                 00000002
 _BOREN_OFF_2L                     000000FD
 _BOREN_ON_2L                      000000FF
-_BORV_20_2L                       000000FF
-MPASM  5.43                         SETUP.ASM   11-5-2017  17:02:57         PAGE 20
+MPASM  5.43                         SETUP.ASM   11-12-2017  12:35:36         PAGE 20
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+_BORV_20_2L                       000000FF
 _BORV_27_2L                       000000FB
 _BORV_42_2L                       000000F7
 _BORV_45_2L                       000000F3
@@ -1146,13 +1149,13 @@ _IDLOC3                           00200003
 _IDLOC4                           00200004
 _IDLOC5                           00200005
 _IDLOC6                           00200006
-_IDLOC7                           00200007
-MPASM  5.43                         SETUP.ASM   11-5-2017  17:02:57         PAGE 21
+MPASM  5.43                         SETUP.ASM   11-12-2017  12:35:36         PAGE 21
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+_IDLOC7                           00200007
 _IESO_OFF_1H                      0000007F
 _IESO_ON_1H                       000000FF
 _LPOL_HIGH_3L                     000000FF
@@ -1205,13 +1208,13 @@ _SETUP                            00000000
 _STVREN_OFF_4L                    000000FE
 _STVREN_ON_4L                     000000FF
 _T1OSCMX_OFF_3L                   000000DF
-_T1OSCMX_ON_3L                    000000FF
-MPASM  5.43                         SETUP.ASM   11-5-2017  17:02:57         PAGE 22
+MPASM  5.43                         SETUP.ASM   11-12-2017  12:35:36         PAGE 22
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+_T1OSCMX_ON_3L                    000000FF
 _WDPS_1024_2H                     000000F5
 _WDPS_128_2H                      000000EF
 _WDPS_16384_2H                    000000FD

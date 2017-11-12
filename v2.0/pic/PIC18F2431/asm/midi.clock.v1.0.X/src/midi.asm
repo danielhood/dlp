@@ -110,6 +110,11 @@ _MAIN:
 	movwf	PDC1H
 	movwf	PDC2H
 
+	; Make sure initial output state starts at 0 otherwise song start may not fire properly
+	setf	CV_GATE				; Force all clocks outs to 0 (note inversion)
+	setf	CLOCK_DIVIDER
+
+
 _LOOP:
 _UPDATE_CV1:
 	btfss	CV_FLAGS,CVF_PITCH
@@ -226,8 +231,14 @@ _UPDATE_GATES:
 	rrncf	WREG		; Divide base clock (tripples) by 4
 	rrncf	WREG
 	andlw	0x01
-	addwf	CV_GATE_TMP,F	; Inject base clock into port set
-	comf	CV_GATE_TMP,W	; Invert the bits so ports start at 1
+	addwf	CV_GATE_TMP,W	; Inject base clock into port set
+	andlw	0x0F		; Clear out top bit for Song Start
+	movwf	CV_GATE_TMP	; store back to tmp
+	movf	SONG_START_INV,W ; load song start flag (will be 0xFF or 0x00)
+	andlw	0x10		; Mask out bit
+	addwf	CV_GATE_TMP,W	; Inject song start
+	;addlw	0x00	; test
+	comf	WREG,W	; Invert the bits so ports start at 1
 	movwf	PORTC		; Apply gate settings directly to PORTC
 
 	; TODO: cycle through a sin or triangle way to generate clock sync'd LFO's on CV outs

@@ -62,6 +62,7 @@ _HANDLE_RC:
 	movlw	0x03				; Check if we need to increment the gates (every 3)
 	cpfseq	CLOCK_COUNTER
 	goto	_CLOCK_COUNTER_24
+	setf	SONG_START_INV			; Clear song start
 	incf	CV_GATE,F
 	clrf	CLOCK_COUNTER
 
@@ -81,7 +82,7 @@ _CLOCK_COUNTER_32:
 	goto	_CLOCK_COUNTER_32_END
 	clrf	CLOCK_COUNTER_32
 _CLOCK_COUNTER_32_END:
-	bsf	CV_FLAGS,CVF_MOD			; Notify update for MOD (CV3)
+	bsf	CV_FLAGS,CVF_MOD		; Notify update for MOD (CV3)
 
 _CLOCK_COUNTER_96:
 	incf	CLOCK_COUNTER_96,F
@@ -97,7 +98,8 @@ _NOT_CLOCK:
 	movlw	0xFA				; Song start
 	cpfseq	CUR_BYTE
 	goto	_NOT_SONG_START
-	clrf	CV_GATE				; Reset clocks
+	clrf	CV_GATE				; Reset clocks and counters on song start
+	clrf	SONG_START_INV
 	clrf	CLOCK_COUNTER
 	clrf	CLOCK_COUNTER_24
 	clrf	CLOCK_COUNTER_32
@@ -105,7 +107,15 @@ _NOT_CLOCK:
 	goto	_RC_CLEANUP
 
 _NOT_SONG_START:
+	movlw	0xFC				; Song stop
+	cpfseq	CUR_BYTE
+	goto	_NOT_SONG_STOP
+	setf	CV_GATE				; Force all clocks outs to 0 (note inversion)
+	setf	CLOCK_DIVIDER
 	goto	_RC_CLEANUP
+_NOT_SONG_STOP:
+	goto	_RC_CLEANUP
+
 
 	; First, check to see if we are in SysEx mode
 	movlw	_MOFFSET_SYS_EX
