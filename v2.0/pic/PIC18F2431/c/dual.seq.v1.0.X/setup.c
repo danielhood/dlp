@@ -40,15 +40,26 @@ void setup_io(void) {
 }
 
 void setup_analog(void) {
-        // 10 bit A/D module config
-    ADCON0 = 0x00;  // TODO
-    ADCON1 = 0x00;  // AN2 nad AN3 are analog inputs (mapped VRef's to AVxx)
-    ADCON2 = 0x00;  // TODO: A/D timining and bit formats
-    ADCON3 = 0x00;  // TODO: Interrupt and trigger config
-    ADCHS = 0x00;   // Group selects
+    // 10 bit A/D module config (but we only use the top 8 bits in ADRESH)
+    ADCON0bits.ACONV = 0; // Single Shot
+    ADCON0bits.ACSCH = 0; // Single channel conversion
+    ADCON0bits.ACMOD = 0; // Single Channel Mode 1 (Group A taken and converted)
+    ADCON0bits.ADON = 1; // Enable A/D Conversion
+
+    ADCON1 = 0x00;  // AN2 nad AN3 are analog inputs or digital i/o (mapped VRef's to AVxx)
+    ADCON2 = 0x00;  // A/D timining and bit formats; left justified, start immediatly, Fosc/2
+    ADCON3 = 0x00;  // Interrupt and trigger config; Interupt on each word; disabled triggers
+    ADCON3bits.SSRC = 2; // Timer5 starts A/D sequence
+
+    ADCHS = 0x00;   // Group selects (GroupA: AN0)
 
     //ANSEL0 = 0x1F;  // AN<0:4> analog; RC<5:7> digital
-    ANSEL0 = 0x01;  // AN<0:0> analog; RC<1:7> digital (unless we want RST/DIR to be analog)
+    ANSEL0 = 0x01;  // AN<0:0> analog; RC<1:7> digital (unless we want RST/DIRs to be analog)
+
+    // Setup Timer5
+    PR5H = 0x0F;
+    PR5L = 0x00;
+    T5CONbits.TMR5ON = 1;
 }
 
 void setup_pwm(void) {
@@ -73,9 +84,13 @@ void setup_interrupts(void) {
 
     // Interrupts for A/D conversion
     PIE1 = 0x00;    // Disable all initially
-    //PIE1bits.ADIE = 1    // Enable A/D converter
     PIE2 = 0x00;    // Nothing needed here; all disabled
     PIE3 = 0x00;    // Nothing needed here; all disabled
+
+    INTCONbits.PEIE = 1;    // Enable periferial interrupts
+    PIE1bits.ADIE = 1;      // Enable A/D converter
+    PIR1bits.ADIF = 0;      // Clear interrupt flag
+    IPR1bits.ADIP = 0;      // Low priority AD interrupts
 
     // Interrupts for clock triggers
     INTCON2 = 0xFF; // Int1 and Int2 rising edge triggered

@@ -13,6 +13,7 @@
 #include "device_config.h"
 #include "setup.h"
 #include "buttons.h"
+#include "inputs.h"
 #include "leds.h"
 #include "clock.h"
 #include "seq.h"
@@ -46,6 +47,10 @@ void InterruptHandlerLow (void)
     if (INTCONbits.TMR0IF) {       // check Timer0
         INTCONbits.TMR0IF = 0;     // clear interrupt flag
         leds_blink();              // Update led state
+    } else if (PIR1bits.ADIF) {
+        PIR1bits.ADIF = 0;
+        inputs_set(LVL, ADRESH);
+        //ADCON0bits.GODONE = 1;     // Trigger a new sample
     }
 }
 
@@ -90,6 +95,7 @@ void main() {
     //      - Set triggers write of encoder value to current step in target pattern
     //      - Clock 1 ticks pattern 1
     //      - Clock 2 ticks patterns 2 and 3
+    //      - RST/DIR is functioning
     //
     //  Next Steps:
     //      - Get A/D working for encoder
@@ -104,10 +110,16 @@ void main() {
     setup();
     seq_init(16);
     leds_init();
-    
+
+    //ADCON0bits.GODONE = 1;     // Trigger initial A/D sample
+
     while (1) {
         clock_check();
         buttons_check();
+
+        // TEST: Write LVL to CV1
+        PDC0L = inputs_get(LVL); // TODO: Map the 10 bits of A/D to 12 bits of PWM
+        //PDC0H = 0x1C;
     }
 }
 

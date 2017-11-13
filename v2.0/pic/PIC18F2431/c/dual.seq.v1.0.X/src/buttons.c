@@ -58,10 +58,10 @@ void buttons_mode_on(void) {
         buttons_encoderValue = !buttons_encoderValue;
 
         if (buttons_encoderValue) {
-            cv_set_all();
+            //cv_set_all();
             leds_set_mode(99);
         } else {
-            cv_clear_all();
+            //cv_clear_all();
             leds_set_mode(0);
         }
     }
