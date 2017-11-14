@@ -13,6 +13,9 @@ void seq_reset(unsigned short seqidx);
 unsigned short seq_get(unsigned short seqidx);
 void seq_set(unsigned short seqidx, unsigned short val);
 
+unsigned short seq_get_cv(unsigned short seqidx);
+void seq_set_cv(unsigned short seqidx, unsigned short val);
+
 
 #ifdef __cplusplus
 }

@@ -14,11 +14,11 @@ void clock_tick(unsigned int clockIdx) {
     if (clockIdx == CLOCK1) {
         if (inputs_get(RST1)) {
             seq_reset(0);
-        }
-        else {
+        } else {
             seq_tick(0, inputs_get(DIR1));
         }
-        gates_set(GATE1, seq_get(0));
+        
+        gates_set(GATE1, seq_get(0), seq_get_cv(0));
 
         gateRelease1 = 100;
         gateClear1 = 0;
@@ -34,8 +34,8 @@ void clock_tick(unsigned int clockIdx) {
             seq_tick(2, direction);
         }
 
-        gates_set(GATE2, seq_get(1));
-        gates_set(GATE3, seq_get(2));
+        gates_set(GATE2, seq_get(1), seq_get_cv(1));
+        gates_set(GATE3, seq_get(2), seq_get_cv(2));
 
         gateClear2 = 0;
         gateRelease2 = 100;
@@ -49,7 +49,7 @@ void clock_check(void) {
         if (gateRelease1 > 0) {
             --gateRelease1;
         } else {
-            gates_set(GATE1, 0);
+            gates_set(GATE1, 0, seq_get_cv(0));
             gateClear1 = 1;
         }
     }
@@ -58,8 +58,8 @@ void clock_check(void) {
         if (gateRelease2 > 0) {
             --gateRelease2;
         } else {
-            gates_set(GATE2, 0);
-            gates_set(GATE3, 0);
+            gates_set(GATE2, 0, seq_get_cv(1));
+            gates_set(GATE3, 0, seq_get_cv(2));
             gateClear2 = 1;
         }
     }

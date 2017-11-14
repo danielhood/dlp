@@ -118,7 +118,7 @@ void main() {
         buttons_check();
 
         // TEST: Write LVL to CV1
-        PDC0L = inputs_get(LVL); // TODO: Map the 10 bits of A/D to 12 bits of PWM
+        //PDC0L = inputs_get(LVL); // TODO: Map the 10 bits of A/D to 12 bits of PWM
         //PDC0H = 0x1C;
     }
 }

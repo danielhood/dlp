@@ -1,11 +1,23 @@
 #include <p18f2431.h>
 
+/*
+ * Buttons
+ *
+ * Set: Triggers a write, either to gate pattern, or cv pattern, depending on target and mode
+ *
+ * Mode: Three states indicating what to write: Gate Off, Gate On, CV Value
+ *
+ * Target: Four states indicating where to write: None, Seq1, Seq2, Seq3
+ *
+ */
+
 #include "seq.h"
 #include "leds.h"
 #include "buttons.h"
+#include "inputs.h"
 
-unsigned short buttons_encoderValue = 0;
 unsigned short active_pattern = 0; // This is seqIdx + 1; Max of 3
+unsigned short active_mode = 0; // 0:Gate Off, 1:Gate On, 2:CV Value
 
 unsigned short debounce = 0;
 unsigned short state_mode = 0;
@@ -53,16 +65,19 @@ void buttons_mode_on(void) {
     if (!state_mode) {
         state_mode = !state_mode;
         start_debounce();
-    
-        // Mode is toggling CV outs, and encoder value
-        buttons_encoderValue = !buttons_encoderValue;
 
-        if (buttons_encoderValue) {
-            //cv_set_all();
-            leds_set_mode(99);
-        } else {
-            //cv_clear_all();
-            leds_set_mode(0);
+        // Cycle through modes: Gate OFF, Gate ON, CV Value
+        active_mode = ++active_mode % 3;
+        switch (active_mode)
+        {
+            case 0:
+                leds_set_mode(0);
+                break;
+            case 1:
+                leds_set_mode(99);
+                break;
+            case 2:
+                leds_set_mode(3);
         }
     }
 }
@@ -97,7 +112,11 @@ void buttons_set_on(void) {
     // the button down to write multiple steps
     start_debounce();
     if (active_pattern > 0) {
-        seq_set(active_pattern-1, buttons_encoderValue);
+        if (active_mode < 2) {
+            seq_set(active_pattern-1, active_mode);
+        } else {
+            seq_set_cv(active_pattern-1, inputs_get(LVL));
+        }
     }
 
 }

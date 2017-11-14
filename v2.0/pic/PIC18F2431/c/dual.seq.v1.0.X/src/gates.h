@@ -5,6 +5,6 @@
 #define GATE2 1
 #define GATE3 2
 
-void gates_set(short gateIdx, short value);
+void gates_set(short gateIdx, short gate, short cv);
 
 #endif
