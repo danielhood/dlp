@@ -48,7 +48,7 @@ void leds_reset_cycle(void){
     cycle_count = 0;
 }
 
-void leds_set_mode(unsigned int value)
+void leds_set_mode(unsigned short value)
 {
     led1_value = (value * 2);
     
@@ -57,7 +57,7 @@ void leds_set_mode(unsigned int value)
     }
 }
 
-void leds_set_target(unsigned int value)
+void leds_set_target(unsigned short value)
 {
     led2_value = (value * 2);
 

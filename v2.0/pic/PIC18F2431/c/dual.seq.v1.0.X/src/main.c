@@ -96,14 +96,11 @@ void main() {
     //      - Clock 1 ticks pattern 1
     //      - Clock 2 ticks patterns 2 and 3
     //      - RST/DIR is functioning
+    //      - CV edit from A/D LVL input
     //
     //  Next Steps:
-    //      - Get A/D working for encoder
-    //      - Sequence both gate/trigger and CV for each step
-    //      - Implement modes:
-    //          - CV edit for step
-    //          - Trigger edit for step
-    //          - Gate width
+    //      - More modes:
+    //          - Gate width <-- yes
     //          - Apply presets (selected by encoder and applied by set?)
     //
 
@@ -111,15 +108,11 @@ void main() {
     seq_init(16);
     leds_init();
 
-    //ADCON0bits.GODONE = 1;     // Trigger initial A/D sample
+
 
     while (1) {
         clock_check();
         buttons_check();
-
-        // TEST: Write LVL to CV1
-        //PDC0L = inputs_get(LVL); // TODO: Map the 10 bits of A/D to 12 bits of PWM
-        //PDC0H = 0x1C;
     }
 }
 

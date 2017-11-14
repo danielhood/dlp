@@ -8,9 +8,9 @@
 #define LVL 4
 
 
-unsigned inputs_get(short inputIdx);
+unsigned short inputs_get(unsigned short inputIdx);
 
-void inputs_set(short inputIdx, unsigned value);
+void inputs_set(unsigned short inputIdx, unsigned short value);
 
 
 #endif

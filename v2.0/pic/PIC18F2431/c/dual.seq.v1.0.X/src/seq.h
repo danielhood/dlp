@@ -7,7 +7,7 @@ extern "C" {
 
 void seq_init(unsigned short patLen);
 
-void seq_tick(unsigned short seqidx, unsigned direction);
+void seq_tick(unsigned short seqidx, unsigned short direction);
 void seq_reset(unsigned short seqidx);
 
 unsigned short seq_get(unsigned short seqidx);

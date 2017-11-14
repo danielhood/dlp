@@ -30,7 +30,7 @@ short check_seqidx(unsigned short seqidx) {
     return (seqidx < SEQ_COUNT);
 }
 
-void seq_tick(unsigned short seqidx, unsigned direction) {
+void seq_tick(unsigned short seqidx, unsigned short direction) {
     if (!check_seqidx(seqidx)) return;
 
     if (direction) {
