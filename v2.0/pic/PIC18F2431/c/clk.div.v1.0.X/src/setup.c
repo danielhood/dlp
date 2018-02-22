@@ -46,7 +46,7 @@ void setup_analog(void) {
     ADCON0bits.ACMOD = 0; // Single Channel Mode 1 (Group A taken and converted)
     ADCON0bits.ADON = 1; // Enable A/D Conversion
 
-    ADCON1 = 0x00;  // AN2 nad AN3 are analog inputs or digital i/o (mapped VRef's to AVxx)
+    ADCON1 = 0x00;  // AN2 and AN3 are analog inputs or digital i/o (mapped VRef's to AVxx)
     ADCON2 = 0x00;  // A/D timining and bit formats; left justified, start immediatly, Fosc/2
     ADCON3 = 0x00;  // Interrupt and trigger config; Interupt on each word; disabled triggers
     ADCON3bits.SSRC = 2; // Timer5 starts A/D sequence

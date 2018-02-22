@@ -44,3 +44,23 @@ void gates_set(unsigned short gateIdx, unsigned short gate, unsigned short cv) {
         }
     }
 }
+
+void gates_set_allgates(unsigned short gate1, unsigned short gate2, unsigned short gate3) {
+    PORTBbits.RB0 = gate1;
+    PORTBbits.RB2 = gate2;
+    PORTBbits.RB5 = gate3;
+}
+
+void gates_set_allcvs(unsigned short cv1, unsigned short cv2, unsigned short cv3) {
+    split_cv_values(cv1);
+    PDC0H = cvH;
+    PDC0L = cvL;
+
+    split_cv_values(cv2);
+    PDC1H = cvH;
+    PDC1L = cvL;
+
+    split_cv_values(cv3);
+    PDC2H = cvH;
+    PDC2L = cvL;
+}

@@ -89,30 +89,54 @@ void delay (int loop)
 void main() {
 
     // Current Functionality:
-    //      Very functional gate/trigger sequencer:
-    //      - Mode toggles current encoder value, indicated by mode led
-    //      - Target selects active pattern (none, 1, 2, 3), indicated by target led
-    //      - Set triggers write of encoder value to current step in target pattern
-    //      - Clock 1 ticks pattern 1
-    //      - Clock 2 ticks patterns 2 and 3
-    //      - RST/DIR is functioning
-    //      - CV edit from A/D LVL input
+    //      Fully functional clock divider
+    //      Clock 1 drives dividers on 3 CV outs
+    //      Clock 2 drives dividers on 3 GATE outs
+    //      Reset 1 and 2 resets clock counts
+    //      DIR1 shuffles (rotates) clock divisions accross all 6 outs
+    //      DIR2 swaps clock divisons between 3 CV's and GATES
+    //      Modes for Set button:
+    //          Direct set (with level) - no light
+    //          Trigger Shuffle - solid light
+    //          Trigger Swap - single flash
+    //          Trigger Division reset - 6 flashes
+    //      Target button allows direct set of each of the 6 divisoins
     //
-    //  Next Steps:
-    //      - More modes:
-    //          - Gate width <-- yes
-    //          - Apply presets (selected by encoder and applied by set?)
-    //
+    
+    unsigned short shuffle = 0;
+    unsigned short swap = 0;
 
     setup();
-    seq_init(16);
+    seq_init();
     leds_init();
 
-
-
     while (1) {
-        clock_check();
         buttons_check();
+
+        // Check and toggle shuffle
+        if (!shuffle) {
+            if (inputs_get(DIR1)) {
+                shuffle = 1;
+                seq_shuffle();
+            }
+        } else {
+            if (!inputs_get(DIR1)) {
+                shuffle = 0;
+            }
+        }
+
+        // Check and toggle swap
+        if (!swap) {
+            if (inputs_get(DIR2)) {
+                swap = 1;
+                seq_swap();
+            }
+        } else {
+            if (!inputs_get(DIR2)) {
+                swap = 0;
+            }
+        }
+
     }
 }
 

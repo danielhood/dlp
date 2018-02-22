@@ -5,63 +5,38 @@
 #include "inputs.h"
 #include "clock.h"
 
-unsigned short gateClear1 = 0;
-unsigned short gateClear2 = 0;
-unsigned short gateRelease1 = 0;
-unsigned short gateRelease2 = 0;
-
 void clock_tick(unsigned int clockIdx) {
     if (clockIdx == CLOCK1) {
         if (inputs_get(RST1)) {
             seq_reset(0);
+            seq_reset(1);
+            seq_reset(2);
         } else {
-            seq_tick(0, inputs_get(DIR1));
+            unsigned direction = inputs_get(DIR1);
+            seq_tick(0);
+            seq_tick(1);
+            seq_tick(2);
         }
         
-        gates_set(GATE1, seq_get(0), seq_get_cv(0));
-
-        gateRelease1 = 100;
-        gateClear1 = 0;
+        gates_set_allcvs(
+                seq_get(0) ? 255 : 0,
+                seq_get(1) ? 255 : 0,
+                seq_get(2) ? 255 : 0);
     }
 
     if (clockIdx == CLOCK2) {
         if (inputs_get(RST2)) {
-            seq_reset(1);
-            seq_reset(2);
+            seq_reset(3);
+            seq_reset(4);
+            seq_reset(5);
         } else {
             unsigned direction = inputs_get(DIR2);
-            seq_tick(1, direction);
-            seq_tick(2, direction);
+            seq_tick(3);
+            seq_tick(4);
+            seq_tick(5);
         }
 
-        gates_set(GATE2, seq_get(1), seq_get_cv(1));
-        gates_set(GATE3, seq_get(2), seq_get_cv(2));
-
-        gateClear2 = 0;
-        gateRelease2 = 100;
-    }
-}
-
-void clock_check(void) {
-
-    // Clear gates after trigger
-    if (!gateClear1) {
-        if (gateRelease1 > 0) {
-            --gateRelease1;
-        } else {
-            gates_set(GATE1, 0, seq_get_cv(0));
-            gateClear1 = 1;
-        }
-    }
-
-    if (!gateClear2) {
-        if (gateRelease2 > 0) {
-            --gateRelease2;
-        } else {
-            gates_set(GATE2, 0, seq_get_cv(1));
-            gates_set(GATE3, 0, seq_get_cv(2));
-            gateClear2 = 1;
-        }
+        gates_set_allgates(seq_get(3), seq_get(4), seq_get(5));
     }
 }
 

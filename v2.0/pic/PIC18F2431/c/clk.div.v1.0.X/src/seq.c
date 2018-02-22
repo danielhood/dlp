@@ -1,79 +1,89 @@
 #include "seq.h"
 
-#define SEQ_COUNT 3
-#define SEQ_PATTERN_LENGTH_MAX 16
+#define SEQ_COUNT 6
 
-unsigned short pattern[SEQ_COUNT][SEQ_PATTERN_LENGTH_MAX];
-unsigned short pattern_cv[SEQ_COUNT][SEQ_PATTERN_LENGTH_MAX];
-unsigned short patidx[SEQ_COUNT];
-unsigned short currentPatternLength = 16;
+unsigned short divisions[SEQ_COUNT] = {1,2,4,8,16,32};
+unsigned short clockCount[SEQ_COUNT] = {0,0,0,0,0,0};
+unsigned short state[SEQ_COUNT] = {0,0,0,0,0,0};
 
-void seq_init(unsigned short patLen) {
-    unsigned short i,j;
-    for(i = 0; i < SEQ_COUNT; ++i) {
-        for (j=0; j<SEQ_PATTERN_LENGTH_MAX; ++j) {
-            pattern[i][j] = 0;
-            pattern_cv[i][j] = 0;
-        }
-        patidx[i] = 0;
+void seq_init() {
+    int i;
+    
+    divisions[0] = 1;
+    divisions[1] = 2;
+    divisions[2] = 4;
+    divisions[3] = 8;
+    divisions[4] = 16;
+    divisions[5] = 32;
+
+    for (i = 0; i<SEQ_COUNT; i++) {
+        clockCount[i] = 0;
+        state[i] = 0;
     }
-
-    // Stick a 1 at the beginning of each pattern
-    for(i = 0; i < SEQ_COUNT; ++i) {
-        pattern[i][0] = 1;
-    }
-
-    currentPatternLength = patLen;
 }
 
 short check_seqidx(unsigned short seqidx) {
     return (seqidx < SEQ_COUNT);
 }
 
-void seq_tick(unsigned short seqidx, unsigned short direction) {
+void seq_tick(unsigned short seqidx) {
     if (!check_seqidx(seqidx)) return;
 
-    if (direction) {
-        if (patidx[seqidx] <= 0) {
-            patidx[seqidx] = currentPatternLength-1;
-        } else {
-            --patidx[seqidx];
-        }
-    } else {
-        if (patidx[seqidx] >= currentPatternLength-1) {
-            patidx[seqidx] = 0;
-        } else {
-            ++patidx[seqidx];
-        }
+    clockCount[seqidx]++;
+    if (clockCount[seqidx] >= divisions[seqidx]) {
+        clockCount[seqidx] = 0;
+        state[seqidx] = !state[seqidx];
     }
+
+    return;
 }
 
 void seq_reset(unsigned short seqidx) {
     if (!check_seqidx(seqidx)) return;
 
-    patidx[seqidx] = 0;
+    state[seqidx] = 0;
+    clockCount[seqidx] = 0;
 }
 
 unsigned short seq_get(unsigned short seqidx) {
     if (!check_seqidx(seqidx)) return 0;
 
-    return pattern[seqidx][patidx[seqidx]];
+    return state[seqidx];
 }
 
 void seq_set(unsigned short seqidx, unsigned short val) {
     if (!check_seqidx(seqidx)) return;
 
-    pattern[seqidx][patidx[seqidx]] = val;
+    if (val <= 31) divisions[seqidx] = 1;
+    else if (val <= 63) divisions[seqidx] = 2;
+    else if (val <= 95) divisions[seqidx] = 3;
+    else if (val <= 127) divisions[seqidx] = 4;
+    else if (val <= 159) divisions[seqidx] = 8;
+    else if (val <= 191) divisions[seqidx] = 12;
+    else if (val <= 223) divisions[seqidx] = 16;
+    else divisions[seqidx] = 32;
 }
 
-unsigned short seq_get_cv(unsigned short seqidx) {
-    if (!check_seqidx(seqidx)) return 0;
-
-    return pattern_cv[seqidx][patidx[seqidx]];
+void seq_shuffle(void) {
+    unsigned short temp = divisions[0];
+    
+    divisions[0] = divisions[5];
+    divisions[5] = divisions[4];
+    divisions[4] = divisions[3];
+    divisions[3] = divisions[2];
+    divisions[2] = divisions[1];
+    divisions[1] = temp;
 }
 
-void seq_set_cv(unsigned short seqidx, unsigned short val) {
-    if (!check_seqidx(seqidx)) return;
+void seq_swap(void) {
+    unsigned short temp0 = divisions[0];
+    unsigned short temp1 = divisions[1];
+    unsigned short temp2 = divisions[2];
 
-    pattern_cv[seqidx][patidx[seqidx]] = val;
+    divisions[0] = divisions[3];
+    divisions[1] = divisions[4];
+    divisions[2] = divisions[5];
+    divisions[3] = temp0;
+    divisions[4] = temp1;
+    divisions[5] = temp2;
 }

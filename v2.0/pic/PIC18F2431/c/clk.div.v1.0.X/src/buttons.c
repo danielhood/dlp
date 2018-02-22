@@ -67,17 +67,21 @@ void buttons_mode_on(void) {
         start_debounce();
 
         // Cycle through modes: Gate OFF, Gate ON, CV Value
-        active_mode = ++active_mode % 3;
+        active_mode = ++active_mode % 4;
         switch (active_mode)
         {
-            case 0:
+            case 0: // Direct Set
                 leds_set_mode(0);
                 break;
-            case 1:
+            case 1: // Shuffle
                 leds_set_mode(99);
                 break;
-            case 2:
-                leds_set_mode(3);
+            case 2: // Swap
+                leds_set_mode(1);
+                break;
+            case 3: // Division Reset
+                leds_set_mode(6);
+                break;
         }
     }
 }
@@ -94,8 +98,8 @@ void buttons_target_on(void) {
         state_target = !state_target;
         start_debounce();
 
-        // Target selects active pattern (none, 1, 2, 3), indicated by target led
-        active_pattern = ++active_pattern % 4;
+        // Target selects active pattern (none, 1, 2, 3, ...), indicated by target led
+        active_pattern = ++active_pattern % 7;
         leds_set_target(active_pattern);
     }
 }
@@ -108,17 +112,28 @@ void buttons_set_off(void) {
 }
 
 void buttons_set_on(void) {
-    // We don't check toggle on set button on since we need to support holding
-    // the button down to write multiple steps
-    start_debounce();
-    if (active_pattern > 0) {
-        if (active_mode < 2) {
-            seq_set(active_pattern-1, active_mode);
-        } else {
-            seq_set_cv(active_pattern-1, inputs_get(LVL));
+    if (!state_set) {
+        state_set = !state_set;
+
+        start_debounce();
+
+        switch (active_mode) {
+            case 1: // Shuffle
+                seq_shuffle();
+                return;
+            case 2: // Swap
+                seq_swap();
+                return;
+            case 3: // Division reset
+                seq_init();
+                return;
+        }
+
+        if (active_pattern > 0) {
+            // Set divisions from level input
+            seq_set(active_pattern-1, inputs_get(LVL));
         }
     }
-
 }
 
 void buttons_check(void) {
