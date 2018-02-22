@@ -29,13 +29,13 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>src/main.c</itemPath>
-      <itemPath>setup.c</itemPath>
       <itemPath>src/seq.c</itemPath>
       <itemPath>src/clock.c</itemPath>
       <itemPath>src/leds.c</itemPath>
       <itemPath>src/buttons.c</itemPath>
       <itemPath>src/gates.c</itemPath>
       <itemPath>src/inputs.c</itemPath>
+      <itemPath>src/setup.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -102,9 +102,9 @@
       </C18-LD>
       <C18LanguageToolchain>
         <property key="stack-analysis-mplink" value="false"/>
-        <property key="extended-mode-mcc18" value="false"/>
-        <property key="stack-analysis" value="false"/>
         <property key="stack-analysis-mcc18" value="false"/>
+        <property key="stack-analysis" value="false"/>
+        <property key="extended-mode-mcc18" value="false"/>
         <property key="extended-mode" value="false"/>
         <property key="extended-mode-mpasm" value="false"/>
         <property key="extended-mode-mplink" value="false"/>
@@ -140,6 +140,10 @@
         </C18-LD>
         <C18LanguageToolchain>
         </C18LanguageToolchain>
+      </item>
+      <item path="src/gates.h" ex="true" overriding="false">
+      </item>
+      <item path="src/inputs.h" ex="true" overriding="false">
       </item>
       <item path="src/leds.h" ex="true" overriding="false">
         <C18>
