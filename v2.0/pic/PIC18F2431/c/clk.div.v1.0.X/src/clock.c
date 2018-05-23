@@ -12,7 +12,6 @@ void clock_tick(unsigned int clockIdx) {
             seq_reset(1);
             seq_reset(2);
         } else {
-            unsigned direction = inputs_get(DIR1);
             seq_tick(0);
             seq_tick(1);
             seq_tick(2);
@@ -30,7 +29,6 @@ void clock_tick(unsigned int clockIdx) {
             seq_reset(4);
             seq_reset(5);
         } else {
-            unsigned direction = inputs_get(DIR2);
             seq_tick(3);
             seq_tick(4);
             seq_tick(5);
