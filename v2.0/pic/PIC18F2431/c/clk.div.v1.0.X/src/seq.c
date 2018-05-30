@@ -22,12 +22,8 @@ void seq_init() {
     }
 }
 
-short check_seqidx(unsigned short seqidx) {
-    return (seqidx < SEQ_COUNT);
-}
-
 void seq_tick(unsigned short seqidx) {
-    if (!check_seqidx(seqidx)) return;
+    if (seqidx >= SEQ_COUNT) return;
 
     clockCount[seqidx]++;
     if (clockCount[seqidx] >= divisions[seqidx]) {
@@ -39,20 +35,20 @@ void seq_tick(unsigned short seqidx) {
 }
 
 void seq_reset(unsigned short seqidx) {
-    if (!check_seqidx(seqidx)) return;
+    if (seqidx >= SEQ_COUNT) return;
 
     state[seqidx] = 0;
     clockCount[seqidx] = 0;
 }
 
 unsigned short seq_get(unsigned short seqidx) {
-    if (!check_seqidx(seqidx)) return 0;
+    if (seqidx >= SEQ_COUNT) return 0;
 
     return state[seqidx];
 }
 
 void seq_set(unsigned short seqidx, unsigned short val) {
-    if (!check_seqidx(seqidx)) return;
+    if (seqidx >= SEQ_COUNT) return;
 
     if (val <= 31) divisions[seqidx] = 1;
     else if (val <= 63) divisions[seqidx] = 2;

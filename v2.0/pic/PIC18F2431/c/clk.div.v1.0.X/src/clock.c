@@ -5,6 +5,23 @@
 #include "inputs.h"
 #include "clock.h"
 
+unsigned short clock_state[2];
+unsigned int tempState;
+
+void clock_setState(unsigned int clockIdx) {
+    if (clockIdx > CLOCK2) return;
+
+    clock_state[clockIdx] = 1;
+}
+
+unsigned short clock_getState(unsigned int clockIdx) {
+    if (clockIdx > CLOCK2) return 0;
+    
+    tempState = clock_state[clockIdx];
+    clock_state[clockIdx] = 0;
+    return tempState;
+}
+
 void clock_tick(unsigned int clockIdx) {
     if (clockIdx == CLOCK1) {
         if (inputs_get(RST1)) {

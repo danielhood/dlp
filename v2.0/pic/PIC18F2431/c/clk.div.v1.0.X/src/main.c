@@ -18,6 +18,11 @@
 #include "clock.h"
 #include "seq.h"
 
+unsigned short main_clockState[2] = {0,0};
+unsigned short main_lvlState = 0;
+unsigned short main_lvl = 0;
+unsigned short main_blinkState = 0;
+
 //----------------------------------------------------------------------------
 // High priority interrupt routine
 
@@ -28,11 +33,13 @@ void InterruptHandlerHigh (void)
 {
     if (INTCON3bits.INT1IF) {       // check Int1
         INTCON3bits.INT1IF = 0;     // clear interrupt flag
-        clock_tick(0);              // Tick
+        main_clockState[CLOCK1] = 1;     // Tick
+        // clock_tick(CLOCK1);
     }
     else if (INTCON3bits.INT2IF) {  // check Int2
         INTCON3bits.INT2IF = 0;     // clear interrupt flag
-        clock_tick(1);              // Tick
+        main_clockState[CLOCK2] = 1;     // Tick
+        // clock_tick(CLOCK2);
     }
 }
 
@@ -46,10 +53,13 @@ void InterruptHandlerLow (void)
 {
     if (INTCONbits.TMR0IF) {       // check Timer0
         INTCONbits.TMR0IF = 0;     // clear interrupt flag
-        leds_blink();              // Update led state
+        main_blinkState = 1;
+        //leds_blink();              // Update led state
     } else if (PIR1bits.ADIF) {
         PIR1bits.ADIF = 0;
-        inputs_set(LVL, ADRESH);
+        main_lvl = ADRESH;
+        main_lvlState = 1;
+        //inputs_set(LVL, ADRESH);
         //ADCON0bits.GODONE = 1;     // Trigger a new sample
     }
 }
@@ -111,6 +121,26 @@ void main() {
     leds_init();
 
     while (1) {
+        if (main_clockState[CLOCK1]) {
+            main_clockState[CLOCK1] = 0;
+            clock_tick(CLOCK1);
+        }
+
+        if (main_clockState[CLOCK2]) {
+            main_clockState[CLOCK2] = 0;
+            clock_tick(CLOCK2);
+        }
+
+        if (main_blinkState) {
+            main_blinkState = 0;
+            leds_blink();
+        }
+
+        if (main_lvlState) {
+            main_lvlState = 0;
+            inputs_set(LVL, main_lvl);
+        }
+
         buttons_check();
 
         // Check and toggle shuffle
