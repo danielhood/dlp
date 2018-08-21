@@ -57,8 +57,9 @@ void setup_analog(void) {
     ANSEL0 = 0x01;  // AN<0:0> analog; RC<1:7> digital (unless we want RST/DIRs to be analog)
 
     // Setup Timer5
-    PR5H = 0x0F;
-    PR5L = 0x00;
+    PR5H = 0xFF;
+    PR5L = 0xFF;
+    T5CONbits.T5PS = 3;     // Prescale 1:8 since 1:1 flooded Low interrupt
     T5CONbits.TMR5ON = 1;
 }
 
@@ -85,7 +86,7 @@ void setup_interrupts(void) {
     // Interrupts for A/D conversion
     PIE1 = 0x00;    // Disable all initially
     PIE2 = 0x00;    // Nothing needed here; all disabled
-    PIE3 = 0x00;    // Nothing needed here; all disabled
+    PIE3 = 0x00;    // Nothing needed here; all disabled (includes TMR5IF = 0)
 
     INTCONbits.PEIE = 1;    // Enable periferial interrupts
     PIE1bits.ADIE = 1;      // Enable A/D converter

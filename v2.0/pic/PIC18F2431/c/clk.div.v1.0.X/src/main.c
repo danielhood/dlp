@@ -23,6 +23,14 @@ unsigned short main_lvlState = 0;
 unsigned short main_lvl = 0;
 unsigned short main_blinkState = 0;
 
+// Interrupt storage
+unsigned short wTempHi;
+unsigned short statusTempHi;
+unsigned short bsrTempHi;
+unsigned short wTempLo;
+unsigned short statusTempLo;
+unsigned short bsrTempLo;
+
 //----------------------------------------------------------------------------
 // High priority interrupt routine
 
@@ -31,6 +39,13 @@ unsigned short main_blinkState = 0;
 
 void InterruptHandlerHigh (void)
 {
+    // Store W, STATUS, and BSR
+_asm
+        movwf	wTempHi,0             // Save W to W_TEMP register
+	movff	STATUS,statusTempHi   // Save STATUS to ST_TEMP register
+	movff	BSR,bsrTempHi         // Save bank select
+_endasm
+
     if (INTCON3bits.INT1IF) {       // check Int1
         INTCON3bits.INT1IF = 0;     // clear interrupt flag
         main_clockState[CLOCK1] = 1;     // Tick
@@ -41,6 +56,14 @@ void InterruptHandlerHigh (void)
         main_clockState[CLOCK2] = 1;     // Tick
         // clock_tick(CLOCK2);
     }
+
+    // Restore W, STATUS, and BSR
+_asm
+        movff	bsrTempHi,BSR         // Restore bank select
+	movf	wTempHi,0,0           // Restore W
+	movff	statusTempHi,STATUS   // Restore STATUS
+_endasm
+
 }
 
 //----------------------------------------------------------------------------
@@ -51,17 +74,32 @@ void InterruptHandlerHigh (void)
 
 void InterruptHandlerLow (void)
 {
-    if (INTCONbits.TMR0IF) {       // check Timer0
-        INTCONbits.TMR0IF = 0;     // clear interrupt flag
-        main_blinkState = 1;
-        //leds_blink();              // Update led state
-    } else if (PIR1bits.ADIF) {
+    // Store W, STATUS, and BSR
+_asm
+        //movwf	wTempLo,0             // Save W to W_TEMP register <-- this line disrupts the clock output
+	movff	STATUS,statusTempLo   // Save STATUS to ST_TEMP register
+	movff	BSR,bsrTempLo         // Save bank select
+_endasm
+
+    if (PIR1bits.ADIF) {
         PIR1bits.ADIF = 0;
         main_lvl = ADRESH;
         main_lvlState = 1;
         //inputs_set(LVL, ADRESH);
         //ADCON0bits.GODONE = 1;     // Trigger a new sample
+    } else if (INTCONbits.TMR0IF) {       // check Timer0
+        INTCONbits.TMR0IF = 0;     // clear interrupt flag
+        main_blinkState = 1;
+        //leds_blink();              // Update led state
     }
+
+    // Restore W, STATUS, and BSR
+_asm
+        movff	bsrTempLo,BSR         // Restore bank select
+	//movf	wTempLo,0,0           // Restore W
+	movff	statusTempLo,STATUS   // Restore STATUS
+_endasm
+
 }
 
 //----------------------------------------------------------------------------
