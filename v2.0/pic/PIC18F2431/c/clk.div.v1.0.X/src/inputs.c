@@ -2,9 +2,9 @@
 
 #include "inputs.h"
 
-unsigned short levelValue = 0;
+unsigned char levelValue = 0;
 
-unsigned short inputs_get(unsigned short inputIdx) {
+unsigned char inputs_get(unsigned char inputIdx) {
     switch (inputIdx) {
         case RST1:
         {
@@ -29,7 +29,7 @@ unsigned short inputs_get(unsigned short inputIdx) {
     }
 }
 
-void inputs_set(unsigned short inputIdx, unsigned short value) {
+void inputs_set(unsigned char inputIdx, unsigned char value) {
     switch (inputIdx)
     {
         case LVL:

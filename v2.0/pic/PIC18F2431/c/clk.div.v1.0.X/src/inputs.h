@@ -7,9 +7,9 @@
 #define DIR2 3
 #define LVL 4
 
-unsigned short inputs_get(unsigned short inputIdx);
+unsigned char inputs_get(unsigned char inputIdx);
 
-void inputs_set(unsigned short inputIdx, unsigned short value);
+void inputs_set(unsigned char inputIdx, unsigned char value);
 
 
 #endif

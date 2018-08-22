@@ -10,6 +10,8 @@
 
 #include <p18f2431.h>
 
+#include <delays.h>
+
 #include "device_config.h"
 #include "setup.h"
 #include "buttons.h"
@@ -18,18 +20,18 @@
 #include "clock.h"
 #include "seq.h"
 
-unsigned short main_clockState[2] = {0,0};
-unsigned short main_lvlState = 0;
-unsigned short main_lvl = 0;
-unsigned short main_blinkState = 0;
+unsigned char main_clockState[2] = {0,0};
+unsigned char main_lvlState = 0;
+unsigned char main_lvl = 0;
+unsigned char main_blinkState = 0;
 
-// Interrupt storage
-unsigned short wTempHi;
-unsigned short statusTempHi;
-unsigned short bsrTempHi;
-unsigned short wTempLo;
-unsigned short statusTempLo;
-unsigned short bsrTempLo;
+// Interrupt register storage
+unsigned char wTempHi;
+unsigned char statusTempHi;
+unsigned char bsrTempHi;
+unsigned char wTempLo;
+unsigned char statusTempLo;
+unsigned char bsrTempLo;
 
 //----------------------------------------------------------------------------
 // High priority interrupt routine
@@ -40,30 +42,29 @@ unsigned short bsrTempLo;
 void InterruptHandlerHigh (void)
 {
     // Store W, STATUS, and BSR
-_asm
-        movwf	wTempHi,0             // Save W to W_TEMP register
-	movff	STATUS,statusTempHi   // Save STATUS to ST_TEMP register
-	movff	BSR,bsrTempHi         // Save bank select
-_endasm
+    wTempHi = WREG;
+    statusTempHi = STATUS;
+    bsrTempHi = BSR;
 
     if (INTCON3bits.INT1IF) {       // check Int1
         INTCON3bits.INT1IF = 0;     // clear interrupt flag
-        main_clockState[CLOCK1] = 1;     // Tick
-        // clock_tick(CLOCK1);
+
+        // Tick clock 1
+        main_clockState[CLOCK1] = 1;
+
     }
     else if (INTCON3bits.INT2IF) {  // check Int2
         INTCON3bits.INT2IF = 0;     // clear interrupt flag
-        main_clockState[CLOCK2] = 1;     // Tick
-        // clock_tick(CLOCK2);
+
+        // Tick clock 2
+        main_clockState[CLOCK2] = 1;
+
     }
 
     // Restore W, STATUS, and BSR
-_asm
-        movff	bsrTempHi,BSR         // Restore bank select
-	movf	wTempHi,0,0           // Restore W
-	movff	statusTempHi,STATUS   // Restore STATUS
-_endasm
-
+    BSR = bsrTempHi;
+    WREG = wTempHi;
+    STATUS = statusTempHi;
 }
 
 //----------------------------------------------------------------------------
@@ -75,31 +76,29 @@ _endasm
 void InterruptHandlerLow (void)
 {
     // Store W, STATUS, and BSR
-_asm
-        //movwf	wTempLo,0             // Save W to W_TEMP register <-- this line disrupts the clock output
-	movff	STATUS,statusTempLo   // Save STATUS to ST_TEMP register
-	movff	BSR,bsrTempLo         // Save bank select
-_endasm
+    wTempLo = WREG;
+    statusTempLo = STATUS;
+    bsrTempLo = BSR;
 
-    if (PIR1bits.ADIF) {
-        PIR1bits.ADIF = 0;
+    if (PIR1bits.ADIF) {                // check AD Conversion Result
+        PIR1bits.ADIF = 0;              // clear interrupt flag
+
+        // Store encoder value
         main_lvl = ADRESH;
         main_lvlState = 1;
-        //inputs_set(LVL, ADRESH);
-        //ADCON0bits.GODONE = 1;     // Trigger a new sample
-    } else if (INTCONbits.TMR0IF) {       // check Timer0
-        INTCONbits.TMR0IF = 0;     // clear interrupt flag
+
+    } else if (INTCONbits.TMR0IF) {     // check Timer0
+        INTCONbits.TMR0IF = 0;          // clear interrupt flag
+
+        // Update led state
         main_blinkState = 1;
-        //leds_blink();              // Update led state
+
     }
 
     // Restore W, STATUS, and BSR
-_asm
-        movff	bsrTempLo,BSR         // Restore bank select
-	//movf	wTempLo,0,0           // Restore W
-	movff	statusTempLo,STATUS   // Restore STATUS
-_endasm
-
+    BSR = bsrTempLo;
+    WREG = wTempLo;
+    STATUS = statusTempLo;
 }
 
 //----------------------------------------------------------------------------
@@ -124,35 +123,25 @@ InterruptVectorLow (void)
 }
 
 
-#pragma code
-void delay (int loop)
-{
-    int j;
-    int i;
-    for (j = 1; j <= loop; j++) {
-        for (i = 0; i < 10000; i++);
-    }
-}
-
+// Current Functionality:
+//      Fully functional clock divider
+//      Clock 1 drives dividers on 3 CV outs
+//      Clock 2 drives dividers on 3 GATE outs
+//      Reset 1 and 2 resets clock counts
+//      DIR1 shuffles (rotates) clock divisions accross all 6 outs
+//      DIR2 swaps clock divisons between 3 CV's and GATES
+//      Modes for Set button:
+//          Direct set (with level) - no light
+//          Trigger Shuffle - solid light
+//          Trigger Swap - single flash
+//          Trigger Division reset - 6 flashes
+//      Target button allows direct set of each of the 6 divisoins
+//
 void main() {
 
-    // Current Functionality:
-    //      Fully functional clock divider
-    //      Clock 1 drives dividers on 3 CV outs
-    //      Clock 2 drives dividers on 3 GATE outs
-    //      Reset 1 and 2 resets clock counts
-    //      DIR1 shuffles (rotates) clock divisions accross all 6 outs
-    //      DIR2 swaps clock divisons between 3 CV's and GATES
-    //      Modes for Set button:
-    //          Direct set (with level) - no light
-    //          Trigger Shuffle - solid light
-    //          Trigger Swap - single flash
-    //          Trigger Division reset - 6 flashes
-    //      Target button allows direct set of each of the 6 divisoins
-    //
     
-    unsigned short shuffle = 0;
-    unsigned short swap = 0;
+    unsigned char shuffle = 0;
+    unsigned char swap = 0;
 
     setup();
     seq_init();
@@ -181,11 +170,15 @@ void main() {
 
         buttons_check();
 
-        // Check and toggle shuffle
+        // Check analog input DIR1 and toggle shuffle
         if (!shuffle) {
             if (inputs_get(DIR1)) {
-                shuffle = 1;
-                seq_shuffle();
+                // Double check
+                Delay10TCYx(1);
+                if (inputs_get(DIR1)) {
+                    shuffle = 1;
+                    seq_shuffle();
+                }
             }
         } else {
             if (!inputs_get(DIR1)) {
@@ -193,18 +186,20 @@ void main() {
             }
         }
 
-        // Check and toggle swap
+        // Check analog input DIR2 and toggle swap
         if (!swap) {
             if (inputs_get(DIR2)) {
-                swap = 1;
-                seq_swap();
+                // Double check
+                Delay10TCYx(1);
+                if (inputs_get(DIR2)) {
+                    swap = 1;
+                    seq_swap();
+                }
             }
         } else {
             if (!inputs_get(DIR2)) {
                 swap = 0;
             }
         }
-
     }
 }
-

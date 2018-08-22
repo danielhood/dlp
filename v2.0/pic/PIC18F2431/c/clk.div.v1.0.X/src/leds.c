@@ -4,9 +4,9 @@
 
 #define LED_MAX_CYCLE  16
 
-unsigned short led1_value = 0;  // values are twice the flash count
-unsigned short led2_value = 0;  // since they count on and off states
-unsigned short cycle_count = 0;
+unsigned char led1_value = 0;  // values are twice the flash count
+unsigned char led2_value = 0;  // since they count on and off states
+unsigned char cycle_count = 0;
 
 void leds_init(void) {
     // Mode LED (1)
@@ -48,7 +48,7 @@ void leds_reset_cycle(void){
     cycle_count = 0;
 }
 
-void leds_set_mode(unsigned short value)
+void leds_set_mode(unsigned char value)
 {
     led1_value = (value * 2);
     
@@ -57,7 +57,7 @@ void leds_set_mode(unsigned short value)
     }
 }
 
-void leds_set_target(unsigned short value)
+void leds_set_target(unsigned char value)
 {
     led2_value = (value * 2);
 

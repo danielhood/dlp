@@ -1,20 +1,22 @@
 #include <p18f2431.h>
 
+#include <delays.h>
+
 #include "seq.h"
 #include "gates.h"
 #include "inputs.h"
 #include "clock.h"
 
-unsigned short clock_state[2];
-unsigned int tempState;
+unsigned char clock_state[2];
+unsigned char tempState;
 
-void clock_setState(unsigned int clockIdx) {
+void clock_setState(unsigned char clockIdx) {
     if (clockIdx > CLOCK2) return;
 
     clock_state[clockIdx] = 1;
 }
 
-unsigned short clock_getState(unsigned int clockIdx) {
+unsigned char clock_getState(unsigned char clockIdx) {
     if (clockIdx > CLOCK2) return 0;
     
     tempState = clock_state[clockIdx];
@@ -22,12 +24,20 @@ unsigned short clock_getState(unsigned int clockIdx) {
     return tempState;
 }
 
-void clock_tick(unsigned int clockIdx) {
+void clock_tick(unsigned char clockIdx) {
     if (clockIdx == CLOCK1) {
         if (inputs_get(RST1)) {
-            seq_reset(0);
-            seq_reset(1);
-            seq_reset(2);
+            // Double check
+            Delay10TCYx(1);
+             if (inputs_get(RST1)) {
+                seq_reset(0);
+                seq_reset(1);
+                seq_reset(2);
+            } else {
+                seq_tick(0);
+                seq_tick(1);
+                seq_tick(2);
+            }
         } else {
             seq_tick(0);
             seq_tick(1);
@@ -42,9 +52,17 @@ void clock_tick(unsigned int clockIdx) {
 
     if (clockIdx == CLOCK2) {
         if (inputs_get(RST2)) {
-            seq_reset(3);
-            seq_reset(4);
-            seq_reset(5);
+            // Double check
+            Delay10TCYx(1);
+            if (inputs_get(RST2)) {
+                seq_reset(3);
+                seq_reset(4);
+                seq_reset(5);
+            } else {
+                seq_tick(3);
+                seq_tick(4);
+                seq_tick(5);
+            }
         } else {
             seq_tick(3);
             seq_tick(4);
@@ -55,7 +73,7 @@ void clock_tick(unsigned int clockIdx) {
     }
 }
 
-unsigned clock_get(short clockIdx) {
+unsigned char clock_get(char clockIdx) {
     switch (clockIdx) {
         case CLOCK1:
         {

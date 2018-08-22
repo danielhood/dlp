@@ -7,11 +7,11 @@ extern "C" {
 
 void seq_init(void);
 
-void seq_tick(unsigned short seqidx);
-void seq_reset(unsigned short seqidx);
+void seq_tick(unsigned char seqidx);
+void seq_reset(unsigned char seqidx);
 
-unsigned short seq_get(unsigned short seqidx);
-void seq_set(unsigned short seqidx, unsigned short val);
+unsigned char seq_get(unsigned char seqidx);
+void seq_set(unsigned char seqidx, unsigned char val);
 
 void seq_shuffle(void);
 void seq_swap(void);

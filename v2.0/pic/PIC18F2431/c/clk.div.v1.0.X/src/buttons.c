@@ -16,13 +16,13 @@
 #include "buttons.h"
 #include "inputs.h"
 
-unsigned short active_pattern = 0; // This is seqIdx + 1; Max of 3
-unsigned short active_mode = 0; // 0:Gate Off, 1:Gate On, 2:CV Value
+unsigned char active_pattern = 0; // This is seqIdx + 1; Max of 3
+unsigned char active_mode = 0; // 0:Gate Off, 1:Gate On, 2:CV Value
 
-unsigned short debounce = 0;
-unsigned short state_mode = 0;
-unsigned short state_target = 0;
-unsigned short state_set = 0;
+unsigned char debounce = 0;
+unsigned char state_mode = 0;
+unsigned char state_target = 0;
+unsigned char state_set = 0;
 
 void cv_clear_all(void) {
     PDC0H = 0x00;
@@ -46,7 +46,7 @@ void start_debounce(void) {
     debounce = 500;
 }
 
-unsigned short buttons_debouncing(void) {
+unsigned char buttons_debouncing(void) {
     if (debounce > 0) {
         --debounce;
     }
