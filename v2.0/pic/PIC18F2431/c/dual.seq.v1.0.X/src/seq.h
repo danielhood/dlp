@@ -5,16 +5,16 @@
 extern "C" {
 #endif
 
-void seq_init(unsigned short patLen);
+void seq_init(unsigned char patLen);
 
-void seq_tick(unsigned short seqidx, unsigned short direction);
-void seq_reset(unsigned short seqidx);
+void seq_tick(unsigned char seqidx, unsigned char direction);
+void seq_reset(unsigned char seqidx);
 
-unsigned short seq_get(unsigned short seqidx);
-void seq_set(unsigned short seqidx, unsigned short val);
+unsigned char seq_get(unsigned char seqidx);
+void seq_set(unsigned char seqidx, unsigned char val);
 
-unsigned short seq_get_cv(unsigned short seqidx);
-void seq_set_cv(unsigned short seqidx, unsigned short val);
+unsigned char seq_get_cv(unsigned char seqidx);
+void seq_set_cv(unsigned char seqidx, unsigned char val);
 
 
 #ifdef __cplusplus

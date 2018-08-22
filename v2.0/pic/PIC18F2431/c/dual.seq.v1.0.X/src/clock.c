@@ -5,12 +5,12 @@
 #include "inputs.h"
 #include "clock.h"
 
-unsigned short gateClear1 = 0;
-unsigned short gateClear2 = 0;
-unsigned short gateRelease1 = 0;
-unsigned short gateRelease2 = 0;
+unsigned char gateClear1 = 0;
+unsigned char gateClear2 = 0;
+unsigned char gateRelease1 = 0;
+unsigned char gateRelease2 = 0;
 
-void clock_tick(unsigned int clockIdx) {
+void clock_tick(unsigned char clockIdx) {
     if (clockIdx == CLOCK1) {
         if (inputs_get(RST1)) {
             seq_reset(0);
@@ -29,7 +29,7 @@ void clock_tick(unsigned int clockIdx) {
             seq_reset(1);
             seq_reset(2);
         } else {
-            unsigned direction = inputs_get(DIR2);
+            unsigned char direction = inputs_get(DIR2);
             seq_tick(1, direction);
             seq_tick(2, direction);
         }
@@ -65,7 +65,7 @@ void clock_check(void) {
     }
 }
 
-unsigned clock_get(short clockIdx) {
+unsigned char clock_get(unsigned char clockIdx) {
     switch (clockIdx) {
         case CLOCK1:
         {

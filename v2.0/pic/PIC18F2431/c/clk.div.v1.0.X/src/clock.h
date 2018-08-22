@@ -9,6 +9,6 @@ unsigned char clock_getState(unsigned char clockIdx);
 
 void clock_tick(unsigned char clockIdx);
 void clock_check(void);
-unsigned char clock_get(char clockIdx);
+unsigned char clock_get(unsigned char clockIdx);
 
 #endif

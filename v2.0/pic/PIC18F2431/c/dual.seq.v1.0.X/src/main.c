@@ -18,6 +18,14 @@
 #include "clock.h"
 #include "seq.h"
 
+// Interrupt register storage
+unsigned char wTempHi;
+unsigned char statusTempHi;
+unsigned char bsrTempHi;
+unsigned char wTempLo;
+unsigned char statusTempLo;
+unsigned char bsrTempLo;
+
 //----------------------------------------------------------------------------
 // High priority interrupt routine
 
@@ -26,6 +34,11 @@
 
 void InterruptHandlerHigh (void)
 {
+    // Store W, STATUS, and BSR
+    wTempHi = WREG;
+    statusTempHi = STATUS;
+    bsrTempHi = BSR;
+
     if (INTCON3bits.INT1IF) {       // check Int1
         INTCON3bits.INT1IF = 0;     // clear interrupt flag
         clock_tick(0);              // Tick
@@ -34,6 +47,11 @@ void InterruptHandlerHigh (void)
         INTCON3bits.INT2IF = 0;     // clear interrupt flag
         clock_tick(1);              // Tick
     }
+
+    // Restore W, STATUS, and BSR
+    BSR = bsrTempHi;
+    WREG = wTempHi;
+    STATUS = statusTempHi;
 }
 
 //----------------------------------------------------------------------------
@@ -44,14 +62,23 @@ void InterruptHandlerHigh (void)
 
 void InterruptHandlerLow (void)
 {
+    // Store W, STATUS, and BSR
+    wTempLo = WREG;
+    statusTempLo = STATUS;
+    bsrTempLo = BSR;
+
     if (INTCONbits.TMR0IF) {       // check Timer0
         INTCONbits.TMR0IF = 0;     // clear interrupt flag
         leds_blink();              // Update led state
     } else if (PIR1bits.ADIF) {
         PIR1bits.ADIF = 0;
         inputs_set(LVL, ADRESH);
-        //ADCON0bits.GODONE = 1;     // Trigger a new sample
     }
+
+    // Restore W, STATUS, and BSR
+    BSR = bsrTempLo;
+    WREG = wTempLo;
+    STATUS = statusTempLo;
 }
 
 //----------------------------------------------------------------------------

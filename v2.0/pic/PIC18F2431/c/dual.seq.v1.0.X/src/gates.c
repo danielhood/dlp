@@ -3,10 +3,10 @@
 #include "gates.h"
 
 
-unsigned short cvH;
-unsigned short cvL;
+unsigned char cvH;
+unsigned char cvL;
 
-void split_cv_values(unsigned short cv) {
+void split_cv_values(unsigned char cv) {
         cvH = cv;
         cvL = cvH;
         cvL <<= 2;
@@ -15,7 +15,7 @@ void split_cv_values(unsigned short cv) {
         cvH &= 0x03;
 }
 
-void gates_set(unsigned short gateIdx, unsigned short gate, unsigned short cv) {
+void gates_set(unsigned char gateIdx, unsigned char gate, unsigned char cv) {
     
     split_cv_values(cv);
 

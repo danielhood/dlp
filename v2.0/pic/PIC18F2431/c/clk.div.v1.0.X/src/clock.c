@@ -73,7 +73,7 @@ void clock_tick(unsigned char clockIdx) {
     }
 }
 
-unsigned char clock_get(char clockIdx) {
+unsigned char clock_get(unsigned char clockIdx) {
     switch (clockIdx) {
         case CLOCK1:
         {

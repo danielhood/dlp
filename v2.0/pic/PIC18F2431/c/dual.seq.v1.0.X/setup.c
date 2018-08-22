@@ -57,8 +57,9 @@ void setup_analog(void) {
     ANSEL0 = 0x01;  // AN<0:0> analog; RC<1:7> digital (unless we want RST/DIRs to be analog)
 
     // Setup Timer5
-    PR5H = 0x0F;
+    PR5H = 0xFF;
     PR5L = 0x00;
+    T5CONbits.T5PS = 3;     // Prescale 1:8 since 1:1 flooded Low interrupt
     T5CONbits.TMR5ON = 1;
 }
 

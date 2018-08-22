@@ -3,13 +3,13 @@
 #define SEQ_COUNT 3
 #define SEQ_PATTERN_LENGTH_MAX 16
 
-unsigned short pattern[SEQ_COUNT][SEQ_PATTERN_LENGTH_MAX];
-unsigned short pattern_cv[SEQ_COUNT][SEQ_PATTERN_LENGTH_MAX];
-unsigned short patidx[SEQ_COUNT];
-unsigned short currentPatternLength = 16;
+unsigned char pattern[SEQ_COUNT][SEQ_PATTERN_LENGTH_MAX];
+unsigned char pattern_cv[SEQ_COUNT][SEQ_PATTERN_LENGTH_MAX];
+unsigned char patidx[SEQ_COUNT];
+unsigned char currentPatternLength = 16;
 
-void seq_init(unsigned short patLen) {
-    unsigned short i,j;
+void seq_init(unsigned char patLen) {
+    unsigned char i,j;
     for(i = 0; i < SEQ_COUNT; ++i) {
         for (j=0; j<SEQ_PATTERN_LENGTH_MAX; ++j) {
             pattern[i][j] = 0;
@@ -26,11 +26,11 @@ void seq_init(unsigned short patLen) {
     currentPatternLength = patLen;
 }
 
-short check_seqidx(unsigned short seqidx) {
+char check_seqidx(unsigned char seqidx) {
     return (seqidx < SEQ_COUNT);
 }
 
-void seq_tick(unsigned short seqidx, unsigned short direction) {
+void seq_tick(unsigned char seqidx, unsigned char direction) {
     if (!check_seqidx(seqidx)) return;
 
     if (direction) {
@@ -48,31 +48,31 @@ void seq_tick(unsigned short seqidx, unsigned short direction) {
     }
 }
 
-void seq_reset(unsigned short seqidx) {
+void seq_reset(unsigned char seqidx) {
     if (!check_seqidx(seqidx)) return;
 
     patidx[seqidx] = 0;
 }
 
-unsigned short seq_get(unsigned short seqidx) {
+unsigned char seq_get(unsigned char seqidx) {
     if (!check_seqidx(seqidx)) return 0;
 
     return pattern[seqidx][patidx[seqidx]];
 }
 
-void seq_set(unsigned short seqidx, unsigned short val) {
+void seq_set(unsigned char seqidx, unsigned char val) {
     if (!check_seqidx(seqidx)) return;
 
     pattern[seqidx][patidx[seqidx]] = val;
 }
 
-unsigned short seq_get_cv(unsigned short seqidx) {
+unsigned char seq_get_cv(unsigned char seqidx) {
     if (!check_seqidx(seqidx)) return 0;
 
     return pattern_cv[seqidx][patidx[seqidx]];
 }
 
-void seq_set_cv(unsigned short seqidx, unsigned short val) {
+void seq_set_cv(unsigned char seqidx, unsigned char val) {
     if (!check_seqidx(seqidx)) return;
 
     pattern_cv[seqidx][patidx[seqidx]] = val;

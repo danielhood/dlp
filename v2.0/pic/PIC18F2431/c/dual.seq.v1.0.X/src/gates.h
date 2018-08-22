@@ -5,6 +5,6 @@
 #define GATE2 1
 #define GATE3 2
 
-void gates_set(unsigned short gateIdx, unsigned short gate, unsigned short cv);
+void gates_set(unsigned char gateIdx, unsigned char gate, unsigned char cv);
 
 #endif

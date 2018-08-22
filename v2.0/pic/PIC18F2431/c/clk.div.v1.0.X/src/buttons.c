@@ -19,7 +19,7 @@
 unsigned char active_pattern = 0; // This is seqIdx + 1; Max of 3
 unsigned char active_mode = 0; // 0:Gate Off, 1:Gate On, 2:CV Value
 
-unsigned char debounce = 0;
+unsigned short debounce = 0;
 unsigned char state_mode = 0;
 unsigned char state_target = 0;
 unsigned char state_set = 0;
