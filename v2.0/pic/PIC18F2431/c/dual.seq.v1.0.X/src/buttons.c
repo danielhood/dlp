@@ -108,17 +108,20 @@ void buttons_set_off(void) {
 }
 
 void buttons_set_on(void) {
-    // We don't check toggle on set button on since we need to support holding
-    // the button down to write multiple steps
-    start_debounce();
-    if (active_pattern > 0) {
-        if (active_mode < 2) {
-            seq_set(active_pattern-1, active_mode);
-        } else {
-            seq_set_cv(active_pattern-1, inputs_get(LVL));
+    // Only check state if writing gates
+    // This allows us to hold set to clear many notes at once or set a range of CV
+    if (!state_set || active_mode != 1) {
+        state_set = !state_set;
+        start_debounce();
+
+        if (active_pattern > 0) {
+            if (active_mode < 2) {
+                seq_set(active_pattern-1, active_mode);
+            } else {
+                seq_set_cv(active_pattern-1, inputs_get(LVL));
+            }
         }
     }
-
 }
 
 void buttons_check(void) {
