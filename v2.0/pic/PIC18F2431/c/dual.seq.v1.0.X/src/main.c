@@ -123,8 +123,8 @@ void main() {
     //          - When Target = none, Set stores encoder to global gate length
     //      - Clock/RST 1 controlls pattern 1
     //      - Clock/RST 2 ticks patterns 2 and 3
-    //      - DIR 1 controls direction on pattern 1
-    //      - DIR 2 controlls gate length offset on patterns 2 and 3
+    //      - DIR 1 controls direction on all patterns
+    //      - DIR 2 controlls gate length offset on patterns 2 and 3; pattern 1 is 'trigger' only
     //      - CV edit from A/D LVL input
     //
     //  Next Steps:

@@ -30,8 +30,7 @@ void clock_tick(unsigned char clockIdx) {
             seq_reset(1);
             seq_reset(2);
         } else {
-            //unsigned char direction = inputs_get(DIR2);
-            unsigned char direction = 0; // Remapped DIR2 to control gate offset
+            unsigned char direction = inputs_get(DIR1);  // DIR1 now controls all patterns
             seq_tick(1, direction);
             seq_tick(2, direction);
         }
