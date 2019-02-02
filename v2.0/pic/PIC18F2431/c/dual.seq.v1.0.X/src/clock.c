@@ -8,7 +8,8 @@
 unsigned char gateClear1 = 0;
 unsigned char gateClear2 = 0;
 unsigned char gateRelease1 = 0;
-unsigned char gateRelease2 = 0;
+unsigned short gateRelease2 = 0;
+unsigned char gateLength = 0;
 
 void clock_tick(unsigned char clockIdx) {
     if (clockIdx == CLOCK1) {
@@ -29,7 +30,8 @@ void clock_tick(unsigned char clockIdx) {
             seq_reset(1);
             seq_reset(2);
         } else {
-            unsigned char direction = inputs_get(DIR2);
+            //unsigned char direction = inputs_get(DIR2);
+            unsigned char direction = 0; // Remapped DIR2 to control gate offset
             seq_tick(1, direction);
             seq_tick(2, direction);
         }
@@ -38,7 +40,9 @@ void clock_tick(unsigned char clockIdx) {
         gates_set(GATE3, seq_get(2), seq_get_cv(2));
 
         gateClear2 = 0;
-        gateRelease2 = 100;
+        
+        // We only modulate gates 2 and 3; 1 is always a trigger
+        gateRelease2 = ((unsigned short) gateLength * 16) + (unsigned short) (inputs_get(DIR2) ? 2000 : 10);
     }
 }
 
@@ -76,4 +80,8 @@ unsigned char clock_get(unsigned char clockIdx) {
             return PORTCbits.RC5;
         }
     }
+}
+
+void clock_set_gate_length(unsigned char val) {
+    gateLength = val;
 }

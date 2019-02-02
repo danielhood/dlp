@@ -120,22 +120,20 @@ void main() {
     //      - Mode toggles current encoder value, indicated by mode led
     //      - Target selects active pattern (none, 1, 2, 3), indicated by target led
     //      - Set triggers write of encoder value to current step in target pattern
-    //      - Clock 1 ticks pattern 1
-    //      - Clock 2 ticks patterns 2 and 3
-    //      - RST/DIR is functioning
+    //          - When Target = none, Set stores encoder to global gate length
+    //      - Clock/RST 1 controlls pattern 1
+    //      - Clock/RST 2 ticks patterns 2 and 3
+    //      - DIR 1 controls direction on pattern 1
+    //      - DIR 2 controlls gate length offset on patterns 2 and 3
     //      - CV edit from A/D LVL input
     //
     //  Next Steps:
-    //      - More modes:
-    //          - Gate width <-- yes
-    //          - Apply presets (selected by encoder and applied by set?)
+    //    - Sequence Presets (selected by encoder and applied by set?)
     //
 
     setup();
     seq_init(16);
     leds_init();
-
-
 
     while (1) {
         clock_check();

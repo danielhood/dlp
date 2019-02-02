@@ -8,4 +8,6 @@ void clock_tick(unsigned char clockIdx);
 void clock_check(void);
 unsigned char clock_get(unsigned char clockIdx);
 
+void clock_set_gate_length(unsigned char val);
+
 #endif

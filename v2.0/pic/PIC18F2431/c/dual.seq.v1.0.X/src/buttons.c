@@ -15,6 +15,7 @@
 #include "leds.h"
 #include "buttons.h"
 #include "inputs.h"
+#include "clock.h"
 
 unsigned char active_pattern = 0; // This is seqIdx + 1; Max of 3
 unsigned char active_mode = 0; // 0:Gate Off, 1:Gate On, 2:CV Value
@@ -77,7 +78,7 @@ void buttons_mode_on(void) {
                 leds_set_mode(99);
                 break;
             case 2:
-                leds_set_mode(3);
+                leds_set_mode(6);
         }
     }
 }
@@ -120,6 +121,9 @@ void buttons_set_on(void) {
             } else {
                 seq_set_cv(active_pattern-1, inputs_get(LVL));
             }
+        } else {
+            // Set global gate length
+            clock_set_gate_length(inputs_get(LVL));
         }
     }
 }
