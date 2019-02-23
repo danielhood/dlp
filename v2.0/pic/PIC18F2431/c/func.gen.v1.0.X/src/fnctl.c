@@ -2,14 +2,12 @@
 #include "fncommon.h"
 #include "triangle.h"
 #include "gates.h"
+#include "inputs.h"
 
 // Temp Vars
 unsigned char fnctl_cv;
 unsigned char fnctl_gate;
-
-void fnctl_init(void){
-
-}
+unsigned char fnctl_param_offsets[FNCTL_MAX_PARAM];
 
 unsigned char fnctl_check_ch(unsigned char ch) {
     return ch < FNCOMMON_MAX_CHAN;
@@ -63,9 +61,15 @@ void fnctl_set_param3(unsigned char ch, unsigned char val){
 
 void fnctl_tick(void) {
     // Tick all function generators
-    triangle_tick(0);
-    triangle_tick(1);
-    triangle_tick(2);
+
+    fnctl_param_offsets[0] = inputs_get(0);
+    fnctl_param_offsets[1] = inputs_get(1);
+    fnctl_param_offsets[2] = inputs_get(2);
+    fnctl_param_offsets[3] = inputs_get(3);
+
+    triangle_tick(0, fnctl_param_offsets);
+    triangle_tick(1, fnctl_param_offsets);
+    triangle_tick(2, fnctl_param_offsets);
 }
 
 void fnctl_update_outs(void){

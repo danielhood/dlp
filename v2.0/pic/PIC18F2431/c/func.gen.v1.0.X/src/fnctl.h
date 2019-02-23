@@ -1,9 +1,7 @@
 #ifndef _FNCTL_H
 #define _FNCTL_H
 
-#define FNCTL_MAX_PARAM 3
-
-void fnctl_init(void);
+#define FNCTL_MAX_PARAM 4
 
 void fnctl_reset(unsigned char ch);
 

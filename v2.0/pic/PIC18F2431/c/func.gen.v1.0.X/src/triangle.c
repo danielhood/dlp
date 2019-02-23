@@ -13,6 +13,11 @@ unsigned char triangle_single_flag[FNCOMMON_MAX_CHAN] = {1, 1, 1};
 // Temp vars
 unsigned char triangle_ovr;
 
+unsigned char triangle_single_offset;
+unsigned short triangle_inc_offset;
+unsigned short triangle_max_offset;
+unsigned short triangle_initial_offset;
+
 void triangle_check_bounds(unsigned char ch) {
     if (triangle_initial[ch] > triangle_max[ch]) {
         triangle_initial[ch] = triangle_max[ch];
@@ -48,8 +53,11 @@ unsigned char triangle_gate(unsigned char ch) {
     return !triangle_dir_flag[ch];
 }
 
-void triangle_tick(unsigned char ch) {
-    if (triangle_curr[ch] < (unsigned short) triangle_inc[ch] && !triangle_dir_flag[ch]) {
+void triangle_tick(unsigned char ch, unsigned char* param_offsets) {
+    // Offset allows inc to exceed 255
+    triangle_inc_offset = (unsigned short)param_offsets[1] + triangle_inc[ch];
+
+    if (triangle_curr[ch] < triangle_inc_offset && !triangle_dir_flag[ch]) {
         // Lower bound
         if (triangle_single_flag[ch]) {
             // Force stop for single-shot
@@ -57,18 +65,18 @@ void triangle_tick(unsigned char ch) {
             return;
         }
 
-        triangle_curr[ch] = (unsigned short) triangle_inc[ch] - triangle_curr[ch];
+        triangle_curr[ch] = triangle_inc_offset - triangle_curr[ch];
         triangle_dir_flag[ch] = 1;
-    } else if (triangle_curr[ch] > triangle_max[ch] - (unsigned short) triangle_inc[ch] && triangle_dir_flag[ch]) {
+    } else if (triangle_curr[ch] > triangle_max[ch] - triangle_inc_offset && triangle_dir_flag[ch]) {
         // Upper bound
         triangle_ovr = triangle_max[ch] - triangle_curr[ch];
-        triangle_curr[ch] = triangle_max[ch] - ((unsigned short) triangle_inc[ch] - triangle_ovr);
+        triangle_curr[ch] = triangle_max[ch] - (triangle_inc_offset - triangle_ovr);
         triangle_dir_flag[ch] = 0;
     } else {
         if (triangle_dir_flag[ch]) {
-            triangle_curr[ch] += triangle_inc[ch];
+            triangle_curr[ch] += triangle_inc_offset;
         } else {
-            triangle_curr[ch] -= triangle_inc[ch];
+            triangle_curr[ch] -= triangle_inc_offset;
         }
     }
 }
