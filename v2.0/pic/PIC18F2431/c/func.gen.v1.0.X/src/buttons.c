@@ -11,14 +11,15 @@
  *
  */
 
+#include "fncommon.h"
 #include "leds.h"
 #include "buttons.h"
 #include "inputs.h"
 #include "clock.h"
 #include "fnctl.h"
 
-#define MAX_TARGETS 4  // Includes 'none' target
-#define MAX_MODES   4  // ALG, PARAM1/2/3
+#define MAX_MODES   (FNCTL_MAX_PARAM + 1)  // ALG, PARAM1/2/3
+#define MAX_TARGETS (FNCOMMON_MAX_CHAN + 1)  // Includes 'none' target
 
 unsigned char active_target = 0; // None, Func 1, Func 2, Func 3, ...
 unsigned char active_mode = 0; // 0:Alg Select, 1:Fixed Param1, 2:Fixed Param2
@@ -47,7 +48,7 @@ void cv_set_all(void) {
 }
 
 void start_debounce(void) {
-    debounce = 500;
+    debounce = 50;
 }
 
 unsigned char buttons_debouncing(void) {
@@ -106,48 +107,37 @@ void buttons_set_on(void) {
         state_set = !state_set;
         start_debounce();
 
-        if (active_target > 0) {
+        if (active_target == 0) {
+            // 'None' target; could be used to set global values
+        } else {
             if (active_mode == 0) {
                 // TODO: Set alg for target
             } else {
-                // TODO: Select target
                 fnctl_set_param(active_target-1, active_mode-1, inputs_get(LVL));
             }
-        } else {
-            // 'None' target; could be used to set global values
         }
     }
 }
 
 void buttons_check(void) {
+    if (buttons_debouncing()) return;
+
     // Handle pushbuttons (inputs are normally high)
     if (PORTCbits.RC0) {
-        if (!buttons_debouncing()) {
-            buttons_mode_off();
-        }
+        buttons_mode_off();
     } else {
-        if (!buttons_debouncing()) {
-            buttons_mode_on();
-        }
+        buttons_mode_on();
     }
 
     if (PORTCbits.RC1) {
-        if (!buttons_debouncing()) {
-            buttons_target_off();
-        }
+        buttons_target_off();
     } else {
-        if (!buttons_debouncing()) {
-            buttons_target_on();
-        }
+        buttons_target_on();
     }
 
     if (PORTCbits.RC2) {
-        if (!buttons_debouncing()) {
-            buttons_set_off();
-        }
+        buttons_set_off();
     } else {
-        if (!buttons_debouncing()) {
-            buttons_set_on();
-        }
+        buttons_set_on();
     }
 }

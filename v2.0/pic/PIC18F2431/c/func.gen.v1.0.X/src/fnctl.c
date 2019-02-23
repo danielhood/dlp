@@ -1,4 +1,5 @@
 #include "fnctl.h"
+#include "fncommon.h"
 #include "triangle.h"
 #include "gates.h"
 
@@ -11,7 +12,7 @@ void fnctl_init(void){
 }
 
 unsigned char fnctl_check_ch(unsigned char ch) {
-    return ch < FNCTL_MAX_CHAN;
+    return ch < FNCOMMON_MAX_CHAN;
 }
 
 unsigned char fnctl_check_param(unsigned char pr) {
@@ -21,7 +22,7 @@ unsigned char fnctl_check_param(unsigned char pr) {
 void fnctl_reset(unsigned char ch){
     if (!fnctl_check_ch(ch)) return;
 
-    triangle_reset();
+    triangle_reset(ch);
 }
 
 void fnctl_set_param(unsigned char ch, unsigned char pr, unsigned char val) {
@@ -45,34 +46,38 @@ void fnctl_set_param1(unsigned char ch, unsigned char val){
     if (!fnctl_check_ch(ch)) return;
 
     // For now we are directly supporting only triangle
-    triangle_set_single(val);
+    triangle_set_single(ch, val);
 }
 
 void fnctl_set_param2(unsigned char ch, unsigned char val){
     if (!fnctl_check_ch(ch)) return;
 
-    triangle_set_inc(val);
+    triangle_set_inc(ch, val);
 }
 
 void fnctl_set_param3(unsigned char ch, unsigned char val){
     if (!fnctl_check_ch(ch)) return;
 
-    triangle_set_max(val);
+    triangle_set_max(ch, val);
 }
 
 void fnctl_tick(void) {
     // Tick all function generators
-    triangle_tick();
+    triangle_tick(0);
+    triangle_tick(1);
+    triangle_tick(2);
 }
 
 void fnctl_update_outs(void){
-    fnctl_cv = triangle_get();
+    fnctl_cv = triangle_get(0);
     fnctl_gate = fnctl_cv > 127;
-
-    // Broadcast triangle value to all CV and GATE outs for now
     gates_set(GATE1, fnctl_gate, fnctl_cv);
+
+    fnctl_cv = triangle_get(1);
+    fnctl_gate = fnctl_cv > 127;
     gates_set(GATE2, fnctl_gate, fnctl_cv);
 
-    // TEST: keep gate3 high
-    gates_set(GATE3, 1, fnctl_cv);
+    fnctl_cv = triangle_get(2);
+    fnctl_gate = fnctl_cv > 127;
+    gates_set(GATE3, fnctl_gate, fnctl_cv);
 }

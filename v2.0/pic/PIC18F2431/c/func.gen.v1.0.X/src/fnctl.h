@@ -1,7 +1,6 @@
 #ifndef _FNCTL_H
 #define _FNCTL_H
 
-#define FNCTL_MAX_CHAN 1
 #define FNCTL_MAX_PARAM 3
 
 void fnctl_init(void);

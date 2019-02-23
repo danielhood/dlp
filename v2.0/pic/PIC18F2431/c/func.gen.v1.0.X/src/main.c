@@ -113,24 +113,21 @@ void delay (int loop)
     }
 }
 
-unsigned char testval = 0;
-char dirval = 1;
-
 void main() {
 
     // Current Functionality:
     //      - Simple function generator
-    //      - CK1 = clock
-    //      - CK2 = Trig/Rest
+    //      - CK1 = Trig/Reset ch 1
+    //      - CK2 = Trig/Reset ch 2/3
     //      - All 4 inputs are paramters (eventually will be all analog)
-    //      - MODE: Alg selct/Fixed Params (1, 2, etc)
+    //      - MODE: Alg select/Fixed Params (1, 2, etc)
     //      - TARGET: Ouput 1, 2, 3 (, 4, 5, 6? if gates aren't EOC's and their own independent gate patterns)
     //      - SET/VAL: set the value for the selected target
     //
     //      Algs:
     //          - 0: Triangle
-    //          - 1: Ramp
-    //          - 2: Inv Ramp
+    //          - [1: Ramp]
+    //          - [2: Inv Ramp]
 
     setup();
     leds_init();

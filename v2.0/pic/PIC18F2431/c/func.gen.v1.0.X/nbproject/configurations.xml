@@ -13,6 +13,7 @@
       <itemPath>src/inputs.h</itemPath>
       <itemPath>src/triangle.h</itemPath>
       <itemPath>src/fnctl.h</itemPath>
+      <itemPath>src/fncommon.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LibraryFiles"
                    displayName="Library Files"
