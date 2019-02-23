@@ -9,5 +9,6 @@ void triangle_set_initial(unsigned char val);
 unsigned char triangle_get(void);
 void triangle_tick(void);
 void triangle_reset(void);
+void triangle_reset_dir(void);
 
 #endif

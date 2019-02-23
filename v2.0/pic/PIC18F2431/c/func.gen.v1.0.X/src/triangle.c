@@ -2,64 +2,88 @@
 #include <math.h>
 #include "triangle.h"
 
+#include "gates.h"
+
 unsigned short triangle_curr = 0;
-char triangle_dir = -1; // Ensures we initially start not-triggered
-unsigned short triangle_max = 65535-256;
+unsigned char triangle_dir_flag = 0; // Ensures we initially start not-triggered
+unsigned short triangle_max = 65280;
 unsigned short triangle_initial = 0;
 unsigned char triangle_inc;
-unsigned char triangle_single = 0;
+unsigned char triangle_single_flag = 0;
 
 // Temp vars
 unsigned char triangle_ovr;
 
 void triangle_check_bounds(void) {
-	if (triangle_initial > triangle_max) {
-		triangle_initial = triangle_max;
-	}
+    if (triangle_initial > triangle_max) {
+        triangle_initial = triangle_max;
+    }
 }
 
 void triangle_set_max(unsigned char val) {
-	triangle_max = val << 8;
+    triangle_max = (unsigned short) val << 8;
 
-	triangle_check_bounds();
+    triangle_check_bounds();
 }
 
 void triangle_set_inc(unsigned char val) {
-	triangle_inc = val;
+    triangle_inc = val;
 }
 
 void triangle_set_single(unsigned char val) {
-	triangle_single = val;	
+    triangle_single_flag = val;
 }
 
 void triangle_set_initial(unsigned char val) {
-	triangle_initial = val << 8;
-		
-	triangle_check_bounds();
+    triangle_initial = (unsigned short) val << 8;
+
+    triangle_check_bounds();
 }
 
 unsigned char triangle_get(void) {
-	return triangle_curr >> 8;
+    return triangle_curr >> 8;
 }
 
 void triangle_tick(void) {
-	if (triangle_curr < triangle_inc) {
-		if (triangle_single && triangle_dir == -1) {
-			triangle_curr = 0;
-			return;
-		}
-		triangle_curr = triangle_inc - triangle_curr;
-		triangle_dir = 1;
-	} else if (triangle_curr > triangle_max - (unsigned short)triangle_inc) {
-		triangle_ovr = triangle_max - triangle_curr;
-		triangle_curr = triangle_max - triangle_inc - triangle_ovr;
-		triangle_dir = -1;
-	} else {
-		triangle_curr = triangle_curr + (short)triangle_inc * (short)triangle_dir;
-	}
+    if (triangle_curr < (unsigned short) triangle_inc && !triangle_dir_flag) {
+        // Lower bound
+        if (triangle_single_flag) {
+            // Force stop for single-shot
+            triangle_curr = 0;
+            return;
+        }
+
+        triangle_curr = (unsigned short) triangle_inc - triangle_curr;
+        triangle_dir_flag = 1;
+
+        // DEBUG: indicate we've procseed lower bound
+        gates_set(GATE2, 1, 0);
+        gates_set(GATE3, 0, 0);
+        
+    } else if (triangle_curr > triangle_max - (unsigned short) triangle_inc && triangle_dir_flag) {
+        // Upper bound
+        triangle_ovr = triangle_max - triangle_curr;
+        triangle_curr = triangle_max - ((unsigned short) triangle_inc - triangle_ovr);
+        triangle_dir_flag = 0;
+
+        // DEBUG: indicate we've procseed uppder bound
+        gates_set(GATE2, 0, 0);
+        gates_set(GATE3, 1, 0);
+
+    } else {
+        if (triangle_dir_flag) {
+            triangle_curr += triangle_inc;
+        } else {
+            triangle_curr -= triangle_inc;
+        }
+    }
 }
 
 void triangle_reset(void) {
-	triangle_curr = triangle_initial;
-	triangle_dir = 1;
+    triangle_curr = triangle_initial;
+    triangle_dir_flag = 1;
+}
+
+void triangle_toggle_dir(void) {
+    triangle_dir_flag = !triangle_dir_flag;
 }

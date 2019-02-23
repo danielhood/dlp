@@ -16,6 +16,9 @@
 #include "inputs.h"
 #include "clock.h"
 
+#include "triangle.h"
+#include "gates.h"
+
 #define MAX_TARGETS 4  // Includes 'none' target
 #define MAX_MODES   3
 
@@ -111,11 +114,14 @@ void buttons_set_off(void) {
 }
 
 void buttons_set_on(void) {
-    // Only check state if writing gates
-    // This allows us to hold set to clear many notes at once or set a range of CV
-    if (!state_set || active_mode != 1) {
+    if (!state_set) {
         state_set = !state_set;
         start_debounce();
+
+        // TEST: Set the increment to the current LVL value
+        triangle_set_inc(inputs_get(LVL));
+        gates_set(GATE2, 0, 0);
+        gates_set(GATE3, 0, 0);
 
         if (active_target > 0) {
             if (active_mode == 1) {

@@ -110,7 +110,7 @@ void delay (int loop)
     int j;
     int i;
     for (j = 1; j <= loop; j++) {
-        for (i = 0; i < 10000; i++);
+        for (i = 0; i < 10; i++);
     }
 }
 
@@ -138,9 +138,10 @@ void main() {
 
     // Init Algs
     triangle_set_max(255);
-    triangle_set_inc(3);
+
+    triangle_set_inc(7);
     triangle_set_single(0);
-    triangle_set_initial(0);
+    triangle_set_initial(255);
 
     // Test
     triangle_reset();
@@ -154,6 +155,7 @@ void main() {
 
         // Update Outs
         gates_set(GATE1, 1, triangle_get());
+        delay(1);
 
 //        if (testval==255) dirval = -1;
 //        if (testval==0) dirval = 1;

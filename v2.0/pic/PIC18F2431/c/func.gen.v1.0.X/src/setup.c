@@ -89,7 +89,9 @@ void setup_interrupts(void) {
     PIE3 = 0x00;    // Nothing needed here; all disabled
 
     INTCONbits.PEIE = 1;    // Enable periferial interrupts
+
     PIE1bits.ADIE = 1;      // Enable A/D converter
+
     PIR1bits.ADIF = 0;      // Clear interrupt flag
     IPR1bits.ADIP = 0;      // Low priority AD interrupts
 
