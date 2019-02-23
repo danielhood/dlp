@@ -5,9 +5,9 @@
 
 unsigned short triangle_curr[FNCOMMON_MAX_CHAN] = {0, 0, 0};
 unsigned char triangle_dir_flag[FNCOMMON_MAX_CHAN] = {0, 0, 0}; // Ensures we do not trigger on start
-unsigned short triangle_max[FNCOMMON_MAX_CHAN] = {65280, 65280, 65280};
+unsigned short triangle_max[FNCOMMON_MAX_CHAN] = {0xFF00, 0xFF00, 0xFF00};
 unsigned short triangle_initial[FNCOMMON_MAX_CHAN] = {0, 0, 0};
-unsigned char triangle_inc[FNCOMMON_MAX_CHAN] = {128, 128, 128};
+unsigned char triangle_inc[FNCOMMON_MAX_CHAN] = {0x80, 0x80, 0x80};
 unsigned char triangle_single_flag[FNCOMMON_MAX_CHAN] = {1, 1, 1};
 
 // Temp vars
@@ -53,13 +53,34 @@ unsigned char triangle_gate(unsigned char ch) {
     return !triangle_dir_flag[ch];
 }
 
-void triangle_tick(unsigned char ch, unsigned char* param_offsets) {
-    // Offset allows inc to exceed 255
+
+void triangle_process_offsets(unsigned char ch, unsigned char* param_offsets) {
+    // SingleOffset will invert single flag (xor)
+    triangle_single_offset = (param_offsets[0] >= 128) != triangle_single_flag[ch];
+
+    // IncOffset allows inc to exceed 255
     triangle_inc_offset = (unsigned short)param_offsets[1] + triangle_inc[ch];
 
+    // Clamp max to 0xFF00
+    triangle_max_offset = ((unsigned short)param_offsets[2] << 8);
+    if (triangle_max_offset > 0xFF00 - triangle_max[ch]) {
+        triangle_max_offset = 0xFF00;
+    } else {
+        triangle_max_offset += triangle_max[ch];
+    }
+}
+
+// Param mappings:
+//  0: single
+//  1: inc
+//  2: max
+//  3: initial
+void triangle_tick(unsigned char ch, unsigned char* param_offsets) {
+    triangle_process_offsets(ch, param_offsets);
+    
     if (triangle_curr[ch] < triangle_inc_offset && !triangle_dir_flag[ch]) {
         // Lower bound
-        if (triangle_single_flag[ch]) {
+        if (triangle_single_offset) {
             // Force stop for single-shot
             triangle_curr[ch] = 0;
             return;
@@ -67,10 +88,11 @@ void triangle_tick(unsigned char ch, unsigned char* param_offsets) {
 
         triangle_curr[ch] = triangle_inc_offset - triangle_curr[ch];
         triangle_dir_flag[ch] = 1;
-    } else if (triangle_curr[ch] > triangle_max[ch] - triangle_inc_offset && triangle_dir_flag[ch]) {
+    } else if (triangle_curr[ch] > triangle_max_offset - triangle_inc_offset && triangle_dir_flag[ch]) {
         // Upper bound
-        triangle_ovr = triangle_max[ch] - triangle_curr[ch];
-        triangle_curr[ch] = triangle_max[ch] - (triangle_inc_offset - triangle_ovr);
+        triangle_ovr = triangle_max_offset - triangle_curr[ch];
+        triangle_curr[ch] = triangle_max_offset - (triangle_inc_offset - triangle_ovr);
+        
         triangle_dir_flag[ch] = 0;
     } else {
         if (triangle_dir_flag[ch]) {
