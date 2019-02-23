@@ -31,7 +31,7 @@ void triangle_set_inc(unsigned char val) {
 }
 
 void triangle_set_single(unsigned char val) {
-    triangle_single_flag = val;
+    triangle_single_flag = val >= 128; // Boolean scaled to accept values from LVL knob
 }
 
 void triangle_set_initial(unsigned char val) {

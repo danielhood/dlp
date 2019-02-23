@@ -12,6 +12,7 @@
       <itemPath>src/gates.h</itemPath>
       <itemPath>src/inputs.h</itemPath>
       <itemPath>src/triangle.h</itemPath>
+      <itemPath>src/fnctl.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LibraryFiles"
                    displayName="Library Files"
@@ -36,6 +37,7 @@
       <itemPath>src/inputs.c</itemPath>
       <itemPath>src/setup.c</itemPath>
       <itemPath>src/triangle.c</itemPath>
+      <itemPath>src/fnctl.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -98,8 +100,8 @@
       </C18>
       <C18-AS>
         <property key="default.radix" value="HEX"/>
-        <property key="enable.case.sensitivity" value="true"/>
         <property key="hex.output.format" value="INHX32"/>
+        <property key="enable.case.sensitivity" value="true"/>
         <property key="preprocessor.macros" value=""/>
         <property key="warning.level" value="0"/>
         <property key="cross.reference.file" value=""/>
@@ -112,16 +114,16 @@
       </C18-LD>
       <C18LanguageToolchain>
         <property key="stack-analysis-mplink" value="false"/>
-        <property key="extended-mode-mcc18" value="false"/>
-        <property key="stack-analysis" value="false"/>
         <property key="stack-analysis-mcc18" value="false"/>
+        <property key="stack-analysis" value="false"/>
+        <property key="extended-mode-mcc18" value="false"/>
         <property key="extended-mode" value="false"/>
         <property key="extended-mode-mpasm" value="false"/>
         <property key="extended-mode-mplink" value="false"/>
       </C18LanguageToolchain>
       <PICkit2PlatformTool>
         <property key="pk2settings.userpgmexec" value="true"/>
-        <property key="pk2settings.setvddvoltage" value="${pk2settings.setvddvoltage}"/>
+        <property key="pk2settings.setvddvoltage" value="5.00"/>
         <property key="pk2settings.3state" value="false"/>
         <property key="pk2settings.preserveee" value="false"/>
         <property key="pk2settings.usetargetpower" value="false"/>

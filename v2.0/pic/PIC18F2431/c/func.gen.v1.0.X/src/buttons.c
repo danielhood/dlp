@@ -15,12 +15,10 @@
 #include "buttons.h"
 #include "inputs.h"
 #include "clock.h"
-
-#include "triangle.h"
-#include "gates.h"
+#include "fnctl.h"
 
 #define MAX_TARGETS 4  // Includes 'none' target
-#define MAX_MODES   3
+#define MAX_MODES   4  // ALG, PARAM1/2/3
 
 unsigned char active_target = 0; // None, Func 1, Func 2, Func 3, ...
 unsigned char active_mode = 0; // 0:Alg Select, 1:Fixed Param1, 2:Fixed Param2
@@ -74,17 +72,7 @@ void buttons_mode_on(void) {
 
         // Cycle through modes: Gate OFF, Gate ON, CV Value
         active_mode = ++active_mode % MAX_MODES;
-        switch (active_mode)
-        {
-            case 0:
-                leds_set_mode(0);
-                break;
-            case 1:
-                leds_set_mode(99);
-                break;
-            case 2:
-                leds_set_mode(6);
-        }
+        leds_set_mode(active_mode);
     }
 }
 
@@ -118,16 +106,12 @@ void buttons_set_on(void) {
         state_set = !state_set;
         start_debounce();
 
-        // TEST: Set the increment to the current LVL value
-        triangle_set_inc(inputs_get(LVL));
-        gates_set(GATE2, 0, 0);
-        gates_set(GATE3, 0, 0);
-
         if (active_target > 0) {
-            if (active_mode == 1) {
-                // Set alg for target
+            if (active_mode == 0) {
+                // TODO: Set alg for target
             } else {
-                // Set fixed param1/2
+                // TODO: Select target
+                fnctl_set_param(active_target-1, active_mode-1, inputs_get(LVL));
             }
         } else {
             // 'None' target; could be used to set global values

@@ -40,11 +40,11 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/src/main.o ${OBJECTDIR}/src/clock.o ${OBJECTDIR}/src/leds.o ${OBJECTDIR}/src/buttons.o ${OBJECTDIR}/src/gates.o ${OBJECTDIR}/src/inputs.o ${OBJECTDIR}/src/setup.o ${OBJECTDIR}/src/triangle.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/src/main.o.d ${OBJECTDIR}/src/clock.o.d ${OBJECTDIR}/src/leds.o.d ${OBJECTDIR}/src/buttons.o.d ${OBJECTDIR}/src/gates.o.d ${OBJECTDIR}/src/inputs.o.d ${OBJECTDIR}/src/setup.o.d ${OBJECTDIR}/src/triangle.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/src/main.o ${OBJECTDIR}/src/clock.o ${OBJECTDIR}/src/leds.o ${OBJECTDIR}/src/buttons.o ${OBJECTDIR}/src/gates.o ${OBJECTDIR}/src/inputs.o ${OBJECTDIR}/src/setup.o ${OBJECTDIR}/src/triangle.o ${OBJECTDIR}/src/fnctl.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/src/main.o.d ${OBJECTDIR}/src/clock.o.d ${OBJECTDIR}/src/leds.o.d ${OBJECTDIR}/src/buttons.o.d ${OBJECTDIR}/src/gates.o.d ${OBJECTDIR}/src/inputs.o.d ${OBJECTDIR}/src/setup.o.d ${OBJECTDIR}/src/triangle.o.d ${OBJECTDIR}/src/fnctl.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/src/main.o ${OBJECTDIR}/src/clock.o ${OBJECTDIR}/src/leds.o ${OBJECTDIR}/src/buttons.o ${OBJECTDIR}/src/gates.o ${OBJECTDIR}/src/inputs.o ${OBJECTDIR}/src/setup.o ${OBJECTDIR}/src/triangle.o
+OBJECTFILES=${OBJECTDIR}/src/main.o ${OBJECTDIR}/src/clock.o ${OBJECTDIR}/src/leds.o ${OBJECTDIR}/src/buttons.o ${OBJECTDIR}/src/gates.o ${OBJECTDIR}/src/inputs.o ${OBJECTDIR}/src/setup.o ${OBJECTDIR}/src/triangle.o ${OBJECTDIR}/src/fnctl.o
 
 
 CFLAGS=
@@ -138,6 +138,12 @@ ${OBJECTDIR}/src/triangle.o: src/triangle.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_PICKIT2=1 -p$(MP_PROCESSOR_OPTION)   -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/src/triangle.o   src/triangle.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/src/triangle.o 
 	
+${OBJECTDIR}/src/fnctl.o: src/fnctl.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/src 
+	@${RM} ${OBJECTDIR}/src/fnctl.o.d 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_PICKIT2=1 -p$(MP_PROCESSOR_OPTION)   -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/src/fnctl.o   src/fnctl.c 
+	@${DEP_GEN} -d ${OBJECTDIR}/src/fnctl.o 
+	
 else
 ${OBJECTDIR}/src/main.o: src/main.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/src 
@@ -186,6 +192,12 @@ ${OBJECTDIR}/src/triangle.o: src/triangle.c  nbproject/Makefile-${CND_CONF}.mk
 	@${RM} ${OBJECTDIR}/src/triangle.o.d 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION)   -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/src/triangle.o   src/triangle.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/src/triangle.o 
+	
+${OBJECTDIR}/src/fnctl.o: src/fnctl.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/src 
+	@${RM} ${OBJECTDIR}/src/fnctl.o.d 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION)   -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/src/fnctl.o   src/fnctl.c 
+	@${DEP_GEN} -d ${OBJECTDIR}/src/fnctl.o 
 	
 endif
 
