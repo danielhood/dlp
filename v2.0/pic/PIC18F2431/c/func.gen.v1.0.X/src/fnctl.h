@@ -6,6 +6,8 @@
 
 void fnctl_init(void);
 
+void fnctl_reset(unsigned char ch);
+
 void fnctl_set_param(unsigned char ch, unsigned char pr, unsigned char val);
 void fnctl_set_param1(unsigned char ch, unsigned char val);
 void fnctl_set_param2(unsigned char ch, unsigned char val);

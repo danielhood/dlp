@@ -55,21 +55,11 @@ void triangle_tick(void) {
 
         triangle_curr = (unsigned short) triangle_inc - triangle_curr;
         triangle_dir_flag = 1;
-
-        // DEBUG: indicate we've procseed lower bound
-        gates_set(GATE2, 1, 0);
-        gates_set(GATE3, 0, 0);
-        
     } else if (triangle_curr > triangle_max - (unsigned short) triangle_inc && triangle_dir_flag) {
         // Upper bound
         triangle_ovr = triangle_max - triangle_curr;
         triangle_curr = triangle_max - ((unsigned short) triangle_inc - triangle_ovr);
         triangle_dir_flag = 0;
-
-        // DEBUG: indicate we've procseed uppder bound
-        gates_set(GATE2, 0, 0);
-        gates_set(GATE3, 1, 0);
-
     } else {
         if (triangle_dir_flag) {
             triangle_curr += triangle_inc;

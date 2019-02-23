@@ -136,7 +136,6 @@ void main() {
     leds_init();
 
     while (1) {
-        clock_check();
         buttons_check();
 
         fnctl_tick();

@@ -3,7 +3,8 @@
 #include "gates.h"
 
 // Temp Vars
-unsigned char fnctl_curr;
+unsigned char fnctl_cv;
+unsigned char fnctl_gate;
 
 void fnctl_init(void){
 
@@ -15,6 +16,12 @@ unsigned char fnctl_check_ch(unsigned char ch) {
 
 unsigned char fnctl_check_param(unsigned char pr) {
     return pr < FNCTL_MAX_PARAM;
+}
+
+void fnctl_reset(unsigned char ch){
+    if (!fnctl_check_ch(ch)) return;
+
+    triangle_reset();
 }
 
 void fnctl_set_param(unsigned char ch, unsigned char pr, unsigned char val) {
@@ -54,12 +61,18 @@ void fnctl_set_param3(unsigned char ch, unsigned char val){
 }
 
 void fnctl_tick(void) {
+    // Tick all function generators
     triangle_tick();
 }
 
 void fnctl_update_outs(void){
-    fnctl_curr = triangle_get();
-    gates_set(GATE1, fnctl_curr > 127, fnctl_curr);
-    gates_set(GATE2, fnctl_curr > 127, fnctl_curr);
-    gates_set(GATE3, fnctl_curr > 127, fnctl_curr);
+    fnctl_cv = triangle_get();
+    fnctl_gate = fnctl_cv > 127;
+
+    // Broadcast triangle value to all CV and GATE outs for now
+    gates_set(GATE1, fnctl_gate, fnctl_cv);
+    gates_set(GATE2, fnctl_gate, fnctl_cv);
+
+    // TEST: keep gate3 high
+    gates_set(GATE3, 1, fnctl_cv);
 }
