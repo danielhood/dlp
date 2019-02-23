@@ -39,8 +39,13 @@ void triangle_set_initial(unsigned char ch, unsigned char val) {
     triangle_check_bounds(ch);
 }
 
-unsigned char triangle_get(unsigned char ch) {
+unsigned char triangle_cv(unsigned char ch) {
     return triangle_curr[ch] >> 8;
+}
+
+unsigned char triangle_gate(unsigned char ch) {
+    // Return 'slope' of fn
+    return !triangle_dir_flag[ch];
 }
 
 void triangle_tick(unsigned char ch) {

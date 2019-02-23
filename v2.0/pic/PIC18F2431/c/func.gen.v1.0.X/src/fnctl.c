@@ -69,15 +69,15 @@ void fnctl_tick(void) {
 }
 
 void fnctl_update_outs(void){
-    fnctl_cv = triangle_get(0);
-    fnctl_gate = fnctl_cv > 127;
+    fnctl_cv = triangle_cv(0);
+    fnctl_gate = triangle_gate(0);
     gates_set(GATE1, fnctl_gate, fnctl_cv);
 
-    fnctl_cv = triangle_get(1);
-    fnctl_gate = fnctl_cv > 127;
+    fnctl_cv = triangle_cv(1);
+    fnctl_gate = triangle_gate(1);
     gates_set(GATE2, fnctl_gate, fnctl_cv);
 
-    fnctl_cv = triangle_get(2);
-    fnctl_gate = fnctl_cv > 127;
+    fnctl_cv = triangle_cv(2);
+    fnctl_gate = triangle_gate(2);
     gates_set(GATE3, fnctl_gate, fnctl_cv);
 }
