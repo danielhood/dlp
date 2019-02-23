@@ -11,6 +11,8 @@ void fnctl_set_param1(unsigned char ch, unsigned char val);
 void fnctl_set_param2(unsigned char ch, unsigned char val);
 void fnctl_set_param3(unsigned char ch, unsigned char val);
 
-unsigned char fnctl_get_val(unsigned char ch);
+void fnctl_tick(void);
+
+void fnctl_update_outs(void);
 
 #endif

@@ -5,11 +5,11 @@
 #include "gates.h"
 
 unsigned short triangle_curr = 0;
-unsigned char triangle_dir_flag = 0; // Ensures we initially start not-triggered
+unsigned char triangle_dir_flag = 0; // Ensures we do not trigger on start
 unsigned short triangle_max = 65280;
 unsigned short triangle_initial = 0;
-unsigned char triangle_inc;
-unsigned char triangle_single_flag = 0;
+unsigned char triangle_inc = 128;
+unsigned char triangle_single_flag = 1;
 
 // Temp vars
 unsigned char triangle_ovr;

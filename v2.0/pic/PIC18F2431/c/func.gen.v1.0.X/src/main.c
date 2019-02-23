@@ -16,8 +16,7 @@
 #include "inputs.h"
 #include "leds.h"
 #include "clock.h"
-#include "triangle.h"
-#include "gates.h"
+#include "fnctl.h"
 
 // Interrupt register storage
 unsigned char wTempHi;
@@ -123,7 +122,7 @@ void main() {
     //      - Simple function generator
     //      - CK1 = clock
     //      - CK2 = Trig/Rest
-    //      - All 4 inputs are paramters (eventually will be all analog
+    //      - All 4 inputs are paramters (eventually will be all analog)
     //      - MODE: Alg selct/Fixed Params (1, 2, etc)
     //      - TARGET: Ouput 1, 2, 3 (, 4, 5, 6? if gates aren't EOC's and their own independent gate patterns)
     //      - SET/VAL: set the value for the selected target
@@ -136,32 +135,13 @@ void main() {
     setup();
     leds_init();
 
-    // Init Algs
-    triangle_set_max(255);
-
-    triangle_set_inc(100);
-    triangle_set_single(0);
-    triangle_set_initial(255);
-
-    // Test
-    triangle_reset();
-
     while (1) {
         clock_check();
         buttons_check();
 
-        // Tick Algs
-        triangle_tick();
-
-        // Update Outs
-        gates_set(GATE1, 1, triangle_get());
+        fnctl_tick();
+        fnctl_update_outs();
+        
         delay(100);
-
-//        if (testval==255) dirval = -1;
-//        if (testval==0) dirval = 1;
-//        testval+=dirval;
-//        gates_set(GATE2, 1, testval);
-//        delay(1);
     }
 }
-
