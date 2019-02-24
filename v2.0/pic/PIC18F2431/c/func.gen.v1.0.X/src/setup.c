@@ -41,20 +41,33 @@ void setup_io(void) {
 
 void setup_analog(void) {
     // 10 bit A/D module config (but we only use the top 8 bits in ADRESH)
-    ADCON0bits.ACONV = 0; // Single Shot
-    ADCON0bits.ACSCH = 0; // Single channel conversion
-    ADCON0bits.ACMOD = 0; // Single Channel Mode 1 (Group A taken and converted)
-    ADCON0bits.ADON = 1; // Enable A/D Conversion
+    ADCON0bits.ACONV = 0;   // Single Shot
+    ADCON0bits.ACSCH = 1;   // Multi channel conversion
 
-    ADCON1 = 0x00;  // AN2 nad AN3 are analog inputs or digital i/o (mapped VRef's to AVxx)
-    ADCON2 = 0x00;  // A/D timining and bit formats; left justified, start immediatly, Fosc/2
-    ADCON3 = 0x00;  // Interrupt and trigger config; Interupt on each word; disabled triggers
-    ADCON3bits.SSRC = 2; // Timer5 starts A/D sequence
+    //ADCON0bits.ACMOD = 1;   // Multi-Channel Sequential Mode (A,B,C,D in sequence)
+    ADCON0bits.ACMOD = 3;   // Multi-Channel Simu Mode (A + B, C + D in sequence)
 
-    ADCHS = 0x00;   // Group selects (GroupA: AN0)
+    ADCON0bits.ADON = 1;    // Enable A/D Conversion
 
-    //ANSEL0 = 0x1F;  // AN<0:4> analog; RC<5:7> digital
-    ANSEL0 = 0x01;  // AN<0:0> analog; RC<1:7> digital (eventually we will want PARM* inputs to be analog)
+    ADCON1 = 0x00;          // AN2 nad AN3 are analog inputs or digital i/o (mapped VRef's to AVxx)
+    ADCON1bits.FIFOEN = 1;  // Enable FIFO buffer
+
+    ADCON2 = 0x00;          // A/D timing and bit formats; left justified, start immediatly, Fosc/2
+    
+    ADCON2bits.ACQT = 0x6;    // 12Tad delay (ok for multi-sumu mode)
+    //ADCON2bits.ACQT = 0xF;    // 64Tad delay (needed for multi-sequential mode)
+
+    ADCON3 = 0x00;          // Interrupt and trigger config; Interupt on each word; disabled triggers
+    ADCON3bits.SSRC = 2;    // Timer5 starts A/D sequence
+    ADCON3bits.ADRS = 2;    // Interrupt is generated when the 4th word is written to the buffer
+
+    ADCHS = 0x00;   // Group selects (GroupA: AN0, GroupB: AN1, GroupC: AN2, GroupD: AN3)
+                    
+
+    //ANSEL0 = 0x1F;    // AN<0:4> analog; RC<5:7> digital
+    //ANSEL0 = 0x01;    // AN<0:0> analog; RC<1:7> digital (eventually we will want PARM* inputs to be analog)
+    ANSEL0 = 0x0F;      // AN<0:3> analog; RC<4:7> digital
+                        // Note AN4 (DIR2/PARAM4) is left digital as we cannot sample more than 4 inputs
 
     // Setup Timer5
     PR5H = 0xFF;

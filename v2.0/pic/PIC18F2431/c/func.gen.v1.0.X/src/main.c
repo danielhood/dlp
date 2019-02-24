@@ -18,6 +18,8 @@
 #include "clock.h"
 #include "fnctl.h"
 
+#include "gates.h"
+
 // Interrupt register storage
 unsigned char wTempHi;
 unsigned char statusTempHi;
@@ -60,6 +62,8 @@ void InterruptHandlerHigh (void)
 #pragma code
 #pragma interrupt InterruptHandlerLow
 
+unsigned char inputIdx = 0;
+
 void InterruptHandlerLow (void)
 {
     // Store W, STATUS, and BSR
@@ -72,7 +76,14 @@ void InterruptHandlerLow (void)
         leds_blink();              // Update led state
     } else if (PIR1bits.ADIF) {
         PIR1bits.ADIF = 0;
-        inputs_set(LVL, ADRESH);
+        //inputs_set(inputIdx++ & 0x03, ADRESH);
+
+        // Interrupt every 4th write
+        // Sampling cycles through AD0 to AD3, which should be indexed by the ADPNT bits
+        inputs_set(ADCON1bits.ADPNT, ADRESH);
+        inputs_set(ADCON1bits.ADPNT, ADRESH);
+        inputs_set(ADCON1bits.ADPNT, ADRESH);
+        inputs_set(ADCON1bits.ADPNT, ADRESH);
     }
 
     // Restore W, STATUS, and BSR
@@ -137,7 +148,28 @@ void main() {
 
         fnctl_tick();
         fnctl_update_outs();
-        
+
         delay(100);
+
+        // TEST: publish samples values
+        // Inputs are very quiet, and we need to scale up to detect signal
+        // May need to adjust h/w to better scale for 5V
+
+        // Mappings are a bit messed up (same for both simu and seqential modes)
+        // We will need to internally map these somehow
+        //  PARM3 11
+        //  PARM2 00
+        //  PARM1 10
+        //  LVL   01
+
+        // Note that sequential mode scatters the values
+
+        //gates_set(GATE1, 1, inputs_get(LVL) << 3);
+
+        //gates_set(GATE2, 1, inputs_get(PARM1));
+        //gates_set(GATE3, 1, inputs_get(PARM2));
+
+        //gates_set(GATE2, 1, inputs_get(PARM2) << 3);
+        //gates_set(GATE3, 1, inputs_get(PARM3) << 3);
     }
 }
