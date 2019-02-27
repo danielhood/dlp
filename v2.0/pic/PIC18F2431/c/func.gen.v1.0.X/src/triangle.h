@@ -9,7 +9,7 @@ void triangle_set_initial(unsigned char ch, unsigned char val);
 void triangle_toggle_dir(unsigned char ch);
 
 void triangle_tick(unsigned char ch, unsigned char* param_offsets);
-void triangle_reset(unsigned char ch);
+void triangle_reset(unsigned char ch, unsigned char* param_offsets);
 
 unsigned char triangle_cv(unsigned char ch);
 unsigned char triangle_gate(unsigned char ch);

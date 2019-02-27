@@ -17,10 +17,20 @@ unsigned char fnctl_check_param(unsigned char pr) {
     return pr < FNCTL_MAX_PARAM;
 }
 
+void fnctl_update_offsets(void) {
+        // Pull offset params from CV inputs
+    fnctl_param_offsets[0] = inputs_get(PARM1);  // TODO: The inputs jitter (or the gate outs when looped back) need to test with a solid 5v source
+    fnctl_param_offsets[1] = inputs_get(PARM2);
+    fnctl_param_offsets[2] = inputs_get(PARM3);
+    fnctl_param_offsets[3] = inputs_get(PARM4);
+}
+
 void fnctl_reset(unsigned char ch){
     if (!fnctl_check_ch(ch)) return;
 
-    triangle_reset(ch);
+    fnctl_update_offsets();
+
+    triangle_reset(ch, fnctl_param_offsets);
 }
 
 void fnctl_set_param(unsigned char ch, unsigned char pr, unsigned char val) {
@@ -61,11 +71,7 @@ void fnctl_set_param3(unsigned char ch, unsigned char val){
 
 void fnctl_tick(void) {
 
-    // Pull offset params from CV inputs
-    fnctl_param_offsets[0] = inputs_get(PARM1);  // TODO: The inputs jitter (or the gate outs when looped back) need to test with a solid 5v source
-    fnctl_param_offsets[1] = inputs_get(PARM2);
-    fnctl_param_offsets[2] = inputs_get(PARM3);
-    fnctl_param_offsets[3] = inputs_get(PARM4);
+    fnctl_update_offsets();
 
     // Tick all function generators
     triangle_tick(0, fnctl_param_offsets);

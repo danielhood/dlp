@@ -55,7 +55,7 @@ unsigned char triangle_gate(unsigned char ch) {
 
 
 void triangle_process_offsets(unsigned char ch, unsigned char* param_offsets) {
-    // SingleOffset will invert single flag (xor)
+    // SingleOffset will invert current single flag (xor)
     triangle_single_offset = (param_offsets[0] >= 128) != triangle_single_flag[ch];
 
     // IncOffset allows inc to exceed 255
@@ -67,6 +67,29 @@ void triangle_process_offsets(unsigned char ch, unsigned char* param_offsets) {
         triangle_max_offset = 0xFF00;
     } else {
         triangle_max_offset += triangle_max[ch];
+    }
+}
+
+void triangle_process_offsets_reset(unsigned char ch, unsigned char* param_offsets) {
+    // Clamp max to 0xFF00
+    triangle_max_offset = ((unsigned short)param_offsets[2] << 8);
+    if (triangle_max_offset > 0xFF00 - triangle_max[ch]) {
+        triangle_max_offset = 0xFF00;
+    } else {
+        triangle_max_offset += triangle_max[ch];
+    }
+    
+    // Clamp initial to 0XFF00
+    triangle_initial_offset = ((unsigned short)param_offsets[3] << 8);
+    if (triangle_initial_offset > 0xFF00 - triangle_initial[ch]) {
+        triangle_initial_offset = 0xFF00;
+    } else {
+        triangle_initial_offset += triangle_initial[ch];
+    }
+
+    // Check bounds
+    if (triangle_initial_offset > triangle_max_offset) {
+        triangle_initial_offset = triangle_max_offset;
     }
 }
 
@@ -103,8 +126,10 @@ void triangle_tick(unsigned char ch, unsigned char* param_offsets) {
     }
 }
 
-void triangle_reset(unsigned char ch) {
-    triangle_curr[ch] = triangle_initial[ch];
+void triangle_reset(unsigned char ch, unsigned char* param_offsets) {
+    triangle_process_offsets_reset(ch, param_offsets);
+
+    triangle_curr[ch] = triangle_initial_offset;
     triangle_dir_flag[ch] = 1;
 }
 

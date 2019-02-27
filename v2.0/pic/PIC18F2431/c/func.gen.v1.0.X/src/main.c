@@ -132,13 +132,17 @@ void main() {
     //      - CK2 = Trig/Reset ch 2/3
     //      - All 4 inputs are paramters (eventually will be all analog)
     //      - MODE: Alg select/Fixed Params (1, 2, etc)
-    //      - TARGET: Ouput 1, 2, 3 (, 4, 5, 6? if gates aren't EOC's and their own independent gate patterns)
+    //      - TARGET: Ouput 1, 2, 3
     //      - SET/VAL: set the value for the selected target
+    //      - CV outs for function value
+    //      - Gate outs defined by Alg (TODO: have another param the determines the Gate behaviour of the fn alg)
+    //          - Triangle: 'slope' of fn
     //
     //      Algs:
     //          - 0: Triangle
-    //          - [1: Ramp]
-    //          - [2: Inv Ramp]
+    //          - TODO: 1: Ramp
+    //          - TODO: 2: Inv Ramp
+    //
 
     setup();
     leds_init();
@@ -157,10 +161,10 @@ void main() {
 
         // Mappings are a bit messed up (same for both simu and seqential modes)
         // We will need to internally map these somehow
-        //  PARM3 11
         //  PARM2 00
-        //  PARM1 10
         //  LVL   01
+        //  PARM1 10
+        //  PARM3 11
 
         // Note that sequential mode scatters the values
 
