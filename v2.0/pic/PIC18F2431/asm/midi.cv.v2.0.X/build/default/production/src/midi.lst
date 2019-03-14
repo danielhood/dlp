@@ -1,4 +1,4 @@
-MPASM  5.43                          MIDI.ASM   3-13-2019  22:23:04         PAGE  1
+MPASM  5.43                          MIDI.ASM   3-13-2019  22:43:17         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,7 +57,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00038 ;------ midi.asm variables
   00000017            00039         TMP_CV_BYTE_L           ; Holds a temp value for pushing CV values to the PWM registers
   00000018            00040         TMP_CV_BYTE_H
-MPASM  5.43                          MIDI.ASM   3-13-2019  22:23:04         PAGE  2
+MPASM  5.43                          MIDI.ASM   3-13-2019  22:43:17         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -116,7 +116,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
   00000001            00091 GATE_4:         equ     0x01
   00000000            00092 GATE_5:         equ     0x00
                       00005 
-MPASM  5.43                          MIDI.ASM   3-13-2019  22:23:04         PAGE  3
+MPASM  5.43                          MIDI.ASM   3-13-2019  22:43:17         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -175,7 +175,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00056         endm
                       00057 
                       00058 ; ------------------------------------------------------------------------------
-MPASM  5.43                          MIDI.ASM   3-13-2019  22:23:04         PAGE  4
+MPASM  5.43                          MIDI.ASM   3-13-2019  22:43:17         PAGE  4
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -234,7 +234,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00004E 4218               M         rrncf   TMP_CV_BYTE_H,F
 000050 4218               M         rrncf   TMP_CV_BYTE_H,F
 000052 C018 FF76      00089         movff   TMP_CV_BYTE_H,PDC1H
-MPASM  5.43                          MIDI.ASM   3-13-2019  22:23:04         PAGE  5
+MPASM  5.43                          MIDI.ASM   3-13-2019  22:43:17         PAGE  5
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -267,7 +267,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 000084 EF?? F???      00105         goto    _LOOP
                       00106 
                       00107         end
-MPASM  5.43                          MIDI.ASM   3-13-2019  22:23:04         PAGE  6
+MPASM  5.43                          MIDI.ASM   3-13-2019  22:43:17         PAGE  6
 
 
 SYMBOL TABLE
@@ -326,7 +326,7 @@ BFEMT                             00000003
 BFOVFL                            00000002
 BOR                               00000000
 BRFEN                             00000007
-MPASM  5.43                          MIDI.ASM   3-13-2019  22:23:04         PAGE  7
+MPASM  5.43                          MIDI.ASM   3-13-2019  22:43:17         PAGE  7
 
 
 SYMBOL TABLE
@@ -385,7 +385,7 @@ CCP2M1                            00000001
 CCP2M2                            00000002
 CCP2M3                            00000003
 CCP2X                             00000005
-MPASM  5.43                          MIDI.ASM   3-13-2019  22:23:04         PAGE  8
+MPASM  5.43                          MIDI.ASM   3-13-2019  22:43:17         PAGE  8
 
 
 SYMBOL TABLE
@@ -444,7 +444,7 @@ DT2                               00000002
 DT3                               00000003
 DT4                               00000004
 DT5                               00000005
-MPASM  5.43                          MIDI.ASM   3-13-2019  22:23:04         PAGE  9
+MPASM  5.43                          MIDI.ASM   3-13-2019  22:43:17         PAGE  9
 
 
 SYMBOL TABLE
@@ -503,7 +503,7 @@ FSR1L                             00000FE1
 FSR2                              00000002
 FSR2H                             00000FDA
 FSR2L                             00000FD9
-MPASM  5.43                          MIDI.ASM   3-13-2019  22:23:04         PAGE 10
+MPASM  5.43                          MIDI.ASM   3-13-2019  22:43:17         PAGE 10
 
 
 SYMBOL TABLE
@@ -562,7 +562,7 @@ INT2IE                            00000004
 INT2IF                            00000001
 INT2IP                            00000007
 INT2P                             00000007
-MPASM  5.43                          MIDI.ASM   3-13-2019  22:23:04         PAGE 11
+MPASM  5.43                          MIDI.ASM   3-13-2019  22:43:17         PAGE 11
 
 
 SYMBOL TABLE
@@ -621,7 +621,7 @@ LVDL2                             00000002
 LVDL3                             00000003
 MAXCNTH                           00000F65
 MAXCNTL                           00000F64
-MPASM  5.43                          MIDI.ASM   3-13-2019  22:23:04         PAGE 12
+MPASM  5.43                          MIDI.ASM   3-13-2019  22:43:17         PAGE 12
 
 
 SYMBOL TABLE
@@ -680,7 +680,7 @@ PCLATH                            00000FFA
 PCLATU                            00000FFB
 PD                                00000002
 PDC0H                             00000F78
-MPASM  5.43                          MIDI.ASM   3-13-2019  22:23:04         PAGE 13
+MPASM  5.43                          MIDI.ASM   3-13-2019  22:43:17         PAGE 13
 
 
 SYMBOL TABLE
@@ -739,7 +739,7 @@ POVD6                             00000006
 POVD7                             00000007
 PR2                               00000FCB
 PR5                               00000F90
-MPASM  5.43                          MIDI.ASM   3-13-2019  22:23:04         PAGE 14
+MPASM  5.43                          MIDI.ASM   3-13-2019  22:43:17         PAGE 14
 
 
 SYMBOL TABLE
@@ -798,7 +798,7 @@ RB4                               00000004
 RB5                               00000005
 RB6                               00000006
 RB7                               00000007
-MPASM  5.43                          MIDI.ASM   3-13-2019  22:23:04         PAGE 15
+MPASM  5.43                          MIDI.ASM   3-13-2019  22:43:17         PAGE 15
 
 
 SYMBOL TABLE
@@ -857,7 +857,7 @@ SENDB                             00000003
 SEVOPS0                           00000004
 SEVOPS1                           00000005
 SEVOPS2                           00000006
-MPASM  5.43                          MIDI.ASM   3-13-2019  22:23:04         PAGE 16
+MPASM  5.43                          MIDI.ASM   3-13-2019  22:43:17         PAGE 16
 
 
 SYMBOL TABLE
@@ -916,7 +916,7 @@ T0PS0                             00000000
 T0PS1                             00000001
 T0PS2                             00000002
 T0PS3                             00000003
-MPASM  5.43                          MIDI.ASM   3-13-2019  22:23:04         PAGE 17
+MPASM  5.43                          MIDI.ASM   3-13-2019  22:43:17         PAGE 17
 
 
 SYMBOL TABLE
@@ -975,7 +975,7 @@ TMR1ON                            00000000
 TMR2                              00000FCC
 TMR2IE                            00000001
 TMR2IF                            00000001
-MPASM  5.43                          MIDI.ASM   3-13-2019  22:23:04         PAGE 18
+MPASM  5.43                          MIDI.ASM   3-13-2019  22:43:17         PAGE 18
 
 
 SYMBOL TABLE
@@ -1034,7 +1034,7 @@ TUN3                              00000003
 TUN4                              00000004
 TUN5                              00000005
 TX                                00000006
-MPASM  5.43                          MIDI.ASM   3-13-2019  22:23:04         PAGE 19
+MPASM  5.43                          MIDI.ASM   3-13-2019  22:43:17         PAGE 19
 
 
 SYMBOL TABLE
@@ -1093,7 +1093,7 @@ _CONFIG7H                         0030000D
 _CONFIG7L                         0030000C
 _CP0_OFF_5L                       000000FF
 _CP0_ON_5L                        000000FE
-MPASM  5.43                          MIDI.ASM   3-13-2019  22:23:04         PAGE 20
+MPASM  5.43                          MIDI.ASM   3-13-2019  22:43:17         PAGE 20
 
 
 SYMBOL TABLE
@@ -1152,7 +1152,7 @@ _MOFFSET_CP                       0000000A
 _MOFFSET_F1                       00000010
 _MOFFSET_KP                       00000004
 _MOFFSET_NONE                     0000002E
-MPASM  5.43                          MIDI.ASM   3-13-2019  22:23:04         PAGE 21
+MPASM  5.43                          MIDI.ASM   3-13-2019  22:43:17         PAGE 21
 
 
 SYMBOL TABLE
@@ -1211,7 +1211,7 @@ _WDPS_2048_2H                     000000F7
 _WDPS_256_2H                      000000F1
 _WDPS_2_2H                        000000E3
 _WDPS_32768_2H                    000000FF
-MPASM  5.43                          MIDI.ASM   3-13-2019  22:23:04         PAGE 22
+MPASM  5.43                          MIDI.ASM   3-13-2019  22:43:17         PAGE 22
 
 
 SYMBOL TABLE

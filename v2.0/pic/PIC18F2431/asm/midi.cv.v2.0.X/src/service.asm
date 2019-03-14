@@ -434,8 +434,8 @@ _MSTATE_KP:
 	goto	_RC_CLEANUP
 
 _MSTATE_CC:
-	;btfsc	PORTA,0				; Check MIDI MODE
-	goto	_RC_CLEANUP			; Simply ignore CC in MODE1 and MODE0
+	btfss	PORTA,0				; Check MIDI MODE
+	goto	_RC_CLEANUP			; Ignore CC in MODE0 (Synth)
 	btfsc	MSG_COUNT,0
 	goto	_PROCESS_CC01
 _PROCSES_CNUM:
@@ -443,59 +443,25 @@ _PROCSES_CNUM:
 	incf	MSG_COUNT
 	goto	_RC_CLEANUP
 _PROCESS_CC01:
-	movlw	0x01				; Controller num that we're mapping (Mod Wheel)
+	movlw	0x14				; Controller num that we're mapping (CC20)
 	cpfseq	CC_NUM				; Check to see if this is the controller we want
 	goto	_PROCESS_CC02			; Try next CC Value
-	movff	CUR_BYTE,CV_MOD			; Update the CC value
-	bsf	CV_FLAGS,CVF_MOD
+	movff	CUR_BYTE,CV_PITCH		; Update CV1 to the CC value
+	bsf	CV_FLAGS,CVF_PITCH
 	goto	_END_CVALUE
 _PROCESS_CC02:
-	movlw	0x02
+	movlw	0x15				; CC21
 	cpfseq	CC_NUM				; Check CC Value
 	goto	_PROCESS_CC03			; Try next CC Value
-	movlw	0x3F				; Check if > 63
-	cpfsgt	CUR_BYTE
-	goto	_CC02_OFF
-	bsf	CV_GATE,GATE_2			; Trigger Gate
-	goto	_END_CVALUE
-_CC02_OFF:
-	bcf	CV_GATE,GATE_2			; Clear Gate
+	movff	CUR_BYTE,CV_VELOCITY		; Update CV2 to the CC value
+	bsf	CV_FLAGS,CVF_VELOCITY
 	goto	_END_CVALUE
 _PROCESS_CC03:
-	movlw	0x03
+	movlw	0x16				; CC22
 	cpfseq	CC_NUM				; Check CC Value
-	goto	_PROCESS_CC04			; Try next CC Value
-	movlw	0x3F				; Check if > 63
-	cpfsgt	CUR_BYTE
-	goto	_CC03_OFF
-	bsf	CV_GATE,GATE_3			; Trigger Gate
 	goto	_END_CVALUE
-_CC03_OFF:
-	bcf	CV_GATE,GATE_3			; Clear Gate
-	goto	_END_CVALUE
-_PROCESS_CC04:
-	movlw	0x04
-	cpfseq	CC_NUM				; Check CC Value
-	goto	_PROCESS_CC05			; Try next CC Value
-	movlw	0x3F				; Check if > 63
-	cpfsgt	CUR_BYTE
-	goto	_CC04_OFF
-	bsf	CV_GATE,GATE_4			; Trigger Gate
-	goto	_END_CVALUE
-_CC04_OFF:
-	bcf	CV_GATE,GATE_4			; Clear Gate
-	goto	_END_CVALUE
-_PROCESS_CC05:
-	movlw	0x05
-	cpfseq	CC_NUM				; Check CC Value
-	goto	_END_CVALUE			; CC Must be > 5 so ignore
-	movlw	0x3F				; Check if > 63
-	cpfsgt	CUR_BYTE
-	goto	_CC05_OFF
-	bsf	CV_GATE,GATE_5			; Trigger Gate
-	goto	_END_CVALUE
-_CC05_OFF:
-	bcf	CV_GATE,GATE_5			; Clear Gate
+	movff	CUR_BYTE,CV_MOD			; Update CV3 to the CC value
+	bsf	CV_FLAGS,CVF_MOD
 	goto	_END_CVALUE
 _END_CVALUE:
 	clrf	MSG_COUNT			; Reset message count
