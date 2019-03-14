@@ -1,4 +1,4 @@
-MPASM  5.43                       SERVICE.ASM   3-13-2019  22:19:43         PAGE  1
+MPASM  5.43                       SERVICE.ASM   3-13-2019  22:23:05         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,7 +57,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00038 ;------ midi.asm variables
   00000017            00039         TMP_CV_BYTE_L           ; Holds a temp value for pushing CV values to the PWM registers
   00000018            00040         TMP_CV_BYTE_H
-MPASM  5.43                       SERVICE.ASM   3-13-2019  22:19:43         PAGE  2
+MPASM  5.43                       SERVICE.ASM   3-13-2019  22:23:05         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -116,7 +116,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
   00000001            00091 GATE_4:         equ     0x01
   00000000            00092 GATE_5:         equ     0x00
                       00005 
-MPASM  5.43                       SERVICE.ASM   3-13-2019  22:19:43         PAGE  3
+MPASM  5.43                       SERVICE.ASM   3-13-2019  22:23:05         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -175,7 +175,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00050 ; ------------------------------------------------------------------------------
                       00051 ; Handler for MIDI IN over Serial RX
                       00052 ;
-MPASM  5.43                       SERVICE.ASM   3-13-2019  22:19:43         PAGE  4
+MPASM  5.43                       SERVICE.ASM   3-13-2019  22:23:05         PAGE  4
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -234,7 +234,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 000070 D???           00102         bra     _MSTATE_START_SONG
 000072 D???           00103         bra     _MSTATE_CONT_SONG
 000074 D???           00104         bra     _MSTATE_STOP_SONG
-MPASM  5.43                       SERVICE.ASM   3-13-2019  22:19:43         PAGE  5
+MPASM  5.43                       SERVICE.ASM   3-13-2019  22:23:05         PAGE  5
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -293,7 +293,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0000D8 EF?? F???      00154         goto    _RC_CLEANUP
 0000DC                00155 _PROCESS_PITCH_NOTE_OFF_CH5:
 0000DC C000 F015      00156         movff   CUR_BYTE,MSG_PITCH_CH5
-MPASM  5.43                       SERVICE.ASM   3-13-2019  22:19:43         PAGE  6
+MPASM  5.43                       SERVICE.ASM   3-13-2019  22:23:05         PAGE  6
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -352,7 +352,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 000146                00204 _PROCESS_VEL_NOTE_OFF_CH4:
 000146 5014           00205         movf    MSG_PITCH_CH4,W
 000148 6203           00206         cpfseq  CV_PITCH_CH4
-MPASM  5.43                       SERVICE.ASM   3-13-2019  22:19:43         PAGE  7
+MPASM  5.43                       SERVICE.ASM   3-13-2019  22:23:05         PAGE  7
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -411,7 +411,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00255         ;bsf    CV_FLAGS,CVF_PITCH
 0001B0 9807           00256         bcf     CV_GATE,GATE_1                  ; Clear GATE1
 0001B2 6A0E           00257         clrf    MSG_COUNT                       ; Reset message count
-MPASM  5.43                       SERVICE.ASM   3-13-2019  22:19:43         PAGE  8
+MPASM  5.43                       SERVICE.ASM   3-13-2019  22:23:05         PAGE  8
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -470,7 +470,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 000218 EF?? F???      00308         goto    _RC_CLEANUP
 00021C                00309 _PROCESS_PITCH_NOTE_ON_CH3:     
 00021C C000 F013      00310         movff   CUR_BYTE,MSG_PITCH_CH3
-MPASM  5.43                       SERVICE.ASM   3-13-2019  22:19:43         PAGE  9
+MPASM  5.43                       SERVICE.ASM   3-13-2019  22:23:05         PAGE  9
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -529,7 +529,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 000288 8407           00359         bsf     CV_GATE,GATE_3                  ; Trigger GATE
 00028A 6A0E           00360         clrf    MSG_COUNT                       ; Reset message count
 00028C EF?? F???      00361         goto    _RC_CLEANUP
-MPASM  5.43                       SERVICE.ASM   3-13-2019  22:19:43         PAGE 10
+MPASM  5.43                       SERVICE.ASM   3-13-2019  22:23:05         PAGE 10
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -582,226 +582,226 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0002EE 6011           00404         cpfslt  MSG_PITCH_CH1
 0002F0 EF?? F???      00405         goto    _PROCESS_NOTE_ON_GATE2
 0002F4                00406 _PROCESS_NOTE_ON_GATE1:
-0002F4 C016 F002      00407         movff   MSG_VELOCITY,CV_PITCH           ; PWM1
-0002F8 8001           00408         bsf     CV_FLAGS,CVF_PITCH
-0002FA 8807           00409         bsf     CV_GATE,GATE_1                  ; Trigger GATE1
-0002FC 6A0E           00410         clrf    MSG_COUNT                       ; Reset message count
-0002FE EF?? F???      00411         goto    _RC_CLEANUP
-000302                00412 _PROCESS_NOTE_ON_GATE2:
-MPASM  5.43                       SERVICE.ASM   3-13-2019  22:19:43         PAGE 11
+                      00407         ;movff  MSG_VELOCITY,CV_PITCH           ; PWM1
+                      00408         ;bsf    CV_FLAGS,CVF_PITCH
+0002F4 8807           00409         bsf     CV_GATE,GATE_1                  ; Trigger GATE1
+0002F6 6A0E           00410         clrf    MSG_COUNT                       ; Reset message count
+0002F8 EF?? F???      00411         goto    _RC_CLEANUP
+0002FC                00412 _PROCESS_NOTE_ON_GATE2:
+MPASM  5.43                       SERVICE.ASM   3-13-2019  22:23:05         PAGE 11
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-000302 C016 F005      00413         movff   MSG_VELOCITY,CV_VELOCITY        ; PWM3
-000306 8201           00414         bsf     CV_FLAGS,CVF_VELOCITY
-000308 8607           00415         bsf     CV_GATE,GATE_2                  ; Trigger GATE2
-00030A 6A0E           00416         clrf    MSG_COUNT                       ; Reset message count
-00030C EF?? F???      00417         goto    _RC_CLEANUP
-000310                00418 _PROCESS_NOTE_ON_GATE3:
-000310 C016 F006      00419         movff   MSG_VELOCITY,CV_MOD             ; PWM5
-000314 8401           00420         bsf     CV_FLAGS,CVF_MOD
-000316 8407           00421         bsf     CV_GATE,GATE_3                  ; Trigger GATE3
-000318 6A0E           00422         clrf    MSG_COUNT                       ; Reset message count
-00031A EF?? F???      00423         goto    _RC_CLEANUP
-00031E                00424 _PROCESS_NOTE_ON_GATE4:
-00031E 8207           00425         bsf     CV_GATE,GATE_4                  ; Trigger GATE4
-000320 6A0E           00426         clrf    MSG_COUNT                       ; Reset message count
-000322 EF?? F???      00427         goto    _RC_CLEANUP
-000326                00428 _PROCESS_NOTE_ON_GATE5:
-000326 8007           00429         bsf     CV_GATE,GATE_5                  ; Trigger GATE5
-000328 6A0E           00430         clrf    MSG_COUNT                       ; Reset message count
-00032A EF?? F???      00431         goto    _RC_CLEANUP
+                      00413         ;movff  MSG_VELOCITY,CV_VELOCITY        ; PWM3
+                      00414         ;bsf    CV_FLAGS,CVF_VELOCITY
+0002FC 8607           00415         bsf     CV_GATE,GATE_2                  ; Trigger GATE2
+0002FE 6A0E           00416         clrf    MSG_COUNT                       ; Reset message count
+000300 EF?? F???      00417         goto    _RC_CLEANUP
+000304                00418 _PROCESS_NOTE_ON_GATE3:
+                      00419         ;movff  MSG_VELOCITY,CV_MOD             ; PWM5
+                      00420         ;bsf    CV_FLAGS,CVF_MOD
+000304 8407           00421         bsf     CV_GATE,GATE_3                  ; Trigger GATE3
+000306 6A0E           00422         clrf    MSG_COUNT                       ; Reset message count
+000308 EF?? F???      00423         goto    _RC_CLEANUP
+00030C                00424 _PROCESS_NOTE_ON_GATE4:
+00030C 8207           00425         bsf     CV_GATE,GATE_4                  ; Trigger GATE4
+00030E 6A0E           00426         clrf    MSG_COUNT                       ; Reset message count
+000310 EF?? F???      00427         goto    _RC_CLEANUP
+000314                00428 _PROCESS_NOTE_ON_GATE5:
+000314 8007           00429         bsf     CV_GATE,GATE_5                  ; Trigger GATE5
+000316 6A0E           00430         clrf    MSG_COUNT                       ; Reset message count
+000318 EF?? F???      00431         goto    _RC_CLEANUP
                       00432 
-00032E                00433 _MSTATE_KP:
-00032E EF?? F???      00434         goto    _RC_CLEANUP
+00031C                00433 _MSTATE_KP:
+00031C EF?? F???      00434         goto    _RC_CLEANUP
                       00435 
-000332                00436 _MSTATE_CC:
+000320                00436 _MSTATE_CC:
                       00437         ;btfsc  PORTA,0                         ; Check MIDI MODE
-000332 EF?? F???      00438         goto    _RC_CLEANUP                     ; Simply ignore CC in MODE1 and MODE0
-000336 B00E           00439         btfsc   MSG_COUNT,0
-000338 EF?? F???      00440         goto    _PROCESS_CC01
-00033C                00441 _PROCSES_CNUM:
-00033C C000 F00F      00442         movff   CUR_BYTE,CC_NUM
-000340 2A0E           00443         incf    MSG_COUNT
-000342 EF?? F???      00444         goto    _RC_CLEANUP
-000346                00445 _PROCESS_CC01:
-000346 0E01           00446         movlw   0x01                            ; Controller num that we're mapping (Mod Wheel)
-000348 620F           00447         cpfseq  CC_NUM                          ; Check to see if this is the controller we want
-00034A EF?? F???      00448         goto    _PROCESS_CC02                   ; Try next CC Value
-00034E C000 F006      00449         movff   CUR_BYTE,CV_MOD                 ; Update the CC value
-000352 8401           00450         bsf     CV_FLAGS,CVF_MOD
-000354 EF?? F???      00451         goto    _END_CVALUE
-000358                00452 _PROCESS_CC02:
-000358 0E02           00453         movlw   0x02
-00035A 620F           00454         cpfseq  CC_NUM                          ; Check CC Value
-00035C EF?? F???      00455         goto    _PROCESS_CC03                   ; Try next CC Value
-000360 0E3F           00456         movlw   0x3F                            ; Check if > 63
-000362 6400           00457         cpfsgt  CUR_BYTE
-000364 EF?? F???      00458         goto    _CC02_OFF
-000368 8607           00459         bsf     CV_GATE,GATE_2                  ; Trigger Gate
-00036A EF?? F???      00460         goto    _END_CVALUE
-00036E                00461 _CC02_OFF:
-00036E 9607           00462         bcf     CV_GATE,GATE_2                  ; Clear Gate
-000370 EF?? F???      00463         goto    _END_CVALUE
-000374                00464 _PROCESS_CC03:
-000374 0E03           00465         movlw   0x03
-MPASM  5.43                       SERVICE.ASM   3-13-2019  22:19:43         PAGE 12
+000320 EF?? F???      00438         goto    _RC_CLEANUP                     ; Simply ignore CC in MODE1 and MODE0
+000324 B00E           00439         btfsc   MSG_COUNT,0
+000326 EF?? F???      00440         goto    _PROCESS_CC01
+00032A                00441 _PROCSES_CNUM:
+00032A C000 F00F      00442         movff   CUR_BYTE,CC_NUM
+00032E 2A0E           00443         incf    MSG_COUNT
+000330 EF?? F???      00444         goto    _RC_CLEANUP
+000334                00445 _PROCESS_CC01:
+000334 0E01           00446         movlw   0x01                            ; Controller num that we're mapping (Mod Wheel)
+000336 620F           00447         cpfseq  CC_NUM                          ; Check to see if this is the controller we want
+000338 EF?? F???      00448         goto    _PROCESS_CC02                   ; Try next CC Value
+00033C C000 F006      00449         movff   CUR_BYTE,CV_MOD                 ; Update the CC value
+000340 8401           00450         bsf     CV_FLAGS,CVF_MOD
+000342 EF?? F???      00451         goto    _END_CVALUE
+000346                00452 _PROCESS_CC02:
+000346 0E02           00453         movlw   0x02
+000348 620F           00454         cpfseq  CC_NUM                          ; Check CC Value
+00034A EF?? F???      00455         goto    _PROCESS_CC03                   ; Try next CC Value
+00034E 0E3F           00456         movlw   0x3F                            ; Check if > 63
+000350 6400           00457         cpfsgt  CUR_BYTE
+000352 EF?? F???      00458         goto    _CC02_OFF
+000356 8607           00459         bsf     CV_GATE,GATE_2                  ; Trigger Gate
+000358 EF?? F???      00460         goto    _END_CVALUE
+00035C                00461 _CC02_OFF:
+00035C 9607           00462         bcf     CV_GATE,GATE_2                  ; Clear Gate
+00035E EF?? F???      00463         goto    _END_CVALUE
+000362                00464 _PROCESS_CC03:
+000362 0E03           00465         movlw   0x03
+MPASM  5.43                       SERVICE.ASM   3-13-2019  22:23:05         PAGE 12
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-000376 620F           00466         cpfseq  CC_NUM                          ; Check CC Value
-000378 EF?? F???      00467         goto    _PROCESS_CC04                   ; Try next CC Value
-00037C 0E3F           00468         movlw   0x3F                            ; Check if > 63
-00037E 6400           00469         cpfsgt  CUR_BYTE
-000380 EF?? F???      00470         goto    _CC03_OFF
-000384 8407           00471         bsf     CV_GATE,GATE_3                  ; Trigger Gate
-000386 EF?? F???      00472         goto    _END_CVALUE
-00038A                00473 _CC03_OFF:
-00038A 9407           00474         bcf     CV_GATE,GATE_3                  ; Clear Gate
-00038C EF?? F???      00475         goto    _END_CVALUE
-000390                00476 _PROCESS_CC04:
-000390 0E04           00477         movlw   0x04
-000392 620F           00478         cpfseq  CC_NUM                          ; Check CC Value
-000394 EF?? F???      00479         goto    _PROCESS_CC05                   ; Try next CC Value
-000398 0E3F           00480         movlw   0x3F                            ; Check if > 63
-00039A 6400           00481         cpfsgt  CUR_BYTE
-00039C EF?? F???      00482         goto    _CC04_OFF
-0003A0 8207           00483         bsf     CV_GATE,GATE_4                  ; Trigger Gate
-0003A2 EF?? F???      00484         goto    _END_CVALUE
-0003A6                00485 _CC04_OFF:
-0003A6 9207           00486         bcf     CV_GATE,GATE_4                  ; Clear Gate
-0003A8 EF?? F???      00487         goto    _END_CVALUE
-0003AC                00488 _PROCESS_CC05:
-0003AC 0E05           00489         movlw   0x05
-0003AE 620F           00490         cpfseq  CC_NUM                          ; Check CC Value
-0003B0 EF?? F???      00491         goto    _END_CVALUE                     ; CC Must be > 5 so ignore
-0003B4 0E3F           00492         movlw   0x3F                            ; Check if > 63
-0003B6 6400           00493         cpfsgt  CUR_BYTE
-0003B8 EF?? F???      00494         goto    _CC05_OFF
-0003BC 8007           00495         bsf     CV_GATE,GATE_5                  ; Trigger Gate
-0003BE EF?? F???      00496         goto    _END_CVALUE
-0003C2                00497 _CC05_OFF:
-0003C2 9007           00498         bcf     CV_GATE,GATE_5                  ; Clear Gate
-0003C4 EF?? F???      00499         goto    _END_CVALUE
-0003C8                00500 _END_CVALUE:
-0003C8 6A0E           00501         clrf    MSG_COUNT                       ; Reset message count
-0003CA EF?? F???      00502         goto    _RC_CLEANUP
+000364 620F           00466         cpfseq  CC_NUM                          ; Check CC Value
+000366 EF?? F???      00467         goto    _PROCESS_CC04                   ; Try next CC Value
+00036A 0E3F           00468         movlw   0x3F                            ; Check if > 63
+00036C 6400           00469         cpfsgt  CUR_BYTE
+00036E EF?? F???      00470         goto    _CC03_OFF
+000372 8407           00471         bsf     CV_GATE,GATE_3                  ; Trigger Gate
+000374 EF?? F???      00472         goto    _END_CVALUE
+000378                00473 _CC03_OFF:
+000378 9407           00474         bcf     CV_GATE,GATE_3                  ; Clear Gate
+00037A EF?? F???      00475         goto    _END_CVALUE
+00037E                00476 _PROCESS_CC04:
+00037E 0E04           00477         movlw   0x04
+000380 620F           00478         cpfseq  CC_NUM                          ; Check CC Value
+000382 EF?? F???      00479         goto    _PROCESS_CC05                   ; Try next CC Value
+000386 0E3F           00480         movlw   0x3F                            ; Check if > 63
+000388 6400           00481         cpfsgt  CUR_BYTE
+00038A EF?? F???      00482         goto    _CC04_OFF
+00038E 8207           00483         bsf     CV_GATE,GATE_4                  ; Trigger Gate
+000390 EF?? F???      00484         goto    _END_CVALUE
+000394                00485 _CC04_OFF:
+000394 9207           00486         bcf     CV_GATE,GATE_4                  ; Clear Gate
+000396 EF?? F???      00487         goto    _END_CVALUE
+00039A                00488 _PROCESS_CC05:
+00039A 0E05           00489         movlw   0x05
+00039C 620F           00490         cpfseq  CC_NUM                          ; Check CC Value
+00039E EF?? F???      00491         goto    _END_CVALUE                     ; CC Must be > 5 so ignore
+0003A2 0E3F           00492         movlw   0x3F                            ; Check if > 63
+0003A4 6400           00493         cpfsgt  CUR_BYTE
+0003A6 EF?? F???      00494         goto    _CC05_OFF
+0003AA 8007           00495         bsf     CV_GATE,GATE_5                  ; Trigger Gate
+0003AC EF?? F???      00496         goto    _END_CVALUE
+0003B0                00497 _CC05_OFF:
+0003B0 9007           00498         bcf     CV_GATE,GATE_5                  ; Clear Gate
+0003B2 EF?? F???      00499         goto    _END_CVALUE
+0003B6                00500 _END_CVALUE:
+0003B6 6A0E           00501         clrf    MSG_COUNT                       ; Reset message count
+0003B8 EF?? F???      00502         goto    _RC_CLEANUP
                       00503 
-0003CE                00504 _MSTATE_PC:
-0003CE EF?? F???      00505         goto    _RC_CLEANUP
+0003BC                00504 _MSTATE_PC:
+0003BC EF?? F???      00505         goto    _RC_CLEANUP
                       00506 
-0003D2                00507 _MSTATE_CP:
-0003D2 EF?? F???      00508         goto    _RC_CLEANUP
+0003C0                00507 _MSTATE_CP:
+0003C0 EF?? F???      00508         goto    _RC_CLEANUP
                       00509 
-0003D6                00510 _MSTATE_PB:
-0003D6 EF?? F???      00511         goto    _RC_CLEANUP
+0003C4                00510 _MSTATE_PB:
+0003C4 EF?? F???      00511         goto    _RC_CLEANUP
                       00512 
-0003DA                00513 _MSTATE_F1:
-0003DA EF?? F???      00514         goto    _RC_CLEANUP
+0003C8                00513 _MSTATE_F1:
+0003C8 EF?? F???      00514         goto    _RC_CLEANUP
                       00515 
-0003DE                00516 _MSTATE_SP:
-0003DE EF?? F???      00517         goto    _RC_CLEANUP
+0003CC                00516 _MSTATE_SP:
+0003CC EF?? F???      00517         goto    _RC_CLEANUP
                       00518 
-MPASM  5.43                       SERVICE.ASM   3-13-2019  22:19:43         PAGE 13
+MPASM  5.43                       SERVICE.ASM   3-13-2019  22:23:05         PAGE 13
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-0003E2                00519 _MSTATE_SS:
-0003E2 EF?? F???      00520         goto    _RC_CLEANUP
+0003D0                00519 _MSTATE_SS:
+0003D0 EF?? F???      00520         goto    _RC_CLEANUP
                       00521 
-0003E6                00522 _MSTATE_F4:
-0003E6 EF?? F???      00523         goto    _RC_CLEANUP
+0003D4                00522 _MSTATE_F4:
+0003D4 EF?? F???      00523         goto    _RC_CLEANUP
                       00524 
-0003EA                00525 _MSTATE_UBS:
-0003EA EF?? F???      00526         goto    _RC_CLEANUP
+0003D8                00525 _MSTATE_UBS:
+0003D8 EF?? F???      00526         goto    _RC_CLEANUP
                       00527 
-0003EE                00528 _MSTATE_TR:
-0003EE EF?? F???      00529         goto    _RC_CLEANUP
+0003DC                00528 _MSTATE_TR:
+0003DC EF?? F???      00529         goto    _RC_CLEANUP
                       00530 
-0003F2                00531 _MSTATE_SYS_EX_END:
-0003F2 EF?? F???      00532         goto    _RC_CLEANUP
+0003E0                00531 _MSTATE_SYS_EX_END:
+0003E0 EF?? F???      00532         goto    _RC_CLEANUP
                       00533 
-0003F6                00534 _MSTATE_TT:
-0003F6 EF?? F???      00535         goto    _RC_CLEANUP
+0003E4                00534 _MSTATE_TT:
+0003E4 EF?? F???      00535         goto    _RC_CLEANUP
                       00536 
-0003FA                00537 _MSTATE_F9:
-0003FA EF?? F???      00538         goto    _RC_CLEANUP
+0003E8                00537 _MSTATE_F9:
+0003E8 EF?? F???      00538         goto    _RC_CLEANUP
                       00539 
-0003FE                00540 _MSTATE_START_SONG:
-0003FE EF?? F???      00541         goto    _RC_CLEANUP
+0003EC                00540 _MSTATE_START_SONG:
+0003EC EF?? F???      00541         goto    _RC_CLEANUP
                       00542 
-000402                00543 _MSTATE_CONT_SONG:
-000402 EF?? F???      00544         goto    _RC_CLEANUP
+0003F0                00543 _MSTATE_CONT_SONG:
+0003F0 EF?? F???      00544         goto    _RC_CLEANUP
                       00545 
-000406                00546 _MSTATE_STOP_SONG:
-000406 EF?? F???      00547         goto    _RC_CLEANUP
+0003F4                00546 _MSTATE_STOP_SONG:
+0003F4 EF?? F???      00547         goto    _RC_CLEANUP
                       00548 
-00040A                00549 _MSTATE_FD:
-00040A EF?? F???      00550         goto    _RC_CLEANUP
+0003F8                00549 _MSTATE_FD:
+0003F8 EF?? F???      00550         goto    _RC_CLEANUP
                       00551 
-00040E                00552 _MSTATE_AS:
-00040E EF?? F???      00553         goto    _RC_CLEANUP
+0003FC                00552 _MSTATE_AS:
+0003FC EF?? F???      00553         goto    _RC_CLEANUP
                       00554 
-000412                00555 _MSTATE_SYS_RESET:
-000412 00FF           00556         reset
+000400                00555 _MSTATE_SYS_RESET:
+000400 00FF           00556         reset
                       00557 
-000414                00558 _MSTATE_NONE:   ; Ignore non-status bytes
-000414 EF?? F???      00559         goto    _RC_CLEANUP
+000402                00558 _MSTATE_NONE:   ; Ignore non-status bytes
+000402 EF?? F???      00559         goto    _RC_CLEANUP
                       00560 
                       00561 
                       00562 ; ------------------------------------------------------------------------------
                       00563 ; Process MIDI Status byte
                       00564 ;
-000418                00565 _PROCESS_STATUS:
-000418 0EF0           00566         movlw   0xF0                            ; Check for sysex
-00041A 6200           00567         cpfseq  CUR_BYTE
-00041C EF?? F???      00568         goto    _CHECK_BYTE
-000420 C00C F00D      00569         movff   MIDI_STATE,MIDI_STATE_TMP       ; Store the current status if sysex start
-000424                00570 _CHECK_BYTE:
-000424 0EF0           00571         movlw   0xF0                            ; Check for system message
-MPASM  5.43                       SERVICE.ASM   3-13-2019  22:19:43         PAGE 14
+000406                00565 _PROCESS_STATUS:
+000406 0EF0           00566         movlw   0xF0                            ; Check for sysex
+000408 6200           00567         cpfseq  CUR_BYTE
+00040A EF?? F???      00568         goto    _CHECK_BYTE
+00040E C00C F00D      00569         movff   MIDI_STATE,MIDI_STATE_TMP       ; Store the current status if sysex start
+000412                00570 _CHECK_BYTE:
+000412 0EF0           00571         movlw   0xF0                            ; Check for system message
+MPASM  5.43                       SERVICE.ASM   3-13-2019  22:23:05         PAGE 14
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-000426 6000           00572         cpfslt  CUR_BYTE
-000428 EF?? F???      00573         goto    _SET_SYSTEM_MSG
-00042C                00574 _SET_STD_MSG:
-00042C 5000           00575         movf    CUR_BYTE,W
-00042E 0B0F           00576         andlw   0x0F                            ; Extract MIDI chan
-000430 6E10           00577         movwf   MSG_CHAN
-000432 5000           00578         movf    CUR_BYTE,W
-000434 0B70           00579         andlw   0x70                            ; Extract status code and drop MSb
-000436 3AE8           00580         swapf   WREG
-000438 EF?? F???      00581         goto    _CREATE_OFFSET
-00043C                00582 _SET_SYSTEM_MSG:
-00043C 5000           00583         movf    CUR_BYTE,W
-00043E 0B0F           00584         andlw   0x0F                            ; We only need the first nibble since we know this is a 
+000414 6000           00572         cpfslt  CUR_BYTE
+000416 EF?? F???      00573         goto    _SET_SYSTEM_MSG
+00041A                00574 _SET_STD_MSG:
+00041A 5000           00575         movf    CUR_BYTE,W
+00041C 0B0F           00576         andlw   0x0F                            ; Extract MIDI chan
+00041E 6E10           00577         movwf   MSG_CHAN
+000420 5000           00578         movf    CUR_BYTE,W
+000422 0B70           00579         andlw   0x70                            ; Extract status code and drop MSb
+000424 3AE8           00580         swapf   WREG
+000426 EF?? F???      00581         goto    _CREATE_OFFSET
+00042A                00582 _SET_SYSTEM_MSG:
+00042A 5000           00583         movf    CUR_BYTE,W
+00042C 0B0F           00584         andlw   0x0F                            ; We only need the first nibble since we know this is a 
                             Sys message
-000440 0F07           00585         addlw   0x07                            ; Add 7 to scale this up
-000442                00586 _CREATE_OFFSET:
-000442 46E8           00587         rlncf   WREG                            ; create an offset mapping by mult x 2
-000444 6E0C           00588         movwf   MIDI_STATE
-000446 6A0E           00589         clrf    MSG_COUNT                       ; Reset message count
+00042E 0F07           00585         addlw   0x07                            ; Add 7 to scale this up
+000430                00586 _CREATE_OFFSET:
+000430 46E8           00587         rlncf   WREG                            ; create an offset mapping by mult x 2
+000432 6E0C           00588         movwf   MIDI_STATE
+000434 6A0E           00589         clrf    MSG_COUNT                       ; Reset message count
                       00590 
                       00591         ; Check to see if we need to process the sys messge now (F6 and above do not have any addtional 
                             mesage bytes)
-000448 0EF6           00592         movlw   0xF6
-00044A 6000           00593         cpfslt  CUR_BYTE
-00044C EF?? F???      00594         goto    _PROCESS_MESSAGE
+000436 0EF6           00592         movlw   0xF6
+000438 6000           00593         cpfslt  CUR_BYTE
+00043A EF?? F???      00594         goto    _PROCESS_MESSAGE
                       00595 
-000450 EF?? F???      00596         goto    _RC_CLEANUP
+00043E EF?? F???      00596         goto    _RC_CLEANUP
                       00597 
                       00598 
                       00599         end
-MPASM  5.43                       SERVICE.ASM   3-13-2019  22:19:43         PAGE 15
+MPASM  5.43                       SERVICE.ASM   3-13-2019  22:23:05         PAGE 15
 
 
 SYMBOL TABLE
@@ -860,7 +860,7 @@ BFEMT                             00000003
 BFOVFL                            00000002
 BOR                               00000000
 BRFEN                             00000007
-MPASM  5.43                       SERVICE.ASM   3-13-2019  22:19:43         PAGE 16
+MPASM  5.43                       SERVICE.ASM   3-13-2019  22:23:05         PAGE 16
 
 
 SYMBOL TABLE
@@ -919,7 +919,7 @@ CCP2M1                            00000001
 CCP2M2                            00000002
 CCP2M3                            00000003
 CCP2X                             00000005
-MPASM  5.43                       SERVICE.ASM   3-13-2019  22:19:43         PAGE 17
+MPASM  5.43                       SERVICE.ASM   3-13-2019  22:23:05         PAGE 17
 
 
 SYMBOL TABLE
@@ -978,7 +978,7 @@ DT3                               00000003
 DT4                               00000004
 DT5                               00000005
 DTA0                              00000000
-MPASM  5.43                       SERVICE.ASM   3-13-2019  22:19:43         PAGE 18
+MPASM  5.43                       SERVICE.ASM   3-13-2019  22:23:05         PAGE 18
 
 
 SYMBOL TABLE
@@ -1037,7 +1037,7 @@ FSR2                              00000002
 FSR2H                             00000FDA
 FSR2L                             00000FD9
 GASEL0                            00000000
-MPASM  5.43                       SERVICE.ASM   3-13-2019  22:19:43         PAGE 19
+MPASM  5.43                       SERVICE.ASM   3-13-2019  22:23:05         PAGE 19
 
 
 SYMBOL TABLE
@@ -1096,7 +1096,7 @@ INT2IF                            00000001
 INT2IP                            00000007
 INT2P                             00000007
 INTCON                            00000FF2
-MPASM  5.43                       SERVICE.ASM   3-13-2019  22:19:43         PAGE 20
+MPASM  5.43                       SERVICE.ASM   3-13-2019  22:23:05         PAGE 20
 
 
 SYMBOL TABLE
@@ -1155,7 +1155,7 @@ LVDL3                             00000003
 MAXCNTH                           00000F65
 MAXCNTL                           00000F64
 MCLR                              00000003
-MPASM  5.43                       SERVICE.ASM   3-13-2019  22:19:43         PAGE 21
+MPASM  5.43                       SERVICE.ASM   3-13-2019  22:23:05         PAGE 21
 
 
 SYMBOL TABLE
@@ -1214,7 +1214,7 @@ PCLATU                            00000FFB
 PD                                00000002
 PDC0H                             00000F78
 PDC0L                             00000F79
-MPASM  5.43                       SERVICE.ASM   3-13-2019  22:19:43         PAGE 22
+MPASM  5.43                       SERVICE.ASM   3-13-2019  22:23:05         PAGE 22
 
 
 SYMBOL TABLE
@@ -1273,7 +1273,7 @@ POVD7                             00000007
 PR2                               00000FCB
 PR5                               00000F90
 PR5H                              00000F91
-MPASM  5.43                       SERVICE.ASM   3-13-2019  22:19:43         PAGE 23
+MPASM  5.43                       SERVICE.ASM   3-13-2019  22:23:05         PAGE 23
 
 
 SYMBOL TABLE
@@ -1332,7 +1332,7 @@ RB5                               00000005
 RB6                               00000006
 RB7                               00000007
 RBIE                              00000003
-MPASM  5.43                       SERVICE.ASM   3-13-2019  22:19:43         PAGE 24
+MPASM  5.43                       SERVICE.ASM   3-13-2019  22:23:05         PAGE 24
 
 
 SYMBOL TABLE
@@ -1391,7 +1391,7 @@ SEVOPS0                           00000004
 SEVOPS1                           00000005
 SEVOPS2                           00000006
 SEVOPS3                           00000007
-MPASM  5.43                       SERVICE.ASM   3-13-2019  22:19:43         PAGE 25
+MPASM  5.43                       SERVICE.ASM   3-13-2019  22:23:05         PAGE 25
 
 
 SYMBOL TABLE
@@ -1450,7 +1450,7 @@ T0PS1                             00000001
 T0PS2                             00000002
 T0PS3                             00000003
 T0SE                              00000004
-MPASM  5.43                       SERVICE.ASM   3-13-2019  22:19:43         PAGE 26
+MPASM  5.43                       SERVICE.ASM   3-13-2019  22:23:05         PAGE 26
 
 
 SYMBOL TABLE
@@ -1509,7 +1509,7 @@ TMR2                              00000FCC
 TMR2IE                            00000001
 TMR2IF                            00000001
 TMR2IP                            00000001
-MPASM  5.43                       SERVICE.ASM   3-13-2019  22:19:43         PAGE 27
+MPASM  5.43                       SERVICE.ASM   3-13-2019  22:23:05         PAGE 27
 
 
 SYMBOL TABLE
@@ -1568,7 +1568,7 @@ TUN4                              00000004
 TUN5                              00000005
 TX                                00000006
 TX9                               00000006
-MPASM  5.43                       SERVICE.ASM   3-13-2019  22:19:43         PAGE 28
+MPASM  5.43                       SERVICE.ASM   3-13-2019  22:23:05         PAGE 28
 
 
 SYMBOL TABLE
@@ -1612,11 +1612,11 @@ _BORV_20_2L                       000000FF
 _BORV_27_2L                       000000FB
 _BORV_42_2L                       000000F7
 _BORV_45_2L                       000000F3
-_CC02_OFF                         0000036E
-_CC03_OFF                         0000038A
-_CC04_OFF                         000003A6
-_CC05_OFF                         000003C2
-_CHECK_BYTE                       00000424
+_CC02_OFF                         0000035C
+_CC03_OFF                         00000378
+_CC04_OFF                         00000394
+_CC05_OFF                         000003B0
+_CHECK_BYTE                       00000412
 _CHECK_BYTE_TYPE                  00000042
 _CHECK_RC                         0000000C
 _CONFIG1H                         00300001
@@ -1627,7 +1627,7 @@ _CONFIG3L                         00300004
 _CONFIG4L                         00300006
 _CONFIG5H                         00300009
 _CONFIG5L                         00300008
-MPASM  5.43                       SERVICE.ASM   3-13-2019  22:19:43         PAGE 29
+MPASM  5.43                       SERVICE.ASM   3-13-2019  22:23:05         PAGE 29
 
 
 SYMBOL TABLE
@@ -1649,7 +1649,7 @@ _CPB_OFF_5H                       000000FF
 _CPB_ON_5H                        000000BF
 _CPD_OFF_5H                       000000FF
 _CPD_ON_5H                        0000007F
-_CREATE_OFFSET                    00000442
+_CREATE_OFFSET                    00000430
 _DEBUG_OFF_4L                     000000FF
 _DEBUG_ON_4L                      0000007F
 _DEVID1                           003FFFFE
@@ -1664,7 +1664,7 @@ _EBTR3_OFF_7L                     000000FF
 _EBTR3_ON_7L                      000000F7
 _EBTRB_OFF_7H                     000000FF
 _EBTRB_ON_7H                      000000BF
-_END_CVALUE                       000003C8
+_END_CVALUE                       000003B6
 _END_NOTE_OFF                     00000166
 _EXIT_SERVICE                     00000012
 _FCMEN_OFF_1H                     000000BF
@@ -1686,7 +1686,7 @@ _LPOL_HIGH_3L                     000000FF
 _LPOL_LOW_3L                      000000F7
 _LVP_OFF_4L                       000000FB
 _LVP_ON_4L                        000000FF
-MPASM  5.43                       SERVICE.ASM   3-13-2019  22:19:43         PAGE 30
+MPASM  5.43                       SERVICE.ASM   3-13-2019  22:23:05         PAGE 30
 
 
 SYMBOL TABLE
@@ -1718,34 +1718,34 @@ _MOFFSET_UBS                      00000018
 _MOSSFEST_F4                      00000016
 _MOSSFEST_F9                      00000020
 _MOSSFEST_FD                      00000028
-_MSTATE_AS                        0000040E
-_MSTATE_CC                        00000332
-_MSTATE_CONT_SONG                 00000402
-_MSTATE_CP                        000003D2
-_MSTATE_F1                        000003DA
-_MSTATE_F4                        000003E6
-_MSTATE_F9                        000003FA
-_MSTATE_FD                        0000040A
-_MSTATE_KP                        0000032E
-_MSTATE_NONE                      00000414
+_MSTATE_AS                        000003FC
+_MSTATE_CC                        00000320
+_MSTATE_CONT_SONG                 000003F0
+_MSTATE_CP                        000003C0
+_MSTATE_F1                        000003C8
+_MSTATE_F4                        000003D4
+_MSTATE_F9                        000003E8
+_MSTATE_FD                        000003F8
+_MSTATE_KP                        0000031C
+_MSTATE_NONE                      00000402
 _MSTATE_NOTE_OFF                  00000084
 _MSTATE_NOTE_OFF_MODE_1           0000016C
 _MSTATE_NOTE_ON                   000001D8
 _MSTATE_NOTE_ON_MODE_1            000002A8
-_MSTATE_PB                        000003D6
-_MSTATE_PC                        000003CE
-_MSTATE_SP                        000003DE
-_MSTATE_SS                        000003E2
-_MSTATE_START_SONG                000003FE
-_MSTATE_STOP_SONG                 00000406
+_MSTATE_PB                        000003C4
+_MSTATE_PC                        000003BC
+_MSTATE_SP                        000003CC
+_MSTATE_SS                        000003D0
+_MSTATE_START_SONG                000003EC
+_MSTATE_STOP_SONG                 000003F4
 _MSTATE_SYS_EX                    0000002A
-_MSTATE_SYS_EX_END                000003F2
-_MSTATE_SYS_RESET                 00000412
-_MSTATE_TR                        000003EE
-_MSTATE_TT                        000003F6
-_MSTATE_UBS                       000003EA
+_MSTATE_SYS_EX_END                000003E0
+_MSTATE_SYS_RESET                 00000400
+_MSTATE_TR                        000003DC
+_MSTATE_TT                        000003E4
+_MSTATE_UBS                       000003D8
 _OSC_ECIO_1H                      000000F5
-MPASM  5.43                       SERVICE.ASM   3-13-2019  22:19:43         PAGE 31
+MPASM  5.43                       SERVICE.ASM   3-13-2019  22:23:05         PAGE 31
 
 
 SYMBOL TABLE
@@ -1762,11 +1762,11 @@ _OSC_RC2_1H                       000000F3
 _OSC_RCIO_1H                      000000F7
 _OSC_RC_1H                        000000FC
 _OSC_XT_1H                        000000F1
-_PROCESS_CC01                     00000346
-_PROCESS_CC02                     00000358
-_PROCESS_CC03                     00000374
-_PROCESS_CC04                     00000390
-_PROCESS_CC05                     000003AC
+_PROCESS_CC01                     00000334
+_PROCESS_CC02                     00000346
+_PROCESS_CC03                     00000362
+_PROCESS_CC04                     0000037E
+_PROCESS_CC05                     0000039A
 _PROCESS_MESSAGE                  0000004A
 _PROCESS_NOTE_OFF_GATE1           000001B0
 _PROCESS_NOTE_OFF_GATE2           000001B8
@@ -1774,10 +1774,10 @@ _PROCESS_NOTE_OFF_GATE3           000001C0
 _PROCESS_NOTE_OFF_GATE4           000001C8
 _PROCESS_NOTE_OFF_GATE5           000001D0
 _PROCESS_NOTE_ON_GATE1            000002F4
-_PROCESS_NOTE_ON_GATE2            00000302
-_PROCESS_NOTE_ON_GATE3            00000310
-_PROCESS_NOTE_ON_GATE4            0000031E
-_PROCESS_NOTE_ON_GATE5            00000326
+_PROCESS_NOTE_ON_GATE2            000002FC
+_PROCESS_NOTE_ON_GATE3            00000304
+_PROCESS_NOTE_ON_GATE4            0000030C
+_PROCESS_NOTE_ON_GATE5            00000314
 _PROCESS_PITCH_NOTE_OFF_CH1       000000B4
 _PROCESS_PITCH_NOTE_OFF_CH2       000000BE
 _PROCESS_PITCH_NOTE_OFF_CH3       000000C8
@@ -1788,7 +1788,7 @@ _PROCESS_PITCH_NOTE_ON_CH2        00000212
 _PROCESS_PITCH_NOTE_ON_CH3        0000021C
 _PROCESS_PITCH_NOTE_ON_CH4        00000226
 _PROCESS_PITCH_NOTE_ON_CH5        00000230
-_PROCESS_STATUS                   00000418
+_PROCESS_STATUS                   00000406
 _PROCESS_SYS_EX_DATA              0000003A
 _PROCESS_VELOCITY_NOTE_OFF        000000E6
 _PROCESS_VELOCITY_NOTE_OFF2       000000E6
@@ -1804,7 +1804,7 @@ _PROCESS_VEL_NOTE_OFF_CH5         00000158
 _PROCESS_VEL_NOTE_ON_CH1          00000266
 _PROCESS_VEL_NOTE_ON_CH2          00000274
 _PROCESS_VEL_NOTE_ON_CH3          00000282
-MPASM  5.43                       SERVICE.ASM   3-13-2019  22:19:43         PAGE 32
+MPASM  5.43                       SERVICE.ASM   3-13-2019  22:23:05         PAGE 32
 
 
 SYMBOL TABLE
@@ -1812,7 +1812,7 @@ SYMBOL TABLE
 
 _PROCESS_VEL_NOTE_ON_CH4          00000290
 _PROCESS_VEL_NOTE_ON_CH5          0000029C
-_PROCSES_CNUM                     0000033C
+_PROCSES_CNUM                     0000032A
 _PROCSES_PITCH_NOTE_OFF           00000090
 _PROCSES_PITCH_NOTE_OFF_M1        00000172
 _PROCSES_PITCH_NOTE_ON            000001E4
@@ -1833,8 +1833,8 @@ _RESTORE_CTX
 _SAVE_CTX                         
 _SERVICE_HI                       00000002
 _SERVICE_LO                       00000000
-_SET_STD_MSG                      0000042C
-_SET_SYSTEM_MSG                   0000043C
+_SET_STD_MSG                      0000041A
+_SET_SYSTEM_MSG                   0000042A
 _STVREN_OFF_4L                    000000FE
 _STVREN_ON_4L                     000000FF
 _T1OSCMX_OFF_3L                   000000DF
@@ -1863,7 +1863,7 @@ _WRT0_OFF_6L                      000000FF
 _WRT0_ON_6L                       000000FE
 _WRT1_OFF_6L                      000000FF
 _WRT1_ON_6L                       000000FD
-MPASM  5.43                       SERVICE.ASM   3-13-2019  22:19:43         PAGE 33
+MPASM  5.43                       SERVICE.ASM   3-13-2019  22:23:05         PAGE 33
 
 
 SYMBOL TABLE
