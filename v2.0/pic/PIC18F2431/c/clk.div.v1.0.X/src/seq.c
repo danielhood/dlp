@@ -2,7 +2,7 @@
 
 #define SEQ_COUNT 6
 
-unsigned char divisions[SEQ_COUNT] = {1,2,4,8,16,32};
+unsigned char divisions[SEQ_COUNT] = {1,2,4,4,3,1};
 unsigned char clockCount[SEQ_COUNT] = {0,0,0,0,0,0};
 unsigned char state[SEQ_COUNT] = {0,0,0,0,0,0};
 
