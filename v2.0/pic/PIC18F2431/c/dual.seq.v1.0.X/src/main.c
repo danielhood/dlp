@@ -118,9 +118,13 @@ void main() {
     // Current Functionality:
     //      Very functional gate/trigger sequencer:
     //      - Mode toggles current encoder value, indicated by mode led
+    //          - 0 (No light):     Clear gate
+    //          - 1 (Solid):        Set gate
+    //          - 2 (All Flash):    Set CV
+    //          - 3 (Double Flash): Set Preset
     //      - Target selects active pattern (none, 1, 2, 3), indicated by target led
-    //      - Set triggers write of encoder value to current step in target pattern
     //          - When Target = none, Set stores encoder to global gate length
+    //          - Otherwise, Set triggers write of encoder value to current step in target pattern (depending on mode)
     //      - Clock/RST 1 controlls pattern 1
     //      - Clock/RST 2 ticks patterns 2 and 3
     //      - DIR 1 controls direction on all patterns

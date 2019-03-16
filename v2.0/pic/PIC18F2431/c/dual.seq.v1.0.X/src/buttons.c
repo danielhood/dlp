@@ -18,7 +18,7 @@
 #include "clock.h"
 
 unsigned char active_pattern = 0; // This is seqIdx + 1; Max of 3
-unsigned char active_mode = 0; // 0:Gate Off, 1:Gate On, 2:CV Value
+unsigned char active_mode = 0; // 0:Gate Off, 1:Gate On, 2:CV Value, 3:Preset
 
 unsigned short debounce = 0;
 unsigned char state_mode = 0;
@@ -44,7 +44,7 @@ void cv_set_all(void) {
 }
 
 void start_debounce(void) {
-    debounce = 500;
+    debounce = 2000;
 }
 
 unsigned char buttons_debouncing(void) {
@@ -68,7 +68,7 @@ void buttons_mode_on(void) {
         start_debounce();
 
         // Cycle through modes: Gate OFF, Gate ON, CV Value
-        active_mode = ++active_mode % 3;
+        active_mode = ++active_mode % MAX_MODES;
         switch (active_mode)
         {
             case 0:
@@ -79,6 +79,10 @@ void buttons_mode_on(void) {
                 break;
             case 2:
                 leds_set_mode(6);
+                break;
+            case 3:
+                leds_set_mode(2);
+                break;
         }
     }
 }
@@ -109,17 +113,24 @@ void buttons_set_off(void) {
 }
 
 void buttons_set_on(void) {
-    // Only check state if writing gates
+    // Only check state if writing gates or setting preset
     // This allows us to hold set to clear many notes at once or set a range of CV
-    if (!state_set || active_mode != 1) {
+    if (!state_set || active_mode == 0 || active_mode == 2) {
         state_set = !state_set;
         start_debounce();
 
         if (active_pattern > 0) {
-            if (active_mode < 2) {
-                seq_set(active_pattern-1, active_mode);
-            } else {
-                seq_set_cv(active_pattern-1, inputs_get(LVL));
+            switch (active_mode) {
+                case 0:
+                case 1:
+                    seq_set(active_pattern-1, active_mode);
+                    break;
+                case 2:
+                    seq_set_cv(active_pattern-1, inputs_get(LVL));
+                    break;
+                case 3:
+                    seq_next_preset(active_pattern-1);
+                    break;
             }
         } else {
             // Set global gate length

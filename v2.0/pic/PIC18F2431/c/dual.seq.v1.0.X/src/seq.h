@@ -16,6 +16,9 @@ void seq_set(unsigned char seqidx, unsigned char val);
 unsigned char seq_get_cv(unsigned char seqidx);
 void seq_set_cv(unsigned char seqidx, unsigned char val);
 
+void seq_next_preset(unsigned char seqidx);
+void seq_prev_preset(unsigned char seqidx);
+
 #ifdef __cplusplus
 }
 #endif

@@ -40,11 +40,11 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/src/main.o ${OBJECTDIR}/setup.o ${OBJECTDIR}/src/seq.o ${OBJECTDIR}/src/clock.o ${OBJECTDIR}/src/leds.o ${OBJECTDIR}/src/buttons.o ${OBJECTDIR}/src/gates.o ${OBJECTDIR}/src/inputs.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/src/main.o.d ${OBJECTDIR}/setup.o.d ${OBJECTDIR}/src/seq.o.d ${OBJECTDIR}/src/clock.o.d ${OBJECTDIR}/src/leds.o.d ${OBJECTDIR}/src/buttons.o.d ${OBJECTDIR}/src/gates.o.d ${OBJECTDIR}/src/inputs.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/src/main.o ${OBJECTDIR}/setup.o ${OBJECTDIR}/src/seq.o ${OBJECTDIR}/src/clock.o ${OBJECTDIR}/src/leds.o ${OBJECTDIR}/src/buttons.o ${OBJECTDIR}/src/gates.o ${OBJECTDIR}/src/inputs.o ${OBJECTDIR}/src/seqPresets.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/src/main.o.d ${OBJECTDIR}/setup.o.d ${OBJECTDIR}/src/seq.o.d ${OBJECTDIR}/src/clock.o.d ${OBJECTDIR}/src/leds.o.d ${OBJECTDIR}/src/buttons.o.d ${OBJECTDIR}/src/gates.o.d ${OBJECTDIR}/src/inputs.o.d ${OBJECTDIR}/src/seqPresets.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/src/main.o ${OBJECTDIR}/setup.o ${OBJECTDIR}/src/seq.o ${OBJECTDIR}/src/clock.o ${OBJECTDIR}/src/leds.o ${OBJECTDIR}/src/buttons.o ${OBJECTDIR}/src/gates.o ${OBJECTDIR}/src/inputs.o
+OBJECTFILES=${OBJECTDIR}/src/main.o ${OBJECTDIR}/setup.o ${OBJECTDIR}/src/seq.o ${OBJECTDIR}/src/clock.o ${OBJECTDIR}/src/leds.o ${OBJECTDIR}/src/buttons.o ${OBJECTDIR}/src/gates.o ${OBJECTDIR}/src/inputs.o ${OBJECTDIR}/src/seqPresets.o
 
 
 CFLAGS=
@@ -138,6 +138,12 @@ ${OBJECTDIR}/src/inputs.o: src/inputs.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_PICKIT2=1 -p$(MP_PROCESSOR_OPTION)   -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/src/inputs.o   src/inputs.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/src/inputs.o 
 	
+${OBJECTDIR}/src/seqPresets.o: src/seqPresets.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/src 
+	@${RM} ${OBJECTDIR}/src/seqPresets.o.d 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_PICKIT2=1 -p$(MP_PROCESSOR_OPTION)   -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/src/seqPresets.o   src/seqPresets.c 
+	@${DEP_GEN} -d ${OBJECTDIR}/src/seqPresets.o 
+	
 else
 ${OBJECTDIR}/src/main.o: src/main.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/src 
@@ -186,6 +192,12 @@ ${OBJECTDIR}/src/inputs.o: src/inputs.c  nbproject/Makefile-${CND_CONF}.mk
 	@${RM} ${OBJECTDIR}/src/inputs.o.d 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION)   -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/src/inputs.o   src/inputs.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/src/inputs.o 
+	
+${OBJECTDIR}/src/seqPresets.o: src/seqPresets.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/src 
+	@${RM} ${OBJECTDIR}/src/seqPresets.o.d 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION)   -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/src/seqPresets.o   src/seqPresets.c 
+	@${DEP_GEN} -d ${OBJECTDIR}/src/seqPresets.o 
 	
 endif
 
