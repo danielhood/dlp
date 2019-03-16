@@ -9,7 +9,7 @@ unsigned char pattern[SEQ_COUNT][SEQ_PATTERN_LENGTH_MAX];
 unsigned char pattern_cv[SEQ_COUNT][SEQ_PATTERN_LENGTH_MAX];
 unsigned char patidx[SEQ_COUNT];
 unsigned char currentPatternLength = 16;
-unsigned char presetIdx[SEQ_COUNT] = {0, 0, 0};
+unsigned char presetIdx[SEQ_COUNT] = {PRESET_MAX_IDX, PRESET_MAX_IDX, PRESET_MAX_IDX}; // Initialize to the last preset so first trigger sets first one
 
 void seq_init(unsigned char patLen) {
     unsigned char i,j;

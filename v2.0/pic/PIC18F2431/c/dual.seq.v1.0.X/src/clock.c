@@ -9,7 +9,7 @@ unsigned char gateClear1 = 0;
 unsigned char gateClear2 = 0;
 unsigned char gateRelease1 = 0;
 unsigned short gateRelease2 = 0;
-unsigned char gateLength = 255;
+unsigned char gateLength = 127;
 
 void clock_tick(unsigned char clockIdx) {
     if (clockIdx == CLOCK1) {
