@@ -57,8 +57,7 @@ _SETUP:
 				;		f = 39.0625 KHz
 				;		C = 0.0104 uF (0x47+uF seemed to be requried)
 
-
-; Serial RX Config (for MIDI IN)
+; EUSART Config (RX/TX)
 	bcf	TXSTA,SYNC	; Asynchronous
 	bcf	TXSTA,BRGH	; Low spped BRG
 	bcf	BAUDCON,BRG16	; 8 bit BRG
@@ -66,13 +65,18 @@ _SETUP:
 	clrf	SPBRGH		; Clear BRG high bit
 	movlw	0x09		; Set BRG to 9 = 2MHz/31.25KHZ/64-1
 	movwf	SPBRG
-	bcf	RCSTA,RX9	; 8-bit data
-	;bsf	RCSTA,CREN	; Enable RX
+	bsf	RCSTA,SPEN	; Enable Serial IO
 
+; Serial RX Config (for MIDI IN)
+	;bcf	RCSTA,RX9	; Receive 8-bit data
+	;bsf	RCSTA,CREN	; Enable RX
 	;bsf	PIE1,RCIE	; Enable Serial RX Interrupt
 	;bsf	IPR1,RCIP	; Set to High Priority
 
-	;bsf	RCSTA,SPEN	; Enable Serial IO
+; Serial TX Config (for MIDI OUT)
+	bcf	PIE1,TXIE	; Disable transmit interrupt (we don't need this)
+	bcf	TXSTA,TX9	; Transmit 8-bit data
+	bsf	TXSTA,TXEN	; Enable TX
 
 ; Setup vars
 	clrf	CUR_BYTE
@@ -83,6 +87,8 @@ _SETUP:
 	clrf	CV_VELOCITY
 	clrf	CV_MOD
 	clrf	CV_GATE
+	clrf	START_STOP_TGL
+	clrf	WAIT_FOR_BUTTONUP
 
 	movlw	_MOFFSET_NONE	; Set inital midi state
 	movwf	MIDI_STATE
@@ -103,7 +109,7 @@ _SETUP:
 ; Enable Interrupts
 	bsf	RCON,IPEN	; Enable interrupt priorities
 	bcf	INTCON,GIEL	; Disable low-prority interrupts
-	bsf	INTCON,GIEH	; Enable high-priority interrupts
+	bsf	INTCON,GIEH	; Enable high-priority interrupts (used for timber for 96ths MIDI clocks)
 
 	return
 

@@ -125,13 +125,40 @@ _MAIN:
 	setf	CLOCK_DIVIDER
 
 
+	;movlw	0xFA				; Song Start
+	;movwf	TXREG				; Transmit
+
 _LOOP:
+	tstfsz	WAIT_FOR_BUTTONUP
+	goto	_CHECK_BUTTONUP
+
+	btfsc	PORTA,0			; Check start/stop; note 0 is button press
+	goto	_START_DELAY
+
+	setf	WAIT_FOR_BUTTONUP
+	comf	START_STOP_TGL,F
+	bz	_SEND_STOP
+
+	movlw	0xFA				; Song start
+	movwf	TXREG				; Transmit
+	goto	_START_DELAY
+
+_SEND_STOP:
+	movlw	0xFC				; Song stop
+	movwf	TXREG				; Transmit
+	goto _START_DELAY
+
+_CHECK_BUTTONUP:
+	btfss	PORTA,0			; Check start/stop; note 0 is button press
+	goto	_START_DELAY
+	clrf	WAIT_FOR_BUTTONUP
+	
 
 	;setf	PDC0H	; All on for test
 	;setf	PDC1H
 	;setf	PDC2H
 	;setf	PORTC
-
+_START_DELAY:
 	; Manual delay
 	setf DELAY_COUNTER0
 _DELAY0:
@@ -153,8 +180,12 @@ _DELAY3:
 	decfsz  DELAY_COUNTER0
 	goto	_DELAY0
 
+; Midi Message summary: https://www.midi.org/specifications-old/item/table-1-summary-of-midi-message
 
 _TICK_CLOCK:
+	movlw	0xF8				; Midi Clock (96ths)
+	movwf	TXREG				; Transmit
+
 	incf	CLOCK_COUNTER,F			; Tick clocks
 	incf	CLOCK_DIVIDER,F
 	movlw	0x03				; Check if we need to increment the gates (every 3)

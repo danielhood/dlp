@@ -3,7 +3,7 @@
     <type>com.microchip.mplab.nbide.embedded.makeproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/make-project/1">
-            <name>midi.clockgen.v1.0</name>
+            <name>midi.clock.v1.0</name>
             <creation-uuid>ff73c553-8821-42b8-81ea-e03be10493ce</creation-uuid>
             <make-project-type>0</make-project-type>
             <c-extensions/>

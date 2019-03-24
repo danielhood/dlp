@@ -37,6 +37,9 @@
 	DELAY_COUNTER2
 	DELAY_COUNTER3
 
+	START_STOP_TGL		; toggle for start/stop midi clock
+	WAIT_FOR_BUTTONUP	; flag to wait for button up
+
 ;------ service.asm variables
 	W_TMP			; Storage for W register during interrupt
 	ST_TMP			; Storage for STATUS register during interrupt
