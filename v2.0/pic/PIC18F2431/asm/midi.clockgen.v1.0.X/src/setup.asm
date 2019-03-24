@@ -67,12 +67,12 @@ _SETUP:
 	movlw	0x09		; Set BRG to 9 = 2MHz/31.25KHZ/64-1
 	movwf	SPBRG
 	bcf	RCSTA,RX9	; 8-bit data
-	bsf	RCSTA,CREN	; Enable RX
+	;bsf	RCSTA,CREN	; Enable RX
 
-	bsf	PIE1,RCIE	; Enable Serial RX Interrupt
-	bsf	IPR1,RCIP	; Set to High Priority
+	;bsf	PIE1,RCIE	; Enable Serial RX Interrupt
+	;bsf	IPR1,RCIP	; Set to High Priority
 
-	bsf	RCSTA,SPEN	; Enable Serial IO
+	;bsf	RCSTA,SPEN	; Enable Serial IO
 
 ; Setup vars
 	clrf	CUR_BYTE

@@ -32,6 +32,11 @@
 	CV_MOD_TARGET		; Current target for mod
 	CV_MOD_DELAY		; Delay counter for mod target resolution
 
+	DELAY_COUNTER0		; general delay counters
+	DELAY_COUNTER1
+	DELAY_COUNTER2
+	DELAY_COUNTER3
+
 ;------ service.asm variables
 	W_TMP			; Storage for W register during interrupt
 	ST_TMP			; Storage for STATUS register during interrupt

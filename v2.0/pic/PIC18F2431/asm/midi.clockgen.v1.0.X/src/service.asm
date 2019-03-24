@@ -51,6 +51,11 @@ _EXIT_SERVICE:
 ; Handler for MIDI IN over Serial RX
 ;
 _HANDLE_RC:
+
+	; Stub out handhleer
+	bcf	PIR1,RCIF	; Clear Serial RX interrupt
+	goto	_EXIT_SERVICE
+
 	movff	RCREG,CUR_BYTE	; Copy received byte to CUR_BYTE
 
 	; Dirty check for only clock byte, regardless of state

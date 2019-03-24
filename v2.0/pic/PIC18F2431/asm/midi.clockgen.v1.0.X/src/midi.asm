@@ -1,4 +1,14 @@
+; ******************************************************************************
+; This project generates a MIDI clock, with start/stop (pushbutton)
+; set at a hard coded BPM (currently 138).
+; CV outs generated sync'd sine functions (1 beat, 1/4 beat, and 1/3 beat)
+; GATE outs generate RST, and clock divisions (1/4, 1/8, 1/16, and 1/12)
+;
+;
+
+; ------------------------------------------------------------------------------
 ; MIDI Processing Routines (Main code loop)
+;
 
 #include p18f2431.inc
 #include inc/vars.inc
@@ -103,7 +113,7 @@ _SPLIT_CV_VALUE2	macro
 _MAIN:
 	clrf	PORTA		; Clear PORTA
 	clrf	PORTB		; Clear PORTB
-	clrf	PORTC		; Clear PORTC
+	clrf	PORTC		; Clear PORTC (gates)
 
 	movlw	b'00000000'	; Set the high byte to 0
 	movwf	PDC0H
@@ -116,6 +126,72 @@ _MAIN:
 
 
 _LOOP:
+
+	;setf	PDC0H	; All on for test
+	;setf	PDC1H
+	;setf	PDC2H
+	;setf	PORTC
+
+	; Manual delay
+	setf DELAY_COUNTER0
+_DELAY0:
+	setf DELAY_COUNTER1
+_DELAY1:
+	setf DELAY_COUNTER2
+_DELAY2:
+	setf DELAY_COUNTER3
+_DELAY3:
+	;decfsz  DELAY_COUNTER3
+	;goto	_DELAY3
+
+	;decfsz  DELAY_COUNTER2
+	;goto	_DELAY2
+
+	decfsz  DELAY_COUNTER1
+	goto	_DELAY1
+
+	decfsz  DELAY_COUNTER0
+	goto	_DELAY0
+
+
+_TICK_CLOCK:
+	incf	CLOCK_COUNTER,F			; Tick clocks
+	incf	CLOCK_DIVIDER,F
+	movlw	0x03				; Check if we need to increment the gates (every 3)
+	cpfseq	CLOCK_COUNTER
+	goto	_CLOCK_COUNTER_24
+	setf	SONG_START_INV			; Clear song start
+	incf	CV_GATE,F
+	clrf	CLOCK_COUNTER
+
+_CLOCK_COUNTER_24:
+	incf	CLOCK_COUNTER_24,F
+	movlw	0x18				; Reset every 24
+	cpfseq	CLOCK_COUNTER_24
+	goto	_CLOCK_COUNTER_24_END
+	clrf	CLOCK_COUNTER_24
+_CLOCK_COUNTER_24_END:
+	bsf	CV_FLAGS,CVF_VELOCITY		; Notify update for VELOCITY (CV2)
+
+_CLOCK_COUNTER_32:
+	incf	CLOCK_COUNTER_32,F
+	movlw	0x20				; Reset every 32
+	cpfseq	CLOCK_COUNTER_32
+	goto	_CLOCK_COUNTER_32_END
+	clrf	CLOCK_COUNTER_32
+_CLOCK_COUNTER_32_END:
+	bsf	CV_FLAGS,CVF_MOD		; Notify update for MOD (CV3)
+
+_CLOCK_COUNTER_96:
+	incf	CLOCK_COUNTER_96,F
+	movlw	0x60				; Reset every 96
+	cpfseq	CLOCK_COUNTER_96
+	goto	_CLOCK_COUNTER_96_END
+	clrf	CLOCK_COUNTER_96
+_CLOCK_COUNTER_96_END:
+	bsf	CV_FLAGS,CVF_PITCH		; Notify update for PITCH (CV1)
+
+
 _UPDATE_CV1:
 	btfss	CV_FLAGS,CVF_PITCH
 	goto	_UPDATE_CV2
@@ -237,13 +313,8 @@ _UPDATE_GATES:
 	movf	SONG_START_INV,W ; load song start flag (will be 0xFF or 0x00)
 	andlw	0x10		; Mask out bit
 	addwf	CV_GATE_TMP,W	; Inject song start
-	;addlw	0x00	; test
 	comf	WREG,W	; Invert the bits so ports start at 1
 	movwf	PORTC		; Apply gate settings directly to PORTC
-
-	; TODO: cycle through a sin or triangle way to generate clock sync'd LFO's on CV outs
-	; TODO: revisit MIDI state tracking to see if we can do it efficiently
-	; TODO: test main MIDI2CV program to see if it handles clock sync
 
 	goto	_LOOP
 
