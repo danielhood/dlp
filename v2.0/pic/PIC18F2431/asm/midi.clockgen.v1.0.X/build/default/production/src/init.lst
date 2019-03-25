@@ -1,4 +1,4 @@
-MPASM  5.43                          INIT.ASM   3-24-2019  18:15:21         PAGE  1
+MPASM  5.43                          INIT.ASM   3-25-2019  15:06:41         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,7 +57,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00042 ; High-Priority Interrupt Vector
                       00043 ;
                       00044 .HIVEC  org     0x0008
-MPASM  5.43                          INIT.ASM   3-24-2019  18:15:21         PAGE  2
+MPASM  5.43                          INIT.ASM   3-25-2019  15:06:41         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -111,7 +111,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
        0609 0204 0001 
                       00078 
                       00079         end
-MPASM  5.43                          INIT.ASM   3-24-2019  18:15:21         PAGE  3
+MPASM  5.43                          INIT.ASM   3-25-2019  15:06:41         PAGE  3
 
 
 SYMBOL TABLE
@@ -170,7 +170,7 @@ BAUDCON                           00000FAA
 BAUDCTL                           00000FAA
 BF                                00000000
 BFEMT                             00000003
-MPASM  5.43                          INIT.ASM   3-24-2019  18:15:21         PAGE  4
+MPASM  5.43                          INIT.ASM   3-25-2019  15:06:41         PAGE  4
 
 
 SYMBOL TABLE
@@ -229,7 +229,7 @@ CCP2IP                            00000000
 CCP2M0                            00000000
 CCP2M1                            00000001
 CCP2M2                            00000002
-MPASM  5.43                          INIT.ASM   3-24-2019  18:15:21         PAGE  5
+MPASM  5.43                          INIT.ASM   3-25-2019  15:06:41         PAGE  5
 
 
 SYMBOL TABLE
@@ -288,7 +288,7 @@ D_A                               00000005
 D_NOT_A                           00000005
 EEADR                             00000FA9
 EECON1                            00000FA6
-MPASM  5.43                          INIT.ASM   3-24-2019  18:15:21         PAGE  6
+MPASM  5.43                          INIT.ASM   3-25-2019  15:06:41         PAGE  6
 
 
 SYMBOL TABLE
@@ -347,7 +347,7 @@ GIE_GIEH                          00000007
 GO                                00000001
 GODONE                            00000001
 GO_DONE                           00000001
-MPASM  5.43                          INIT.ASM   3-24-2019  18:15:21         PAGE  7
+MPASM  5.43                          INIT.ASM   3-25-2019  15:06:41         PAGE  7
 
 
 SYMBOL TABLE
@@ -406,7 +406,7 @@ LATA                              00000F89
 LATA0                             00000000
 LATA1                             00000001
 LATA2                             00000002
-MPASM  5.43                          INIT.ASM   3-24-2019  18:15:21         PAGE  8
+MPASM  5.43                          INIT.ASM   3-25-2019  15:06:41         PAGE  8
 
 
 SYMBOL TABLE
@@ -465,7 +465,7 @@ NOT_RBPU                          00000007
 NOT_RESEN                         00000006
 NOT_RI                            00000004
 NOT_SS                            00000006
-MPASM  5.43                          INIT.ASM   3-24-2019  18:15:21         PAGE  9
+MPASM  5.43                          INIT.ASM   3-25-2019  15:06:41         PAGE  9
 
 
 SYMBOL TABLE
@@ -524,7 +524,7 @@ PORTA                             00000F80
 PORTB                             00000F81
 PORTC                             00000F82
 PORTE                             00000F84
-MPASM  5.43                          INIT.ASM   3-24-2019  18:15:21         PAGE 10
+MPASM  5.43                          INIT.ASM   3-25-2019  15:06:41         PAGE 10
 
 
 SYMBOL TABLE
@@ -583,7 +583,7 @@ PTOPS1                            00000005
 PTOPS2                            00000006
 PTOPS3                            00000007
 PTPERH                            00000F7A
-MPASM  5.43                          INIT.ASM   3-24-2019  18:15:21         PAGE 11
+MPASM  5.43                          INIT.ASM   3-25-2019  15:06:41         PAGE 11
 
 
 SYMBOL TABLE
@@ -642,7 +642,7 @@ READ_WRITE                        00000002
 RESEN                             00000006
 RI                                00000004
 RX                                00000007
-MPASM  5.43                          INIT.ASM   3-24-2019  18:15:21         PAGE 12
+MPASM  5.43                          INIT.ASM   3-25-2019  15:06:41         PAGE 12
 
 
 SYMBOL TABLE
@@ -701,7 +701,7 @@ SSRC0                             00000000
 SSRC1                             00000001
 SSRC2                             00000002
 SSRC3                             00000003
-MPASM  5.43                          INIT.ASM   3-24-2019  18:15:21         PAGE 13
+MPASM  5.43                          INIT.ASM   3-25-2019  15:06:41         PAGE 13
 
 
 SYMBOL TABLE
@@ -760,7 +760,7 @@ TABLAT                            00000FF5
 TBIE                              00000004
 TBIF                              00000004
 TBIP                              00000004
-MPASM  5.43                          INIT.ASM   3-24-2019  18:15:21         PAGE 14
+MPASM  5.43                          INIT.ASM   3-25-2019  15:06:41         PAGE 14
 
 
 SYMBOL TABLE
@@ -819,7 +819,7 @@ TRISB                             00000F93
 TRISB0                            00000000
 TRISB1                            00000001
 TRISB2                            00000002
-MPASM  5.43                          INIT.ASM   3-24-2019  18:15:21         PAGE 15
+MPASM  5.43                          INIT.ASM   3-25-2019  15:06:41         PAGE 15
 
 
 SYMBOL TABLE
@@ -878,7 +878,7 @@ WREG                              00000FE8
 WREN                              00000002
 WRERR                             00000003
 WUE                               00000001
-MPASM  5.43                          INIT.ASM   3-24-2019  18:15:21         PAGE 16
+MPASM  5.43                          INIT.ASM   3-25-2019  15:06:41         PAGE 16
 
 
 SYMBOL TABLE
@@ -937,7 +937,7 @@ _IDLOC0                           00200000
 _IDLOC1                           00200001
 _IDLOC2                           00200002
 _IDLOC3                           00200003
-MPASM  5.43                          INIT.ASM   3-24-2019  18:15:21         PAGE 17
+MPASM  5.43                          INIT.ASM   3-25-2019  15:06:41         PAGE 17
 
 
 SYMBOL TABLE
@@ -996,7 +996,7 @@ _WDPS_64_2H                       000000ED
 _WDPS_8192_2H                     000000FB
 _WDPS_8_2H                        000000E7
 _WDTEN_OFF_2H                     000000FE
-MPASM  5.43                          INIT.ASM   3-24-2019  18:15:21         PAGE 18
+MPASM  5.43                          INIT.ASM   3-25-2019  15:06:41         PAGE 18
 
 
 SYMBOL TABLE

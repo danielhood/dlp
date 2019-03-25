@@ -14,7 +14,7 @@
 
 	config	PWMPIN = OFF	; PWM output pins Reset state control
 
-	config	T1OSCMX = ON	; Timer1 Oscillator MUX => Low-power Timer1 operation when microcontroller is in Sleep mode
+	config	T1OSCMX = OFF	; Timer1 Oscillator MUX => Don't use low power Timer1 operation when microcontroller is in Sleep mode
 
 	config	MCLRE = ON	; MCLR Pin Enable bit
 

@@ -20,7 +20,7 @@ _SETUP:
 	movlw	0x00		; All Digital I/O on PORTA
 	movwf	ANSEL0
 
-	movlw	b'00000001'	; PORTA:	RA0 - Switch Input for MIDI Mode (Pitch/Mod vs Drum Trigger)
+	movlw	b'00000001'	; PORTA:	RA0 - Push Button Input for Start/Stop
 	movwf	TRISA		; 		RA1:4 - Output (Unused)
 				;		RA5 - Doesn't exist on this chip
 				;		RA6:7 - Crystal Osc
@@ -77,6 +77,26 @@ _SETUP:
 	bcf	PIE1,TXIE	; Disable transmit interrupt (we don't need this)
 	bcf	TXSTA,TX9	; Transmit 8-bit data
 	bsf	TXSTA,TXEN	; Enable TX
+
+; Timer1 (16bit) Config for Master Clock
+; This is configured to match 96ticks for each quarter note based on the desired bpm
+; The current configuration is scaled for 138bpm
+
+; Calculate period of timer1
+; 65536-5MHz*(bpm/60s*96ticks) = 65536-5000000*60/bpm/96
+; 138bpm = 42,891.07
+
+	movlw	0xA7
+	movwf	TMR1H
+	movlw	0x8B
+	movwf	TMR1L
+
+	bcf	T1CON,TMR1CS	; Increment every instruction cycle (FOSC/4 => crystal at 20Mhz/4 => 5Mhz)
+	bcf	T1CON,T1OSCEN	; Disable internal Timer1 oscillator (uses internal clock from external osc) since we need RC0 and RC1 for output
+	bcf	T1CON,T1CKPS0	; 1:4 Prescale value
+	bsf	T1CON,T1CKPS1
+	bsf	PIE1,TMR1IE	; Enable Timer1 interrupt
+	bsf	T1CON,TMR1ON	; Enable Timer1
 
 ; Setup vars
 	clrf	CUR_BYTE

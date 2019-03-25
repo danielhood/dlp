@@ -1,4 +1,4 @@
-MPASM  5.43                        CONFIG.ASM   3-24-2019  18:15:18         PAGE  1
+MPASM  5.43                        CONFIG.ASM   3-25-2019  15:06:38         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -20,8 +20,8 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00014 
                       00015         config  PWMPIN = OFF    ; PWM output pins Reset state control
                       00016 
-                      00017         config  T1OSCMX = ON    ; Timer1 Oscillator MUX => Low-power Timer1 operation when microcontroll
-                            er is in Sleep mode
+                      00017         config  T1OSCMX = OFF   ; Timer1 Oscillator MUX => Don't use low power Timer1 operation when mic
+                            rocontroller is in Sleep mode
                       00018 
                       00019         config  MCLRE = ON      ; MCLR Pin Enable bit
                       00020 
@@ -52,7 +52,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00045         config  EBTRB = OFF     ; Boot Block Table Read Protection bit
                       00046 
                       00047         end
-MPASM  5.43                        CONFIG.ASM   3-24-2019  18:15:18         PAGE  2
+MPASM  5.43                        CONFIG.ASM   3-25-2019  15:06:38         PAGE  2
 
 
 SYMBOL TABLE

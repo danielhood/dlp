@@ -141,6 +141,13 @@ _LOOP:
 
 	movlw	0xFA				; Song start
 	movwf	TXREG				; Transmit
+
+	; Reset Timer1
+	movlw	0x8B		; We may need to offset this to accommodate clock cycles lost while setting registers?
+	movwf	TMR1L
+	movlw	0xA7		; Reload calculated period for selected bpm
+	movwf	TMR1H
+
 	goto	_START_DELAY
 
 _SEND_STOP:
@@ -183,8 +190,8 @@ _DELAY3:
 ; Midi Message summary: https://www.midi.org/specifications-old/item/table-1-summary-of-midi-message
 
 _TICK_CLOCK:
-	movlw	0xF8				; Midi Clock (96ths)
-	movwf	TXREG				; Transmit
+	;movlw	0xF8				; Midi Clock (96ths)
+	;movwf	TXREG				; Transmit
 
 	incf	CLOCK_COUNTER,F			; Tick clocks
 	incf	CLOCK_DIVIDER,F
