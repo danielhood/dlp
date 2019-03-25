@@ -101,26 +101,20 @@ _SETUP:
 	bcf	T1CON,TMR1ON	; Disable  Timer1 (MIDI Clock enabled on Song Start)
 
 ; Setup vars
-	clrf	CUR_BYTE
-	clrf	MSG_COUNT
-
 	clrf	CV_FLAGS
 	clrf	CV_PITCH
 	clrf	CV_VELOCITY
 	clrf	CV_MOD
 	clrf	CV_GATE
+	setf	SONG_START_INV	; Clear song start
 	clrf	START_STOP_TGL
 	clrf	WAIT_FOR_BUTTONUP
 
-	movlw	_MOFFSET_NONE	; Set inital midi state
-	movwf	MIDI_STATE
-	
-	movlw	0x01
-	movwf	MSG_CHAN	; Default to channel 1
-
-
-	movlw	0xF7		; Set SysEx data to deault state
-	movwf	SYS_EX_DATA
+	clrf	CLOCK_COUNTER
+	clrf	CLOCK_DIVIDER
+	clrf	CLOCK_COUNTER_24
+	clrf	CLOCK_COUNTER_32
+	clrf	CLOCK_COUNTER_96
 
 ; Setup Table memory pointers
 	movlw	upper LFO_SINE_DATA_24		; Will be the same for all tables, only need to set H and L bytes each lookup
