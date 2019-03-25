@@ -143,16 +143,22 @@ _LOOP:
 	movwf	TXREG				; Transmit
 
 	; Reset Timer1
-	movlw	0x8B		; We may need to offset this to accommodate clock cycles lost while setting registers?
+	; Prescale 1:2
+	movlw	0x16
 	movwf	TMR1L
-	movlw	0xA7		; Reload calculated period for selected bpm
+	movlw	0x4F		; Reload calculated period for selected bpm
 	movwf	TMR1H
+
+	bsf	T1CON,TMR1ON	; Enable Timer1 (MIDI Clock)
 
 	goto	_START_DELAY
 
 _SEND_STOP:
-	movlw	0xFC				; Song stop
-	movwf	TXREG				; Transmit
+	movlw	0xFC		; Song stop
+	movwf	TXREG		; Transmit
+
+	bcf	T1CON,TMR1ON	; Disable Timer1 (MIDI Clock)
+
 	goto _START_DELAY
 
 _CHECK_BUTTONUP:

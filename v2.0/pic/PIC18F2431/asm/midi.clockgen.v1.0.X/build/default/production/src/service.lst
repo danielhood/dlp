@@ -1,4 +1,4 @@
-MPASM  5.43                       SERVICE.ASM   3-25-2019  15:06:39         PAGE  1
+MPASM  5.43                       SERVICE.ASM   3-25-2019  15:35:57         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,7 +57,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
   00000018            00037         DELAY_COUNTER2
   00000019            00038         DELAY_COUNTER3
                       00039 
-MPASM  5.43                       SERVICE.ASM   3-25-2019  15:06:39         PAGE  2
+MPASM  5.43                       SERVICE.ASM   3-25-2019  15:35:57         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -116,7 +116,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
   00000010            00090 _MOFFSET_F1:            equ     0x10    ; 0xF1
   00000012            00091 _MOFFSET_SP:            equ     0x12    ; 0xF2
   00000014            00092 _MOFFSET_SS:            equ     0x14    ; 0xF3
-MPASM  5.43                       SERVICE.ASM   3-25-2019  15:06:39         PAGE  3
+MPASM  5.43                       SERVICE.ASM   3-25-2019  15:35:57         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -175,7 +175,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00029 ; Dispatcher for interrupt handlers
                       00030 ;
                       00031 .SERVICE        code    ; Relocatable code for interrupt handler
-MPASM  5.43                       SERVICE.ASM   3-25-2019  15:06:39         PAGE  4
+MPASM  5.43                       SERVICE.ASM   3-25-2019  15:35:57         PAGE  4
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -196,27 +196,36 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00000C A09E           00041         btfss   PIR1,TMR1IF     ; Check for Timer1 interrupt
 00000E EF?? F???      00042         goto    _EXIT_SERVICE
                       00043 
-000012 0E8D           00044         movlw   0x8D            ; Offset by 2 cycles accommodate clock cycles lost to get to this point 
+                      00044         ; Prescale 1:4
+                      00045         ;movlw  0x8D            ; Offset by 2 cycles accommodate clock cycles lost to get to this point 
                             (note includes 1:4 prescaler and possibly some clock inaccuracy)
-000014 6ECE           00045         movwf   TMR1L
-000016 0EA7           00046         movlw   0xA7            ; Reload calculated period for selected bpm
-000018 6ECF           00047         movwf   TMR1H
-                      00048 
-00001A 909E           00049         bcf     PIR1,TMR1IF     ; Clear Timer1 interrupt
-                      00050 
-00001C 0EF8           00051         movlw   0xF8            ; MIDI Clock Message (96ths)
-00001E 6EAD           00052         movwf   TXREG           ; Transmit on MIDI out
-                      00053 
-000020                00054 _EXIT_SERVICE:
-                      00055         _RESTORE_CTX
+                      00046         ;movwf  TMR1L
+                      00047         ;movlw  0xA7            ; Reload calculated period for selected bpm
+                      00048         ;movwf  TMR1H
+                      00049 
+                      00050         ; Prescale 1:2
+000012 0E1A           00051         movlw   0x1A            ; Offset by 4 cycles accommodate clock cycles lost to get to this point 
+                            (note includes 1:2 prescaler and possibly some clock inaccuracy)
+000014 6ECE           00052         movwf   TMR1L
+000016 0E4F           00053         movlw   0x4F            ; Reload calculated period for selected bpm
+000018 6ECF           00054         movwf   TMR1H
+                      00055 
+                      00056 
+00001A 909E           00057         bcf     PIR1,TMR1IF     ; Clear Timer1 interrupt
+                      00058 
+00001C 0EF8           00059         movlw   0xF8            ; MIDI Clock Message (96ths)
+00001E 6EAD           00060         movwf   TXREG           ; Transmit on MIDI out
+                      00061 
+000020                00062 _EXIT_SERVICE:
+                      00063         _RESTORE_CTX
 000020 C01E FFE0          M         movff   BSR_TMP,BSR     ; Restore bank select
 000024 501C               M         movf    W_TMP,W         ; Restore W
 000026 C01D FFD8          M         movff   ST_TMP,STATUS   ; Restore STATUS
-                      00056 
-00002A 0010           00057         retfie
-                      00058 
-                      00059         end
-MPASM  5.43                       SERVICE.ASM   3-25-2019  15:06:39         PAGE  5
+                      00064 
+00002A 0010           00065         retfie
+                      00066 
+                      00067         end
+MPASM  5.43                       SERVICE.ASM   3-25-2019  15:35:57         PAGE  5
 
 
 SYMBOL TABLE
@@ -275,7 +284,7 @@ BFEMT                             00000003
 BFOVFL                            00000002
 BOR                               00000000
 BRFEN                             00000007
-MPASM  5.43                       SERVICE.ASM   3-25-2019  15:06:39         PAGE  6
+MPASM  5.43                       SERVICE.ASM   3-25-2019  15:35:57         PAGE  6
 
 
 SYMBOL TABLE
@@ -334,7 +343,7 @@ CCP2M1                            00000001
 CCP2M2                            00000002
 CCP2M3                            00000003
 CCP2X                             00000005
-MPASM  5.43                       SERVICE.ASM   3-25-2019  15:06:39         PAGE  7
+MPASM  5.43                       SERVICE.ASM   3-25-2019  15:35:57         PAGE  7
 
 
 SYMBOL TABLE
@@ -393,7 +402,7 @@ DC2B1                             00000005
 DDRA                              TRISA
 DDRB                              TRISB
 DDRC                              TRISC
-MPASM  5.43                       SERVICE.ASM   3-25-2019  15:06:39         PAGE  8
+MPASM  5.43                       SERVICE.ASM   3-25-2019  15:35:57         PAGE  8
 
 
 SYMBOL TABLE
@@ -452,7 +461,7 @@ FLTAMOD                           00000001
 FLTAS                             00000002
 FLTB                              00000002
 FLTBEN                            00000004
-MPASM  5.43                       SERVICE.ASM   3-25-2019  15:06:39         PAGE  9
+MPASM  5.43                       SERVICE.ASM   3-25-2019  15:35:57         PAGE  9
 
 
 SYMBOL TABLE
@@ -511,7 +520,7 @@ INDF0                             00000FEF
 INDF1                             00000FE7
 INDF2                             00000FDF
 INT0                              00000003
-MPASM  5.43                       SERVICE.ASM   3-25-2019  15:06:39         PAGE 10
+MPASM  5.43                       SERVICE.ASM   3-25-2019  15:35:57         PAGE 10
 
 
 SYMBOL TABLE
@@ -570,7 +579,7 @@ LATB6                             00000006
 LATB7                             00000007
 LATC                              00000F8B
 LATC0                             00000000
-MPASM  5.43                       SERVICE.ASM   3-25-2019  15:06:39         PAGE 11
+MPASM  5.43                       SERVICE.ASM   3-25-2019  15:35:57         PAGE 11
 
 
 SYMBOL TABLE
@@ -629,7 +638,7 @@ NOT_W                             00000002
 NOT_WRITE                         00000002
 OERR                              00000001
 OSC1                              00000007
-MPASM  5.43                       SERVICE.ASM   3-25-2019  15:06:39         PAGE 12
+MPASM  5.43                       SERVICE.ASM   3-25-2019  15:35:57         PAGE 12
 
 
 SYMBOL TABLE
@@ -688,7 +697,7 @@ POSTDEC2                          00000FDD
 POSTINC0                          00000FEE
 POSTINC1                          00000FE6
 POSTINC2                          00000FDE
-MPASM  5.43                       SERVICE.ASM   3-25-2019  15:06:39         PAGE 13
+MPASM  5.43                       SERVICE.ASM   3-25-2019  15:35:57         PAGE 13
 
 
 SYMBOL TABLE
@@ -747,7 +756,7 @@ PWMEN1                            00000005
 PWMEN2                            00000006
 QEICON                            00000FB6
 QEIM0                             00000002
-MPASM  5.43                       SERVICE.ASM   3-25-2019  15:06:39         PAGE 14
+MPASM  5.43                       SERVICE.ASM   3-25-2019  15:35:57         PAGE 14
 
 
 SYMBOL TABLE
@@ -806,7 +815,7 @@ R_W                               00000002
 S                                 00000003
 SASEL0                            00000000
 SASEL1                            00000001
-MPASM  5.43                       SERVICE.ASM   3-25-2019  15:06:39         PAGE 15
+MPASM  5.43                       SERVICE.ASM   3-25-2019  15:35:57         PAGE 15
 
 
 SYMBOL TABLE
@@ -865,7 +874,7 @@ STKFUL                            00000007
 STKOVF                            00000007
 STKPTR                            00000FFC
 STKPTR0                           00000000
-MPASM  5.43                       SERVICE.ASM   3-25-2019  15:06:39         PAGE 16
+MPASM  5.43                       SERVICE.ASM   3-25-2019  15:35:57         PAGE 16
 
 
 SYMBOL TABLE
@@ -924,7 +933,7 @@ TBLPTR                            00000FF6
 TBLPTRH                           00000FF7
 TBLPTRL                           00000FF6
 TBLPTRU                           00000FF8
-MPASM  5.43                       SERVICE.ASM   3-25-2019  15:06:39         PAGE 17
+MPASM  5.43                       SERVICE.ASM   3-25-2019  15:35:57         PAGE 17
 
 
 SYMBOL TABLE
@@ -983,7 +992,7 @@ TRISB1                            00000001
 TRISB2                            00000002
 TRISB3                            00000003
 TRISB4                            00000004
-MPASM  5.43                       SERVICE.ASM   3-25-2019  15:06:39         PAGE 18
+MPASM  5.43                       SERVICE.ASM   3-25-2019  15:35:57         PAGE 18
 
 
 SYMBOL TABLE
@@ -1042,7 +1051,7 @@ WREN                              00000002
 WRERR                             00000003
 WUE                               00000001
 W_TMP                             0000001C
-MPASM  5.43                       SERVICE.ASM   3-25-2019  15:06:39         PAGE 19
+MPASM  5.43                       SERVICE.ASM   3-25-2019  15:35:57         PAGE 19
 
 
 SYMBOL TABLE
@@ -1101,7 +1110,7 @@ _HPOL_HIGH_3L                     000000FF
 _HPOL_LOW_3L                      000000EF
 _IDLOC0                           00200000
 _IDLOC1                           00200001
-MPASM  5.43                       SERVICE.ASM   3-25-2019  15:06:39         PAGE 20
+MPASM  5.43                       SERVICE.ASM   3-25-2019  15:35:57         PAGE 20
 
 
 SYMBOL TABLE
@@ -1160,7 +1169,7 @@ _OSC_XT_1H                        000000F1
 _PWMPIN_OFF_3L                    000000FF
 _PWMPIN_ON_3L                     000000FB
 _PWRTEN_OFF_2L                    000000FF
-MPASM  5.43                       SERVICE.ASM   3-25-2019  15:06:39         PAGE 21
+MPASM  5.43                       SERVICE.ASM   3-25-2019  15:35:57         PAGE 21
 
 
 SYMBOL TABLE

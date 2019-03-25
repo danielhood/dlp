@@ -83,20 +83,22 @@ _SETUP:
 ; The current configuration is scaled for 138bpm
 
 ; Calculate period of timer1
-; 65536-5MHz*(bpm/60s*96ticks) = 65536-5000000*60/bpm/96
-; 138bpm = 42,891.07
+; 65536-5MHz*(bpm/60s*96ticks) = 65536-5000000*60/bpm/96 (seems off by a factor of 4??!)
+; 138bpm = 42,891.07 at 1:4 prescale
+;	 = 20,246 at 1:2 prescale
 
-	movlw	0xA7
-	movwf	TMR1H
-	movlw	0x8B
+	; Prescale 1:2
+	movlw	0x16
 	movwf	TMR1L
+	movlw	0x4F		; Reload calculated period for selected bpm
+	movwf	TMR1H
 
 	bcf	T1CON,TMR1CS	; Increment every instruction cycle (FOSC/4 => crystal at 20Mhz/4 => 5Mhz)
 	bcf	T1CON,T1OSCEN	; Disable internal Timer1 oscillator (uses internal clock from external osc) since we need RC0 and RC1 for output
-	bcf	T1CON,T1CKPS0	; 1:4 Prescale value
-	bsf	T1CON,T1CKPS1
+	bsf	T1CON,T1CKPS0	; 1:2 Prescale value
+	bcf	T1CON,T1CKPS1
 	bsf	PIE1,TMR1IE	; Enable Timer1 interrupt
-	bsf	T1CON,TMR1ON	; Enable Timer1
+	bcf	T1CON,TMR1ON	; Disable  Timer1 (MIDI Clock enabled on Song Start)
 
 ; Setup vars
 	clrf	CUR_BYTE

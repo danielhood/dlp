@@ -41,10 +41,18 @@ _CHECK_RC:
 	btfss	PIR1,TMR1IF	; Check for Timer1 interrupt
 	goto	_EXIT_SERVICE
 
-	movlw	0x8D		; Offset by 2 cycles accommodate clock cycles lost to get to this point (note includes 1:4 prescaler and possibly some clock inaccuracy)
+	; Prescale 1:4
+	;movlw	0x8D		; Offset by 2 cycles accommodate clock cycles lost to get to this point (note includes 1:4 prescaler and possibly some clock inaccuracy)
+	;movwf	TMR1L
+	;movlw	0xA7		; Reload calculated period for selected bpm
+	;movwf	TMR1H
+
+	; Prescale 1:2
+	movlw	0x1A		; Offset by 4 cycles accommodate clock cycles lost to get to this point (note includes 1:2 prescaler and possibly some clock inaccuracy)
 	movwf	TMR1L
-	movlw	0xA7		; Reload calculated period for selected bpm
+	movlw	0x4F		; Reload calculated period for selected bpm
 	movwf	TMR1H
+
 
 	bcf	PIR1,TMR1IF	; Clear Timer1 interrupt
 
