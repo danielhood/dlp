@@ -106,9 +106,15 @@ _SETUP:
 	clrf	CV_VELOCITY
 	clrf	CV_MOD
 	clrf	CV_GATE
+
+	clrf	CV_VEL_TARGET
+	clrf	CV_PITCH_TARGET
+	clrf	CV_MOD_TARGET
+
 	setf	SONG_START_INV	; Clear song start
 	clrf	START_STOP_TGL
 	clrf	WAIT_FOR_BUTTONUP
+	clrf	DEBOUNCE
 
 	clrf	CLOCK_COUNTER
 	clrf	CLOCK_DIVIDER
