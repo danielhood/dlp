@@ -67,6 +67,11 @@ _TICK_CLOCK:
 	clrf	CLOCK_COUNTER
 
 _CLOCK_COUNTER_24:
+	decfsz	CV_MOD_SCALE
+	goto	_CLOCK_COUNTER_32
+	movlw	CV_MOD_SCALE_INIT		; reset scale factor
+	movwf	CV_MOD_SCALE
+
 	incf	CLOCK_COUNTER_24,F
 	movlw	0x18				; Reset every 24
 	cpfseq	CLOCK_COUNTER_24
@@ -76,6 +81,11 @@ _CLOCK_COUNTER_24_END:
 	bsf	CV_FLAGS,CVF_VELOCITY		; Notify update for VELOCITY (CV2)
 
 _CLOCK_COUNTER_32:
+	decfsz	CV_VEL_SCALE
+	goto	_CLOCK_COUNTER_96
+	movlw	CV_VEL_SCALE_INIT		; reset scale factor
+	movwf	CV_VEL_SCALE
+
 	incf	CLOCK_COUNTER_32,F
 	movlw	0x20				; Reset every 32
 	cpfseq	CLOCK_COUNTER_32
@@ -85,6 +95,11 @@ _CLOCK_COUNTER_32_END:
 	bsf	CV_FLAGS,CVF_MOD		; Notify update for MOD (CV3)
 
 _CLOCK_COUNTER_96:
+	decfsz	CV_PITCH_SCALE
+	goto	_UPDATE_GATES
+	movlw	CV_PITCH_SCALE_INIT		; reset scale factor
+	movwf	CV_PITCH_SCALE
+
 	incf	CLOCK_COUNTER_96,F
 	movlw	0x60				; Reset every 96
 	cpfseq	CLOCK_COUNTER_96

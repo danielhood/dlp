@@ -111,6 +111,13 @@ _SETUP:
 	clrf	CV_PITCH_TARGET
 	clrf	CV_MOD_TARGET
 
+	movlw	CV_PITCH_SCALE_INIT	; reset scale factor
+	movwf	CV_PITCH_SCALE
+	movlw	CV_VEL_SCALE_INIT
+	movwf	CV_VEL_SCALE
+	movlw	CV_MOD_SCALE_INIT
+	movwf	CV_MOD_SCALE
+
 	setf	SONG_START_INV	; Clear song start
 	clrf	START_STOP_TGL
 	clrf	WAIT_FOR_BUTTONUP

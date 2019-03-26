@@ -191,6 +191,10 @@ _CHECK_BUTTON:
 	clrf	CLOCK_COUNTER_32
 	clrf	CLOCK_COUNTER_96
 
+	movlw	CV_PITCH_SCALE_INIT	; reset scale factor
+	movwf	CV_PITCH_SCALE
+
+
 	goto	_UPDATE_CV1
 
 _SEND_STOP:
@@ -220,6 +224,7 @@ _CHECK_BUTTONUP_CONT:
 _UPDATE_CV1:
 	btfss	CV_FLAGS,CVF_PITCH
 	goto	_UPDATE_CV2
+
 	movf	CLOCK_COUNTER_96,W
 	_LOOKUP_LFO_SINE_96		; returning result in W
 	movwf	CV_PITCH_TARGET		; set new target
