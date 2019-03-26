@@ -64,8 +64,8 @@ CVF_CV_4:	equ	0x03	; MODE0
 CVF_CV_5:	equ	0x04	; MODE0
 
 CV_PITCH_SCALE_INIT:	equ	0x04
-CV_VEL_SCALE_INIT:	equ	0x02
-CV_MOD_SCALE_INIT:	equ	0x08
+CV_VEL_SCALE_INIT:	equ	0x08
+CV_MOD_SCALE_INIT:	equ	0x02
 
 ; GATE Mappings
 ; Bits 0 to 4 of PORT_C represent gates

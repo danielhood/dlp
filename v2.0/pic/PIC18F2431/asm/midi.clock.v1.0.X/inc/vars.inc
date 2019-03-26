@@ -27,10 +27,13 @@
 
 	CV_PITCH_TARGET		; Current target for pitch
 	CV_PITCH_DELAY		; Delay counter for pitch target resolution
+	CV_PITCH_SCALE		; Scale factor for pitch
 	CV_VEL_TARGET		; Current target for velocity
 	CV_VEL_DELAY		; Delay counter for velocity target resolution
+	CV_VEL_SCALE		; Scale factor for vel
 	CV_MOD_TARGET		; Current target for mod
 	CV_MOD_DELAY		; Delay counter for mod target resolution
+	CV_MOD_SCALE		; Scale factor for mod
 
 ;------ service.asm variables
 	W_TMP			; Storage for W register during interrupt
@@ -71,6 +74,10 @@ CVF_MOD:	equ	0x02	; MODE0
 CVF_CV_4:	equ	0x03	; MODE0
 CVF_CV_5:	equ	0x04	; MODE0
 
+CV_PITCH_SCALE_INIT:	equ	0x04
+CV_VEL_SCALE_INIT:	equ	0x08
+CV_MOD_SCALE_INIT:	equ	0x02
+
 _MOFFSET_NOTE_OFF:	equ	0x00	; 0x8c
 _MOFFSET_NOTE_ON:	equ	0x02	; 0x9c
 _MOFFSET_KP:		equ	0x04	; 0xAc
@@ -105,6 +112,6 @@ GATE_3:		equ	0x02
 GATE_4:		equ	0x01
 GATE_5:		equ	0x00
 
-DELAY_96	equ	0x80
-DELAY_32	equ	0x80
-DELAY_24	equ	0x80
+DELAY_96:	equ	0x80
+DELAY_32:	equ	0x80
+DELAY_24:	equ	0x80

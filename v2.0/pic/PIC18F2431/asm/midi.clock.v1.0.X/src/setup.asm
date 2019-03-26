@@ -84,6 +84,23 @@ _SETUP:
 	clrf	CV_MOD
 	clrf	CV_GATE
 
+	clrf	CV_VEL_TARGET
+	clrf	CV_PITCH_TARGET
+	clrf	CV_MOD_TARGET
+
+	movlw	CV_PITCH_SCALE_INIT	; reset scale factor
+	movwf	CV_PITCH_SCALE
+	movlw	CV_VEL_SCALE_INIT
+	movwf	CV_VEL_SCALE
+	movlw	CV_MOD_SCALE_INIT
+	movwf	CV_MOD_SCALE
+
+	clrf	CLOCK_COUNTER
+	clrf	CLOCK_DIVIDER
+	clrf	CLOCK_COUNTER_24
+	clrf	CLOCK_COUNTER_32
+	clrf	CLOCK_COUNTER_96
+
 	movlw	_MOFFSET_NONE	; Set inital midi state
 	movwf	MIDI_STATE
 	

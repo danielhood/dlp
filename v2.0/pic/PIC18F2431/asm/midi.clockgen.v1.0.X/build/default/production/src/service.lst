@@ -1,4 +1,4 @@
-MPASM  5.43                       SERVICE.ASM   3-26-2019  3:06:38         PAGE  1
+MPASM  5.43                       SERVICE.ASM   3-26-2019  3:17:13         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,7 +57,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
   0000001B            00037         DEBOUNCE                ; debounce delay for button
                       00038 
                       00039 ;------ service.asm variables
-MPASM  5.43                       SERVICE.ASM   3-26-2019  3:06:38         PAGE  2
+MPASM  5.43                       SERVICE.ASM   3-26-2019  3:17:13         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -90,8 +90,8 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
   00000004            00064 CVF_CV_5:       equ     0x04    ; MODE0
                       00065 
   00000004            00066 CV_PITCH_SCALE_INIT:    equ     0x04
-  00000002            00067 CV_VEL_SCALE_INIT:      equ     0x02
-  00000008            00068 CV_MOD_SCALE_INIT:      equ     0x08
+  00000008            00067 CV_VEL_SCALE_INIT:      equ     0x08
+  00000002            00068 CV_MOD_SCALE_INIT:      equ     0x02
                       00069 
                       00070 ; GATE Mappings
                       00071 ; Bits 0 to 4 of PORT_C represent gates
@@ -116,7 +116,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00013 ; ------------------------------------------------------------------------------
                       00014 ; Context SAVE/RESTORE macros
                       00015 ;
-MPASM  5.43                       SERVICE.ASM   3-26-2019  3:06:38         PAGE  3
+MPASM  5.43                       SERVICE.ASM   3-26-2019  3:17:13         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -175,7 +175,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00001E 2A0A           00061         incf    CLOCK_DIVIDER,F
 000020 0E03           00062         movlw   0x03                            ; Check if we need to increment the gates (every 3)
 000022 6206           00063         cpfseq  CLOCK_COUNTER
-MPASM  5.43                       SERVICE.ASM   3-26-2019  3:06:38         PAGE  4
+MPASM  5.43                       SERVICE.ASM   3-26-2019  3:17:13         PAGE  4
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -187,10 +187,10 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00002C 6A06           00067         clrf    CLOCK_COUNTER
                       00068 
 00002E                00069 _CLOCK_COUNTER_24:
-00002E 2E14           00070         decfsz  CV_MOD_SCALE
+00002E 2E11           00070         decfsz  CV_VEL_SCALE
 000030 EF?? F???      00071         goto    _CLOCK_COUNTER_32
-000034 0E08           00072         movlw   CV_MOD_SCALE_INIT               ; reset scale factor
-000036 6E14           00073         movwf   CV_MOD_SCALE
+000034 0E08           00072         movlw   CV_VEL_SCALE_INIT               ; reset scale factor
+000036 6E11           00073         movwf   CV_VEL_SCALE
                       00074 
 000038 2A07           00075         incf    CLOCK_COUNTER_24,F
 00003A 0E18           00076         movlw   0x18                            ; Reset every 24
@@ -201,10 +201,10 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 000044 8200           00081         bsf     CV_FLAGS,CVF_VELOCITY           ; Notify update for VELOCITY (CV2)
                       00082 
 000046                00083 _CLOCK_COUNTER_32:
-000046 2E11           00084         decfsz  CV_VEL_SCALE
+000046 2E14           00084         decfsz  CV_MOD_SCALE
 000048 EF?? F???      00085         goto    _CLOCK_COUNTER_96
-00004C 0E02           00086         movlw   CV_VEL_SCALE_INIT               ; reset scale factor
-00004E 6E11           00087         movwf   CV_VEL_SCALE
+00004C 0E02           00086         movlw   CV_MOD_SCALE_INIT               ; reset scale factor
+00004E 6E14           00087         movwf   CV_MOD_SCALE
                       00088 
 000050 2A08           00089         incf    CLOCK_COUNTER_32,F
 000052 0E20           00090         movlw   0x20                            ; Reset every 32
@@ -234,7 +234,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00007A 0BFE           00114         andlw   0xFE            ; bit could be dirty
 00007C 6E05           00115         movwf   CV_GATE_TMP
 00007E 500A           00116         movf    CLOCK_DIVIDER,W
-MPASM  5.43                       SERVICE.ASM   3-26-2019  3:06:38         PAGE  5
+MPASM  5.43                       SERVICE.ASM   3-26-2019  3:17:13         PAGE  5
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -267,7 +267,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0000A4 0010           00138         retfie
                       00139 
                       00140         end
-MPASM  5.43                       SERVICE.ASM   3-26-2019  3:06:38         PAGE  6
+MPASM  5.43                       SERVICE.ASM   3-26-2019  3:17:13         PAGE  6
 
 
 SYMBOL TABLE
@@ -326,7 +326,7 @@ BFEMT                             00000003
 BFOVFL                            00000002
 BOR                               00000000
 BRFEN                             00000007
-MPASM  5.43                       SERVICE.ASM   3-26-2019  3:06:38         PAGE  7
+MPASM  5.43                       SERVICE.ASM   3-26-2019  3:17:13         PAGE  7
 
 
 SYMBOL TABLE
@@ -385,7 +385,7 @@ CCP2M1                            00000001
 CCP2M2                            00000002
 CCP2M3                            00000003
 CCP2X                             00000005
-MPASM  5.43                       SERVICE.ASM   3-26-2019  3:06:38         PAGE  8
+MPASM  5.43                       SERVICE.ASM   3-26-2019  3:17:13         PAGE  8
 
 
 SYMBOL TABLE
@@ -423,7 +423,7 @@ CV_GATE_TMP                       00000005
 CV_MOD                            00000003
 CV_MOD_DELAY                      00000013
 CV_MOD_SCALE                      00000014
-CV_MOD_SCALE_INIT                 00000008
+CV_MOD_SCALE_INIT                 00000002
 CV_MOD_TARGET                     00000012
 CV_NOTE_LKP                       00000080
 CV_PITCH                          00000001
@@ -434,7 +434,7 @@ CV_PITCH_TARGET                   0000000C
 CV_VELOCITY                       00000002
 CV_VEL_DELAY                      00000010
 CV_VEL_SCALE                      00000011
-CV_VEL_SCALE_INIT                 00000002
+CV_VEL_SCALE_INIT                 00000008
 CV_VEL_TARGET                     0000000F
 D                                 00000005
 DATA_ADDRESS                      00000005
@@ -444,7 +444,7 @@ DC1B1                             00000005
 DC2B0                             00000004
 DC2B1                             00000005
 DDRA                              TRISA
-MPASM  5.43                       SERVICE.ASM   3-26-2019  3:06:38         PAGE  9
+MPASM  5.43                       SERVICE.ASM   3-26-2019  3:17:13         PAGE  9
 
 
 SYMBOL TABLE
@@ -503,7 +503,7 @@ FLT4EN                            00000006
 FLTA                              00000001
 FLTAEN                            00000000
 FLTAMOD                           00000001
-MPASM  5.43                       SERVICE.ASM   3-26-2019  3:06:38         PAGE 10
+MPASM  5.43                       SERVICE.ASM   3-26-2019  3:17:13         PAGE 10
 
 
 SYMBOL TABLE
@@ -562,7 +562,7 @@ IC3DRIF                           00000003
 IC3DRIP                           00000003
 IDLEN                             00000007
 INDF0                             00000FEF
-MPASM  5.43                       SERVICE.ASM   3-26-2019  3:06:38         PAGE 11
+MPASM  5.43                       SERVICE.ASM   3-26-2019  3:17:13         PAGE 11
 
 
 SYMBOL TABLE
@@ -621,7 +621,7 @@ LATB3                             00000003
 LATB4                             00000004
 LATB5                             00000005
 LATB6                             00000006
-MPASM  5.43                       SERVICE.ASM   3-26-2019  3:06:38         PAGE 12
+MPASM  5.43                       SERVICE.ASM   3-26-2019  3:17:13         PAGE 12
 
 
 SYMBOL TABLE
@@ -680,7 +680,7 @@ OSFIE                             00000007
 OSFIF                             00000007
 OSFIP                             00000007
 OSTS                              00000003
-MPASM  5.43                       SERVICE.ASM   3-26-2019  3:06:38         PAGE 13
+MPASM  5.43                       SERVICE.ASM   3-26-2019  3:17:13         PAGE 13
 
 
 SYMBOL TABLE
@@ -739,7 +739,7 @@ POUT3                             00000003
 POUT4                             00000004
 POUT5                             00000005
 POUT6                             00000006
-MPASM  5.43                       SERVICE.ASM   3-26-2019  3:06:38         PAGE 14
+MPASM  5.43                       SERVICE.ASM   3-26-2019  3:17:13         PAGE 14
 
 
 SYMBOL TABLE
@@ -798,7 +798,7 @@ RA0                               00000000
 RA1                               00000001
 RA2                               00000002
 RA3                               00000003
-MPASM  5.43                       SERVICE.ASM   3-26-2019  3:06:38         PAGE 15
+MPASM  5.43                       SERVICE.ASM   3-26-2019  3:17:13         PAGE 15
 
 
 SYMBOL TABLE
@@ -857,7 +857,7 @@ SCKP                              00000004
 SCL                               00000005
 SCS0                              00000000
 SCS1                              00000001
-MPASM  5.43                       SERVICE.ASM   3-26-2019  3:06:38         PAGE 16
+MPASM  5.43                       SERVICE.ASM   3-26-2019  3:17:13         PAGE 16
 
 
 SYMBOL TABLE
@@ -916,7 +916,7 @@ STKPTR4                           00000004
 STKUNF                            00000006
 ST_TMP                            0000001D
 SWDTEN                            00000000
-MPASM  5.43                       SERVICE.ASM   3-26-2019  3:06:38         PAGE 17
+MPASM  5.43                       SERVICE.ASM   3-26-2019  3:17:13         PAGE 17
 
 
 SYMBOL TABLE
@@ -975,7 +975,7 @@ TMR0IE                            00000005
 TMR0IF                            00000002
 TMR0IP                            00000002
 TMR0L                             00000FD6
-MPASM  5.43                       SERVICE.ASM   3-26-2019  3:06:38         PAGE 18
+MPASM  5.43                       SERVICE.ASM   3-26-2019  3:17:13         PAGE 18
 
 
 SYMBOL TABLE
@@ -1034,7 +1034,7 @@ TRISC0                            00000000
 TRISC1                            00000001
 TRISC2                            00000002
 TRISC3                            00000003
-MPASM  5.43                       SERVICE.ASM   3-26-2019  3:06:38         PAGE 19
+MPASM  5.43                       SERVICE.ASM   3-26-2019  3:17:13         PAGE 19
 
 
 SYMBOL TABLE
@@ -1093,7 +1093,7 @@ _BORV_27_2L                       000000FB
 _BORV_42_2L                       000000F7
 _BORV_45_2L                       000000F3
 _CHECK_RC                         0000000C
-MPASM  5.43                       SERVICE.ASM   3-26-2019  3:06:38         PAGE 20
+MPASM  5.43                       SERVICE.ASM   3-26-2019  3:17:13         PAGE 20
 
 
 SYMBOL TABLE
@@ -1152,7 +1152,7 @@ _IDLOC0                           00200000
 _IDLOC1                           00200001
 _IDLOC2                           00200002
 _IDLOC3                           00200003
-MPASM  5.43                       SERVICE.ASM   3-26-2019  3:06:38         PAGE 21
+MPASM  5.43                       SERVICE.ASM   3-26-2019  3:17:13         PAGE 21
 
 
 SYMBOL TABLE
@@ -1211,7 +1211,7 @@ _WDPS_4096_2H                     000000F9
 _WDPS_4_2H                        000000E5
 _WDPS_512_2H                      000000F3
 _WDPS_64_2H                       000000ED
-MPASM  5.43                       SERVICE.ASM   3-26-2019  3:06:38         PAGE 22
+MPASM  5.43                       SERVICE.ASM   3-26-2019  3:17:13         PAGE 22
 
 
 SYMBOL TABLE

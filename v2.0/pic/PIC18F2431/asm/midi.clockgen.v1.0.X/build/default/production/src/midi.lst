@@ -1,4 +1,4 @@
-MPASM  5.43                          MIDI.ASM   3-26-2019  3:06:38         PAGE  1
+MPASM  5.43                          MIDI.ASM   3-26-2019  3:17:12         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,7 +57,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
   00000013            00027         CV_MOD_DELAY            ; Delay counter for mod target resolution
   00000014            00028         CV_MOD_SCALE            ; Scale factor for mod
                       00029 
-MPASM  5.43                          MIDI.ASM   3-26-2019  3:06:38         PAGE  2
+MPASM  5.43                          MIDI.ASM   3-26-2019  3:17:12         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -100,8 +100,8 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
   00000004            00064 CVF_CV_5:       equ     0x04    ; MODE0
                       00065 
   00000004            00066 CV_PITCH_SCALE_INIT:    equ     0x04
-  00000002            00067 CV_VEL_SCALE_INIT:      equ     0x02
-  00000008            00068 CV_MOD_SCALE_INIT:      equ     0x08
+  00000008            00067 CV_VEL_SCALE_INIT:      equ     0x08
+  00000002            00068 CV_MOD_SCALE_INIT:      equ     0x02
                       00069 
                       00070 ; GATE Mappings
                       00071 ; Bits 0 to 4 of PORT_C represent gates
@@ -116,7 +116,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
   00000080            00080 DELAY_32:       equ     0x80
   00000080            00081 DELAY_24:       equ     0x80
                       00015 
-MPASM  5.43                          MIDI.ASM   3-26-2019  3:06:38         PAGE  3
+MPASM  5.43                          MIDI.ASM   3-26-2019  3:17:12         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -175,7 +175,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00066 ; W must contain a value between 0 and 95
                       00067 ;
                       00068 _LOOKUP_LFO_SINE_96 macro
-MPASM  5.43                          MIDI.ASM   3-26-2019  3:06:38         PAGE  4
+MPASM  5.43                          MIDI.ASM   3-26-2019  3:17:12         PAGE  4
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -234,7 +234,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 000004 6A82           00118         clrf    PORTC           ; Clear PORTC (gates)
                       00119 
 000006 0E00           00120         movlw   b'00000000'     ; Set the high byte to 0
-MPASM  5.43                          MIDI.ASM   3-26-2019  3:06:38         PAGE  5
+MPASM  5.43                          MIDI.ASM   3-26-2019  3:17:12         PAGE  5
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -293,7 +293,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00004A 6A78           00171         clrf    PDC0H
 00004C 6A79           00172         clrf    PDC0L
 00004E 6A76           00173         clrf    PDC1H
-MPASM  5.43                          MIDI.ASM   3-26-2019  3:06:38         PAGE  6
+MPASM  5.43                          MIDI.ASM   3-26-2019  3:17:12         PAGE  6
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -352,7 +352,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00009C                00224 _UPDATE_CV1:
 00009C A000           00225         btfss   CV_FLAGS,CVF_PITCH
 00009E EF?? F???      00226         goto    _UPDATE_CV2
-MPASM  5.43                          MIDI.ASM   3-26-2019  3:06:38         PAGE  7
+MPASM  5.43                          MIDI.ASM   3-26-2019  3:17:12         PAGE  7
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -411,7 +411,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0000EC EF?? F???      00259         goto    _CHECK_VEL
 0000F0                00260 _UPDATE_PITCH_CHECK:
 0000F0 2E0D           00261         decfsz  CV_PITCH_DELAY,F        ; Check counter
-MPASM  5.43                          MIDI.ASM   3-26-2019  3:06:38         PAGE  8
+MPASM  5.43                          MIDI.ASM   3-26-2019  3:17:12         PAGE  8
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -470,7 +470,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 000154 4220               M         rrncf   TMP_CV_BYTE_H,F
 000156 4220               M         rrncf   TMP_CV_BYTE_H,F
 000158 C020 FF76      00296         movff   TMP_CV_BYTE_H,PDC1H
-MPASM  5.43                          MIDI.ASM   3-26-2019  3:06:38         PAGE  9
+MPASM  5.43                          MIDI.ASM   3-26-2019  3:17:12         PAGE  9
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -515,7 +515,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0001A4 EF?? F???      00324         goto    _LOOP
                       00325 
                       00326         end
-MPASM  5.43                          MIDI.ASM   3-26-2019  3:06:38         PAGE 10
+MPASM  5.43                          MIDI.ASM   3-26-2019  3:17:12         PAGE 10
 
 
 SYMBOL TABLE
@@ -574,7 +574,7 @@ BFEMT                             00000003
 BFOVFL                            00000002
 BOR                               00000000
 BRFEN                             00000007
-MPASM  5.43                          MIDI.ASM   3-26-2019  3:06:38         PAGE 11
+MPASM  5.43                          MIDI.ASM   3-26-2019  3:17:12         PAGE 11
 
 
 SYMBOL TABLE
@@ -633,7 +633,7 @@ CCP2M1                            00000001
 CCP2M2                            00000002
 CCP2M3                            00000003
 CCP2X                             00000005
-MPASM  5.43                          MIDI.ASM   3-26-2019  3:06:38         PAGE 12
+MPASM  5.43                          MIDI.ASM   3-26-2019  3:17:12         PAGE 12
 
 
 SYMBOL TABLE
@@ -671,7 +671,7 @@ CV_GATE_TMP                       00000005
 CV_MOD                            00000003
 CV_MOD_DELAY                      00000013
 CV_MOD_SCALE                      00000014
-CV_MOD_SCALE_INIT                 00000008
+CV_MOD_SCALE_INIT                 00000002
 CV_MOD_TARGET                     00000012
 CV_NOTE_LKP                       00000080
 CV_PITCH                          00000001
@@ -682,7 +682,7 @@ CV_PITCH_TARGET                   0000000C
 CV_VELOCITY                       00000002
 CV_VEL_DELAY                      00000010
 CV_VEL_SCALE                      00000011
-CV_VEL_SCALE_INIT                 00000002
+CV_VEL_SCALE_INIT                 00000008
 CV_VEL_TARGET                     0000000F
 D                                 00000005
 DATA_ADDRESS                      00000005
@@ -692,7 +692,7 @@ DC1B1                             00000005
 DC2B0                             00000004
 DC2B1                             00000005
 DDRA                              TRISA
-MPASM  5.43                          MIDI.ASM   3-26-2019  3:06:38         PAGE 13
+MPASM  5.43                          MIDI.ASM   3-26-2019  3:17:12         PAGE 13
 
 
 SYMBOL TABLE
@@ -751,7 +751,7 @@ FLT4EN                            00000006
 FLTA                              00000001
 FLTAEN                            00000000
 FLTAMOD                           00000001
-MPASM  5.43                          MIDI.ASM   3-26-2019  3:06:38         PAGE 14
+MPASM  5.43                          MIDI.ASM   3-26-2019  3:17:12         PAGE 14
 
 
 SYMBOL TABLE
@@ -810,7 +810,7 @@ IC3DRIF                           00000003
 IC3DRIP                           00000003
 IDLEN                             00000007
 INDF0                             00000FEF
-MPASM  5.43                          MIDI.ASM   3-26-2019  3:06:38         PAGE 15
+MPASM  5.43                          MIDI.ASM   3-26-2019  3:17:12         PAGE 15
 
 
 SYMBOL TABLE
@@ -869,7 +869,7 @@ LATB3                             00000003
 LATB4                             00000004
 LATB5                             00000005
 LATB6                             00000006
-MPASM  5.43                          MIDI.ASM   3-26-2019  3:06:38         PAGE 16
+MPASM  5.43                          MIDI.ASM   3-26-2019  3:17:12         PAGE 16
 
 
 SYMBOL TABLE
@@ -928,7 +928,7 @@ OSC2                              00000006
 OSCCON                            00000FD3
 OSCTUNE                           00000F9B
 OSFIE                             00000007
-MPASM  5.43                          MIDI.ASM   3-26-2019  3:06:38         PAGE 17
+MPASM  5.43                          MIDI.ASM   3-26-2019  3:17:12         PAGE 17
 
 
 SYMBOL TABLE
@@ -987,7 +987,7 @@ POUT0                             00000000
 POUT1                             00000001
 POUT2                             00000002
 POUT3                             00000003
-MPASM  5.43                          MIDI.ASM   3-26-2019  3:06:38         PAGE 18
+MPASM  5.43                          MIDI.ASM   3-26-2019  3:17:12         PAGE 18
 
 
 SYMBOL TABLE
@@ -1046,7 +1046,7 @@ QEIM1                             00000003
 QEIM2                             00000004
 R                                 00000002
 RA0                               00000000
-MPASM  5.43                          MIDI.ASM   3-26-2019  3:06:38         PAGE 19
+MPASM  5.43                          MIDI.ASM   3-26-2019  3:17:12         PAGE 19
 
 
 SYMBOL TABLE
@@ -1105,7 +1105,7 @@ SBSEL0                            00000004
 SBSEL1                            00000005
 SCK                               00000005
 SCKP                              00000004
-MPASM  5.43                          MIDI.ASM   3-26-2019  3:06:38         PAGE 20
+MPASM  5.43                          MIDI.ASM   3-26-2019  3:17:12         PAGE 20
 
 
 SYMBOL TABLE
@@ -1164,7 +1164,7 @@ STKPTR1                           00000001
 STKPTR2                           00000002
 STKPTR3                           00000003
 STKPTR4                           00000004
-MPASM  5.43                          MIDI.ASM   3-26-2019  3:06:38         PAGE 21
+MPASM  5.43                          MIDI.ASM   3-26-2019  3:17:12         PAGE 21
 
 
 SYMBOL TABLE
@@ -1223,7 +1223,7 @@ TMP_CV_BYTE_L                     0000001F
 TMR0                              00000FD6
 TMR0H                             00000FD7
 TMR0IE                            00000005
-MPASM  5.43                          MIDI.ASM   3-26-2019  3:06:38         PAGE 22
+MPASM  5.43                          MIDI.ASM   3-26-2019  3:17:12         PAGE 22
 
 
 SYMBOL TABLE
@@ -1282,7 +1282,7 @@ TRISB6                            00000006
 TRISB7                            00000007
 TRISC                             00000F94
 TRISC0                            00000000
-MPASM  5.43                          MIDI.ASM   3-26-2019  3:06:38         PAGE 23
+MPASM  5.43                          MIDI.ASM   3-26-2019  3:17:12         PAGE 23
 
 
 SYMBOL TABLE
@@ -1341,7 +1341,7 @@ _BOREN_OFF_2L                     000000FD
 _BOREN_ON_2L                      000000FF
 _BORV_20_2L                       000000FF
 _BORV_27_2L                       000000FB
-MPASM  5.43                          MIDI.ASM   3-26-2019  3:06:38         PAGE 24
+MPASM  5.43                          MIDI.ASM   3-26-2019  3:17:12         PAGE 24
 
 
 SYMBOL TABLE
@@ -1400,7 +1400,7 @@ _EBTRB_OFF_7H                     000000FF
 _EBTRB_ON_7H                      000000BF
 _FCMEN_OFF_1H                     000000BF
 _FCMEN_ON_1H                      000000FF
-MPASM  5.43                          MIDI.ASM   3-26-2019  3:06:38         PAGE 25
+MPASM  5.43                          MIDI.ASM   3-26-2019  3:17:12         PAGE 25
 
 
 SYMBOL TABLE
@@ -1459,7 +1459,7 @@ _UPDATE_MOD                       00000186
 _UPDATE_MOD_CHECK                 00000170
 _UPDATE_PITCH                     00000106
 _UPDATE_PITCH_CHECK               000000F0
-MPASM  5.43                          MIDI.ASM   3-26-2019  3:06:38         PAGE 26
+MPASM  5.43                          MIDI.ASM   3-26-2019  3:17:12         PAGE 26
 
 
 SYMBOL TABLE
