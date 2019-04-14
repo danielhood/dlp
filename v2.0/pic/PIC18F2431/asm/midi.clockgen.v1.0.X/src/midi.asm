@@ -115,7 +115,7 @@ _SPLIT_CV_VALUE2	macro
 _MAIN:
 	clrf	PORTA		; Clear PORTA
 	clrf	PORTB		; Clear PORTB
-	clrf	PORTC		; Clear PORTC (gates)
+	clrf	PORTC		; Clear PORTC (gates) - needs to start low (incl reset) so Song Start will flip to high
 
 	movlw	b'00000000'	; Set the high byte to 0
 	movwf	PDC0H
@@ -202,6 +202,10 @@ _SEND_STOP:
 	movwf	TXREG		; Transmit
 
 	bcf	T1CON,TMR1ON	; Disable Timer1 (MIDI Clock)
+
+	; Reset internal CV/GATEs
+	; All clocks stop on low, and low reset flag for Song Stop - neded so we can go high at song start
+	clrf	PORTC		; Apply gate settings directly to PORTC
 
 	goto	_UPDATE_CV1
 
