@@ -1,4 +1,4 @@
-MPASM  5.43                         SETUP.ASM   3-26-2019  3:17:14         PAGE  1
+MPASM  5.43                         SETUP.ASM   4-13-2019  22:59:24         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,7 +57,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00039 ;------ service.asm variables
   0000001C            00040         W_TMP                   ; Storage for W register during interrupt
   0000001D            00041         ST_TMP                  ; Storage for STATUS register during interrupt
-MPASM  5.43                         SETUP.ASM   3-26-2019  3:17:14         PAGE  2
+MPASM  5.43                         SETUP.ASM   4-13-2019  22:59:24         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -116,7 +116,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00013 ; ------------------------------------------------------------------------------
                       00014 ; Setup routine
                       00015 ;
-MPASM  5.43                         SETUP.ASM   3-26-2019  3:17:14         PAGE  3
+MPASM  5.43                         SETUP.ASM   4-13-2019  22:59:24         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -175,7 +175,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 000028 94AC           00062         bcf     TXSTA,BRGH      ; Low spped BRG
 00002A 96AA           00063         bcf     BAUDCON,BRG16   ; 8 bit BRG
 00002C 90AA           00064         bcf     BAUDCON,ABDEN   ; Disable auto-baud detect
-MPASM  5.43                         SETUP.ASM   3-26-2019  3:17:14         PAGE  4
+MPASM  5.43                         SETUP.ASM   4-13-2019  22:59:24         PAGE  4
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -234,7 +234,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00113 
 000060 0E04           00114         movlw   CV_PITCH_SCALE_INIT     ; reset scale factor
 000062 6E0E           00115         movwf   CV_PITCH_SCALE
-MPASM  5.43                         SETUP.ASM   3-26-2019  3:17:14         PAGE  5
+MPASM  5.43                         SETUP.ASM   4-13-2019  22:59:24         PAGE  5
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -272,7 +272,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00008C 0012           00143         return
                       00144 
                       00145         end
-MPASM  5.43                         SETUP.ASM   3-26-2019  3:17:14         PAGE  6
+MPASM  5.43                         SETUP.ASM   4-13-2019  22:59:24         PAGE  6
 
 
 SYMBOL TABLE
@@ -331,7 +331,7 @@ BFEMT                             00000003
 BFOVFL                            00000002
 BOR                               00000000
 BRFEN                             00000007
-MPASM  5.43                         SETUP.ASM   3-26-2019  3:17:14         PAGE  7
+MPASM  5.43                         SETUP.ASM   4-13-2019  22:59:24         PAGE  7
 
 
 SYMBOL TABLE
@@ -390,7 +390,7 @@ CCP2M1                            00000001
 CCP2M2                            00000002
 CCP2M3                            00000003
 CCP2X                             00000005
-MPASM  5.43                         SETUP.ASM   3-26-2019  3:17:14         PAGE  8
+MPASM  5.43                         SETUP.ASM   4-13-2019  22:59:24         PAGE  8
 
 
 SYMBOL TABLE
@@ -449,7 +449,7 @@ DC1B1                             00000005
 DC2B0                             00000004
 DC2B1                             00000005
 DDRA                              TRISA
-MPASM  5.43                         SETUP.ASM   3-26-2019  3:17:14         PAGE  9
+MPASM  5.43                         SETUP.ASM   4-13-2019  22:59:24         PAGE  9
 
 
 SYMBOL TABLE
@@ -508,7 +508,7 @@ FLT4EN                            00000006
 FLTA                              00000001
 FLTAEN                            00000000
 FLTAMOD                           00000001
-MPASM  5.43                         SETUP.ASM   3-26-2019  3:17:14         PAGE 10
+MPASM  5.43                         SETUP.ASM   4-13-2019  22:59:24         PAGE 10
 
 
 SYMBOL TABLE
@@ -567,7 +567,7 @@ IC3DRIF                           00000003
 IC3DRIP                           00000003
 IDLEN                             00000007
 INDF0                             00000FEF
-MPASM  5.43                         SETUP.ASM   3-26-2019  3:17:14         PAGE 11
+MPASM  5.43                         SETUP.ASM   4-13-2019  22:59:24         PAGE 11
 
 
 SYMBOL TABLE
@@ -626,7 +626,7 @@ LATB3                             00000003
 LATB4                             00000004
 LATB5                             00000005
 LATB6                             00000006
-MPASM  5.43                         SETUP.ASM   3-26-2019  3:17:14         PAGE 12
+MPASM  5.43                         SETUP.ASM   4-13-2019  22:59:24         PAGE 12
 
 
 SYMBOL TABLE
@@ -685,7 +685,7 @@ OSC2                              00000006
 OSCCON                            00000FD3
 OSCTUNE                           00000F9B
 OSFIE                             00000007
-MPASM  5.43                         SETUP.ASM   3-26-2019  3:17:14         PAGE 13
+MPASM  5.43                         SETUP.ASM   4-13-2019  22:59:24         PAGE 13
 
 
 SYMBOL TABLE
@@ -744,7 +744,7 @@ POUT0                             00000000
 POUT1                             00000001
 POUT2                             00000002
 POUT3                             00000003
-MPASM  5.43                         SETUP.ASM   3-26-2019  3:17:14         PAGE 14
+MPASM  5.43                         SETUP.ASM   4-13-2019  22:59:24         PAGE 14
 
 
 SYMBOL TABLE
@@ -803,7 +803,7 @@ QEIM1                             00000003
 QEIM2                             00000004
 R                                 00000002
 RA0                               00000000
-MPASM  5.43                         SETUP.ASM   3-26-2019  3:17:14         PAGE 15
+MPASM  5.43                         SETUP.ASM   4-13-2019  22:59:24         PAGE 15
 
 
 SYMBOL TABLE
@@ -862,7 +862,7 @@ SBSEL0                            00000004
 SBSEL1                            00000005
 SCK                               00000005
 SCKP                              00000004
-MPASM  5.43                         SETUP.ASM   3-26-2019  3:17:14         PAGE 16
+MPASM  5.43                         SETUP.ASM   4-13-2019  22:59:24         PAGE 16
 
 
 SYMBOL TABLE
@@ -921,7 +921,7 @@ STKPTR1                           00000001
 STKPTR2                           00000002
 STKPTR3                           00000003
 STKPTR4                           00000004
-MPASM  5.43                         SETUP.ASM   3-26-2019  3:17:14         PAGE 17
+MPASM  5.43                         SETUP.ASM   4-13-2019  22:59:24         PAGE 17
 
 
 SYMBOL TABLE
@@ -980,7 +980,7 @@ TMP_CV_BYTE_L                     0000001F
 TMR0                              00000FD6
 TMR0H                             00000FD7
 TMR0IE                            00000005
-MPASM  5.43                         SETUP.ASM   3-26-2019  3:17:14         PAGE 18
+MPASM  5.43                         SETUP.ASM   4-13-2019  22:59:24         PAGE 18
 
 
 SYMBOL TABLE
@@ -1039,7 +1039,7 @@ TRISB6                            00000006
 TRISB7                            00000007
 TRISC                             00000F94
 TRISC0                            00000000
-MPASM  5.43                         SETUP.ASM   3-26-2019  3:17:14         PAGE 19
+MPASM  5.43                         SETUP.ASM   4-13-2019  22:59:24         PAGE 19
 
 
 SYMBOL TABLE
@@ -1098,7 +1098,7 @@ _BOREN_OFF_2L                     000000FD
 _BOREN_ON_2L                      000000FF
 _BORV_20_2L                       000000FF
 _BORV_27_2L                       000000FB
-MPASM  5.43                         SETUP.ASM   3-26-2019  3:17:14         PAGE 20
+MPASM  5.43                         SETUP.ASM   4-13-2019  22:59:24         PAGE 20
 
 
 SYMBOL TABLE
@@ -1157,7 +1157,7 @@ _IDLOC5                           00200005
 _IDLOC6                           00200006
 _IDLOC7                           00200007
 _IESO_OFF_1H                      0000007F
-MPASM  5.43                         SETUP.ASM   3-26-2019  3:17:14         PAGE 21
+MPASM  5.43                         SETUP.ASM   4-13-2019  22:59:24         PAGE 21
 
 
 SYMBOL TABLE
@@ -1216,7 +1216,7 @@ _WRT0_ON_6L                       000000FE
 _WRT1_OFF_6L                      000000FF
 _WRT1_ON_6L                       000000FD
 _WRT2_OFF_6L                      000000FF
-MPASM  5.43                         SETUP.ASM   3-26-2019  3:17:14         PAGE 22
+MPASM  5.43                         SETUP.ASM   4-13-2019  22:59:24         PAGE 22
 
 
 SYMBOL TABLE
