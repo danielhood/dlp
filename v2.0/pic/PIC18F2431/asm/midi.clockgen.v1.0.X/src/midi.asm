@@ -150,8 +150,14 @@ _CHECK_BUTTON:
 	comf	START_STOP_TGL,F
 	bz	_SEND_STOP
 
-	movlw	0xFA				; Song start
-	movwf	TXREG				; Transmit
+	clrf	SONG_START_INV			; Flag song start
+
+	; Reset internal CV/GATEs
+	movlw	0x1F		; All clocks start high, and high reset flag for Song Start
+	movwf	PORTC		; Apply gate settings directly to PORTC
+
+	movlw	0xFA		; Song start
+	movwf	TXREG		; Transmit
 
 	; Reset Timer1
 	; Prescale 1:2
@@ -161,12 +167,6 @@ _CHECK_BUTTON:
 	movwf	TMR1H
 
 	bsf	T1CON,TMR1ON	; Enable Timer1 (MIDI Clock)
-
-	clrf	SONG_START_INV			; Flag song start
-
-	; Reset internal CV/GATEs
-	movlw	0x1F		; All clocks start high, and high reset flag for Song Start
-	movwf	PORTC		; Apply gate settings directly to PORTC
 
 	clrf	PDC0H
 	clrf	PDC0L
