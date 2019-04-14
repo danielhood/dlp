@@ -2,7 +2,7 @@
 
 #define SEQ_COUNT 6
 
-unsigned char divisions[SEQ_COUNT] = {1,2,4,4,3,1};
+unsigned char divisions[SEQ_COUNT] = {1,2,4,3,8,32};
 unsigned char clockCount[SEQ_COUNT] = {0,0,0,0,0,0};
 unsigned char state[SEQ_COUNT] = {0,0,0,0,0,0};
 
@@ -12,9 +12,9 @@ void seq_init() {
     divisions[0] = 1;
     divisions[1] = 2;
     divisions[2] = 4;
-    divisions[3] = 4;
-    divisions[4] = 3;
-    divisions[5] = 1;
+    divisions[3] = 3;
+    divisions[4] = 8;
+    divisions[5] = 32;
 
     for (i = 0; i<SEQ_COUNT; i++) {
         clockCount[i] = 0;
