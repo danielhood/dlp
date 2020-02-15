@@ -55,6 +55,10 @@ _CHECK_RC:
 
 	bcf	PIR1,TMR1IF	; Clear Timer1 interrupt
 
+	movlw	0x00
+	cpfseq	SONG_START
+	goto	_SKIP_TICK_ON_SONG_START
+
 	; Tick GATE/CV clocks
 _TICK_CLOCK:
 	incf	CLOCK_COUNTER,F			; Tick clocks
@@ -136,5 +140,10 @@ _EXIT_SERVICE:
 	_RESTORE_CTX
 
 	retfie
+
+_SKIP_TICK_ON_SONG_START:
+	clrf	SONG_START
+	goto	_UPDATE_GATES
+
 
 	end

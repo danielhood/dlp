@@ -15,7 +15,8 @@
 	CLOCK_COUNTER_32	; Counter for midi clock reset every 32 ticks (thrid note)
 	CLOCK_COUNTER_96	; Counter for midi clock reset every 96 ticks (whole note)
 	CLOCK_DIVIDER		; Stored binary divided MIDI clock (not reset)
-	SONG_START_INV		; Inverted song start (0 indicates song start signal which lasts for 1 clock cycle)
+	SONG_START_INV		; Inverted song start (0 indicates song start signal which lasts for 1 clock cycle), reset after 3 ticks
+	SONG_START		; Non-Inverted song start, reset after 1 tick
 
 	CV_PITCH_TARGET		; Current target for pitch
 	CV_PITCH_DELAY		; Delay counter for pitch target resolution

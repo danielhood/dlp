@@ -57,12 +57,15 @@ _HANDLE_RC:
 	movlw	0xF8				; Timing Clock (96ths)
 	cpfseq	CUR_BYTE
 	goto	_NOT_CLOCK
+	movlw	0x00
+	cpfseq	SONG_START			; Skip initial tick at song start
+	goto	_SKIP_TICK_ON_SONG_START
 	incf	CLOCK_COUNTER,F			; Tick clocks
 	incf	CLOCK_DIVIDER,F
 	movlw	0x03				; Check if we need to increment the gates (every 3)
 	cpfseq	CLOCK_COUNTER
 	goto	_CLOCK_COUNTER_24
-	setf	SONG_START_INV			; Clear song start
+	setf	SONG_START_INV			; Clear song start flag after 3 ticks
 	incf	CV_GATE,F
 	clrf	CLOCK_COUNTER
 
@@ -109,12 +112,17 @@ _CLOCK_COUNTER_96_END:
 	bsf	CV_FLAGS,CVF_PITCH		; Notify update for PITCH (CV1)
 	goto	_RC_CLEANUP
 
+_SKIP_TICK_ON_SONG_START:
+	clrf	SONG_START
+	goto	_RC_CLEANUP
+
 _NOT_CLOCK:
 	movlw	0xFA				; Song start
 	cpfseq	CUR_BYTE
 	goto	_NOT_SONG_START
 	clrf	CV_GATE				; Reset clocks and counters on song start
 	clrf	SONG_START_INV
+	setf	SONG_START
 	clrf	CLOCK_COUNTER
 	clrf	CLOCK_COUNTER_24
 	clrf	CLOCK_COUNTER_32

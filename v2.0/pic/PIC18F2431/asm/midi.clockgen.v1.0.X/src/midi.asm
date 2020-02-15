@@ -151,6 +151,7 @@ _CHECK_BUTTON:
 	bz	_SEND_STOP
 
 	clrf	SONG_START_INV			; Flag song start
+	setf	SONG_START
 
 	; Reset internal CV/GATEs
 	movlw	0x1F		; All clocks start high, and high reset flag for Song Start
