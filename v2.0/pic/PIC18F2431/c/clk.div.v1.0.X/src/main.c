@@ -19,6 +19,7 @@
 #include "leds.h"
 #include "clock.h"
 #include "seq.h"
+#include "gates.h"
 
 unsigned char main_clockState[2] = {0,0};
 unsigned char main_lvlState = 0;
@@ -122,6 +123,9 @@ InterruptVectorLow (void)
   _endasm
 }
 
+void clock_check_1();
+void clock_check_2();
+
 void clock_check_1() {
     if (main_clockState[CLOCK1]) {
         main_clockState[CLOCK1] = 0;
@@ -161,13 +165,15 @@ void main() {
     leds_init();
 
     while (1) {
-        if (inputs_get(RST1) {
+        if (inputs_get(RST1)) {
 	    // double check
             Delay10TCYx(1);
-            if (inputs_get(RST1) {
+            if (inputs_get(RST1)) {
                 seq_reset(0);
                 seq_reset(1);
                 seq_reset(2);
+                gates_set_allcvs(0,0,0);
+
             } else {
                 clock_check_1();
             }
@@ -175,13 +181,14 @@ void main() {
             clock_check_1();
         }
 
-        if (inputs_get(RST2) {
+        if (inputs_get(RST2)) {
 	    // double check
             Delay10TCYx(1);
-            if (inputs_get(RST2) {
+            if (inputs_get(RST2)) {
                 seq_reset(3);
                 seq_reset(4);
                 seq_reset(5);
+                gates_set_allgates(0,0,0);
             } else {
                 clock_check_2();
             }

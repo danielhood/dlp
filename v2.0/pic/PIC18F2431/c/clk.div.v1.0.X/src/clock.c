@@ -26,7 +26,7 @@ unsigned char clock_getState(unsigned char clockIdx) {
 
 void clock_tick(unsigned char clockIdx) {
     switch (clockIdx) {
-        cast CLOCK1:
+        case CLOCK1:
         {
             seq_tick(0);
             seq_tick(1);
@@ -37,7 +37,7 @@ void clock_tick(unsigned char clockIdx) {
                 seq_get(1) ? 255 : 0,
                 seq_get(2) ? 255 : 0);
         }
-        case CLOKC2:
+        case CLOCK2:
         {
             seq_tick(3);
             seq_tick(4);
