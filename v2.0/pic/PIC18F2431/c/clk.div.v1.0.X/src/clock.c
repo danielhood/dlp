@@ -25,51 +25,29 @@ unsigned char clock_getState(unsigned char clockIdx) {
 }
 
 void clock_tick(unsigned char clockIdx) {
-    if (clockIdx == CLOCK1) {
-        if (inputs_get(RST1)) {
-            // Double check
-            Delay10TCYx(1);
-             if (inputs_get(RST1)) {
-                seq_reset(0);
-                seq_reset(1);
-                seq_reset(2);
-            } else {
-                seq_tick(0);
-                seq_tick(1);
-                seq_tick(2);
-            }
-        } else {
+    switch (clockIdx) {
+        cast CLOCK1:
+        {
             seq_tick(0);
             seq_tick(1);
             seq_tick(2);
-        }
-        
-        gates_set_allcvs(
+
+            gates_set_allcvs(
                 seq_get(0) ? 255 : 0,
                 seq_get(1) ? 255 : 0,
                 seq_get(2) ? 255 : 0);
-    }
-
-    if (clockIdx == CLOCK2) {
-        if (inputs_get(RST2)) {
-            // Double check
-            Delay10TCYx(1);
-            if (inputs_get(RST2)) {
-                seq_reset(3);
-                seq_reset(4);
-                seq_reset(5);
-            } else {
-                seq_tick(3);
-                seq_tick(4);
-                seq_tick(5);
-            }
-        } else {
+        }
+        case CLOKC2:
+        {
             seq_tick(3);
             seq_tick(4);
             seq_tick(5);
-        }
 
-        gates_set_allgates(seq_get(3), seq_get(4), seq_get(5));
+            gates_set_allgates(
+                seq_get(3), 
+                seq_get(4), 
+                seq_get(5));
+        }
     }
 }
 

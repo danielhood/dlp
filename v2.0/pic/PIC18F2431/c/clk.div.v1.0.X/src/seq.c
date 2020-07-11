@@ -5,6 +5,7 @@
 unsigned char divisions[SEQ_COUNT] = {1,2,4,3,8,32};
 unsigned char clockCount[SEQ_COUNT] = {0,0,0,0,0,0};
 unsigned char state[SEQ_COUNT] = {0,0,0,0,0,0};
+unsigned char reset[SEQ_COUNT] = {1,1,1,1,1,1}; // Initial state is reset
 
 void seq_init() {
     int i;
@@ -25,6 +26,15 @@ void seq_init() {
 void seq_tick(unsigned char seqidx) {
     if (seqidx >= SEQ_COUNT) return;
 
+    // First tick after reset drives all clocks high
+    if (reset[seqidx]) {
+        state[seqidx] = !state[seqidx];
+        reset[seqidx] = 0;        
+
+        // We don't count this initial tick
+        return;
+    }
+
     clockCount[seqidx]++;
     if (clockCount[seqidx] >= divisions[seqidx]) {
         clockCount[seqidx] = 0;
@@ -39,6 +49,7 @@ void seq_reset(unsigned char seqidx) {
 
     state[seqidx] = 0;
     clockCount[seqidx] = 0;
+    reset[seqidx] = 1;
 }
 
 unsigned char seq_get(unsigned char seqidx) {

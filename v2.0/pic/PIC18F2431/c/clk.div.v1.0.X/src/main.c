@@ -122,6 +122,19 @@ InterruptVectorLow (void)
   _endasm
 }
 
+void clock_check_1() {
+    if (main_clockState[CLOCK1]) {
+        main_clockState[CLOCK1] = 0;
+        clock_tick(CLOCK1);
+    }
+}
+
+void clock_check_2() {
+    if (main_clockState[CLOCK2]) {
+        main_clockState[CLOCK2] = 0;
+        clock_tick(CLOCK2);
+    }
+}
 
 // Current Functionality:
 //      Fully functional clock divider
@@ -148,16 +161,34 @@ void main() {
     leds_init();
 
     while (1) {
-        if (main_clockState[CLOCK1]) {
-            main_clockState[CLOCK1] = 0;
-            clock_tick(CLOCK1);
+        if (inputs_get(RST1) {
+	    // double check
+            Delay10TCYx(1);
+            if (inputs_get(RST1) {
+                seq_reset(0);
+                seq_reset(1);
+                seq_reset(2);
+            } else {
+                clock_check_1();
+            }
+        } else {
+            clock_check_1();
         }
 
-        if (main_clockState[CLOCK2]) {
-            main_clockState[CLOCK2] = 0;
-            clock_tick(CLOCK2);
+        if (inputs_get(RST2) {
+	    // double check
+            Delay10TCYx(1);
+            if (inputs_get(RST2) {
+                seq_reset(3);
+                seq_reset(4);
+                seq_reset(5);
+            } else {
+                clock_check_2();
+            }
+        } else {
+            clock_check_2();
         }
-
+		
         if (main_blinkState) {
             main_blinkState = 0;
             leds_blink();
