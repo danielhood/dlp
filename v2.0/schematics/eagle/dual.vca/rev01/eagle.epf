@@ -1,5 +1,5 @@
 [Eagle]
-Version="09 05 01"
+Version="09 06 02"
 Platform="Mac OS X"
 Globals="Globals"
 Desktop="Desktop"
@@ -270,8 +270,8 @@ UsedLibrary="/Users/dhood/git/danielhood/dlp/v2.0/schematics/eagle/_common.lbr"
 [Win_1]
 Type="Board Editor"
 Number=2
-File="dual.vca.pnl.brd"
-View="-80.5012 -1.76632 103.539 90.0821"
+File="dual.vca.main.brd"
+View="-2.01665 -17.663 102.849 81.915"
 WireWidths=" 0.0762 0.1016 0.127 0.15 0.2 0.2032 0.254 0.3048 0.4064 0.508 0.6096 0.8128 1.016 1.27 2.54 0.1524"
 PadDiameters=" 0.254 0.3048 0.4064 0.6096 0.8128 1.016 1.27 1.4224 1.6764 1.778 1.9304 2.1844 2.54 3.81 6.4516 0"
 PadDrills=" 0.2 0.25 0.3 0.35 0.4 0.45 0.5 0.55 0.65 0.7 0.75 0.8 0.85 0.9 1 0.6"
@@ -312,10 +312,14 @@ PadsSameType=0
 Layer=1
 
 [Win_2]
+Type="Control Panel"
+Number=0
+
+[Win_3]
 Type="Schematic Editor"
 Number=1
-File="dual.vca.pnl.sch"
-View="-14.3156 -7.6961 170.959 97.5223"
+File="dual.vca.main.sch"
+View="-65.3602 -41.683 162.265 95.1096"
 WireWidths=" 0.0762 0.1016 0.127 0.15 0.2 0.2032 0.254 0.3048 0.4064 0.508 0.6096 0.8128 1.016 1.27 2.54 0.1524"
 PadDiameters=" 0.254 0.3048 0.4064 0.6096 0.8128 1.016 1.27 1.4224 1.6764 1.778 1.9304 2.1844 2.54 3.81 6.4516 0"
 PadDrills=" 0.2 0.25 0.3 0.35 0.4 0.45 0.5 0.55 0.65 0.7 0.75 0.8 0.85 0.9 1 0.6"
@@ -354,11 +358,8 @@ ArcDirection=0
 AddLevel=2
 PadsSameType=0
 Layer=91
+Views=" 1: -65.3602 -41.683 162.265 95.1096"
 Sheet="1"
-
-[Win_3]
-Type="Control Panel"
-Number=0
 
 [Desktop]
 Screen="3840 1080"
