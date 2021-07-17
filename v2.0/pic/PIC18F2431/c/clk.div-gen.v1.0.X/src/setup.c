@@ -94,12 +94,12 @@ void setup_interrupts(void) {
     IPR1bits.ADIP = 0;      // Low priority AD interrupts
 
     // Interrupts for clock triggers
-    INTCON2 = 0xFF; // Int1 and Int2 rising edge triggered
-    INTCON3 = 0xD8; // Int1 and Int2 are high priority (vector at 0x0008), and enabled
+    // INTCON2 = 0xFF; // Int1 and Int2 rising edge triggered
+    // INTCON3 = 0xD8; // Int1 and Int2 are high priority (vector at 0x0008), and enabled
 
     // Interrupts for Timer0 (LED blink)
     INTCONbits.TMR0IE = 1;  // Enable Timer0 Interrupt
-    INTCON2bits.TMR0IP = 0; // Low priority
+    INTCON2bits.TMR0IP = 1; // High priority
 
     RCONbits.IPEN = 1;      // Turn on priority levels, otherwise everything flows through high interrupt
 
@@ -108,7 +108,7 @@ void setup_interrupts(void) {
 }
 
 void setup_leds(void) {
-    T0CONbits.TMR0ON = 1;   // Enable timer0
+    T0CONbits.TMR0ON = 0;   // Start with timer0 disabled
     T0CONbits.T016BIT = 0;  // 16-bit timer
     T0CONbits.T0CS = 0;     // Interal clock (Fosc/4)
     T0CONbits.PSA = 0;      // Assign prescaler

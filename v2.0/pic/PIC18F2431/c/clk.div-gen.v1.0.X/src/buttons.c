@@ -15,6 +15,7 @@
 #include "leds.h"
 #include "buttons.h"
 #include "inputs.h"
+#include "gates.h"
 
 unsigned char active_pattern = 0; // This is seqIdx + 1; Max of 3
 unsigned char active_mode = 0; // 0:Gate Off, 1:Gate On, 2:CV Value
@@ -66,23 +67,26 @@ void buttons_mode_on(void) {
         state_mode = !state_mode;
         start_debounce();
 
+        // Toggle Timer
+        T0CONbits.TMR0ON = !T0CONbits.TMR0ON;
+        
         // Cycle through modes: Gate OFF, Gate ON, CV Value
-        active_mode = ++active_mode % 4;
-        switch (active_mode)
-        {
-            case 0: // Direct Set
-                leds_set_mode(0);
-                break;
-            case 1: // Shuffle
-                leds_set_mode(99);
-                break;
-            case 2: // Swap
-                leds_set_mode(1);
-                break;
-            case 3: // Division Reset
-                leds_set_mode(6);
-                break;
-        }
+//        active_mode = ++active_mode % 4;
+//        switch (active_mode)
+//        {
+//            case 0: // Direct Set
+//                leds_set_mode(0);
+//                break;
+//            case 1: // Shuffle
+//                leds_set_mode(99);
+//                break;
+//            case 2: // Swap
+//                leds_set_mode(1);
+//                break;
+//            case 3: // Division Reset
+//                leds_set_mode(6);
+//                break;
+//        }
     }
 }
 
@@ -117,22 +121,33 @@ void buttons_set_on(void) {
 
         start_debounce();
 
-        switch (active_mode) {
-            case 1: // Shuffle
-                seq_shuffle();
-                return;
-            case 2: // Swap
-                seq_swap();
-                return;
-            case 3: // Division reset
-                seq_init();
-                return;
-        }
+        // Reset
+        seq_reset(0);
+        seq_reset(1);
+        seq_reset(2);
+        seq_reset(3);
+        seq_reset(4);
+        seq_reset(5);
+        gates_set_allcvs(0,0,0);
+        gates_set_allgates(0,0,0);
 
-        if (active_pattern > 0) {
-            // Set divisions from level input
-            seq_set(active_pattern-1, inputs_get(LVL));
-        }
+
+//        switch (active_mode) {
+//            case 1: // Shuffle
+//                seq_shuffle();
+//                return;
+//            case 2: // Swap
+//                seq_swap();
+//                return;
+//            case 3: // Division reset
+//                seq_init();
+//                return;
+//        }
+//
+//        if (active_pattern > 0) {
+//            // Set divisions from level input
+//            seq_set(active_pattern-1, inputs_get(LVL));
+//        }
     }
 }
 

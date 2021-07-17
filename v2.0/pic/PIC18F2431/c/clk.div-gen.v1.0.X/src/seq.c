@@ -13,9 +13,9 @@ void seq_init() {
     divisions[0] = 1;
     divisions[1] = 2;
     divisions[2] = 4;
-    divisions[3] = 3;
-    divisions[4] = 8;
-    divisions[5] = 32;
+    divisions[3] = 8;
+    divisions[4] = 16;
+    divisions[5] = 64;
 
     for (i = 0; i<SEQ_COUNT; i++) {
         clockCount[i] = 0;

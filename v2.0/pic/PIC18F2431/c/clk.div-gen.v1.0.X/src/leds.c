@@ -16,6 +16,14 @@ void leds_init(void) {
     PORTCbits.RC7 = 0;
 }
 
+void leds_set_mode_direct(unsigned char value){
+    PORTCbits.RC6 = value;
+}
+
+void leds_set_target_direct(unsigned char value){
+    PORTCbits.RC7 = value;
+}
+
 void leds_blink(void) {
     if (led1_value > LED_MAX_CYCLE) {
         // Solid

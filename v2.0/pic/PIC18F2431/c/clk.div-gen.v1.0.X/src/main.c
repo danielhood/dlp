@@ -26,6 +26,8 @@ unsigned char main_lvlState = 0;
 unsigned char main_lvl = 0;
 unsigned char main_blinkState = 0;
 
+unsigned char main_clock_value = 0;
+
 // Interrupt register storage
 unsigned char wTempHi;
 unsigned char statusTempHi;
@@ -47,18 +49,30 @@ void InterruptHandlerHigh (void)
     statusTempHi = STATUS;
     bsrTempHi = BSR;
 
-    if (INTCON3bits.INT1IF) {       // check Int1
-        INTCON3bits.INT1IF = 0;     // clear interrupt flag
+//    if (INTCON3bits.INT1IF) {       // check Int1
+//        INTCON3bits.INT1IF = 0;     // clear interrupt flag
+//
+//        // Tick clock 1
+//        main_clockState[CLOCK1] = 1;
+//
+//    }
+//    else if (INTCON3bits.INT2IF) {  // check Int2
+//        INTCON3bits.INT2IF = 0;     // clear interrupt flag
+//
+//        // Tick clock 2
+//        main_clockState[CLOCK2] = 1;
+//
+//    }
+    
+    if (INTCONbits.TMR0IF) {     // check Timer0
+        INTCONbits.TMR0IF = 0;          // clear interrupt flag
 
-        // Tick clock 1
+        // Init timer baesd on current level value (higher value = faster clock)
+        TMR0H = main_lvl;
+        TMR0L = 0x00;
+
+        // Tick clock
         main_clockState[CLOCK1] = 1;
-
-    }
-    else if (INTCON3bits.INT2IF) {  // check Int2
-        INTCON3bits.INT2IF = 0;     // clear interrupt flag
-
-        // Tick clock 2
-        main_clockState[CLOCK2] = 1;
 
     }
 
@@ -87,12 +101,6 @@ void InterruptHandlerLow (void)
         // Store encoder value
         main_lvl = ADRESH;
         main_lvlState = 1;
-
-    } else if (INTCONbits.TMR0IF) {     // check Timer0
-        INTCONbits.TMR0IF = 0;          // clear interrupt flag
-
-        // Update led state
-        main_blinkState = 1;
 
     }
 
@@ -141,103 +149,33 @@ void clock_check_2() {
 }
 
 // Current Functionality:
-//      Fully functional clock divider
-//      Clock 1 drives dividers on 3 CV outs
-//      Clock 2 drives dividers on 3 GATE outs
-//      Reset 1 and 2 resets clock counts
-//      DIR1 shuffles (rotates) clock divisions accross all 6 outs
-//      DIR2 swaps clock divisons between 3 CV's and GATES
-//      Modes for Set button:
-//          Direct set (with level) - no light
-//          Trigger Shuffle - solid light
-//          Trigger Swap - single flash
-//          Trigger Division reset - 6 flashes
-//      Target button allows direct set of each of the 6 divisoins
+//      Clock generator
+//      Six fixed clock divisions: 16th, 8th, 4tr, 2lf, 1, 4
+//      Variable clock rate: ~70 bpm to 300+ bpm
+//      All inputs are disabled except for push buttons:
+//          Set: Reset clock
+//          Mode: Toggles clock start/stop
+//          Target: <Unused>
+//      Mode LED will blink on beat
+//      Trigger LED will blink on every 16th beat
 //
 void main() {
 
-    
-    unsigned char shuffle = 0;
-    unsigned char swap = 0;
-
     setup();
     seq_init();
-    leds_init();
+    leds_init(); // This inits TMR0 which now drives the internal clock
+    
+    Delay10TCYx(1);
 
     while (1) {
-        if (inputs_get(RST1)) {
-	    // double check
-            Delay10TCYx(1);
-            if (inputs_get(RST1)) {
-                seq_reset(0);
-                seq_reset(1);
-                seq_reset(2);
-                gates_set_allcvs(0,0,0);
+        clock_check_1();
 
-            } else {
-                clock_check_1();
-            }
-        } else {
-            clock_check_1();
-        }
-
-        if (inputs_get(RST2)) {
-	    // double check
-            Delay10TCYx(1);
-            if (inputs_get(RST2)) {
-                seq_reset(3);
-                seq_reset(4);
-                seq_reset(5);
-                gates_set_allgates(0,0,0);
-            } else {
-                clock_check_2();
-            }
-        } else {
-            clock_check_2();
-        }
-		
-        if (main_blinkState) {
-            main_blinkState = 0;
-            leds_blink();
-        }
-
-        if (main_lvlState) {
-            main_lvlState = 0;
-            inputs_set(LVL, main_lvl);
-        }
+//        if (main_lvlState) {
+//            main_lvlState = 0;
+//            inputs_set(LVL, main_lvl);
+//        }
 
         buttons_check();
 
-        // Check analog input DIR1 and toggle shuffle
-        if (!shuffle) {
-            if (inputs_get(DIR1)) {
-                // Double check
-                Delay10TCYx(1);
-                if (inputs_get(DIR1)) {
-                    shuffle = 1;
-                    seq_shuffle();
-                }
-            }
-        } else {
-            if (!inputs_get(DIR1)) {
-                shuffle = 0;
-            }
-        }
-
-        // Check analog input DIR2 and toggle swap
-        if (!swap) {
-            if (inputs_get(DIR2)) {
-                // Double check
-                Delay10TCYx(1);
-                if (inputs_get(DIR2)) {
-                    swap = 1;
-                    seq_swap();
-                }
-            }
-        } else {
-            if (!inputs_get(DIR2)) {
-                swap = 0;
-            }
-        }
     }
 }
