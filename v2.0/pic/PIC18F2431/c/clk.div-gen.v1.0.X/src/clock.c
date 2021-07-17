@@ -37,15 +37,17 @@ void clock_tick(unsigned char clockIdx) {
             seq_tick(4);
             seq_tick(5);
 
+            // Bottom jacks are high freq as they produce a more stable signal than the cv outs
+            // And will typically drive clock inputs
             gates_set_allcvs(
-                seq_get(0) ? 255 : 0,
-                seq_get(1) ? 255 : 0,
-                seq_get(2) ? 255 : 0);
+                seq_get(5) ? 255 : 0,
+                seq_get(4) ? 255 : 0,
+                seq_get(3) ? 255 : 0);
 
             gates_set_allgates(
-                seq_get(3), 
-                seq_get(4), 
-                seq_get(5));
+                seq_get(2),
+                seq_get(1),
+                seq_get(0));
 
             leds_set_mode_direct(seq_get(2));
             leds_set_target_direct(seq_get(5));
