@@ -17179,6 +17179,15 @@ Source: http://www.alphapotentiometers.net/html/16mm_pot_2.html</description>
 <sheets>
 <sheet>
 <plain>
+<text x="68.58" y="83.82" size="1.778" layer="91">Built this inverting version 2021-09-22.
+
+Note the output will be inverted, but shouldn't matter since we 
+are using this as the final mix stage before output.
+
+This was used over the non-inverting due to the natural ground
+point where the signals are mixed which helps isolate the inputs,
+and inverting configs should have lower distortion since the
+common voltage is kept at 0 which is ideal for op amp operation.</text>
 </plain>
 <instances>
 <instance part="JP1" gate="A" x="55.88" y="2.54" smashed="yes" rot="R180">
@@ -17599,6 +17608,10 @@ Source: http://www.alphapotentiometers.net/html/16mm_pot_2.html</description>
 </schematic>
 </drawing>
 <compatibility>
+<note version="6.3" minversion="6.2.2" severity="warning">
+Since Version 6.2.2 text objects can contain more than one line,
+which will not be processed correctly with this version.
+</note>
 <note version="8.2" severity="warning">
 Since Version 8.2, EAGLE supports online libraries. The ids
 of those online libraries will not be understood (or retained)
