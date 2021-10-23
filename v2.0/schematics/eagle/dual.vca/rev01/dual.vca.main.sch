@@ -4842,6 +4842,8 @@ R2 3 2 {val-val*var/100}
 <sheet>
 <plain>
 <text x="2.54" y="99.06" size="1.778" layer="91">VCA adapted from: https://yusynth.net/Modular/EN/VCA/index.html</text>
+<text x="127" y="-15.24" size="1.778" layer="91">GATE1 OUT</text>
+<text x="160.02" y="73.66" size="1.778" layer="91">VCA1 OUT</text>
 </plain>
 <instances>
 <instance part="JP1" gate="A" x="-25.4" y="78.74" smashed="yes">
@@ -4994,12 +4996,12 @@ R2 3 2 {val-val*var/100}
 <attribute name="NAME" x="68.58" y="60.9346" size="1.778" layer="95" align="center"/>
 <attribute name="VALUE" x="68.58" y="55.88" size="1.778" layer="96" align="center"/>
 </instance>
-<instance part="R18" gate="G$1" x="76.2" y="48.26" smashed="yes" rot="R90">
-<attribute name="NAME" x="73.6854" y="48.26" size="1.778" layer="95" rot="R90" align="center"/>
-<attribute name="VALUE" x="78.74" y="48.26" size="1.778" layer="96" rot="R90" align="center"/>
+<instance part="R18" gate="G$1" x="68.58" y="45.72" smashed="yes">
+<attribute name="NAME" x="68.58" y="48.2346" size="1.778" layer="95" align="center"/>
+<attribute name="VALUE" x="68.58" y="43.18" size="1.778" layer="96" align="center"/>
 </instance>
-<instance part="GND7" gate="1" x="76.2" y="38.1" smashed="yes">
-<attribute name="VALUE" x="74.295" y="35.56" size="1.778" layer="96"/>
+<instance part="GND7" gate="1" x="63.5" y="40.64" smashed="yes">
+<attribute name="VALUE" x="61.595" y="38.1" size="1.778" layer="96"/>
 </instance>
 <instance part="R19" gate="G$1" x="99.06" y="22.86" smashed="yes" rot="R90">
 <attribute name="NAME" x="96.5454" y="22.86" size="1.778" layer="95" rot="R90" align="center"/>
@@ -5251,7 +5253,7 @@ R2 3 2 {val-val*var/100}
 <segment>
 <pinref part="R18" gate="G$1" pin="1"/>
 <pinref part="GND7" gate="1" pin="0V"/>
-<wire x1="76.2" y1="43.18" x2="76.2" y2="40.64" width="0.1524" layer="91"/>
+<wire x1="63.5" y1="45.72" x2="63.5" y2="43.18" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="GND4" gate="1" pin="0V"/>
@@ -5304,6 +5306,16 @@ R2 3 2 {val-val*var/100}
 <pinref part="R31" gate="G$1" pin="1"/>
 <pinref part="GND11" gate="1" pin="0V"/>
 <wire x1="124.46" y1="-30.48" x2="124.46" y2="-33.02" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="JP4" gate="A" pin="15"/>
+<wire x1="-33.02" y1="-22.86" x2="-40.64" y2="-22.86" width="0.1524" layer="91"/>
+<label x="-50.8" y="-22.86" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="JP4" gate="A" pin="2"/>
+<wire x1="-25.4" y1="-5.08" x2="-17.78" y2="-5.08" width="0.1524" layer="91"/>
+<label x="-17.78" y="-5.08" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="IN1" class="0">
@@ -5370,9 +5382,9 @@ R2 3 2 {val-val*var/100}
 <label x="-40.64" y="50.8" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="JP4" gate="A" pin="2"/>
-<wire x1="-25.4" y1="-5.08" x2="-17.78" y2="-5.08" width="0.1524" layer="91"/>
-<label x="-17.78" y="-5.08" size="1.778" layer="95"/>
+<pinref part="JP4" gate="A" pin="4"/>
+<wire x1="-25.4" y1="-7.62" x2="-17.78" y2="-7.62" width="0.1524" layer="91"/>
+<label x="-17.78" y="-7.62" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="OUT3" class="0">
@@ -5552,17 +5564,6 @@ R2 3 2 {val-val*var/100}
 <pinref part="IC1" gate="A" pin="OUT"/>
 <wire x1="60.96" y1="58.42" x2="63.5" y2="58.42" width="0.1524" layer="91"/>
 <junction x="63.5" y="58.42"/>
-</segment>
-</net>
-<net name="N$4" class="0">
-<segment>
-<pinref part="R17" gate="G$1" pin="2"/>
-<wire x1="73.66" y1="58.42" x2="76.2" y2="58.42" width="0.1524" layer="91"/>
-<pinref part="R18" gate="G$1" pin="2"/>
-<wire x1="76.2" y1="53.34" x2="76.2" y2="58.42" width="0.1524" layer="91"/>
-<pinref part="T1" gate="G$1" pin="B"/>
-<wire x1="76.2" y1="58.42" x2="81.28" y2="58.42" width="0.1524" layer="91"/>
-<junction x="76.2" y="58.42"/>
 </segment>
 </net>
 <net name="N$5" class="0">
@@ -5787,6 +5788,15 @@ R2 3 2 {val-val*var/100}
 <wire x1="-33.02" y1="-17.78" x2="-40.64" y2="-17.78" width="0.1524" layer="91"/>
 <label x="-50.8" y="-17.78" size="1.778" layer="95"/>
 </segment>
+<segment>
+<pinref part="R17" gate="G$1" pin="2"/>
+<pinref part="T1" gate="G$1" pin="B"/>
+<wire x1="73.66" y1="58.42" x2="76.2" y2="58.42" width="0.1524" layer="91"/>
+<wire x1="76.2" y1="58.42" x2="81.28" y2="58.42" width="0.1524" layer="91"/>
+<wire x1="76.2" y1="58.42" x2="76.2" y2="53.34" width="0.1524" layer="91"/>
+<junction x="76.2" y="58.42"/>
+<label x="76.2" y="50.8" size="1.778" layer="95"/>
+</segment>
 </net>
 <net name="DRV1B" class="0">
 <segment>
@@ -5794,50 +5804,41 @@ R2 3 2 {val-val*var/100}
 <wire x1="-33.02" y1="-20.32" x2="-40.64" y2="-20.32" width="0.1524" layer="91"/>
 <label x="-50.8" y="-20.32" size="1.778" layer="95"/>
 </segment>
-</net>
-<net name="DVV1C" class="0">
 <segment>
-<pinref part="JP4" gate="A" pin="15"/>
-<wire x1="-33.02" y1="-22.86" x2="-40.64" y2="-22.86" width="0.1524" layer="91"/>
-<label x="-50.8" y="-22.86" size="1.778" layer="95"/>
+<pinref part="R18" gate="G$1" pin="2"/>
+<wire x1="73.66" y1="45.72" x2="76.2" y2="45.72" width="0.1524" layer="91"/>
+<label x="76.2" y="45.72" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="INATT2B" class="0">
-<segment>
-<pinref part="JP4" gate="A" pin="4"/>
-<wire x1="-25.4" y1="-7.62" x2="-17.78" y2="-7.62" width="0.1524" layer="91"/>
-<label x="-17.78" y="-7.62" size="1.778" layer="95"/>
-</segment>
-</net>
-<net name="CVATT2A" class="0">
 <segment>
 <pinref part="JP4" gate="A" pin="6"/>
 <wire x1="-25.4" y1="-10.16" x2="-17.78" y2="-10.16" width="0.1524" layer="91"/>
 <label x="-17.78" y="-10.16" size="1.778" layer="95"/>
 </segment>
 </net>
-<net name="CVATT2B" class="0">
+<net name="CVATT2A" class="0">
 <segment>
 <pinref part="JP4" gate="A" pin="8"/>
 <wire x1="-25.4" y1="-12.7" x2="-17.78" y2="-12.7" width="0.1524" layer="91"/>
 <label x="-17.78" y="-12.7" size="1.778" layer="95"/>
 </segment>
 </net>
-<net name="DRV2A" class="0">
+<net name="CVATT2B" class="0">
 <segment>
 <pinref part="JP4" gate="A" pin="10"/>
 <wire x1="-25.4" y1="-15.24" x2="-17.78" y2="-15.24" width="0.1524" layer="91"/>
 <label x="-17.78" y="-15.24" size="1.778" layer="95"/>
 </segment>
 </net>
-<net name="DRV2B" class="0">
+<net name="DRV2A" class="0">
 <segment>
 <pinref part="JP4" gate="A" pin="12"/>
 <wire x1="-25.4" y1="-17.78" x2="-17.78" y2="-17.78" width="0.1524" layer="91"/>
 <label x="-17.78" y="-17.78" size="1.778" layer="95"/>
 </segment>
 </net>
-<net name="DRV2C" class="0">
+<net name="DRV2B" class="0">
 <segment>
 <pinref part="JP4" gate="A" pin="14"/>
 <wire x1="-25.4" y1="-20.32" x2="-17.78" y2="-20.32" width="0.1524" layer="91"/>
