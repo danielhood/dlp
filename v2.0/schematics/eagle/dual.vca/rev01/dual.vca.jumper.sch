@@ -639,7 +639,8 @@
 <variantdefs>
 </variantdefs>
 <classes>
-<class number="0" name="default" width="0" drill="0">
+<class number="0" name="default" width="0.8128" drill="0">
+<clearance class="0" value="0.4064"/>
 </class>
 </classes>
 <parts>
@@ -647,7 +648,7 @@
 <part name="JP2" library="pinhead" deviceset="PINHD-1X10" device="" value="VCA3-4"/>
 <part name="GND35" library="supply1" deviceset="0V" device=""/>
 <part name="GND36" library="supply1" deviceset="0V" device=""/>
-<part name="JP4" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-2X8" device="" package3d_urn="urn:adsk.eagle:package:22481/2"/>
+<part name="JP4" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-2X8" device="" package3d_urn="urn:adsk.eagle:package:22481/2" value="TO MAIN"/>
 </parts>
 <sheets>
 <sheet>
