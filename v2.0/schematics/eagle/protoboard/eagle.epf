@@ -274,8 +274,8 @@ Number=0
 [Win_2]
 Type="Schematic Editor"
 Number=1
-File="protoboard.rev01.sch"
-View="-77.4387 -92.6896 382.682 203.102"
+File="/Users/dhood/git/danielhood/dlp/v2.0/schematics/eagle/quad.vca/quad.exp.vca.pnl.sch"
+View="-54.9556 -50.8761 130.319 54.3423"
 WireWidths=" 0.0762 0.1016 0.127 0.15 0.2 0.2032 0.254 0.3048 0.4064 0.508 0.6096 0.8128 1.016 1.27 2.54 0.1524"
 PadDiameters=" 0.254 0.3048 0.4064 0.6096 0.8128 1.016 1.27 1.4224 1.6764 1.778 1.9304 2.1844 2.54 3.81 6.4516 0"
 PadDrills=" 0.2 0.25 0.3 0.35 0.4 0.45 0.5 0.55 0.65 0.7 0.75 0.8 0.85 0.9 1 0.6"
@@ -314,14 +314,13 @@ ArcDirection=0
 AddLevel=2
 PadsSameType=0
 Layer=91
-Views=" 1: -77.4387 -92.6896 382.682 203.102"
 Sheet="1"
 
 [Win_3]
 Type="Board Editor"
 Number=2
-File="protoboard.rev01.brd"
-View="-0.394244 -7.97738 82.473 95.0347"
+File="/Users/dhood/git/danielhood/dlp/v2.0/schematics/eagle/quad.vca/quad.exp.vca.pnl.brd"
+View="-1.9746 -0.840231 100.705 40.2102"
 WireWidths=" 0.0762 0.1016 0.127 0.15 0.2 0.2032 0.254 0.3048 0.4064 0.508 0.6096 0.8128 1.016 1.27 2.54 0.1524"
 PadDiameters=" 0.254 0.3048 0.4064 0.6096 0.8128 1.016 1.27 1.4224 1.6764 1.778 1.9304 2.1844 2.54 3.81 6.4516 0"
 PadDrills=" 0.2 0.25 0.3 0.35 0.4 0.45 0.5 0.55 0.65 0.7 0.75 0.8 0.85 0.9 1 0.6"
@@ -359,7 +358,7 @@ SwapLevel=0
 ArcDirection=0
 AddLevel=2
 PadsSameType=0
-Layer=26
+Layer=1
 
 [Desktop]
 Screen="3840 1080"
