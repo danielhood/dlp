@@ -2,24 +2,24 @@ EAGLE AutoRouter Statistics:
 
 Job           : /Users/dhood/git/danielhood/dlp/v2.0/schematics/eagle/dual.vca/rev01/dual.vca.main.brd
 
-Start at      : 19:04:58 (2021-11-06)
-End at        : 19:05:15 (2021-11-06)
-Elapsed time  : 00:00:05
+Start at      : 00:26:37 (2021-11-08)
+End at        : 00:26:42 (2021-11-08)
+Elapsed time  : 00:00:03
 
-Signals       :    71   RoutingGrid: 7 mil  Layers: 2
-Connections   :   185   predefined:  185 ( 2 Vias )
+Signals       :    73   RoutingGrid: 19.685 mil  Layers: 2
+Connections   :   187   predefined:  37 ( 0 Vias )
 
-Router memory :   1111920
+Router memory :   148320
 
-Passname          : TopRouter     Route Optimize1 Optimize2 Optimize3 Optimize4 Optimize5 Optimize6 Optimize7 Optimize8 Optimize9Optimize10Optimize11Optimize12
+Passname          :    Busses     Route Optimize1 Optimize2 Optimize3 Optimize4
 
-Time per pass     :  00:00:00  00:00:00  00:00:01  00:00:00  00:00:00  00:00:01  00:00:00  00:00:01  00:00:00  00:00:00  00:00:01  00:00:00  00:00:00  00:00:01
-Number of Ripups  :         0         0         0         0         0         0         0         0         0         0         0         0         0         0
-max. Level        :         0         0         0         0         0         0         0         0         0         0         0         0         0         0
-max. Total        :         0         0         0         0         0         0         0         0         0         0         0         0         0         0
+Time per pass     :  00:00:00  00:00:01  00:00:00  00:00:01  00:00:00  00:00:01
+Number of Ripups  :         0         0         0         0         0         0
+max. Level        :         0         0         0         0         0         0
+max. Total        :         0         0         0         0         0         0
 
-Routed            :         0         0         0         0         0         0         0         0         0         0         0         0         0         0
-Vias              :         0         0         0         0         0         0         0         0         0         0         0         0         0         0
-Resolution        :   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %
+Routed            :        29       150       150       150       150       150
+Vias              :         0        62        14        11        10         9
+Resolution        :    35.3 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %
 
 Final             : 100.0% finished
