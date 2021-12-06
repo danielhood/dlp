@@ -4548,13 +4548,13 @@ R2 3 2 {val-val*var/100}
 <part name="IC1" library="linear" library_urn="urn:adsk.eagle:library:262" deviceset="TL082" device="P" package3d_urn="urn:adsk.eagle:package:16409/2"/>
 <part name="R18" library="_common" deviceset="R" device="" value="15K"/>
 <part name="R23" library="_common" deviceset="R" device="" value="15K"/>
-<part name="R20" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-TRIMM" device="3339P" package3d_urn="urn:adsk.eagle:package:23757/1" value="1K"/>
-<part name="R15" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-TRIMM" device="3339P" package3d_urn="urn:adsk.eagle:package:23757/1" value="100K"/>
-<part name="R31" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-TRIMM" device="3339P" package3d_urn="urn:adsk.eagle:package:23757/1" value="100K"/>
+<part name="BAL1" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-TRIMM" device="3339P" package3d_urn="urn:adsk.eagle:package:23757/1" value="1K"/>
+<part name="CVINIT1" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-TRIMM" device="3339P" package3d_urn="urn:adsk.eagle:package:23757/1" value="100K"/>
+<part name="OFS1" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-TRIMM" device="3339P" package3d_urn="urn:adsk.eagle:package:23757/1" value="100K"/>
 <part name="P+1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+12V" device=""/>
 <part name="P-1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="-12V" device=""/>
 <part name="GND1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
-<part name="JP1" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-2X5" device="" package3d_urn="urn:adsk.eagle:package:22470/2"/>
+<part name="JP1" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-2X5" device="" package3d_urn="urn:adsk.eagle:package:22470/2" value="PWR"/>
 <part name="C3" library="_common" deviceset="CC-US" device="025-024X044" value="0.1uF"/>
 <part name="C4" library="_common" deviceset="CC-US" device="025-024X044" value="0.1uF"/>
 <part name="C2" library="_common" deviceset="CC-US" device="025-024X044" value="0.1uF"/>
@@ -4607,7 +4607,7 @@ R2 3 2 {val-val*var/100}
 <part name="IC3" library="linear" library_urn="urn:adsk.eagle:library:262" deviceset="LM324" device="N" package3d_urn="urn:adsk.eagle:package:16407/2"/>
 <part name="P+11" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+12V" device=""/>
 <part name="P-11" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="-12V" device=""/>
-<part name="JP2" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-2X8" device="" package3d_urn="urn:adsk.eagle:package:22481/2"/>
+<part name="JP2" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-2X8" device="" package3d_urn="urn:adsk.eagle:package:22481/2" value="JACKBOARD"/>
 <part name="R2" library="_common" deviceset="R" device="" value="100K"/>
 <part name="R1" library="_common" deviceset="R" device="" value="65K"/>
 <part name="R6" library="_common" deviceset="R" device="" value="100K"/>
@@ -4615,7 +4615,7 @@ R2 3 2 {val-val*var/100}
 <part name="GND9" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="R8" library="_common" deviceset="R" device="" value="1M"/>
 <part name="R9" library="_common" deviceset="R" device="" value="1M"/>
-<part name="R4" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-TRIMM" device="3339P" package3d_urn="urn:adsk.eagle:package:23757/1" value="250K"/>
+<part name="REF1" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-TRIMM" device="3339P" package3d_urn="urn:adsk.eagle:package:23757/1" value="250K"/>
 <part name="P-12" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="-12V" device=""/>
 <part name="P+12" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+12V" device=""/>
 <part name="R3" library="_common" deviceset="R" device="" value="100K"/>
@@ -4631,9 +4631,9 @@ R2 3 2 {val-val*var/100}
 <part name="GND13" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="R49" library="_common" deviceset="R" device="" value="15K"/>
 <part name="R54" library="_common" deviceset="R" device="" value="15K"/>
-<part name="R51" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-TRIMM" device="3339P" package3d_urn="urn:adsk.eagle:package:23757/1" value="1K"/>
-<part name="R46" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-TRIMM" device="3339P" package3d_urn="urn:adsk.eagle:package:23757/1" value="100K"/>
-<part name="R62" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-TRIMM" device="3339P" package3d_urn="urn:adsk.eagle:package:23757/1" value="100K"/>
+<part name="BAL2" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-TRIMM" device="3339P" package3d_urn="urn:adsk.eagle:package:23757/1" value="1K"/>
+<part name="CVINIT2" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-TRIMM" device="3339P" package3d_urn="urn:adsk.eagle:package:23757/1" value="100K"/>
+<part name="OFS2" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-TRIMM" device="3339P" package3d_urn="urn:adsk.eagle:package:23757/1" value="100K"/>
 <part name="C9" library="_common" deviceset="CE-US" device="E2-5" value="2.2 uF"/>
 <part name="C10" library="_common" deviceset="CE-US" device="E2-5" value="2.2uF"/>
 <part name="R52" library="_common" deviceset="R" device="" value="33K"/>
@@ -4671,7 +4671,7 @@ R2 3 2 {val-val*var/100}
 <part name="GND20" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="R39" library="_common" deviceset="R" device="" value="1M"/>
 <part name="R40" library="_common" deviceset="R" device="" value="1M"/>
-<part name="R35" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-TRIMM" device="3339P" package3d_urn="urn:adsk.eagle:package:23757/1" value="250K"/>
+<part name="REF2" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-TRIMM" device="3339P" package3d_urn="urn:adsk.eagle:package:23757/1" value="250K"/>
 <part name="P-16" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="-12V" device=""/>
 <part name="P+16" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+12V" device=""/>
 <part name="R34" library="_common" deviceset="R" device="" value="100K"/>
@@ -4728,15 +4728,15 @@ R2 3 2 {val-val*var/100}
 <attribute name="NAME" x="109.2454" y="83.82" size="1.778" layer="95" rot="R90" align="center"/>
 <attribute name="VALUE" x="114.3" y="83.82" size="1.778" layer="96" rot="R90" align="center"/>
 </instance>
-<instance part="R20" gate="G$1" x="99.06" y="91.44" smashed="yes" rot="MR90">
+<instance part="BAL1" gate="G$1" x="99.06" y="91.44" smashed="yes" rot="MR90">
 <attribute name="NAME" x="95.25" y="85.471" size="1.778" layer="95" rot="MR180"/>
 <attribute name="VALUE" x="95.25" y="87.63" size="1.778" layer="96" rot="MR180"/>
 </instance>
-<instance part="R15" gate="G$1" x="68.58" y="7.62" smashed="yes">
+<instance part="CVINIT1" gate="G$1" x="68.58" y="7.62" smashed="yes">
 <attribute name="NAME" x="62.611" y="3.81" size="1.778" layer="95" rot="R90"/>
 <attribute name="VALUE" x="64.77" y="3.81" size="1.778" layer="96" rot="R90"/>
 </instance>
-<instance part="R31" gate="G$1" x="162.56" y="55.88" smashed="yes" rot="MR0">
+<instance part="OFS1" gate="G$1" x="162.56" y="55.88" smashed="yes" rot="MR0">
 <attribute name="NAME" x="168.529" y="52.07" size="1.778" layer="95" rot="MR90"/>
 <attribute name="VALUE" x="166.37" y="52.07" size="1.778" layer="96" rot="MR90"/>
 </instance>
@@ -4972,7 +4972,7 @@ R2 3 2 {val-val*var/100}
 <attribute name="NAME" x="43.2054" y="-25.4" size="1.778" layer="95" rot="R90" align="center"/>
 <attribute name="VALUE" x="48.26" y="-25.4" size="1.778" layer="96" rot="R90" align="center"/>
 </instance>
-<instance part="R4" gate="G$1" x="27.94" y="-12.7" smashed="yes">
+<instance part="REF1" gate="G$1" x="27.94" y="-12.7" smashed="yes">
 <attribute name="NAME" x="21.971" y="-16.51" size="1.778" layer="95" rot="R90"/>
 <attribute name="VALUE" x="24.13" y="-16.51" size="1.778" layer="96" rot="R90"/>
 </instance>
@@ -5042,15 +5042,15 @@ R2 3 2 {val-val*var/100}
 <attribute name="NAME" x="314.9854" y="86.36" size="1.778" layer="95" rot="R90" align="center"/>
 <attribute name="VALUE" x="320.04" y="86.36" size="1.778" layer="96" rot="R90" align="center"/>
 </instance>
-<instance part="R51" gate="G$1" x="304.8" y="93.98" smashed="yes" rot="MR90">
+<instance part="BAL2" gate="G$1" x="304.8" y="93.98" smashed="yes" rot="MR90">
 <attribute name="NAME" x="300.99" y="88.011" size="1.778" layer="95" rot="MR180"/>
 <attribute name="VALUE" x="300.99" y="90.17" size="1.778" layer="96" rot="MR180"/>
 </instance>
-<instance part="R46" gate="G$1" x="274.32" y="10.16" smashed="yes">
+<instance part="CVINIT2" gate="G$1" x="274.32" y="10.16" smashed="yes">
 <attribute name="NAME" x="268.351" y="6.35" size="1.778" layer="95" rot="R90"/>
 <attribute name="VALUE" x="270.51" y="6.35" size="1.778" layer="96" rot="R90"/>
 </instance>
-<instance part="R62" gate="G$1" x="368.3" y="58.42" smashed="yes" rot="MR0">
+<instance part="OFS2" gate="G$1" x="368.3" y="58.42" smashed="yes" rot="MR0">
 <attribute name="NAME" x="374.269" y="54.61" size="1.778" layer="95" rot="MR90"/>
 <attribute name="VALUE" x="372.11" y="54.61" size="1.778" layer="96" rot="MR90"/>
 </instance>
@@ -5197,7 +5197,7 @@ R2 3 2 {val-val*var/100}
 <attribute name="NAME" x="248.9454" y="-22.86" size="1.778" layer="95" rot="R90" align="center"/>
 <attribute name="VALUE" x="254" y="-22.86" size="1.778" layer="96" rot="R90" align="center"/>
 </instance>
-<instance part="R35" gate="G$1" x="233.68" y="-10.16" smashed="yes">
+<instance part="REF2" gate="G$1" x="233.68" y="-10.16" smashed="yes">
 <attribute name="NAME" x="227.711" y="-13.97" size="1.778" layer="95" rot="R90"/>
 <attribute name="VALUE" x="229.87" y="-13.97" size="1.778" layer="96" rot="R90"/>
 </instance>
@@ -5629,7 +5629,7 @@ R2 3 2 {val-val*var/100}
 <wire x1="121.92" y1="7.62" x2="121.92" y2="5.08" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="R31" gate="G$1" pin="A"/>
+<pinref part="OFS1" gate="G$1" pin="A"/>
 <pinref part="P-10" gate="1" pin="-12V"/>
 <wire x1="162.56" y1="50.8" x2="162.56" y2="48.26" width="0.1524" layer="91"/>
 </segment>
@@ -5639,7 +5639,7 @@ R2 3 2 {val-val*var/100}
 <wire x1="99.06" y1="20.32" x2="99.06" y2="17.78" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="R15" gate="G$1" pin="A"/>
+<pinref part="CVINIT1" gate="G$1" pin="A"/>
 <pinref part="P-2" gate="1" pin="-12V"/>
 <wire x1="68.58" y1="2.54" x2="68.58" y2="0" width="0.1524" layer="91"/>
 </segment>
@@ -5654,7 +5654,7 @@ R2 3 2 {val-val*var/100}
 <wire x1="27.94" y1="-30.48" x2="27.94" y2="-33.02" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="R62" gate="G$1" pin="A"/>
+<pinref part="OFS2" gate="G$1" pin="A"/>
 <pinref part="P-15" gate="1" pin="-12V"/>
 <wire x1="368.3" y1="53.34" x2="368.3" y2="50.8" width="0.1524" layer="91"/>
 </segment>
@@ -5664,7 +5664,7 @@ R2 3 2 {val-val*var/100}
 <wire x1="304.8" y1="22.86" x2="304.8" y2="20.32" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="R46" gate="G$1" pin="A"/>
+<pinref part="CVINIT2" gate="G$1" pin="A"/>
 <pinref part="P-13" gate="1" pin="-12V"/>
 <wire x1="274.32" y1="5.08" x2="274.32" y2="2.54" width="0.1524" layer="91"/>
 </segment>
@@ -5720,17 +5720,17 @@ R2 3 2 {val-val*var/100}
 <wire x1="129.54" y1="22.86" x2="129.54" y2="25.4" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="R20" gate="G$1" pin="S"/>
+<pinref part="BAL1" gate="G$1" pin="S"/>
 <pinref part="P+9" gate="1" pin="+12V"/>
 <wire x1="99.06" y1="96.52" x2="99.06" y2="99.06" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="R31" gate="G$1" pin="E"/>
+<pinref part="OFS1" gate="G$1" pin="E"/>
 <pinref part="P+10" gate="1" pin="+12V"/>
 <wire x1="162.56" y1="60.96" x2="162.56" y2="63.5" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="R15" gate="G$1" pin="E"/>
+<pinref part="CVINIT1" gate="G$1" pin="E"/>
 <pinref part="P+2" gate="1" pin="+12V"/>
 <wire x1="68.58" y1="12.7" x2="68.58" y2="15.24" width="0.1524" layer="91"/>
 </segment>
@@ -5745,17 +5745,17 @@ R2 3 2 {val-val*var/100}
 <wire x1="27.94" y1="5.08" x2="27.94" y2="7.62" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="R51" gate="G$1" pin="S"/>
+<pinref part="BAL2" gate="G$1" pin="S"/>
 <pinref part="P+14" gate="1" pin="+12V"/>
 <wire x1="304.8" y1="99.06" x2="304.8" y2="101.6" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="R62" gate="G$1" pin="E"/>
+<pinref part="OFS2" gate="G$1" pin="E"/>
 <pinref part="P+15" gate="1" pin="+12V"/>
 <wire x1="368.3" y1="63.5" x2="368.3" y2="66.04" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="R46" gate="G$1" pin="E"/>
+<pinref part="CVINIT2" gate="G$1" pin="E"/>
 <pinref part="P+13" gate="1" pin="+12V"/>
 <wire x1="274.32" y1="15.24" x2="274.32" y2="17.78" width="0.1524" layer="91"/>
 </segment>
@@ -5811,7 +5811,7 @@ R2 3 2 {val-val*var/100}
 <segment>
 <pinref part="R18" gate="G$1" pin="2"/>
 <wire x1="86.36" y1="88.9" x2="86.36" y2="91.44" width="0.1524" layer="91"/>
-<pinref part="R20" gate="G$1" pin="A"/>
+<pinref part="BAL1" gate="G$1" pin="A"/>
 <wire x1="86.36" y1="91.44" x2="93.98" y2="91.44" width="0.1524" layer="91"/>
 </segment>
 </net>
@@ -5819,7 +5819,7 @@ R2 3 2 {val-val*var/100}
 <segment>
 <pinref part="R23" gate="G$1" pin="2"/>
 <wire x1="111.76" y1="91.44" x2="111.76" y2="88.9" width="0.1524" layer="91"/>
-<pinref part="R20" gate="G$1" pin="E"/>
+<pinref part="BAL1" gate="G$1" pin="E"/>
 <wire x1="104.14" y1="91.44" x2="111.76" y2="91.44" width="0.1524" layer="91"/>
 </segment>
 </net>
@@ -5878,7 +5878,7 @@ R2 3 2 {val-val*var/100}
 <net name="N$10" class="0">
 <segment>
 <pinref part="R30" gate="G$1" pin="1"/>
-<pinref part="R31" gate="G$1" pin="S"/>
+<pinref part="OFS1" gate="G$1" pin="S"/>
 <wire x1="152.4" y1="60.96" x2="154.94" y2="60.96" width="0.1524" layer="91"/>
 <wire x1="154.94" y1="60.96" x2="154.94" y2="55.88" width="0.1524" layer="91"/>
 <wire x1="154.94" y1="55.88" x2="157.48" y2="55.88" width="0.1524" layer="91"/>
@@ -5909,7 +5909,7 @@ R2 3 2 {val-val*var/100}
 </net>
 <net name="N$16" class="0">
 <segment>
-<pinref part="R15" gate="G$1" pin="S"/>
+<pinref part="CVINIT1" gate="G$1" pin="S"/>
 <wire x1="73.66" y1="7.62" x2="76.2" y2="7.62" width="0.1524" layer="91"/>
 <pinref part="R16" gate="G$1" pin="1"/>
 <wire x1="76.2" y1="7.62" x2="76.2" y2="10.16" width="0.1524" layer="91"/>
@@ -6012,14 +6012,14 @@ R2 3 2 {val-val*var/100}
 </net>
 <net name="N$20" class="0">
 <segment>
-<pinref part="R4" gate="G$1" pin="E"/>
+<pinref part="REF1" gate="G$1" pin="E"/>
 <pinref part="R3" gate="G$1" pin="1"/>
 <wire x1="27.94" y1="-7.62" x2="27.94" y2="-5.08" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$21" class="0">
 <segment>
-<pinref part="R4" gate="G$1" pin="A"/>
+<pinref part="REF1" gate="G$1" pin="A"/>
 <pinref part="R5" gate="G$1" pin="2"/>
 <wire x1="27.94" y1="-17.78" x2="27.94" y2="-20.32" width="0.1524" layer="91"/>
 </segment>
@@ -6128,7 +6128,7 @@ R2 3 2 {val-val*var/100}
 <segment>
 <pinref part="R49" gate="G$1" pin="2"/>
 <wire x1="292.1" y1="91.44" x2="292.1" y2="93.98" width="0.1524" layer="91"/>
-<pinref part="R51" gate="G$1" pin="A"/>
+<pinref part="BAL2" gate="G$1" pin="A"/>
 <wire x1="292.1" y1="93.98" x2="299.72" y2="93.98" width="0.1524" layer="91"/>
 </segment>
 </net>
@@ -6136,7 +6136,7 @@ R2 3 2 {val-val*var/100}
 <segment>
 <pinref part="R54" gate="G$1" pin="2"/>
 <wire x1="317.5" y1="93.98" x2="317.5" y2="91.44" width="0.1524" layer="91"/>
-<pinref part="R51" gate="G$1" pin="E"/>
+<pinref part="BAL2" gate="G$1" pin="E"/>
 <wire x1="309.88" y1="93.98" x2="317.5" y2="93.98" width="0.1524" layer="91"/>
 </segment>
 </net>
@@ -6195,7 +6195,7 @@ R2 3 2 {val-val*var/100}
 <net name="N$38" class="0">
 <segment>
 <pinref part="R61" gate="G$1" pin="1"/>
-<pinref part="R62" gate="G$1" pin="S"/>
+<pinref part="OFS2" gate="G$1" pin="S"/>
 <wire x1="358.14" y1="63.5" x2="360.68" y2="63.5" width="0.1524" layer="91"/>
 <wire x1="360.68" y1="63.5" x2="360.68" y2="58.42" width="0.1524" layer="91"/>
 <wire x1="360.68" y1="58.42" x2="363.22" y2="58.42" width="0.1524" layer="91"/>
@@ -6226,7 +6226,7 @@ R2 3 2 {val-val*var/100}
 </net>
 <net name="N$41" class="0">
 <segment>
-<pinref part="R46" gate="G$1" pin="S"/>
+<pinref part="CVINIT2" gate="G$1" pin="S"/>
 <wire x1="279.4" y1="10.16" x2="281.94" y2="10.16" width="0.1524" layer="91"/>
 <pinref part="R47" gate="G$1" pin="1"/>
 <wire x1="281.94" y1="10.16" x2="281.94" y2="12.7" width="0.1524" layer="91"/>
@@ -6279,14 +6279,14 @@ R2 3 2 {val-val*var/100}
 </net>
 <net name="N$47" class="0">
 <segment>
-<pinref part="R35" gate="G$1" pin="E"/>
+<pinref part="REF2" gate="G$1" pin="E"/>
 <pinref part="R34" gate="G$1" pin="1"/>
 <wire x1="233.68" y1="-5.08" x2="233.68" y2="-2.54" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$48" class="0">
 <segment>
-<pinref part="R35" gate="G$1" pin="A"/>
+<pinref part="REF2" gate="G$1" pin="A"/>
 <pinref part="R36" gate="G$1" pin="2"/>
 <wire x1="233.68" y1="-15.24" x2="233.68" y2="-17.78" width="0.1524" layer="91"/>
 </segment>
@@ -6376,7 +6376,7 @@ R2 3 2 {val-val*var/100}
 </net>
 <net name="N$18" class="0">
 <segment>
-<pinref part="R4" gate="G$1" pin="S"/>
+<pinref part="REF1" gate="G$1" pin="S"/>
 <pinref part="IC3" gate="D" pin="-IN"/>
 <wire x1="33.02" y1="-12.7" x2="45.72" y2="-12.7" width="0.1524" layer="91"/>
 <pinref part="R9" gate="G$1" pin="2"/>
@@ -6409,7 +6409,7 @@ R2 3 2 {val-val*var/100}
 </net>
 <net name="N$58" class="0">
 <segment>
-<pinref part="R35" gate="G$1" pin="S"/>
+<pinref part="REF2" gate="G$1" pin="S"/>
 <pinref part="IC3" gate="A" pin="-IN"/>
 <wire x1="238.76" y1="-10.16" x2="251.46" y2="-10.16" width="0.1524" layer="91"/>
 <pinref part="R40" gate="G$1" pin="2"/>
@@ -6421,6 +6421,14 @@ R2 3 2 {val-val*var/100}
 </nets>
 </sheet>
 </sheets>
+<errors>
+<approved hash="104,1,121.92,22.86,IC2P,V+,+12V,,,"/>
+<approved hash="104,1,121.92,7.62,IC2P,V-,-12V,,,"/>
+<approved hash="104,1,129.54,22.86,IC1P,V+,+12V,,,"/>
+<approved hash="104,1,129.54,7.62,IC1P,V-,-12V,,,"/>
+<approved hash="104,1,114.3,22.86,IC3P,V+,+12V,,,"/>
+<approved hash="104,1,114.3,7.62,IC3P,V-,-12V,,,"/>
+</errors>
 </schematic>
 </drawing>
 <compatibility>

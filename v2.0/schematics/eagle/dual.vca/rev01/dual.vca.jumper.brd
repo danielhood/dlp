@@ -491,7 +491,6 @@ design rules under a new name.</description>
 <element name="JP4" library="pinhead" library_urn="urn:adsk.eagle:library:325" package="2X08" package3d_urn="urn:adsk.eagle:package:22481/2" value="TO MAIN" x="29.21" y="13.97" smashed="yes" rot="MR0">
 <attribute name="NAME" x="39.37" y="17.145" size="1.27" layer="26" ratio="10" rot="MR0"/>
 <attribute name="POPULARITY" value="6" x="5.08" y="10.16" size="1.778" layer="28" rot="MR0" display="off"/>
-<attribute name="VALUE" x="39.37" y="9.525" size="1.27" layer="28" rot="MR0"/>
 </element>
 </elements>
 <signals>

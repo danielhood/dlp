@@ -274,8 +274,8 @@ Number=0
 [Win_2]
 Type="Board Editor"
 Number=2
-File="/Users/dhood/git/danielhood/dlp/v2.0/schematics/eagle/dual.vca/rev01/dual.vca.main.brd"
-View="-6.14114 -1.44118 83.3301 101.571"
+File="/Users/dhood/git/danielhood/dlp/v2.0/schematics/eagle/dual.seq/dual.seq.v1.0.1.main.brd"
+View="-2.096 -1.08057 106.896 51.8071"
 WireWidths=" 0.0762 0.1016 0.127 0.15 0.2 0.2032 0.254 0.3048 0.4064 0.508 0.6096 0.8128 1.016 1.27 2.54 0.1524"
 PadDiameters=" 0.254 0.3048 0.4064 0.6096 0.8128 1.016 1.27 1.4224 1.6764 1.778 1.9304 2.1844 2.54 3.81 6.4516 0"
 PadDrills=" 0.2 0.25 0.3 0.35 0.4 0.45 0.5 0.55 0.65 0.7 0.75 0.8 0.85 0.9 1 0.6"
@@ -318,8 +318,8 @@ Layer=1
 [Win_3]
 Type="Schematic Editor"
 Number=1
-File="/Users/dhood/git/danielhood/dlp/v2.0/schematics/eagle/dual.vca/rev01/dual.vca.main.sch"
-View="-1.63651 20.0072 200.587 99.1856"
+File="/Users/dhood/git/danielhood/dlp/v2.0/schematics/eagle/dual.seq/dual.seq.v1.0.1.main.sch"
+View="-197.75 -1.42382 201.756 213.17"
 WireWidths=" 0.0762 0.1016 0.127 0.15 0.2 0.2032 0.254 0.3048 0.4064 0.508 0.6096 0.8128 1.016 1.27 2.54 0.1524"
 PadDiameters=" 0.254 0.3048 0.4064 0.6096 0.8128 1.016 1.27 1.4224 1.6764 1.778 1.9304 2.1844 2.54 3.81 6.4516 0"
 PadDrills=" 0.2 0.25 0.3 0.35 0.4 0.45 0.5 0.55 0.65 0.7 0.75 0.8 0.85 0.9 1 0.6"
@@ -358,7 +358,7 @@ ArcDirection=0
 AddLevel=2
 PadsSameType=0
 Layer=91
-Views=" 1: -1.63651 20.0072 200.587 99.1856"
+Views=" 1: -197.75 -1.42382 201.756 213.17"
 Sheet="1"
 
 [Desktop]
