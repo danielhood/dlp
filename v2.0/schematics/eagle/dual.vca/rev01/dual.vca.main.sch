@@ -4609,7 +4609,7 @@ R2 3 2 {val-val*var/100}
 <part name="P-11" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="-12V" device=""/>
 <part name="JP2" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-2X8" device="" package3d_urn="urn:adsk.eagle:package:22481/2" value="JACKBOARD"/>
 <part name="R2" library="_common" deviceset="R" device="" value="100K"/>
-<part name="R1" library="_common" deviceset="R" device="" value="65K"/>
+<part name="R1" library="_common" deviceset="R" device="" value="56K"/>
 <part name="R6" library="_common" deviceset="R" device="" value="100K"/>
 <part name="R7" library="_common" deviceset="R" device="" value="100K"/>
 <part name="GND9" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
@@ -4665,7 +4665,7 @@ R2 3 2 {val-val*var/100}
 <part name="T6" library="transistor" library_urn="urn:adsk.eagle:library:402" deviceset="BC547" device="" package3d_urn="urn:adsk.eagle:package:28523/2"/>
 <part name="T5" library="transistor" library_urn="urn:adsk.eagle:library:402" deviceset="BC547" device="" package3d_urn="urn:adsk.eagle:package:28523/2"/>
 <part name="R33" library="_common" deviceset="R" device="" value="100K"/>
-<part name="R32" library="_common" deviceset="R" device="" value="65K"/>
+<part name="R32" library="_common" deviceset="R" device="" value="56K"/>
 <part name="R37" library="_common" deviceset="R" device="" value="100K"/>
 <part name="R38" library="_common" deviceset="R" device="" value="100K"/>
 <part name="GND20" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
