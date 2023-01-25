@@ -4706,6 +4706,14 @@ R2 3 2 {val-val*var/100}
 <text x="332.74" y="-12.7" size="1.778" layer="91">GATE1 OUT</text>
 <text x="365.76" y="76.2" size="1.778" layer="91">VCA1 OUT</text>
 <text x="-22.86" y="96.52" size="3.81" layer="91">Dual VCA - Rev 01 - Nov 2021</text>
+<text x="-3.048" y="12.192" size="1.778" layer="97">Offset (250K pot, +12/-12)
+will link to here through 
+a 100K (200K?) resistor.</text>
+<wire x1="22.86" y1="15.24" x2="35.56" y2="15.24" width="0.1524" layer="97"/>
+<wire x1="35.56" y1="15.24" x2="35.56" y2="25.4" width="0.1524" layer="97"/>
+<text x="-14.732" y="-50.8" size="1.778" layer="97">Trimmer or pannel mount pot.</text>
+<wire x1="22.86" y1="-17.78" x2="22.86" y2="-50.8" width="0.1524" layer="97"/>
+<wire x1="22.86" y1="-50.8" x2="17.78" y2="-50.8" width="0.1524" layer="97"/>
 </plain>
 <instances>
 <instance part="IC2" gate="D" x="53.34" y="58.42" smashed="yes" rot="MR180">
@@ -6432,6 +6440,10 @@ R2 3 2 {val-val*var/100}
 </schematic>
 </drawing>
 <compatibility>
+<note version="6.3" minversion="6.2.2" severity="warning">
+Since Version 6.2.2 text objects can contain more than one line,
+which will not be processed correctly with this version.
+</note>
 <note version="8.2" severity="warning">
 Since Version 8.2, EAGLE supports online libraries. The ids
 of those online libraries will not be understood (or retained)
