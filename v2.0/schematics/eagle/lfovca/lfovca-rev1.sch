@@ -4406,16 +4406,16 @@ grid 5 mm, outline 2.4 x 4.4 mm</description>
 <part name="R3" library="resistor" deviceset="R-US_" device="0207/7" value="100K"/>
 <part name="R4" library="resistor" deviceset="R-US_" device="0207/7" value="11K"/>
 <part name="GND4" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
-<part name="C1" library="_common.v1" deviceset="CE-US" device="E2-5" value="2.2uF"/>
-<part name="R5" library="resistor" deviceset="R-US_" device="0207/7" value="1M"/>
+<part name="C1" library="_common.v1" deviceset="CE-US" device="E2-5" value="0.22uF / 2.2uF"/>
+<part name="R5" library="resistor" deviceset="R-US_" device="0207/7" value="470K"/>
 <part name="GND5" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="GND6" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="R6" library="resistor" deviceset="R-US_" device="0207/7" value="100K"/>
-<part name="R7" library="resistor" deviceset="R-US_" device="0207/7" value="100K"/>
-<part name="R8" library="resistor" deviceset="R-US_" device="0207/7" value="3M"/>
+<part name="R7" library="resistor" deviceset="R-US_" device="0207/7" value="200K"/>
+<part name="R8" library="resistor" deviceset="R-US_" device="0207/7" value="3.3M"/>
 <part name="R9" library="resistor" deviceset="R-US_" device="0207/7" value="220Ω"/>
-<part name="RV3" library="_common" deviceset="R-VAR" device="" value="50K"/>
-<part name="C2" library="_common.v1" deviceset="CC-US" device="025-024X044" value="47pF"/>
+<part name="RV3" library="_common" deviceset="R-VAR" device="" value="10K"/>
+<part name="C2" library="_common.v1" deviceset="CC-US" device="025-024X044" value="33pF"/>
 <part name="GND7" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="R10" library="resistor" deviceset="R-US_" device="0207/7" value="22Ω"/>
 <part name="R11" library="resistor" deviceset="R-US_" device="0207/7" value="22Ω"/>
