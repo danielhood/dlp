@@ -13247,14 +13247,15 @@ Mors</description>
 <plain>
 <text x="73.66" y="73.66" size="1.778" layer="97">VCA CV</text>
 <text x="104.14" y="48.26" size="1.778" layer="97">VCA OFFSET</text>
-<text x="271.78" y="93.98" size="1.778" layer="97">LFO SINE OUT</text>
+<text x="269.24" y="99.06" size="1.778" layer="97">LFO SINE OUT
+12Vpp</text>
 <text x="15.24" y="106.68" size="1.778" layer="97">LFO FREQ</text>
 <text x="91.44" y="60.96" size="1.778" layer="97">ATT</text>
 <text x="160.02" y="33.02" size="1.778" layer="97">CV INIT</text>
 <text x="193.04" y="137.16" size="1.778" layer="97">SINE</text>
 <text x="71.12" y="81.28" size="1.778" layer="97">TRIANGLE</text>
 <text x="99.06" y="129.54" size="1.778" layer="97">SQUARE</text>
-<text x="256.54" y="68.58" size="1.778" layer="97">BIAS</text>
+<text x="261.62" y="106.68" size="1.778" layer="97">BIAS</text>
 <text x="121.92" y="144.78" size="1.778" layer="97">MIN LVL</text>
 <text x="149.86" y="101.6" size="1.778" layer="97">SINE SYM</text>
 <text x="116.84" y="116.84" size="1.778" layer="97">ROUND</text>
@@ -13599,19 +13600,19 @@ Mors</description>
 <attribute name="NAME" x="224.5614" y="74.93" size="1.778" layer="95" rot="R90"/>
 <attribute name="VALUE" x="229.362" y="74.93" size="1.778" layer="96" rot="R90"/>
 </instance>
-<instance part="R39" gate="G$1" x="238.76" y="76.2" smashed="yes">
-<attribute name="NAME" x="234.95" y="77.6986" size="1.778" layer="95"/>
-<attribute name="VALUE" x="234.95" y="72.898" size="1.778" layer="96"/>
+<instance part="R39" gate="G$1" x="243.84" y="114.3" smashed="yes">
+<attribute name="NAME" x="240.03" y="115.7986" size="1.778" layer="95"/>
+<attribute name="VALUE" x="240.03" y="110.998" size="1.778" layer="96"/>
 </instance>
-<instance part="R40" gate="1" x="251.46" y="76.2" smashed="yes" rot="MR0">
-<attribute name="NAME" x="257.429" y="72.39" size="1.778" layer="95" rot="MR90"/>
-<attribute name="VALUE" x="255.27" y="72.39" size="1.778" layer="96" rot="MR90"/>
+<instance part="R40" gate="1" x="256.54" y="114.3" smashed="yes" rot="MR0">
+<attribute name="NAME" x="262.509" y="110.49" size="1.778" layer="95" rot="MR90"/>
+<attribute name="VALUE" x="260.35" y="110.49" size="1.778" layer="96" rot="MR90"/>
 </instance>
-<instance part="P-8" gate="1" x="251.46" y="66.04" smashed="yes">
-<attribute name="VALUE" x="248.92" y="63.5" size="1.778" layer="96" rot="R90"/>
+<instance part="P-8" gate="1" x="256.54" y="104.14" smashed="yes">
+<attribute name="VALUE" x="254" y="101.6" size="1.778" layer="96" rot="R90"/>
 </instance>
-<instance part="P+11" gate="1" x="251.46" y="86.36" smashed="yes">
-<attribute name="VALUE" x="248.92" y="81.28" size="1.778" layer="96" rot="R90"/>
+<instance part="P+11" gate="1" x="256.54" y="124.46" smashed="yes">
+<attribute name="VALUE" x="254" y="119.38" size="1.778" layer="96" rot="R90"/>
 </instance>
 <instance part="GND16" gate="1" x="226.06" y="68.58" smashed="yes">
 <attribute name="VALUE" x="224.155" y="66.04" size="1.778" layer="96"/>
@@ -13815,7 +13816,7 @@ Mors</description>
 <segment>
 <pinref part="P+11" gate="1" pin="+12V"/>
 <pinref part="R40" gate="1" pin="E"/>
-<wire x1="251.46" y1="83.82" x2="251.46" y2="81.28" width="0.1524" layer="91"/>
+<wire x1="256.54" y1="121.92" x2="256.54" y2="119.38" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="R10" gate="1" pin="E"/>
@@ -13872,7 +13873,7 @@ Mors</description>
 <segment>
 <pinref part="R40" gate="1" pin="A"/>
 <pinref part="P-8" gate="1" pin="-12V"/>
-<wire x1="251.46" y1="71.12" x2="251.46" y2="68.58" width="0.1524" layer="91"/>
+<wire x1="256.54" y1="109.22" x2="256.54" y2="106.68" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="RV3" gate="G$1" pin="1"/>
@@ -14100,6 +14101,10 @@ Mors</description>
 <wire x1="231.14" y1="104.14" x2="226.06" y2="104.14" width="0.1524" layer="91"/>
 <wire x1="226.06" y1="104.14" x2="226.06" y2="96.52" width="0.1524" layer="91"/>
 <junction x="226.06" y="96.52"/>
+<wire x1="226.06" y1="104.14" x2="226.06" y2="114.3" width="0.1524" layer="91"/>
+<junction x="226.06" y="104.14"/>
+<pinref part="R39" gate="G$1" pin="1"/>
+<wire x1="226.06" y1="114.3" x2="238.76" y2="114.3" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$10" class="0">
@@ -14129,16 +14134,10 @@ Mors</description>
 <pinref part="R35" gate="G$1" pin="2"/>
 <pinref part="IC2" gate="C" pin="+IN"/>
 <wire x1="223.52" y1="91.44" x2="226.06" y2="91.44" width="0.1524" layer="91"/>
-<pinref part="R39" gate="G$1" pin="1"/>
 <wire x1="226.06" y1="91.44" x2="228.6" y2="91.44" width="0.1524" layer="91"/>
-<wire x1="233.68" y1="76.2" x2="231.14" y2="76.2" width="0.1524" layer="91"/>
-<wire x1="231.14" y1="76.2" x2="231.14" y2="86.36" width="0.1524" layer="91"/>
-<wire x1="231.14" y1="86.36" x2="226.06" y2="86.36" width="0.1524" layer="91"/>
-<wire x1="226.06" y1="86.36" x2="226.06" y2="91.44" width="0.1524" layer="91"/>
+<wire x1="226.06" y1="83.82" x2="226.06" y2="91.44" width="0.1524" layer="91"/>
 <junction x="226.06" y="91.44"/>
 <pinref part="R37" gate="G$1" pin="2"/>
-<wire x1="226.06" y1="86.36" x2="226.06" y2="83.82" width="0.1524" layer="91"/>
-<junction x="226.06" y="86.36"/>
 </segment>
 </net>
 <net name="N$15" class="0">
@@ -14337,7 +14336,7 @@ Mors</description>
 <segment>
 <pinref part="R39" gate="G$1" pin="2"/>
 <pinref part="R40" gate="1" pin="S"/>
-<wire x1="243.84" y1="76.2" x2="246.38" y2="76.2" width="0.1524" layer="91"/>
+<wire x1="248.92" y1="114.3" x2="251.46" y2="114.3" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$34" class="0">
@@ -14353,6 +14352,10 @@ Mors</description>
 </schematic>
 </drawing>
 <compatibility>
+<note version="6.3" minversion="6.2.2" severity="warning">
+Since Version 6.2.2 text objects can contain more than one line,
+which will not be processed correctly with this version.
+</note>
 <note version="8.2" severity="warning">
 Since Version 8.2, EAGLE supports online libraries. The ids
 of those online libraries will not be understood (or retained)
