@@ -273,9 +273,9 @@ UsedLibrary="C:/Users/conflictedoperator/git/danielhood/dlp/v2.0/schematics/eagl
 
 [Win_1]
 Type="Schematic Editor"
-Number=1
-File="lfovca-pnl-rev2.sch"
-View="-16.256 -14.986 168.656 103.886"
+Number=2
+File="lfovca-rev2.sch"
+View="9.03563 14.2839 300.844 165.26"
 WireWidths=" 0.0762 0.1016 0.127 0.15 0.2 0.2032 0.254 0.3048 0.4064 0.508 0.6096 0.8128 1.016 1.27 2.54 0.1524"
 PadDiameters=" 0.254 0.3048 0.4064 0.6096 0.8128 1.016 1.27 1.4224 1.6764 1.778 1.9304 2.1844 2.54 3.81 6.4516 0"
 PadDrills=" 0.2 0.25 0.3 0.35 0.4 0.45 0.5 0.55 0.65 0.7 0.75 0.8 0.85 0.9 1 0.6"
@@ -321,6 +321,6 @@ Type="Control Panel"
 Number=0
 
 [Desktop]
-Screen="1920 1080"
+Screen="1920 2160"
 Window="Win_1"
 Window="Win_2"
