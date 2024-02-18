@@ -12499,7 +12499,7 @@ body 3.9 mm/JEDEC MS-012AC</description>
 <part name="GND16" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="GND18" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="R26" library="resistor" deviceset="R-US_" device="0207/7" value="100K"/>
-<part name="R27" library="resistor" deviceset="R-US_" device="0207/7" value="39K"/>
+<part name="R27" library="resistor" deviceset="R-US_" device="0207/7" value="43K"/>
 <part name="P-5" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="-12V" device=""/>
 <part name="R28" library="resistor" deviceset="R-US_" device="0207/7" value="100Ω"/>
 <part name="GND19" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
@@ -12512,7 +12512,7 @@ body 3.9 mm/JEDEC MS-012AC</description>
 <part name="GND21" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="GND22" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="R32" library="resistor" deviceset="R-US_" device="0207/7" value="100K"/>
-<part name="R33" library="resistor" deviceset="R-US_" device="0207/7" value="39K"/>
+<part name="R33" library="resistor" deviceset="R-US_" device="0207/7" value="43K"/>
 <part name="P-7" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="-12V" device=""/>
 <part name="R34" library="resistor" deviceset="R-US_" device="0207/7" value="100Ω"/>
 <part name="GND23" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
@@ -12557,7 +12557,6 @@ body 3.9 mm/JEDEC MS-012AC</description>
 <part name="P+11" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+12V" device=""/>
 <part name="P-8" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="-12V" device=""/>
 <part name="R56" library="resistor" deviceset="R-US_" device="0207/7" value="49.9K"/>
-<part name="P+14" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+12V" device=""/>
 <part name="GND33" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="P-9" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="-12V" device=""/>
 <part name="GND34" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
@@ -12571,6 +12570,8 @@ body 3.9 mm/JEDEC MS-012AC</description>
 <part name="R61" library="pot" library_urn="urn:adsk.eagle:library:331" deviceset="TRIM_EU-" device="CA6V" package3d_urn="urn:adsk.eagle:package:22691/1" value="100K"/>
 <part name="P-13" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="-12V" device=""/>
 <part name="P+16" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+12V" device=""/>
+<part name="RV3" library="_common" deviceset="R-VAR" device="R-VAR-10" value="100K (B)"/>
+<part name="GND36" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -12579,10 +12580,17 @@ body 3.9 mm/JEDEC MS-012AC</description>
 
 Based on Ray Wilson's VCF - JAN 2006:
 https://musicfromouterspace.com/analogsynth_new/VCFJAN2006/VCFJAN2006.html</text>
+<text x="5.08" y="55.88" size="1.778" layer="97">FREQ</text>
+<text x="10.16" y="193.04" size="1.778" layer="97">RES</text>
+<text x="50.8" y="17.78" size="1.778" layer="97">LED ADJ</text>
+<text x="76.2" y="91.44" size="1.778" layer="97">V/OCT</text>
+<text x="27.94" y="38.1" size="1.778" layer="97">FREQ INIT</text>
+<text x="33.02" y="182.88" size="1.778" layer="97">RES INIT</text>
+<text x="30.48" y="144.78" size="1.778" layer="97">LEVEL</text>
 </plain>
 <instances>
-<instance part="GND1" gate="1" x="17.78" y="114.3" smashed="yes">
-<attribute name="VALUE" x="15.875" y="111.76" size="1.778" layer="96"/>
+<instance part="GND1" gate="1" x="5.08" y="121.92" smashed="yes">
+<attribute name="VALUE" x="3.175" y="119.38" size="1.778" layer="96"/>
 </instance>
 <instance part="RV2" gate="G$1" x="12.7" y="63.5" smashed="yes" rot="MR90">
 <attribute name="NAME" x="8.3566" y="63.5" size="1.778" layer="95" rot="MR90" align="center"/>
@@ -12613,35 +12621,35 @@ https://musicfromouterspace.com/analogsynth_new/VCFJAN2006/VCFJAN2006.html</text
 <attribute name="NAME" x="101.6" y="81.28" size="1.778" layer="95"/>
 <attribute name="VALUE" x="91.694" y="84.582" size="1.778" layer="96"/>
 </instance>
-<instance part="T1" gate="G$1" x="76.2" y="30.48" smashed="yes">
-<attribute name="NAME" x="71.12" y="35.56" size="1.778" layer="95" rot="R270"/>
-<attribute name="VALUE" x="81.28" y="33.02" size="1.778" layer="96" rot="R270"/>
+<instance part="T1" gate="G$1" x="71.12" y="27.94" smashed="yes">
+<attribute name="NAME" x="66.04" y="33.02" size="1.778" layer="95" rot="R270"/>
+<attribute name="VALUE" x="76.2" y="30.48" size="1.778" layer="96" rot="R270"/>
 </instance>
-<instance part="R9" gate="G$1" x="71.12" y="43.18" smashed="yes" rot="R90">
-<attribute name="NAME" x="69.6214" y="39.37" size="1.778" layer="95" rot="R90"/>
-<attribute name="VALUE" x="74.422" y="39.37" size="1.778" layer="96" rot="R90"/>
+<instance part="R9" gate="G$1" x="66.04" y="40.64" smashed="yes" rot="R90">
+<attribute name="NAME" x="64.5414" y="36.83" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="69.342" y="36.83" size="1.778" layer="96" rot="R90"/>
 </instance>
-<instance part="R8" gate="G$1" x="63.5" y="30.48" smashed="yes" rot="R180">
-<attribute name="NAME" x="67.31" y="28.9814" size="1.778" layer="95" rot="R180"/>
-<attribute name="VALUE" x="67.31" y="33.782" size="1.778" layer="96" rot="R180"/>
+<instance part="R8" gate="G$1" x="58.42" y="27.94" smashed="yes" rot="R180">
+<attribute name="NAME" x="62.23" y="26.4414" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="62.23" y="31.242" size="1.778" layer="96" rot="R180"/>
 </instance>
 <instance part="R10" gate="1" x="22.86" y="48.26" smashed="yes">
 <attribute name="NAME" x="27.305" y="43.18" size="1.778" layer="95" rot="R90"/>
 <attribute name="VALUE" x="19.05" y="45.466" size="1.778" layer="96" rot="R90"/>
 </instance>
-<instance part="R5" gate="G$1" x="78.74" y="43.18" smashed="yes" rot="R90">
-<attribute name="NAME" x="77.2414" y="39.37" size="1.778" layer="95" rot="R90"/>
-<attribute name="VALUE" x="82.042" y="39.37" size="1.778" layer="96" rot="R90"/>
+<instance part="R5" gate="G$1" x="73.66" y="40.64" smashed="yes" rot="R90">
+<attribute name="NAME" x="72.1614" y="36.83" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="76.962" y="36.83" size="1.778" layer="96" rot="R90"/>
 </instance>
-<instance part="LED1" gate="G$1" x="78.74" y="20.32" smashed="yes">
-<attribute name="NAME" x="82.296" y="15.748" size="1.778" layer="95" rot="R90"/>
-<attribute name="VALUE" x="84.455" y="15.748" size="1.778" layer="96" rot="R90"/>
+<instance part="LED1" gate="G$1" x="73.66" y="17.78" smashed="yes">
+<attribute name="NAME" x="77.216" y="13.208" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="79.375" y="13.208" size="1.778" layer="96" rot="R90"/>
 </instance>
-<instance part="GND15" gate="1" x="78.74" y="10.16" smashed="yes">
-<attribute name="VALUE" x="76.835" y="7.62" size="1.778" layer="96"/>
+<instance part="GND15" gate="1" x="73.66" y="7.62" smashed="yes">
+<attribute name="VALUE" x="71.755" y="5.08" size="1.778" layer="96"/>
 </instance>
-<instance part="P+9" gate="1" x="78.74" y="53.34" smashed="yes">
-<attribute name="VALUE" x="83.82" y="48.26" size="1.778" layer="96" rot="R90"/>
+<instance part="P+9" gate="1" x="73.66" y="50.8" smashed="yes">
+<attribute name="VALUE" x="78.74" y="45.72" size="1.778" layer="96" rot="R90"/>
 </instance>
 <instance part="C1" gate="G$1" x="152.4" y="60.96" smashed="yes">
 <attribute name="NAME" x="149.86" y="61.087" size="1.778" layer="95" rot="R90" align="center"/>
@@ -12680,9 +12688,9 @@ https://musicfromouterspace.com/analogsynth_new/VCFJAN2006/VCFJAN2006.html</text
 <attribute name="NAME" x="457.2" y="121.92" size="1.778" layer="95" rot="MR0"/>
 <attribute name="VALUE" x="480.06" y="124.46" size="1.778" layer="96" rot="MR0"/>
 </instance>
-<instance part="J1" gate="G$1" x="27.94" y="127" smashed="yes">
-<attribute name="NAME" x="30.48" y="127" size="1.778" layer="95"/>
-<attribute name="VALUE" x="10.16" y="129.54" size="1.778" layer="96"/>
+<instance part="J1" gate="G$1" x="15.24" y="134.62" smashed="yes">
+<attribute name="NAME" x="17.78" y="134.62" size="1.778" layer="95"/>
+<attribute name="VALUE" x="-2.54" y="137.16" size="1.778" layer="96"/>
 </instance>
 <instance part="JP1" gate="A" x="457.2" y="66.04" smashed="yes" rot="R180">
 <attribute name="NAME" x="463.55" y="57.785" size="1.778" layer="95" rot="R180"/>
@@ -13170,8 +13178,8 @@ https://musicfromouterspace.com/analogsynth_new/VCFJAN2006/VCFJAN2006.html</text
 <attribute name="NAME" x="32.385" y="187.96" size="1.778" layer="95" rot="R90"/>
 <attribute name="VALUE" x="24.13" y="190.246" size="1.778" layer="96" rot="R90"/>
 </instance>
-<instance part="P+11" gate="1" x="27.94" y="218.44" smashed="yes">
-<attribute name="VALUE" x="33.02" y="213.36" size="1.778" layer="96" rot="R90"/>
+<instance part="P+11" gate="1" x="27.94" y="226.06" smashed="yes">
+<attribute name="VALUE" x="33.02" y="220.98" size="1.778" layer="96" rot="R90"/>
 </instance>
 <instance part="P-8" gate="1" x="27.94" y="167.64" smashed="yes">
 <attribute name="VALUE" x="25.4" y="165.1" size="1.778" layer="96" rot="R90"/>
@@ -13179,9 +13187,6 @@ https://musicfromouterspace.com/analogsynth_new/VCFJAN2006/VCFJAN2006.html</text
 <instance part="R56" gate="G$1" x="27.94" y="177.8" smashed="yes" rot="R90">
 <attribute name="NAME" x="26.4414" y="173.99" size="1.778" layer="95" rot="R90"/>
 <attribute name="VALUE" x="31.242" y="173.99" size="1.778" layer="96" rot="R90"/>
-</instance>
-<instance part="P+14" gate="1" x="17.78" y="210.82" smashed="yes">
-<attribute name="VALUE" x="22.86" y="205.74" size="1.778" layer="96" rot="R90"/>
 </instance>
 <instance part="GND33" gate="1" x="86.36" y="167.64" smashed="yes">
 <attribute name="VALUE" x="84.455" y="165.1" size="1.778" layer="96"/>
@@ -13192,9 +13197,9 @@ https://musicfromouterspace.com/analogsynth_new/VCFJAN2006/VCFJAN2006.html</text
 <instance part="GND34" gate="1" x="50.8" y="182.88" smashed="yes">
 <attribute name="VALUE" x="48.895" y="180.34" size="1.778" layer="96"/>
 </instance>
-<instance part="R57" gate="G$1" x="27.94" y="208.28" smashed="yes" rot="R90">
-<attribute name="NAME" x="26.4414" y="204.47" size="1.778" layer="95" rot="R90"/>
-<attribute name="VALUE" x="31.242" y="204.47" size="1.778" layer="96" rot="R90"/>
+<instance part="R57" gate="G$1" x="27.94" y="215.9" smashed="yes" rot="R90">
+<attribute name="NAME" x="26.4414" y="212.09" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="31.242" y="212.09" size="1.778" layer="96" rot="R90"/>
 </instance>
 <instance part="P+15" gate="1" x="162.56" y="185.42" smashed="yes">
 <attribute name="VALUE" x="167.64" y="180.34" size="1.778" layer="96" rot="R90"/>
@@ -13217,15 +13222,22 @@ https://musicfromouterspace.com/analogsynth_new/VCFJAN2006/VCFJAN2006.html</text
 <attribute name="NAME" x="151.13" y="166.5986" size="1.778" layer="95"/>
 <attribute name="VALUE" x="151.13" y="161.798" size="1.778" layer="96"/>
 </instance>
-<instance part="R61" gate="1" x="50.8" y="30.48" smashed="yes">
-<attribute name="NAME" x="55.245" y="25.4" size="1.778" layer="95" rot="R90"/>
-<attribute name="VALUE" x="46.99" y="27.686" size="1.778" layer="96" rot="R90"/>
+<instance part="R61" gate="1" x="45.72" y="27.94" smashed="yes">
+<attribute name="NAME" x="50.165" y="22.86" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="41.91" y="25.146" size="1.778" layer="96" rot="R90"/>
 </instance>
-<instance part="P-13" gate="1" x="50.8" y="20.32" smashed="yes">
-<attribute name="VALUE" x="48.26" y="17.78" size="1.778" layer="96" rot="R90"/>
+<instance part="P-13" gate="1" x="45.72" y="17.78" smashed="yes">
+<attribute name="VALUE" x="43.18" y="15.24" size="1.778" layer="96" rot="R90"/>
 </instance>
-<instance part="P+16" gate="1" x="50.8" y="40.64" smashed="yes">
-<attribute name="VALUE" x="55.88" y="35.56" size="1.778" layer="96" rot="R90"/>
+<instance part="P+16" gate="1" x="45.72" y="38.1" smashed="yes">
+<attribute name="VALUE" x="50.8" y="33.02" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="RV3" gate="G$1" x="33.02" y="134.62" smashed="yes" rot="MR90">
+<attribute name="NAME" x="28.6766" y="134.62" size="1.778" layer="95" rot="MR90" align="center"/>
+<attribute name="VALUE" x="30.734" y="134.62" size="1.778" layer="96" rot="MR90" align="center"/>
+</instance>
+<instance part="GND36" gate="1" x="33.02" y="124.46" smashed="yes">
+<attribute name="VALUE" x="31.115" y="121.92" size="1.778" layer="96"/>
 </instance>
 </instances>
 <busses>
@@ -13234,18 +13246,18 @@ https://musicfromouterspace.com/analogsynth_new/VCFJAN2006/VCFJAN2006.html</text
 <net name="0V" class="1">
 <segment>
 <pinref part="GND1" gate="1" pin="0V"/>
-<wire x1="17.78" y1="121.92" x2="17.78" y2="119.38" width="0.1524" layer="91"/>
+<wire x1="5.08" y1="129.54" x2="5.08" y2="127" width="0.1524" layer="91"/>
 <pinref part="J1" gate="G$1" pin="P$1"/>
 <pinref part="J1" gate="G$1" pin="P$2"/>
-<wire x1="17.78" y1="119.38" x2="17.78" y2="116.84" width="0.1524" layer="91"/>
-<wire x1="17.78" y1="119.38" x2="22.86" y2="119.38" width="0.1524" layer="91"/>
-<wire x1="22.86" y1="119.38" x2="22.86" y2="124.46" width="0.1524" layer="91"/>
-<junction x="17.78" y="119.38"/>
-<wire x1="22.86" y1="119.38" x2="38.1" y2="119.38" width="0.1524" layer="91"/>
-<wire x1="38.1" y1="119.38" x2="38.1" y2="132.08" width="0.1524" layer="91"/>
-<junction x="22.86" y="119.38"/>
+<wire x1="5.08" y1="127" x2="5.08" y2="124.46" width="0.1524" layer="91"/>
+<wire x1="5.08" y1="127" x2="10.16" y2="127" width="0.1524" layer="91"/>
+<wire x1="10.16" y1="127" x2="10.16" y2="132.08" width="0.1524" layer="91"/>
+<junction x="5.08" y="127"/>
+<wire x1="10.16" y1="127" x2="25.4" y2="127" width="0.1524" layer="91"/>
+<wire x1="25.4" y1="127" x2="25.4" y2="139.7" width="0.1524" layer="91"/>
+<junction x="10.16" y="127"/>
 <pinref part="J1" gate="G$1" pin="P$4"/>
-<wire x1="38.1" y1="132.08" x2="35.56" y2="132.08" width="0.1524" layer="91"/>
+<wire x1="25.4" y1="139.7" x2="22.86" y2="139.7" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="GND13" gate="1" pin="0V"/>
@@ -13260,7 +13272,7 @@ https://musicfromouterspace.com/analogsynth_new/VCFJAN2006/VCFJAN2006.html</text
 <segment>
 <pinref part="LED1" gate="G$1" pin="C"/>
 <pinref part="GND15" gate="1" pin="0V"/>
-<wire x1="78.74" y1="15.24" x2="78.74" y2="12.7" width="0.1524" layer="91"/>
+<wire x1="73.66" y1="12.7" x2="73.66" y2="10.16" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="GND3" gate="1" pin="0V"/>
@@ -13469,6 +13481,11 @@ https://musicfromouterspace.com/analogsynth_new/VCFJAN2006/VCFJAN2006.html</text
 <pinref part="GND35" gate="1" pin="0V"/>
 <wire x1="175.26" y1="162.56" x2="175.26" y2="160.02" width="0.1524" layer="91"/>
 </segment>
+<segment>
+<pinref part="RV3" gate="G$1" pin="1"/>
+<pinref part="GND36" gate="1" pin="0V"/>
+<wire x1="33.02" y1="129.54" x2="33.02" y2="127" width="0.1524" layer="91"/>
+</segment>
 </net>
 <net name="+12V" class="1">
 <segment>
@@ -13484,7 +13501,7 @@ https://musicfromouterspace.com/analogsynth_new/VCFJAN2006/VCFJAN2006.html</text
 <segment>
 <pinref part="R5" gate="G$1" pin="2"/>
 <pinref part="P+9" gate="1" pin="+12V"/>
-<wire x1="78.74" y1="48.26" x2="78.74" y2="50.8" width="0.1524" layer="91"/>
+<wire x1="73.66" y1="45.72" x2="73.66" y2="48.26" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="C1" gate="G$1" pin="1"/>
@@ -13546,14 +13563,9 @@ https://musicfromouterspace.com/analogsynth_new/VCFJAN2006/VCFJAN2006.html</text
 <wire x1="340.36" y1="144.78" x2="340.36" y2="147.32" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="RV1" gate="G$1" pin="2"/>
-<pinref part="P+14" gate="1" pin="+12V"/>
-<wire x1="17.78" y1="205.74" x2="17.78" y2="208.28" width="0.1524" layer="91"/>
-</segment>
-<segment>
 <pinref part="R57" gate="G$1" pin="2"/>
 <pinref part="P+11" gate="1" pin="+12V"/>
-<wire x1="27.94" y1="213.36" x2="27.94" y2="215.9" width="0.1524" layer="91"/>
+<wire x1="27.94" y1="220.98" x2="27.94" y2="223.52" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="P+15" gate="1" pin="+12V"/>
@@ -13562,7 +13574,7 @@ https://musicfromouterspace.com/analogsynth_new/VCFJAN2006/VCFJAN2006.html</text
 <segment>
 <pinref part="R61" gate="1" pin="E"/>
 <pinref part="P+16" gate="1" pin="+12V"/>
-<wire x1="50.8" y1="35.56" x2="50.8" y2="38.1" width="0.1524" layer="91"/>
+<wire x1="45.72" y1="33.02" x2="45.72" y2="35.56" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="-12V" class="1">
@@ -13642,13 +13654,13 @@ https://musicfromouterspace.com/analogsynth_new/VCFJAN2006/VCFJAN2006.html</text
 <segment>
 <pinref part="P-13" gate="1" pin="-12V"/>
 <pinref part="R61" gate="1" pin="A"/>
-<wire x1="50.8" y1="22.86" x2="50.8" y2="25.4" width="0.1524" layer="91"/>
+<wire x1="45.72" y1="20.32" x2="45.72" y2="22.86" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$35" class="0">
 <segment>
 <pinref part="T1" gate="G$1" pin="C"/>
-<wire x1="78.74" y1="38.1" x2="78.74" y2="35.56" width="0.1524" layer="91"/>
+<wire x1="73.66" y1="35.56" x2="73.66" y2="33.02" width="0.1524" layer="91"/>
 <pinref part="R5" gate="G$1" pin="1"/>
 </segment>
 </net>
@@ -13656,18 +13668,18 @@ https://musicfromouterspace.com/analogsynth_new/VCFJAN2006/VCFJAN2006.html</text
 <segment>
 <pinref part="R9" gate="G$1" pin="1"/>
 <pinref part="T1" gate="G$1" pin="B"/>
-<wire x1="71.12" y1="38.1" x2="71.12" y2="30.48" width="0.1524" layer="91"/>
-<wire x1="71.12" y1="30.48" x2="73.66" y2="30.48" width="0.1524" layer="91"/>
+<wire x1="66.04" y1="35.56" x2="66.04" y2="27.94" width="0.1524" layer="91"/>
+<wire x1="66.04" y1="27.94" x2="68.58" y2="27.94" width="0.1524" layer="91"/>
 <pinref part="R8" gate="G$1" pin="1"/>
-<wire x1="68.58" y1="30.48" x2="71.12" y2="30.48" width="0.1524" layer="91"/>
-<junction x="71.12" y="30.48"/>
+<wire x1="63.5" y1="27.94" x2="66.04" y2="27.94" width="0.1524" layer="91"/>
+<junction x="66.04" y="27.94"/>
 </segment>
 </net>
 <net name="N$37" class="0">
 <segment>
 <pinref part="T1" gate="G$1" pin="E"/>
 <pinref part="LED1" gate="G$1" pin="A"/>
-<wire x1="78.74" y1="25.4" x2="78.74" y2="22.86" width="0.1524" layer="91"/>
+<wire x1="73.66" y1="22.86" x2="73.66" y2="20.32" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$1" class="0">
@@ -13729,7 +13741,9 @@ https://musicfromouterspace.com/analogsynth_new/VCFJAN2006/VCFJAN2006.html</text
 <wire x1="71.12" y1="78.74" x2="71.12" y2="88.9" width="0.1524" layer="91"/>
 <junction x="71.12" y="88.9"/>
 <pinref part="R9" gate="G$1" pin="2"/>
-<wire x1="71.12" y1="78.74" x2="71.12" y2="48.26" width="0.1524" layer="91"/>
+<wire x1="71.12" y1="78.74" x2="71.12" y2="58.42" width="0.1524" layer="91"/>
+<wire x1="71.12" y1="58.42" x2="66.04" y2="58.42" width="0.1524" layer="91"/>
+<wire x1="66.04" y1="58.42" x2="66.04" y2="45.72" width="0.1524" layer="91"/>
 <junction x="71.12" y="78.74"/>
 </segment>
 </net>
@@ -14190,13 +14204,6 @@ https://musicfromouterspace.com/analogsynth_new/VCFJAN2006/VCFJAN2006.html</text
 <wire x1="53.34" y1="134.62" x2="50.8" y2="134.62" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$49" class="0">
-<segment>
-<pinref part="C13" gate="G$1" pin="2"/>
-<pinref part="J1" gate="G$1" pin="P$3"/>
-<wire x1="40.64" y1="134.62" x2="38.1" y2="134.62" width="0.1524" layer="91"/>
-</segment>
-</net>
 <net name="N$50" class="0">
 <segment>
 <pinref part="R45" gate="G$1" pin="2"/>
@@ -14254,13 +14261,6 @@ https://musicfromouterspace.com/analogsynth_new/VCFJAN2006/VCFJAN2006.html</text
 <wire x1="35.56" y1="193.04" x2="38.1" y2="193.04" width="0.1524" layer="91"/>
 <junction x="35.56" y="193.04"/>
 <pinref part="R54" gate="G$1" pin="1"/>
-</segment>
-</net>
-<net name="N$54" class="0">
-<segment>
-<pinref part="R55" gate="1" pin="E"/>
-<pinref part="R57" gate="G$1" pin="1"/>
-<wire x1="27.94" y1="198.12" x2="27.94" y2="203.2" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$55" class="0">
@@ -14357,7 +14357,34 @@ https://musicfromouterspace.com/analogsynth_new/VCFJAN2006/VCFJAN2006.html</text
 <segment>
 <pinref part="R8" gate="G$1" pin="2"/>
 <pinref part="R61" gate="1" pin="S"/>
-<wire x1="58.42" y1="30.48" x2="55.88" y2="30.48" width="0.1524" layer="91"/>
+<wire x1="53.34" y1="27.94" x2="50.8" y2="27.94" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$49" class="0">
+<segment>
+<pinref part="RV3" gate="G$1" pin="P$1"/>
+<pinref part="C13" gate="G$1" pin="2"/>
+<wire x1="38.1" y1="134.62" x2="40.64" y2="134.62" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$62" class="0">
+<segment>
+<pinref part="J1" gate="G$1" pin="P$3"/>
+<wire x1="25.4" y1="142.24" x2="33.02" y2="142.24" width="0.1524" layer="91"/>
+<pinref part="RV3" gate="G$1" pin="2"/>
+<wire x1="33.02" y1="142.24" x2="33.02" y2="139.7" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$64" class="1">
+<segment>
+<pinref part="RV1" gate="G$1" pin="2"/>
+<wire x1="17.78" y1="205.74" x2="17.78" y2="208.28" width="0.1524" layer="91"/>
+<pinref part="R55" gate="1" pin="E"/>
+<pinref part="R57" gate="G$1" pin="1"/>
+<wire x1="27.94" y1="198.12" x2="27.94" y2="208.28" width="0.1524" layer="91"/>
+<wire x1="27.94" y1="208.28" x2="27.94" y2="210.82" width="0.1524" layer="91"/>
+<wire x1="17.78" y1="208.28" x2="27.94" y2="208.28" width="0.1524" layer="91"/>
+<junction x="27.94" y="208.28"/>
 </segment>
 </net>
 </nets>
