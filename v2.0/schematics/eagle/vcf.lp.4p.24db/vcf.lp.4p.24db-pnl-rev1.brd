@@ -69,12 +69,12 @@
 <hole x="17.5" y="59.94" drill="7.5" grouprefs="POTS"/>
 <hole x="17.5" y="105.66" drill="7.5" grouprefs="POTS"/>
 <hole x="22" y="32.89" drill="6.5"/>
-<hole x="10" y="94.23" drill="4"/>
+<hole x="22" y="16" drill="5.5"/>
 <hole x="7.5" y="125" drill="3.5"/>
 <hole x="7.5" y="3" drill="3.5"/>
 <text x="17.5" y="96.16" size="1.778" layer="25" align="center">CUTOFF</text>
-<text x="17.5" y="73.3" size="1.778" layer="25" align="center">ATTEN</text>
-<text x="17.5" y="50.44" size="1.778" layer="25" align="center">LEVEL</text>
+<text x="17.5" y="73.3" size="1.778" layer="25" align="center">RES</text>
+<text x="17.5" y="50.44" size="1.778" layer="25" align="center">CV ATT</text>
 <text x="11" y="33.78" size="1.778" layer="25" align="center">IN</text>
 <text x="11" y="16" size="1.778" layer="25" align="center">OUT</text>
 <text x="22" y="25.89" size="1.778" layer="25" align="center">CV</text>
@@ -92,6 +92,7 @@
 <text x="23.928" y="52.28" size="1.6764" layer="25" align="center">10</text>
 <text x="17.5" y="69.94" size="1.6764" layer="25" align="center">5</text>
 <text x="11.072" y="52.28" size="1.6764" layer="25" align="center">0</text>
+<text x="22" y="9" size="1.778" layer="25" align="center">RES++</text>
 </plain>
 <libraries>
 </libraries>

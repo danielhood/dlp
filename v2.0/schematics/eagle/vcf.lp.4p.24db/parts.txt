@@ -1,0 +1,93 @@
+Partlist
+
+Exported from vcf.lp.4p.24db-rev1.sch at 2024-02-20 09:59
+
+EAGLE Version 9.6.2 Copyright (c) 1988-2020 Autodesk, Inc.
+
+Assembly variant: 
+
+Part     Value          Device              Package           Library             Sheet
+
+C1       10uF           CE-USE2-5           E2-5              _common.v1          1
+C2       10uF           CE-USE2-5           E2-5              _common.v1          1
+C3       0.1uF          CC-US025-024X044    C025-024X044      _common.v1          1
+C4       0.1uF          CC-US025-024X044    C025-024X044      _common.v1          1
+C5       0.1uF          CC-US025-024X044    C025-024X044      _common.v1          1
+C6       0.1uF          CC-US025-024X044    C025-024X044      _common.v1          1
+C7       0.1uF          CC-US025-024X044    C025-024X044      _common.v1          1
+C8       0.1uF          CC-US025-024X044    C025-024X044      _common.v1          1
+C9       0.1uF          CC-US025-024X044    C025-024X044      _common.v1          1
+C10      0.1uF          CC-US025-024X044    C025-024X044      _common.v1          1
+C11      0.1uF          CC-US025-024X044    C025-024X044      _common.v1          1
+C12      0.1uF          CC-US025-024X044    C025-024X044      _common.v1          1
+C15      0.1uF          CC-US025-024X044    C025-024X044      _common.v1          1
+C16      100pF          CC-US025-024X044    C025-024X044      _common.v1          1
+C17      100pF          CC-US025-024X044    C025-024X044      _common.v1          1
+C18      100pF          CC-US025-024X044    C025-024X044      _common.v1          1
+C19      100pF          CC-US025-024X044    C025-024X044      _common.v1          1
+C20      100pF          CC-US025-024X044    C025-024X044      _common.v1          1
+C21      0.1uF          CC-US025-024X044    C025-024X044      _common.v1          1
+D1       1N4148         1N4148              DO35-7            _common.v1          1
+IC1      TL082P         TL082P              DIL08             linear              1
+IC2      TL084P         TL084P              DIL14             linear              1
+IC3      TL084P         TL084P              DIL14             linear              1
+IC4      LM13700N       LM13700N            DIL16             ota                 1
+IC5      LM13700N       LM13700N            DIL16             ota                 1
+J1       IN             CL1384              CL1384            jacks               1
+J2       OUT            CL1384              CL1384            jacks               1
+JP1      PWR            PINHD-2X5           2X05              pinhead             1
+JP2      CV IN          PINHD-1X2           1X02              pinhead             1
+JP3      RES BOOST      PINHD-1X3           1X03              pinhead             1
+R1       100K           TRIM_EU-CA6V        CA6V              pot                 1
+R2       39K            R-US_0207/7         0207/7            resistor            1
+R3       100K           R-US_0207/7         0207/7            resistor            1
+R4       100K           R-US_0207/7         0207/7            resistor            1
+R5       100K           R-US_0207/7         0207/7            resistor            1
+R6       200K           R-US_0207/7         0207/7            resistor            1
+R7       1.5K           R-US_0207/7         0207/7            resistor            1
+R8       1M             R-US_0207/7         0207/7            resistor            1
+R9       470?           R-US_0207/7         0207/7            resistor            1
+R10      100K           R-US_0207/7         0207/7            resistor            1
+R11      27K            R-US_0207/7         0207/7            resistor            1
+R12      39K            R-US_0207/7         0207/7            resistor            1
+R13      1M             R-US_0207/7         0207/7            resistor            1
+R14      10K            R-US_0207/7         0207/7            resistor            1
+R15      100?           R-US_0207/7         0207/7            resistor            1
+R16      20K            R-US_0207/7         0207/7            resistor            1
+R17      100K           R-US_0207/7         0207/7            resistor            1
+R18      10K            R-US_0207/7         0207/7            resistor            1
+R19      100K           R-US_0207/7         0207/7            resistor            1
+R20      39K            R-US_0207/7         0207/7            resistor            1
+R21      100?           R-US_0207/7         0207/7            resistor            1
+R22      20K            R-US_0207/7         0207/7            resistor            1
+R23      100K           R-US_0207/7         0207/7            resistor            1
+R24      10K            R-US_0207/7         0207/7            resistor            1
+R25      20K            R-US_0207/7         0207/7            resistor            1
+R26      120K           R-US_0207/7         0207/7            resistor            1
+R27      10K            R-US_0207/7         0207/7            resistor            1
+R28      39K            R-US_0207/7         0207/7            resistor            1
+R29      100?           R-US_0207/7         0207/7            resistor            1
+R30      20K            R-US_0207/7         0207/7            resistor            1
+R31      100K           R-US_0207/7         0207/7            resistor            1
+R32      10K            R-US_0207/7         0207/7            resistor            1
+R33      120K           R-US_0207/7         0207/7            resistor            1
+R34      39K            R-US_0207/7         0207/7            resistor            1
+R35      100?           R-US_0207/7         0207/7            resistor            1
+R36      20K            R-US_0207/7         0207/7            resistor            1
+R37      100K           R-US_0207/7         0207/7            resistor            1
+R38      10K            R-US_0207/7         0207/7            resistor            1
+R39      4.7M           R-US_0207/7         0207/7            resistor            1
+R40      100K           R-US_0207/7         0207/7            resistor            1
+R41      100K           R-US_0207/7         0207/7            resistor            1
+R42      100K           R-US_0207/7         0207/7            resistor            1
+R43      100K           R-US_0207/7         0207/7            resistor            1
+R44      1K             R-US_0207/7         0207/7            resistor            1
+RV1      250K (B)       R-VARR-VAR-10       _COMMON_3RP/1610N _common             1
+RV2      250K (A)       R-VARR-VAR-10       _COMMON_3RP/1610N _common             1
+RV3      10K (B)        R-VARR-VAR-10       _COMMON_3RP/1610N _common             1
+T1       2N3904         2N3904-NPN-TO92-EBC TO92-EBC          transistor-neu-to92 1
+T2       2N3904         2N3904-NPN-TO92-EBC TO92-EBC          transistor-neu-to92 1
+T3       2N3906         2N3906-PNP-TO92-EBC TO92-EBC          transistor-neu-to92 1
+T4       2N3906         2N3906-PNP-TO92-EBC TO92-EBC          transistor-neu-to92 1
+T5       2N3906         2N3906-PNP-TO92-EBC TO92-EBC          transistor-neu-to92 1
+T6       2N3906         2N3906-PNP-TO92-EBC TO92-EBC          transistor-neu-to92 1
