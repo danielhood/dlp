@@ -10693,7 +10693,7 @@ body 3.9 mm/JEDEC MS-012AC</description>
 
 Based on Ray Wilson's VCF - JAN 2006:
 https://musicfromouterspace.com/analogsynth_new/VCFJAN2006/VCFJAN2006.html</text>
-<text x="7.62" y="55.88" size="1.778" layer="97">FREQ</text>
+<text x="5.08" y="55.88" size="1.778" layer="97">CUTOFF</text>
 <text x="33.02" y="22.86" size="1.778" layer="97">FREQ INIT</text>
 <text x="33.02" y="78.74" size="1.778" layer="97">CV ATT</text>
 <text x="215.9" y="162.56" size="1.778" layer="97">RES</text>
@@ -11585,6 +11585,16 @@ https://musicfromouterspace.com/analogsynth_new/VCFJAN2006/VCFJAN2006.html</text
 <wire x1="294.64" y1="50.8" x2="294.64" y2="48.26" width="0.1524" layer="91"/>
 <junction x="287.02" y="50.8"/>
 </segment>
+<segment>
+<pinref part="IC4" gate="SUPPLY" pin="V+"/>
+<pinref part="P+20" gate="1" pin="+12V"/>
+<wire x1="403.86" y1="43.18" x2="403.86" y2="45.72" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="IC5" gate="SUPPLY" pin="V+"/>
+<pinref part="P+21" gate="1" pin="+12V"/>
+<wire x1="396.24" y1="43.18" x2="396.24" y2="45.72" width="0.1524" layer="91"/>
+</segment>
 </net>
 <net name="-12V" class="1">
 <segment>
@@ -11661,6 +11671,16 @@ https://musicfromouterspace.com/analogsynth_new/VCFJAN2006/VCFJAN2006.html</text
 <wire x1="287.02" y1="20.32" x2="294.64" y2="20.32" width="0.1524" layer="91"/>
 <wire x1="294.64" y1="20.32" x2="294.64" y2="22.86" width="0.1524" layer="91"/>
 <junction x="287.02" y="20.32"/>
+</segment>
+<segment>
+<pinref part="IC5" gate="SUPPLY" pin="V-"/>
+<pinref part="P-19" gate="1" pin="-12V"/>
+<wire x1="396.24" y1="27.94" x2="396.24" y2="25.4" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="IC4" gate="SUPPLY" pin="V-"/>
+<pinref part="P-18" gate="1" pin="-12V"/>
+<wire x1="403.86" y1="27.94" x2="403.86" y2="25.4" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$1" class="0">
@@ -12169,30 +12189,6 @@ https://musicfromouterspace.com/analogsynth_new/VCFJAN2006/VCFJAN2006.html</text
 <junction x="226.06" y="144.78"/>
 </segment>
 </net>
-<net name="V-" class="1">
-<segment>
-<pinref part="IC5" gate="SUPPLY" pin="V-"/>
-<pinref part="P-19" gate="1" pin="-12V"/>
-<wire x1="396.24" y1="27.94" x2="396.24" y2="25.4" width="0.1524" layer="91"/>
-</segment>
-<segment>
-<pinref part="IC4" gate="SUPPLY" pin="V-"/>
-<pinref part="P-18" gate="1" pin="-12V"/>
-<wire x1="403.86" y1="27.94" x2="403.86" y2="25.4" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="V+" class="1">
-<segment>
-<pinref part="IC4" gate="SUPPLY" pin="V+"/>
-<pinref part="P+20" gate="1" pin="+12V"/>
-<wire x1="403.86" y1="43.18" x2="403.86" y2="45.72" width="0.1524" layer="91"/>
-</segment>
-<segment>
-<pinref part="IC5" gate="SUPPLY" pin="V+"/>
-<pinref part="P+21" gate="1" pin="+12V"/>
-<wire x1="396.24" y1="43.18" x2="396.24" y2="45.72" width="0.1524" layer="91"/>
-</segment>
-</net>
 <net name="N$19" class="0">
 <segment>
 <pinref part="R16" gate="G$1" pin="1"/>
@@ -12282,28 +12278,24 @@ https://musicfromouterspace.com/analogsynth_new/VCFJAN2006/VCFJAN2006.html</text
 </sheet>
 </sheets>
 <errors>
-<approved hash="101,1,579.12,53.34,IC4BUF1,B,,,,"/>
-<approved hash="101,1,589.28,45.72,IC4BUF1,E,,,,"/>
-<approved hash="101,1,579.12,27.94,IC4BUF2,B,,,,"/>
-<approved hash="101,1,589.28,20.32,IC4BUF2,E,,,,"/>
-<approved hash="101,1,607.06,53.34,IC5BUF1,B,,,,"/>
-<approved hash="101,1,617.22,45.72,IC5BUF1,E,,,,"/>
-<approved hash="101,1,607.06,27.94,IC5BUF2,B,,,,"/>
-<approved hash="101,1,617.22,20.32,IC5BUF2,E,,,,"/>
-<approved hash="102,1,548.64,48.26,+12V,V+,,,,"/>
-<approved hash="102,1,543.56,48.26,+12V,V+,,,,"/>
-<approved hash="102,1,548.64,27.94,-12V,V-,,,,"/>
-<approved hash="102,1,543.56,27.94,-12V,V-,,,,"/>
-<approved hash="201,1,543.56,48.26,+12V,+12V\, V+,,,,"/>
-<approved hash="201,1,548.64,48.26,+12V,+12V\, V+,,,,"/>
-<approved hash="201,1,543.56,27.94,-12V,-12V\, V-,,,,"/>
-<approved hash="201,1,548.64,27.94,-12V,-12V\, V-,,,,"/>
-<approved hash="104,1,568.96,45.72,IC3P,V+,+12V,,,"/>
-<approved hash="104,1,568.96,30.48,IC3P,V-,-12V,,,"/>
-<approved hash="104,1,558.8,45.72,IC1P,V+,+12V,,,"/>
-<approved hash="104,1,558.8,30.48,IC1P,V-,-12V,,,"/>
-<approved hash="104,1,563.88,45.72,IC2P,V+,+12V,,,"/>
-<approved hash="104,1,563.88,30.48,IC2P,V-,-12V,,,"/>
+<approved hash="101,1,436.88,50.8,IC4BUF1,B,,,,"/>
+<approved hash="101,1,447.04,43.18,IC4BUF1,E,,,,"/>
+<approved hash="101,1,436.88,25.4,IC4BUF2,B,,,,"/>
+<approved hash="101,1,447.04,17.78,IC4BUF2,E,,,,"/>
+<approved hash="101,1,464.82,50.8,IC5BUF1,B,,,,"/>
+<approved hash="101,1,474.98,43.18,IC5BUF1,E,,,,"/>
+<approved hash="101,1,464.82,25.4,IC5BUF2,B,,,,"/>
+<approved hash="101,1,474.98,17.78,IC5BUF2,E,,,,"/>
+<approved hash="102,1,403.86,43.18,V+,+12V,,,,"/>
+<approved hash="102,1,403.86,27.94,V-,-12V,,,,"/>
+<approved hash="102,1,396.24,43.18,V+,+12V,,,,"/>
+<approved hash="102,1,396.24,27.94,V-,-12V,,,,"/>
+<approved hash="104,1,426.72,43.18,IC3P,V+,+12V,,,"/>
+<approved hash="104,1,426.72,27.94,IC3P,V-,-12V,,,"/>
+<approved hash="104,1,411.48,43.18,IC1P,V+,+12V,,,"/>
+<approved hash="104,1,411.48,27.94,IC1P,V-,-12V,,,"/>
+<approved hash="104,1,419.1,43.18,IC2P,V+,+12V,,,"/>
+<approved hash="104,1,419.1,27.94,IC2P,V-,-12V,,,"/>
 </errors>
 </schematic>
 </drawing>
