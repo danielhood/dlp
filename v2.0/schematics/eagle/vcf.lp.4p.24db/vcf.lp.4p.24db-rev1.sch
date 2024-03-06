@@ -10697,6 +10697,7 @@ https://musicfromouterspace.com/analogsynth_new/VCFJAN2006/VCFJAN2006.html</text
 <text x="33.02" y="22.86" size="1.778" layer="97">FREQ INIT</text>
 <text x="33.02" y="78.74" size="1.778" layer="97">CV ATT</text>
 <text x="215.9" y="162.56" size="1.778" layer="97">RES</text>
+<text x="25.4" y="86.36" size="1.778" layer="91">ADD ATTENUVERTER</text>
 </plain>
 <instances>
 <instance part="GND1" gate="1" x="20.32" y="99.06" smashed="yes">
