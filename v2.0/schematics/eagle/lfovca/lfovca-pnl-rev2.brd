@@ -90,9 +90,9 @@
 <text x="11.072" y="74.14" size="1.6764" layer="25" align="center">-</text>
 <text x="17.5" y="91.8" size="1.6764" layer="25" align="center">0</text>
 <text x="23.928" y="74.14" size="1.6764" layer="25" align="center">+</text>
-<text x="23.928" y="51.28" size="1.6764" layer="25" align="center">10</text>
-<text x="17.5" y="68.94" size="1.6764" layer="25" align="center">5</text>
-<text x="11.072" y="51.28" size="1.6764" layer="25" align="center">0</text>
+<text x="23.928" y="51.28" size="1.6764" layer="25" align="center">+</text>
+<text x="17.5" y="68.94" size="1.6764" layer="25" align="center">0</text>
+<text x="11.072" y="51.28" size="1.6764" layer="25" align="center">-</text>
 </plain>
 <libraries>
 </libraries>
