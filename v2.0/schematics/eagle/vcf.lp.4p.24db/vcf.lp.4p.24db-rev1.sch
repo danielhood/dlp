@@ -10654,7 +10654,7 @@ body 3.9 mm/JEDEC MS-012AC</description>
 <part name="R44" library="resistor" deviceset="R-US_" device="0207/7" value="1K"/>
 <part name="GND27" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="GND28" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
-<part name="R8" library="resistor" deviceset="R-US_" device="0207/7" value="1M"/>
+<part name="R8" library="resistor" deviceset="R-US_" device="0207/7" value="470K"/>
 <part name="GND29" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="C15" library="_common.v1" deviceset="CC-US" device="025-024X044" value="0.1uF"/>
 <part name="R6" library="resistor" deviceset="R-US_" device="0207/7" value="200K"/>
