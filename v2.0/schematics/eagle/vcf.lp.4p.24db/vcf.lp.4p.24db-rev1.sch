@@ -10660,7 +10660,7 @@ body 3.9 mm/JEDEC MS-012AC</description>
 <part name="R6" library="resistor" deviceset="R-US_" device="0207/7" value="200K"/>
 <part name="GND30" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="R27" library="resistor" deviceset="R-US_" device="0207/7" value="10K"/>
-<part name="R25" library="resistor" deviceset="R-US_" device="0207/7" value="20K"/>
+<part name="R25" library="resistor" deviceset="R-US_" device="0207/7" value="27K"/>
 <part name="RV2" library="_common" deviceset="R-VAR" device="R-VAR-10" value="250K (A)"/>
 <part name="GND36" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="P+17" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+12V" device=""/>
@@ -10680,7 +10680,7 @@ body 3.9 mm/JEDEC MS-012AC</description>
 <part name="C12" library="_common.v1" deviceset="CC-US" device="025-024X044" value="0.1uF"/>
 <part name="JP3" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-1X3" device="" package3d_urn="urn:adsk.eagle:package:22458/2" value="RES BOOST"/>
 <part name="R42" library="resistor" deviceset="R-US_" device="0207/7" value="100K"/>
-<part name="R43" library="resistor" deviceset="R-US_" device="0207/7" value="100K"/>
+<part name="R43" library="resistor" deviceset="R-US_" device="0207/7" value="150K"/>
 <part name="GND38" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="R4" library="resistor" deviceset="R-US_" device="0207/7" value="100K"/>
 <part name="RV3" library="_common" deviceset="R-VAR" device="R-VAR-10" value="10K (B)"/>
@@ -10698,6 +10698,15 @@ https://musicfromouterspace.com/analogsynth_new/VCFJAN2006/VCFJAN2006.html</text
 <text x="33.02" y="78.74" size="1.778" layer="97">CV ATT</text>
 <text x="215.9" y="162.56" size="1.778" layer="97">RES</text>
 <text x="25.4" y="86.36" size="1.778" layer="91">ADD ATTENUVERTER</text>
+<text x="88.9" y="137.16" size="1.778" layer="91">Add trimmer to R16 (20K)
+to boost up to 25K to clip 
+resonance overload</text>
+<text x="231.14" y="81.28" size="1.778" layer="91">Ideally, match the 4 transistors
+feeding the LM13700s</text>
+<text x="-43.18" y="38.1" size="1.778" layer="91">Note: The board traces need to be swapped
+for the cuttoff pins 2 and 3.
+Even though th schem is correct, the board
+mapping seems to have been broke for these two pins.</text>
 </plain>
 <instances>
 <instance part="GND1" gate="1" x="20.32" y="99.06" smashed="yes">
