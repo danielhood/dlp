@@ -10706,7 +10706,7 @@ feeding the LM13700s</text>
 <text x="-43.18" y="38.1" size="1.778" layer="91">Note: The board traces need to be swapped
 for the cuttoff pins 2 and 3.
 Even though th schem is correct, the board
-mapping seems to have been broke for these two pins.</text>
+mapping seems to have been broken for these two pins.</text>
 </plain>
 <instances>
 <instance part="GND1" gate="1" x="20.32" y="99.06" smashed="yes">
