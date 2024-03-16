@@ -1,6 +1,6 @@
 Partlist
 
-Exported from vcf.lp.4p.24db-rev1.sch at 2024-02-20 09:59
+Exported from vcf.lp.4p.24db-rev1.sch at 2024-03-16 11:44 AM
 
 EAGLE Version 9.6.2 Copyright (c) 1988-2020 Autodesk, Inc.
 
@@ -45,7 +45,7 @@ R4       100K           R-US_0207/7         0207/7            resistor          
 R5       100K           R-US_0207/7         0207/7            resistor            1
 R6       200K           R-US_0207/7         0207/7            resistor            1
 R7       1.5K           R-US_0207/7         0207/7            resistor            1
-R8       1M             R-US_0207/7         0207/7            resistor            1
+R8       470K           R-US_0207/7         0207/7            resistor            1
 R9       470?           R-US_0207/7         0207/7            resistor            1
 R10      100K           R-US_0207/7         0207/7            resistor            1
 R11      27K            R-US_0207/7         0207/7            resistor            1
@@ -62,7 +62,7 @@ R21      100?           R-US_0207/7         0207/7            resistor          
 R22      20K            R-US_0207/7         0207/7            resistor            1
 R23      100K           R-US_0207/7         0207/7            resistor            1
 R24      10K            R-US_0207/7         0207/7            resistor            1
-R25      20K            R-US_0207/7         0207/7            resistor            1
+R25      27K            R-US_0207/7         0207/7            resistor            1
 R26      120K           R-US_0207/7         0207/7            resistor            1
 R27      10K            R-US_0207/7         0207/7            resistor            1
 R28      39K            R-US_0207/7         0207/7            resistor            1
@@ -80,7 +80,7 @@ R39      4.7M           R-US_0207/7         0207/7            resistor          
 R40      100K           R-US_0207/7         0207/7            resistor            1
 R41      100K           R-US_0207/7         0207/7            resistor            1
 R42      100K           R-US_0207/7         0207/7            resistor            1
-R43      100K           R-US_0207/7         0207/7            resistor            1
+R43      150K           R-US_0207/7         0207/7            resistor            1
 R44      1K             R-US_0207/7         0207/7            resistor            1
 RV1      250K (B)       R-VARR-VAR-10       _COMMON_3RP/1610N _common             1
 RV2      250K (A)       R-VARR-VAR-10       _COMMON_3RP/1610N _common             1
