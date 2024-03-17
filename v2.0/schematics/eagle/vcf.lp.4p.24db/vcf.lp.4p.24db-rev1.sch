@@ -10707,6 +10707,13 @@ feeding the LM13700s</text>
 for the cuttoff pins 2 and 3.
 Even though th schem is correct, the board
 mapping seems to have been broken for these two pins.</text>
+<text x="55.88" y="134.62" size="1.778" layer="91">May want to set R8 to 200K, 
+and boost the output 
+R43 to 200K</text>
+<text x="190.5" y="149.86" size="1.778" layer="91">R27 to 33K
+R25 to 100K
+Pair of Zenners from pin 7 to 
+0V to introduce clipping on REZ.</text>
 </plain>
 <instances>
 <instance part="GND1" gate="1" x="20.32" y="99.06" smashed="yes">

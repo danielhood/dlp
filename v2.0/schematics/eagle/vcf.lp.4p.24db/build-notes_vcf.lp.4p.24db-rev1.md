@@ -8,25 +8,27 @@
 
 3. Match the 2 NPN transistors (T1, T2). Again, not critical.
 
-3. Mask R16 as this will be populated after to add in a 5K to 10K trimmer in series. Using a single 30K 50K trimmer is also an option, eliminating the 20K series resistor.
+4. Mask R16 as this will be populated after to add in a 5K to 10K trimmer in series. Using a single 30K 50K trimmer is also an option, eliminating the 20K series resistor.
 
-4. Note orientation of IC1.
+5. Note orientation of IC1.
 
-5. Populate all components except pots and R16. Note that it may be useful to leave more height for the leads for T3 to bend to allow the placement of the Trimmer in R16.
+6. Note R12 and R25 are mis-labled!! R12 is really R25 and is 39K, and R25 is really R12 and is 27K.
 
-6. Insert center pot of multi-turn 5K or 10K Trimmer into top hole, bending up outer pins. Jumper the 20K/22K resistor into the top R16 hole and to the closest outer pin of the trimmer. This may bend T3 over a bit.
+7. Populate all components except pots and R16. Note that it may be useful to leave more height for the leads for T3 to bend to allow the placement of the Trimmer in R16.
 
-7. Clip tabs off pots.
+8. Insert center pot of multi-turn 5K or 10K Trimmer into top hole, bending up outer pins. Jumper the 20K/22K resistor into the top R16 hole and to the closest outer pin of the trimmer. This may bend T3 over a bit. OR -> Zenner diode pair for clipping from REZ pin 1 to 0v (CV pin 1).
 
-8. Place pots.
+9. Clip tabs off pots.
 
-9. Jumper Cutoff pin 2 to R4 and Cutoff pin 3 to trimmer R1's pad directly below cutoff pin 2. This will likely be easier on the back of the board, just be sure to use low profile wire and solder welds.
+10. Place pots.
 
-10. Place ICs into sockets.
+11. Jumper Cutoff pin 2 to R4 and Cutoff pin 3 to trimmer R1's pad directly below cutoff pin 2. This will likely be easier on the back of the board, just be sure to use low profile wire and solder welds.
 
-11. Jumper panel mount CV jack and RES++ switch.
+12. Place ICs into sockets.
 
-12. Attach panel.
+13. Jumper panel mount CV jack and RES++ switch.
+
+14. Attach panel.
 
 
 ## Calibration
