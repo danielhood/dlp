@@ -10654,14 +10654,14 @@ body 3.9 mm/JEDEC MS-012AC</description>
 <part name="R44" library="resistor" deviceset="R-US_" device="0207/7" value="1K"/>
 <part name="GND27" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="GND28" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
-<part name="R8" library="resistor" deviceset="R-US_" device="0207/7" value="470K"/>
+<part name="R8" library="resistor" deviceset="R-US_" device="0207/7" value="100K"/>
 <part name="GND29" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="C15" library="_common.v1" deviceset="CC-US" device="025-024X044" value="0.1uF"/>
-<part name="R6" library="resistor" deviceset="R-US_" device="0207/7" value="200K"/>
+<part name="R6" library="resistor" deviceset="R-US_" device="0207/7" value="100K"/>
 <part name="GND30" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="R27" library="resistor" deviceset="R-US_" device="0207/7" value="10K"/>
 <part name="R25" library="resistor" deviceset="R-US_" device="0207/7" value="27K"/>
-<part name="RV2" library="_common" deviceset="R-VAR" device="R-VAR-10" value="250K (A)"/>
+<part name="RV2" library="_common" deviceset="R-VAR" device="R-VAR-10" value="250K (B)"/>
 <part name="GND36" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="P+17" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+12V" device=""/>
 <part name="P+20" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+12V" device=""/>
@@ -10680,7 +10680,7 @@ body 3.9 mm/JEDEC MS-012AC</description>
 <part name="C12" library="_common.v1" deviceset="CC-US" device="025-024X044" value="0.1uF"/>
 <part name="JP3" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-1X3" device="" package3d_urn="urn:adsk.eagle:package:22458/2" value="RES BOOST"/>
 <part name="R42" library="resistor" deviceset="R-US_" device="0207/7" value="100K"/>
-<part name="R43" library="resistor" deviceset="R-US_" device="0207/7" value="150K"/>
+<part name="R43" library="resistor" deviceset="R-US_" device="0207/7" value="100K"/>
 <part name="GND38" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="R4" library="resistor" deviceset="R-US_" device="0207/7" value="100K"/>
 <part name="RV3" library="_common" deviceset="R-VAR" device="R-VAR-10" value="10K (B)"/>
@@ -10710,7 +10710,7 @@ mapping seems to have been broken for these two pins.</text>
 <text x="55.88" y="134.62" size="1.778" layer="91">May want to set R8 to 200K, 
 and boost the output 
 R43 to 200K</text>
-<text x="190.5" y="149.86" size="1.778" layer="91">R27 to 33K
+<text x="190.5" y="149.86" size="1.778" layer="91">R27 to 3.3K (or 68K with VB3 at 250K)
 R25 to 100K
 Pair of Zenners from pin 7 to 
 0V to introduce clipping on REZ.</text>
