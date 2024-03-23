@@ -2179,9 +2179,9 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <wire x1="2.286" y1="-1.016" x2="2.54" y2="0" width="0.2032" layer="94"/>
 <text x="0" y="-4.3434" size="1.778" layer="95" align="center">&gt;NAME</text>
 <text x="0" y="-2.286" size="1.778" layer="96" align="center">&gt;VALUE</text>
-<pin name="2" x="5.08" y="0" visible="off" length="short" direction="pas" swaplevel="1" rot="R180"/>
+<pin name="3" x="5.08" y="0" visible="off" length="short" direction="pas" swaplevel="1" rot="R180"/>
 <pin name="1" x="-5.08" y="0" visible="off" length="short" direction="pas" swaplevel="1"/>
-<pin name="P$1" x="0" y="5.08" visible="off" length="short" direction="pas" rot="R270"/>
+<pin name="2" x="0" y="5.08" visible="off" length="short" direction="pas" rot="R270"/>
 <polygon width="0.254" layer="94">
 <vertex x="-0.635" y="2.286"/>
 <vertex x="0.635" y="2.286"/>
@@ -2697,8 +2697,8 @@ high speed (Philips)</description>
 <device name="" package="R-VAR">
 <connects>
 <connect gate="G$1" pin="1" pad="R1"/>
-<connect gate="G$1" pin="2" pad="R2"/>
-<connect gate="G$1" pin="P$1" pad="VAR"/>
+<connect gate="G$1" pin="2" pad="VAR"/>
+<connect gate="G$1" pin="3" pad="R2"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -2708,7 +2708,7 @@ high speed (Philips)</description>
 <connects>
 <connect gate="G$1" pin="1" pad="1"/>
 <connect gate="G$1" pin="2" pad="2"/>
-<connect gate="G$1" pin="P$1" pad="3"/>
+<connect gate="G$1" pin="3" pad="3"/>
 </connects>
 <technologies>
 <technology name=""/>
