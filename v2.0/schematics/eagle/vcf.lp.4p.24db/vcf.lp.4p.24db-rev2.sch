@@ -8,20 +8,20 @@
 </settings>
 <grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
 <layers>
-<layer number="1" name="Top" color="4" fill="1" visible="no" active="no"/>
-<layer number="16" name="Bottom" color="1" fill="1" visible="no" active="no"/>
-<layer number="17" name="Pads" color="2" fill="1" visible="no" active="no"/>
-<layer number="18" name="Vias" color="2" fill="1" visible="no" active="no"/>
-<layer number="19" name="Unrouted" color="6" fill="1" visible="no" active="no"/>
-<layer number="20" name="Dimension" color="24" fill="1" visible="no" active="no"/>
-<layer number="21" name="tPlace" color="7" fill="1" visible="no" active="no"/>
-<layer number="22" name="bPlace" color="7" fill="1" visible="no" active="no"/>
-<layer number="23" name="tOrigins" color="15" fill="1" visible="no" active="no"/>
-<layer number="24" name="bOrigins" color="15" fill="1" visible="no" active="no"/>
-<layer number="25" name="tNames" color="7" fill="1" visible="no" active="no"/>
-<layer number="26" name="bNames" color="7" fill="1" visible="no" active="no"/>
-<layer number="27" name="tValues" color="7" fill="1" visible="no" active="no"/>
-<layer number="28" name="bValues" color="7" fill="1" visible="no" active="no"/>
+<layer number="1" name="Top" color="4" fill="1" visible="yes" active="no"/>
+<layer number="16" name="Bottom" color="1" fill="1" visible="yes" active="no"/>
+<layer number="17" name="Pads" color="2" fill="1" visible="yes" active="no"/>
+<layer number="18" name="Vias" color="2" fill="1" visible="yes" active="no"/>
+<layer number="19" name="Unrouted" color="6" fill="1" visible="yes" active="no"/>
+<layer number="20" name="Dimension" color="24" fill="1" visible="yes" active="no"/>
+<layer number="21" name="tPlace" color="7" fill="1" visible="yes" active="no"/>
+<layer number="22" name="bPlace" color="7" fill="1" visible="yes" active="no"/>
+<layer number="23" name="tOrigins" color="15" fill="1" visible="yes" active="no"/>
+<layer number="24" name="bOrigins" color="15" fill="1" visible="yes" active="no"/>
+<layer number="25" name="tNames" color="7" fill="1" visible="yes" active="no"/>
+<layer number="26" name="bNames" color="7" fill="1" visible="yes" active="no"/>
+<layer number="27" name="tValues" color="7" fill="1" visible="yes" active="no"/>
+<layer number="28" name="bValues" color="7" fill="1" visible="yes" active="no"/>
 <layer number="29" name="tStop" color="7" fill="3" visible="no" active="no"/>
 <layer number="30" name="bStop" color="7" fill="6" visible="no" active="no"/>
 <layer number="31" name="tCream" color="7" fill="4" visible="no" active="no"/>
@@ -30,8 +30,8 @@
 <layer number="34" name="bFinish" color="6" fill="6" visible="no" active="no"/>
 <layer number="35" name="tGlue" color="7" fill="4" visible="no" active="no"/>
 <layer number="36" name="bGlue" color="7" fill="5" visible="no" active="no"/>
-<layer number="37" name="tTest" color="7" fill="1" visible="no" active="no"/>
-<layer number="38" name="bTest" color="7" fill="1" visible="no" active="no"/>
+<layer number="37" name="tTest" color="7" fill="1" visible="yes" active="no"/>
+<layer number="38" name="bTest" color="7" fill="1" visible="yes" active="no"/>
 <layer number="39" name="tKeepout" color="4" fill="11" visible="no" active="no"/>
 <layer number="40" name="bKeepout" color="1" fill="11" visible="no" active="no"/>
 <layer number="41" name="tRestrict" color="4" fill="10" visible="no" active="no"/>
@@ -39,13 +39,13 @@
 <layer number="43" name="vRestrict" color="2" fill="10" visible="no" active="no"/>
 <layer number="44" name="Drills" color="7" fill="1" visible="no" active="no"/>
 <layer number="45" name="Holes" color="7" fill="1" visible="no" active="no"/>
-<layer number="46" name="Milling" color="3" fill="1" visible="no" active="no"/>
-<layer number="47" name="Measures" color="7" fill="1" visible="no" active="no"/>
-<layer number="48" name="Document" color="7" fill="1" visible="no" active="no"/>
-<layer number="49" name="Reference" color="7" fill="1" visible="no" active="no"/>
-<layer number="50" name="dxf" color="7" fill="1" visible="no" active="no"/>
-<layer number="51" name="tDocu" color="7" fill="1" visible="no" active="no"/>
-<layer number="52" name="bDocu" color="7" fill="1" visible="no" active="no"/>
+<layer number="46" name="Milling" color="3" fill="1" visible="yes" active="no"/>
+<layer number="47" name="Measures" color="7" fill="1" visible="yes" active="no"/>
+<layer number="48" name="Document" color="7" fill="1" visible="yes" active="no"/>
+<layer number="49" name="Reference" color="7" fill="1" visible="yes" active="no"/>
+<layer number="50" name="dxf" color="7" fill="1" visible="yes" active="no"/>
+<layer number="51" name="tDocu" color="7" fill="1" visible="yes" active="no"/>
+<layer number="52" name="bDocu" color="7" fill="1" visible="yes" active="no"/>
 <layer number="88" name="SimResults" color="9" fill="1" visible="yes" active="yes"/>
 <layer number="89" name="SimProbes" color="9" fill="1" visible="yes" active="yes"/>
 <layer number="90" name="Modules" color="5" fill="1" visible="yes" active="yes"/>
@@ -3508,6 +3508,58 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <text x="-8.255" y="5.715" size="1.27" layer="25">&gt;NAME</text>
 <text x="-3.175" y="2.54" size="1.27" layer="27">&gt;VALUE</text>
 </package>
+<package name="DO35-7">
+<description>&lt;B&gt;DIODE&lt;/B&gt;&lt;p&gt;
+diameter 2 mm, horizontal, grid 7.62 mm</description>
+<wire x1="3.81" y1="0" x2="2.921" y2="0" width="0.508" layer="51"/>
+<wire x1="-3.81" y1="0" x2="-2.921" y2="0" width="0.508" layer="51"/>
+<wire x1="-0.635" y1="0" x2="0" y2="0" width="0.1524" layer="21"/>
+<wire x1="1.016" y1="0.635" x2="1.016" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="1.016" y1="-0.635" x2="0" y2="0" width="0.1524" layer="21"/>
+<wire x1="0" y1="0" x2="1.524" y2="0" width="0.1524" layer="21"/>
+<wire x1="0" y1="0" x2="1.016" y2="0.635" width="0.1524" layer="21"/>
+<wire x1="0" y1="0.635" x2="0" y2="0" width="0.1524" layer="21"/>
+<wire x1="0" y1="0" x2="0" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="2.032" y1="1.016" x2="2.286" y2="0.762" width="0.1524" layer="21" curve="-90"/>
+<wire x1="2.286" y1="0.762" x2="2.286" y2="-0.762" width="0.1524" layer="21"/>
+<wire x1="2.032" y1="-1.016" x2="2.286" y2="-0.762" width="0.1524" layer="21" curve="90"/>
+<wire x1="-2.286" y1="0.762" x2="-2.032" y2="1.016" width="0.1524" layer="21" curve="-90"/>
+<wire x1="-2.286" y1="-0.762" x2="-2.032" y2="-1.016" width="0.1524" layer="21" curve="90"/>
+<wire x1="-2.032" y1="-1.016" x2="2.032" y2="-1.016" width="0.1524" layer="21"/>
+<wire x1="-2.286" y1="0.762" x2="-2.286" y2="-0.762" width="0.1524" layer="21"/>
+<wire x1="-2.032" y1="1.016" x2="2.032" y2="1.016" width="0.1524" layer="21"/>
+<pad name="C" x="-3.81" y="0" drill="0.8128" shape="long"/>
+<pad name="A" x="3.81" y="0" drill="0.8128" shape="long"/>
+<text x="-2.286" y="1.27" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-2.286" y="-2.667" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<rectangle x1="-1.905" y1="-1.016" x2="-1.397" y2="1.016" layer="21"/>
+<rectangle x1="2.286" y1="-0.254" x2="2.921" y2="0.254" layer="21"/>
+<rectangle x1="-2.921" y1="-0.254" x2="-2.286" y2="0.254" layer="21"/>
+</package>
+<package name="DO34-5">
+<description>&lt;B&gt;DIODE&lt;/B&gt;&lt;p&gt;
+diameter 1.8 mm, horizontal, grid 5.08 mm</description>
+<wire x1="-1.524" y1="-0.889" x2="1.524" y2="-0.889" width="0.1524" layer="21"/>
+<wire x1="1.524" y1="0.889" x2="-1.524" y2="0.889" width="0.1524" layer="21"/>
+<wire x1="1.524" y1="-0.889" x2="1.524" y2="0.889" width="0.1524" layer="21"/>
+<wire x1="-1.524" y1="0.889" x2="-1.524" y2="-0.889" width="0.1524" layer="21"/>
+<wire x1="2.54" y1="0" x2="1.778" y2="0" width="0.508" layer="51"/>
+<wire x1="-2.54" y1="0" x2="-1.778" y2="0" width="0.508" layer="51"/>
+<wire x1="-0.508" y1="0" x2="-0.127" y2="0" width="0.1524" layer="21"/>
+<wire x1="0.889" y1="0.508" x2="0.889" y2="-0.508" width="0.1524" layer="21"/>
+<wire x1="0.889" y1="-0.508" x2="-0.127" y2="0" width="0.1524" layer="21"/>
+<wire x1="-0.127" y1="0" x2="1.27" y2="0" width="0.1524" layer="21"/>
+<wire x1="-0.127" y1="0" x2="0.889" y2="0.508" width="0.1524" layer="21"/>
+<wire x1="-0.127" y1="0.508" x2="-0.127" y2="0" width="0.1524" layer="21"/>
+<wire x1="-0.127" y1="0" x2="-0.127" y2="-0.508" width="0.1524" layer="21"/>
+<pad name="C" x="-2.54" y="0" drill="0.8128" shape="long"/>
+<pad name="A" x="2.54" y="0" drill="0.8128" shape="long"/>
+<text x="-1.651" y="1.27" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-1.651" y="-2.54" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<rectangle x1="-1.143" y1="-0.889" x2="-0.762" y2="0.889" layer="21"/>
+<rectangle x1="-1.651" y1="-0.254" x2="-1.524" y2="0.254" layer="21"/>
+<rectangle x1="1.524" y1="-0.254" x2="1.651" y2="0.254" layer="21"/>
+</package>
 </packages>
 <symbols>
 <symbol name="R-VAR-US">
@@ -3535,6 +3587,22 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <text x="3.048" y="0.508" size="1.778" layer="94">3</text>
 <text x="0.508" y="2.794" size="1.778" layer="94">2</text>
 </symbol>
+<symbol name="DZ">
+<wire x1="1.27" y1="1.27" x2="1.27" y2="-1.27" width="0.254" layer="94"/>
+<text x="0" y="-2.5654" size="1.778" layer="95" align="center">&gt;NAME</text>
+<text x="0" y="-4.5974" size="1.778" layer="96" align="center">&gt;VALUE</text>
+<pin name="A" x="-2.54" y="0" visible="off" length="short" direction="pas"/>
+<pin name="C" x="2.54" y="0" visible="off" length="short" direction="pas" rot="R180"/>
+<polygon width="0.254" layer="94">
+<vertex x="-1.27" y="1.27"/>
+<vertex x="1.27" y="0"/>
+<vertex x="-1.27" y="-1.27"/>
+</polygon>
+<wire x1="0.762" y1="1.27" x2="1.27" y2="1.27" width="0.254" layer="94"/>
+<wire x1="1.27" y1="-1.27" x2="1.778" y2="-1.27" width="0.254" layer="94"/>
+<wire x1="1.27" y1="-1.27" x2="1.778" y2="-1.27" width="0.254" layer="94"/>
+<wire x1="0.762" y1="1.27" x2="1.27" y2="1.27" width="0.254" layer="94"/>
+</symbol>
 </symbols>
 <devicesets>
 <deviceset name="R-VAR" prefix="RV" uservalue="yes">
@@ -3557,6 +3625,32 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <connect gate="G$1" pin="1" pad="1"/>
 <connect gate="G$1" pin="2" pad="2"/>
 <connect gate="G$1" pin="3" pad="3"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="1N5232B" prefix="D">
+<description>ZENER DIODE 500mW 5.6V DO-35; Zener Voltage Vz Typ:5.6V; Power Dissipation Pd:500mW; Diode Case Style:DO-35; No. of Pins:2; Operating Temperature Max:175 C;</description>
+<gates>
+<gate name="G$1" symbol="DZ" x="0" y="0"/>
+</gates>
+<devices>
+<device name="-7" package="DO35-7">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+<device name="" package="DO34-5">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -10659,8 +10753,8 @@ body 3.9 mm/JEDEC MS-012AC</description>
 <part name="C15" library="_common.v1" deviceset="CC-US" device="025-024X044" value="0.1uF"/>
 <part name="R6" library="resistor" deviceset="R-US_" device="0207/7" value="100K"/>
 <part name="GND30" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
-<part name="R27" library="resistor" deviceset="R-US_" device="0207/7" value="10K"/>
-<part name="R25" library="resistor" deviceset="R-US_" device="0207/7" value="27K"/>
+<part name="R27" library="resistor" deviceset="R-US_" device="0207/7" value="68K"/>
+<part name="R25" library="resistor" deviceset="R-US_" device="0207/7" value="100K"/>
 <part name="RV2" library="_common" deviceset="R-VAR" device="R-VAR-10" value="250K (B)"/>
 <part name="GND36" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="P+17" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+12V" device=""/>
@@ -10683,8 +10777,11 @@ body 3.9 mm/JEDEC MS-012AC</description>
 <part name="R43" library="resistor" deviceset="R-US_" device="0207/7" value="100K"/>
 <part name="GND38" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="R4" library="resistor" deviceset="R-US_" device="0207/7" value="100K"/>
-<part name="RV3" library="_common" deviceset="R-VAR" device="R-VAR-10" value="10K (B)"/>
+<part name="RV3" library="_common" deviceset="R-VAR" device="R-VAR-10" value="250K (B)"/>
 <part name="IC2" library="linear" library_urn="urn:adsk.eagle:library:262" deviceset="TL084" device="P" package3d_urn="urn:adsk.eagle:package:16407/2"/>
+<part name="D2" library="_common" deviceset="1N5232B" device=""/>
+<part name="D3" library="_common" deviceset="1N5232B" device=""/>
+<part name="GND15" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -10694,26 +10791,18 @@ body 3.9 mm/JEDEC MS-012AC</description>
 Based on Ray Wilson's VCF - JAN 2006:
 https://musicfromouterspace.com/analogsynth_new/VCFJAN2006/VCFJAN2006.html</text>
 <text x="5.08" y="55.88" size="1.778" layer="97">CUTOFF</text>
-<text x="33.02" y="22.86" size="1.778" layer="97">FREQ INIT</text>
+<text x="33.02" y="22.86" size="1.778" layer="97">CUTOFF INIT</text>
 <text x="33.02" y="78.74" size="1.778" layer="97">CV ATT</text>
 <text x="215.9" y="162.56" size="1.778" layer="97">RES</text>
-<text x="25.4" y="86.36" size="1.778" layer="91">ADD ATTENUVERTER</text>
-<text x="88.9" y="137.16" size="1.778" layer="91">Add trimmer to R16 (20K)
-to boost up to 25K to clip 
-resonance overload</text>
-<text x="231.14" y="81.28" size="1.778" layer="91">Ideally, match the 4 transistors
+<text x="25.4" y="86.36" size="1.778" layer="97">Option: Add attenuverter</text>
+<text x="231.14" y="81.28" size="1.778" layer="97">Ideally, match the 4 transistors
 feeding the LM13700s</text>
-<text x="-43.18" y="38.1" size="1.778" layer="91">Note: The board traces need to be swapped
-for the cuttoff pins 2 and 3.
-Even though th schem is correct, the board
-mapping seems to have been broken for these two pins.</text>
-<text x="55.88" y="134.62" size="1.778" layer="91">May want to set R8 to 200K, 
-and boost the output 
-R43 to 200K</text>
-<text x="190.5" y="149.86" size="1.778" layer="91">R27 to 3.3K (or 68K with VB3 at 250K)
-R25 to 100K
-Pair of Zenners from pin 7 to 
-0V to introduce clipping on REZ.</text>
+<text x="236.22" y="162.56" size="1.778" layer="97">Alternative: R27 = 3.3K, RV3 = 10K</text>
+<text x="281.94" y="154.94" size="1.778" layer="97">Option:
+- Res Boost switch isn't really that useful
+-- Hardwire res in to IC2D pin 14 (max res)
+- Use switch to select 4 pole / 2 pole
+-- Switch C12 between IC3A pin 1 and IC3C pin 8</text>
 </plain>
 <instances>
 <instance part="GND1" gate="1" x="20.32" y="99.06" smashed="yes">
@@ -11276,6 +11365,17 @@ Pair of Zenners from pin 7 to
 <attribute name="VALUE" x="223.774" y="157.48" size="1.778" layer="96" rot="MR90" align="center"/>
 </instance>
 <instance part="IC2" gate="P" x="419.1" y="35.56" smashed="yes"/>
+<instance part="D2" gate="G$1" x="226.06" y="139.7" smashed="yes" rot="R270">
+<attribute name="NAME" x="223.4946" y="139.7" size="1.778" layer="95" rot="R270" align="center"/>
+<attribute name="VALUE" x="221.4626" y="139.7" size="1.778" layer="96" rot="R270" align="center"/>
+</instance>
+<instance part="D3" gate="G$1" x="226.06" y="134.62" smashed="yes" rot="R90">
+<attribute name="NAME" x="228.6254" y="134.62" size="1.778" layer="95" rot="R90" align="center"/>
+<attribute name="VALUE" x="230.6574" y="134.62" size="1.778" layer="96" rot="R90" align="center"/>
+</instance>
+<instance part="GND15" gate="1" x="226.06" y="129.54" smashed="yes">
+<attribute name="VALUE" x="224.155" y="127" size="1.778" layer="96"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -11514,6 +11614,10 @@ Pair of Zenners from pin 7 to
 <wire x1="454.66" y1="109.22" x2="452.12" y2="109.22" width="0.1524" layer="91"/>
 <pinref part="GND38" gate="1" pin="0V"/>
 <wire x1="452.12" y1="109.22" x2="452.12" y2="106.68" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="D3" gate="G$1" pin="A"/>
+<pinref part="GND15" gate="1" pin="0V"/>
 </segment>
 </net>
 <net name="+12V" class="1">
@@ -12204,6 +12308,8 @@ Pair of Zenners from pin 7 to
 <wire x1="226.06" y1="144.78" x2="228.6" y2="144.78" width="0.1524" layer="91"/>
 <wire x1="226.06" y1="144.78" x2="226.06" y2="152.4" width="0.1524" layer="91"/>
 <junction x="226.06" y="144.78"/>
+<pinref part="D2" gate="G$1" pin="A"/>
+<wire x1="226.06" y1="144.78" x2="226.06" y2="142.24" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$19" class="0">
@@ -12289,6 +12395,12 @@ Pair of Zenners from pin 7 to
 <pinref part="RV2" gate="G$1" pin="2"/>
 <pinref part="R3" gate="G$1" pin="1"/>
 <wire x1="33.02" y1="73.66" x2="35.56" y2="73.66" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$35" class="0">
+<segment>
+<pinref part="D2" gate="G$1" pin="C"/>
+<pinref part="D3" gate="G$1" pin="C"/>
 </segment>
 </net>
 </nets>
