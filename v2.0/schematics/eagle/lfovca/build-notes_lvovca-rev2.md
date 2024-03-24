@@ -28,38 +28,36 @@
 
 1. Attach knobs.
 
-
 ## Calibration
 
-### R1 Trimmer (FREQ INIT)
+### BIAS, SYMM, ROUND Trimmers
 
-1. Set CUTOFF to 0, and RES to 0. Set RES++ to 4 POLE setting (up).
+1. Attach scope to SINE OUT
 
-2. Apply a signal, ideally with a bass component, to the input.
+2. Adjust RATE and OFFSET to form a visible wave on the scope.
 
-3. Monitor the output audibly, or with a frequency or amplitude scope.
+3. Adjust ROUND to adjust the roundness of the top and bottom of sine wave.
 
-4. Adjust R1 to find the point just below where the filter output is audible.
+4. Adjust SYMM to adjust the symmetry of the top and bottom of sine wave.
 
-### R16 Series Trimmer (Input Clipping)
-1. Set CUTOFF to max, and RES to 0. Set RES++ to 4 POLE setting (up).
+5. Adjust BIAS to center the sine wave over 0v.  Check bias on both max and min of OFFSET setting. Starting with min setting may be easier to center at 0V. If the transistors are not matched, you will not be able to get an even sine wave. 
 
-2. Apply a full +10v/-10v triangle or saw wav to input (or whatever max amplitude you need to support), and a scope onto the output.
+_Note that it is usually more important to have 0V at the emin OFFSET setting than a balanced wave at max._
 
-3. Adjust R16 series trimmer until you see the top of the wav getting clipped. Back off the trimmer slightly.
+### CV INIT Trimmer
 
-4. This avoids overdriving the LM13700N when the RES overdrives the input to control feedback. Without this, when the RES gets to a point (usually higher frequencies), the audio will drop out periodically. Clipping the input to the first LM13700 avoids this.  The trimmer can be adjusted to always clip to provide some diode clipping for an overdrive effect, even for normal signals if desired!
+1. Attach scope to SINE OUT
 
-### Test Filter Stages
+2. With OFFSET at max, adjust RATE so the scope shows several peaks on the screen.
 
-The LM13700's are easily damaged (e.g. putting IC1 in the wrong orientation and powering on!). However, even in this state, the filter may sound like it's working, even though there may be a significant DC bias being applied at one stage of the filter, skewing the wave positive or negative, so each stage of the filter needs to be checked.
+4. Adjust CV INIT to produce +/- 6V.
 
-1. Set CUTOFF to max, RES to 0. Set RES++ to 4 POLE setting (up).
+5. Set OFFSET to 0 (mid position). This should produce no sinewave (flat at 0V)
 
-2. Apply any input with a balanced DC.
+_Note: It's possible to set CV init to produce output greater than +/- 6V at max OFFSET. Doing so will limit the amount the offset can affect the CV input in the negative direction._
 
-3. With a scope, observe the output of each of TL084 (IC3) outputs.
+### MIN LVL Trimmer
 
-If the wav is not DC balanced, one or both of the LM13700's may need to be replaced. Ideally we would have trimmers instead of each of the 20K resistors feeding the bias diodes of the LM13700's.
+1. Adjust RATE so that the LED flashes so you can see the on/off cycle in a reasonable amount of time.
 
-
+2. Adjust MIN LVL so that the LED shows the rise/fall in a balanced way.
