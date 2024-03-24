@@ -10659,8 +10659,8 @@ body 3.9 mm/JEDEC MS-012AC</description>
 <part name="C15" library="_common.v1" deviceset="CC-US" device="025-024X044" value="0.1uF"/>
 <part name="R6" library="resistor" deviceset="R-US_" device="0207/7" value="100K"/>
 <part name="GND30" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
-<part name="R27" library="resistor" deviceset="R-US_" device="0207/7" value="10K"/>
-<part name="R25" library="resistor" deviceset="R-US_" device="0207/7" value="27K"/>
+<part name="R27" library="resistor" deviceset="R-US_" device="0207/7" value="68K"/>
+<part name="R25" library="resistor" deviceset="R-US_" device="0207/7" value="100K"/>
 <part name="RV2" library="_common" deviceset="R-VAR" device="R-VAR-10" value="250K (B)"/>
 <part name="GND36" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="P+17" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+12V" device=""/>
@@ -10683,7 +10683,7 @@ body 3.9 mm/JEDEC MS-012AC</description>
 <part name="R43" library="resistor" deviceset="R-US_" device="0207/7" value="100K"/>
 <part name="GND38" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="R4" library="resistor" deviceset="R-US_" device="0207/7" value="100K"/>
-<part name="RV3" library="_common" deviceset="R-VAR" device="R-VAR-10" value="10K (B)"/>
+<part name="RV3" library="_common" deviceset="R-VAR" device="R-VAR-10" value="250K (B)"/>
 <part name="IC2" library="linear" library_urn="urn:adsk.eagle:library:262" deviceset="TL084" device="P" package3d_urn="urn:adsk.eagle:package:16407/2"/>
 </parts>
 <sheets>
@@ -10697,23 +10697,23 @@ https://musicfromouterspace.com/analogsynth_new/VCFJAN2006/VCFJAN2006.html</text
 <text x="33.02" y="22.86" size="1.778" layer="97">FREQ INIT</text>
 <text x="33.02" y="78.74" size="1.778" layer="97">CV ATT</text>
 <text x="215.9" y="162.56" size="1.778" layer="97">RES</text>
-<text x="25.4" y="86.36" size="1.778" layer="91">ADD ATTENUVERTER</text>
-<text x="88.9" y="137.16" size="1.778" layer="91">Add trimmer to R16 (20K)
+<text x="25.4" y="86.36" size="1.778" layer="97">ADD ATTENUVERTER</text>
+<text x="88.9" y="137.16" size="1.778" layer="97">Add trimmer to R16 (20K)
 to boost up to 25K to clip 
 resonance overload</text>
-<text x="231.14" y="81.28" size="1.778" layer="91">Ideally, match the 4 transistors
+<text x="231.14" y="81.28" size="1.778" layer="97">Ideally, match the 4 transistors
 feeding the LM13700s</text>
-<text x="-43.18" y="38.1" size="1.778" layer="91">Note: The board traces need to be swapped
-for the cuttoff pins 2 and 3.
-Even though th schem is correct, the board
-mapping seems to have been broken for these two pins.</text>
-<text x="55.88" y="134.62" size="1.778" layer="91">May want to set R8 to 200K, 
+<text x="-43.18" y="38.1" size="1.778" layer="97">Note: The board traces need to be swapped
+for the CUTOFF and CV ATT pins 2 and 3.
+This was due to a bad pin mapping of the R-VAR device.</text>
+<text x="55.88" y="134.62" size="1.778" layer="97">May want to set R8 to 200K, 
 and boost the output 
 R43 to 200K</text>
-<text x="190.5" y="149.86" size="1.778" layer="91">R27 to 3.3K (or 68K with VB3 at 250K)
-R25 to 100K
-Pair of Zenners from pin 7 to 
+<text x="175.26" y="147.32" size="1.778" layer="97">Add pair of 1N5232B Zenners from pin 7 to 
 0V to introduce clipping on REZ.</text>
+<text x="248.92" y="160.02" size="1.778" layer="97">Alternative: RV3 = 10K, R27 = 3.3K</text>
+<text x="276.86" y="152.4" size="1.778" layer="97">Change: See build notes to change RES++ switch to become a 2 POLE/4POLE switch
+ by switching C21 between IC3A pin 1 and IC3 pin 8 trough a 20K resistor. </text>
 </plain>
 <instances>
 <instance part="GND1" gate="1" x="20.32" y="99.06" smashed="yes">

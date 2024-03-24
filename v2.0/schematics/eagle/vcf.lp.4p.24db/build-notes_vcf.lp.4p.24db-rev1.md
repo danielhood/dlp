@@ -2,66 +2,70 @@
 
 ## Build Notes
 
-1. Cut traces to CUTOFF pot 2 and 3 on topside of board. These are crossed due to a board validation error and will be jumpered after component placement.
+1. Cut traces to the CUTOFF and CV ATT pot pins 2 and 3 on topside of board. These are crossed due to a bad pin mapping on the R-VAR device and need to be jumpered after component placement.
 
 2. Match the 4 PNP transistors (T3 - T6) feeding the LM13700N's. Not critical, but helps.
 
 3. Match the 2 NPN transistors (T1, T2). Again, not critical.
 
-4. Mask R16 as this will be populated after to add in a 5K to 10K trimmer in series. Using a single 30K 50K trimmer is also an option, eliminating the 20K series resistor.
+4. Note orientation of IC1.
 
-5. Note orientation of IC1.
+5. Note R12 and R25 are mis-labeled!! R12 is really R25 and is 39K, and R25 is really R12 and is 100K.
 
-6. Note R12 and R25 are mis-labled!! R12 is really R25 and is 39K, and R25 is really R12 and is 27K.
+6. Populate C21 with only one lead through bottom hole, leaving second pin floating vertically. This will be jumpered to center pin of switch later.
 
-7. Populate all components except pots and R16. Note that it may be useful to leave more height for the leads for T3 to bend to allow the placement of the Trimmer in R16.
+7. Populate remaining components except pots.
 
-8. Insert center pot of multi-turn 5K or 10K Trimmer into top hole, bending up outer pins. Jumper the 20K/22K resistor into the top R16 hole and to the closest outer pin of the trimmer. This may bend T3 over a bit. OR -> Zenner diode pair for clipping from REZ pin 1 to 0v (CV pin 1).
+8. Clip tabs off pots and place on board.
 
-9. Clip tabs off pots.
+9. On the back of the board, jumper CUTOFF pot pin 2 to top lead of R4, and CUTOFF pot pin 3 to trimmer R1's pad directly below cutoff pin 2.
 
-10. Place pots.
+10. On the back of the board, jumper CV ATT pot pin 2 to left pin of R3, and CV ATT pot pin 3 to left pin of CV IN.
 
-11. Jumper Cutoff pin 2 to R4 and Cutoff pin 3 to trimmer R1's pad directly below cutoff pin 2. This will likely be easier on the back of the board, just be sure to use low profile wire and solder welds.
+11. Solder the cathode of two 1N5232B Zenner diodes. On the top of the board, Connect this pair between RES (RV3) pin 1 and CV ATT (RV2) pin 1 (GND).
 
 12. Place ICs into sockets.
 
-13. Jumper panel mount CV jack and RES++ switch.
+13. Solder bridge the two left holes of RES BOOST.
 
-14. Attach panel.
+14. Attach panel, and mount switch and CV IN jack.
+
+15. Jumper center pin of switch to the floating pin of C12. Jumper bottom pin of switch (4 POLE) to the open C21 hole.
+
+16. Add a 20K resistor off of top pin of switch (2 POLE). Jumper the other resistor lead to the top of R26. 
+
+17. Jumper panel mount CV jack to CV IN on board.
+
+18. Attach knobs.
 
 
 ## Calibration
 
-### R1 Trimmer (FREQ INIT)
+### BIAS, SYMM, ROUND Trimmers
 
-1. Set CUTOFF to 0, and RES to 0. Disable RES++.
+1. Attach scope to SINE OUT
 
-2. Apply a signal, ideally with a bass component, to the input.
+2. Adjust RATE and OFFSET to form a visible wave on the scope.
 
-3. Monitor the output audibly, or with a frequency or amplitude scope.
+3. Adjust ROUND to adjust the roundness of the top and bottom of sine wave.
 
-4. Adjust R1 to find the point just below where the filter output is audible.
+4. Adjust SYMM to adjust the symmetry of the top and bottom of sine wave.
 
-### R16 Series Trimmer (Input Clipping)
-1. Set CUTOFF to max, and RES to 0. Disable RES++.
+5. Adjust BIAS to center the sine wave over 0v.  Check bias on both max and min of offset setting. Starting with min setting may be easier. If the transistors are not matched, you will not be able to get an even sine wave.
 
-2. Apply a full +10v/-10v triangle or saw wav to input (or whatever max amplitude you need to support), and a scope onto the output.
+### CV INIT Trimmer
 
-3. Adjust R16 series trimmer until you see the top of the wav getting clipped. Back off the trimmer slightly.
+1. Attach scope to SINE OUT
 
-4. This avoids overdriving the LM13700N when the RES overdrives the input to control feedback. Without this, when the RES gets to a point (usually higher frequencies), the audio will drop out periodically. Clipping the input to the first LM13700 avoids this.  The trimmer can be adjusted to always clip to provide some diode clipping for an overdrive effect, even for normal signals if desired!
+2. With OFFSET at mid range, adjust RATE so the scope shows several peaks on the screen.
 
-### Test Filter Stages
+3. Set OFFSET to min.
 
-The LM13700's are easily damaged (e.g. putting IC1 in the wrong orientation and powering on!). However, even in this state, the filter may sound like it's working, even though there may be a significant DC bias being applied at one stage of the filter, skewing the wave positive or negative.
+4. Adjust CV INIT just below the point where the sine wave is visible.
 
-1. Set CUTOFF to max, RES to 0, disable RES++.
+### MIN LVL Trimmer
 
-2. Apply any input with a balanced DC.
+1. Adjust RATE so that the LED flashes so you can see the on/off cycle in a reasonable amount of time.
 
-3. With a scope, observe the output of each of TL084 (IC3) outputs.
-
-If the wav is not DC balanced, one or both of the LM13700's likely needs to be replaced.
-
+2. Adjust MIN LVL so that the LED shows the rise/fall in a balanced way.
 

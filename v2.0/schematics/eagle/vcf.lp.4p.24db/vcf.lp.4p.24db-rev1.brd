@@ -2139,11 +2139,11 @@ design rules under a new name.</description>
 <attribute name="NAME" x="29.21" y="55.88" size="1.27" layer="25" ratio="10" align="top-right"/>
 <attribute name="VALUE" x="26.924" y="52.7812" size="1.27" layer="27" ratio="10"/>
 </element>
-<element name="R27" library="resistor" package="0207/7" value="10K" x="58.42" y="38.1" smashed="yes">
+<element name="R27" library="resistor" package="0207/7" value="68K" x="58.42" y="38.1" smashed="yes">
 <attribute name="NAME" x="58.547" y="39.497" size="1.27" layer="25" ratio="10"/>
 <attribute name="VALUE" x="56.134" y="37.5412" size="1.27" layer="27" ratio="10"/>
 </element>
-<element name="R25" library="resistor" package="0207/7" value="27K" x="20.32" y="39.37" smashed="yes" rot="R90">
+<element name="R25" library="resistor" package="0207/7" value="100K" x="20.32" y="39.37" smashed="yes" rot="R90">
 <attribute name="NAME" x="20.955" y="43.942" size="1.27" layer="25" ratio="10" rot="R90"/>
 <attribute name="VALUE" x="20.8788" y="38.354" size="1.27" layer="27" ratio="10" rot="R90"/>
 </element>
@@ -2192,7 +2192,7 @@ design rules under a new name.</description>
 <attribute name="NAME" x="81.28" y="55.753" size="1.27" layer="25" ratio="10" rot="R270"/>
 <attribute name="VALUE" x="83.2612" y="58.166" size="1.27" layer="27" ratio="10" rot="R270"/>
 </element>
-<element name="RV3" library="_common" package="_COMMON_3RP/1610N" value="10K (B)" x="66.04" y="67.31" smashed="yes" rot="R180">
+<element name="RV3" library="_common" package="_COMMON_3RP/1610N" value="250K (B)" x="66.04" y="67.31" smashed="yes" rot="R180">
 <attribute name="NAME" x="55.88" y="69.469" size="1.27" layer="25" rot="R270"/>
 <attribute name="VALUE" x="69.215" y="64.77" size="1.27" layer="27" rot="R180"/>
 </element>
