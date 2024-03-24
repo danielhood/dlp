@@ -1,4 +1,4 @@
-# VCF-LP (rev1)
+# LFO-VCA (rev2)
 
 ## Build Notes
 
