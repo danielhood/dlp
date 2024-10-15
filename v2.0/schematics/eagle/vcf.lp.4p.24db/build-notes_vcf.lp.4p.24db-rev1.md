@@ -2,7 +2,7 @@
 
 ## Build Notes
 
-1. Cut traces to the CUTOFF and CV ATT pot pins 2 and 3 on topside of board. These are crossed due to a bad pin mapping on the R-VAR device and need to be jumpered after component placement. Note for CV ATT, only pin 3 trace needs to be cut.
+1. Cut traces 2 and 3 to CUTOFF pot on top side of board, and trace 3 to CV ATT pot on bottom of board. These are crossed due to a bad pin mapping on the R-VAR device and need to be jumpered after component placement. Note for CV ATT, only pin 3 trace needs to be cut as pin 2 will be jumpered and the trace will not be connected.
 
 2. Match the 4 PNP transistors (T3 - T6) feeding the LM13700N's. Not critical, but helps.
 
@@ -32,7 +32,7 @@
 
 15. Jumper center pin of switch to the floating pin of C12. Jumper bottom pin of switch (4 POLE) to the open C21 hole.
 
-16. Add a 20K resistor off of top pin of switch (2 POLE). Jumper the other resistor lead to the top of R26. 
+16. Add a 20K resistor off of top pin of switch (2 POLE). Jumper the other resistor lead to the bottom of R23.
 
 17. Jumper panel mount CV jack ground pin to pin 2 of CV IN on board. Jumper panel mount CV jack signal pin directly to CV ATT pot pin 3.
 
