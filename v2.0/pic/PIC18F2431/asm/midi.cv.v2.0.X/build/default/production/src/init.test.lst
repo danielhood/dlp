@@ -1,4 +1,4 @@
-MPASM  5.43                     INIT.TEST.ASM   5-10-2025  18:31:24         PAGE  1
+MPASM  5.43                     INIT.TEST.ASM   5-10-2025  22:55:57         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,7 +57,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 000008 EF?? F???      00042         goto    _SERVICE_HI     ; Points to interrupt service routine
                       00043 
                       00044 
-MPASM  5.43                     INIT.TEST.ASM   5-10-2025  18:31:24         PAGE  2
+MPASM  5.43                     INIT.TEST.ASM   5-10-2025  22:55:57         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -82,57 +82,73 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00061 ;
 00001C                00062 CV_PITCH_DATA:
                       00063         ;         C     C#    D     D#    E     F     F#    G     G#    A     A#    B
-00001C 0000 0000 0000 00064         db      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00  ; C-1
-       0000 0000 0000 
-000028 0000 0000 0000 00065         db      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00  ; C0
-       0000 0000 0000 
-000034 0400 0D09 1712 00066         db      0x00, 0x04, 0x09, 0x0d, 0x12, 0x17, 0x1b, 0x20, 0x24, 0x29, 0x2d, 0x32  ; C1
-       201B 2924 322D 
-000040 3B36 433F 4C48 00067         db      0x36, 0x3b, 0x3f, 0x43, 0x48, 0x4c, 0x51, 0x55, 0x59, 0x5e, 0x62, 0x66  ; C2
-       5551 5E59 6662 
-00004C 6F6B 7773 807C 00068         db      0x6b, 0x6f, 0x73, 0x77, 0x7c, 0x80, 0x84, 0x88, 0x8c, 0x91, 0x95, 0x99  ; C3
-       8884 918C 9995 
-000058 A19D A9A5 B2AE 00069         db      0x9d, 0xa1, 0xa5, 0xa9, 0xae, 0xb2, 0xb6, 0xba, 0xbe, 0xc2, 0xc6, 0xca  ; C4
-       BAB6 C2BE CAC6 
-000064 D2CE DAD6 E2DE 00070         db      0xce, 0xd2, 0xd6, 0xda, 0xde, 0xe2, 0xe6, 0xea, 0xee, 0xf2, 0xf6, 0xfa  ; C5
-       EAE6 F2EE FAF6 
-000070 FEFE FEFE FEFE 00071         db      0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe  ; C6
-       FEFE FEFE FEFE 
-00007C FEFE FEFE FEFE 00072         db      0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe  ; C7
-       FEFE FEFE FEFE 
-000088 FEFE FEFE FEFE 00073         db      0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe  ; C8
-       FEFE FEFE FEFE 
-000094 FEFE FEFE FEFE 00074         db      0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe                          ; C9
-       FEFE 
+                      00064 ;       db      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00  ; C-1
+                      00065 ;       db      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00  ; C0
+                      00066 ;       db      0x00, 0x04, 0x09, 0x0d, 0x12, 0x17, 0x1b, 0x20, 0x24, 0x29, 0x2d, 0x32  ; C1
+                      00067 ;       db      0x36, 0x3b, 0x3f, 0x43, 0x48, 0x4c, 0x51, 0x55, 0x59, 0x5e, 0x62, 0x66  ; C2
+                      00068 ;       db      0x6b, 0x6f, 0x73, 0x77, 0x7c, 0x80, 0x84, 0x88, 0x8c, 0x91, 0x95, 0x99  ; C3
+                      00069 ;       db      0x9d, 0xa1, 0xa5, 0xa9, 0xae, 0xb2, 0xb6, 0xba, 0xbe, 0xc2, 0xc6, 0xca  ; C4
+                      00070 ;       db      0xce, 0xd2, 0xd6, 0xda, 0xde, 0xe2, 0xe6, 0xea, 0xee, 0xf2, 0xf6, 0xfa  ; C5
+                      00071 ;       db      0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe  ; C6
+                      00072 ;       db      0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe  ; C7
+                      00073 ;       db      0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe  ; C8
+                      00074 ;       db      0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe                          ; C9
                       00075 
                       00076 
-                      00077 ;CV_PITCH_DATA:
-                      00078 ;       db      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-                      00079 ;       db      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-                      00080 ;       db      0x00, 0x00, 0x00, 0x00, 0x00, 0xf4, 0xf8, 0xfc
-                      00081 ;       db      0x00, 0x04, 0x08, 0x0c, 0x11, 0x15, 0x19, 0x1d
-                      00082 ;       db      0x22, 0x26, 0x2a, 0x2e, 0x33, 0x37, 0x3b, 0x3f
-                      00083 ;       db      0x44, 0x48, 0x4c, 0x50, 0x55, 0x59, 0x5d, 0x61
-                      00084 ;       db      0x66, 0x6a, 0x6e, 0x72, 0x77, 0x7b, 0x7f, 0x83
-                      00085 ;       db      0x88, 0x8c, 0x90, 0x94, 0x99, 0x9d, 0xa1, 0xa5
-                      00086 ;       db      0xaa, 0xae, 0xb2, 0xb6, 0xbb, 0xbf, 0xc3, 0xc7
-MPASM  5.43                     INIT.TEST.ASM   5-10-2025  18:31:24         PAGE  3
+                      00077 ; Revised from measrured voltages
+00001C                00078 CV_PITCH_DATA:
+                      00079         ;         C     C#    D     D#    E     F     F#    G     G#    A     A#    B
+00001C 0000 0000 0000 00080         db      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00  ; C-1
+       0000 0000 0000 
+000028 0000 0000 0000 00081         db      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00  ; C0
+       0000 0000 0000 
+000034 0500 0E09 1712 00082         db      0x00, 0x05, 0x09, 0x0e, 0x12, 0x17, 0x1c, 0x20, 0x25, 0x29, 0x2e, 0x32  ; C1
+       201C 2925 322E 
+000040 3B37 4440 4D49 00083         db      0x37, 0x3b, 0x40, 0x44, 0x49, 0x4d, 0x52, 0x56, 0x5a, 0x5f, 0x63, 0x68  ; C2
+       5652 5F5A 6863 
+00004C 706C 7975 817D 00084         db      0x6c, 0x70, 0x75, 0x79, 0x7d, 0x81, 0x86, 0x8a, 0x8e, 0x92, 0x97, 0x9b  ; C3
+       8A86 928E 9B97 
+000058 A39F ACA7 B4B0 00085         db      0x9f, 0xa3, 0xa7, 0xac, 0xb0, 0xb4, 0xb8, 0xbc, 0xc0, 0xc4, 0xc8, 0xcc  ; C4
+       BCB8 C4C0 CCC8 
+000064 D5D1 DDD9 E5E1 00086         db      0xd1, 0xd5, 0xd9, 0xdd, 0xe1, 0xe5, 0xe9, 0xed, 0xf1, 0xf5, 0xf9, 0xfd  ; C5
+       EDE9 F5F1 FDF9 
+000070 FFFF FFFF FFFF 00087         db      0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff  ; C6
+       FFFF FFFF FFFF 
+00007C FFFF FFFF FFFF 00088         db      0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff  ; C7
+       FFFF FFFF FFFF 
+MPASM  5.43                     INIT.TEST.ASM   5-10-2025  22:55:57         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-                      00087 ;       db      0xcc, 0xd0, 0xd4, 0xd8, 0xdd, 0xe1, 0xe5, 0xe9
-                      00088 ;       db      0xee, 0xf2, 0xf6, 0xfa, 0xff, 0xff, 0xff, 0xff
-                      00089 ;       db      0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
-                      00090 ;       db      0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
-                      00091 ;       db      0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
-                      00092 ;       db      0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
-                      00093 ;       db      0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
-                      00094 
-                      00095 
-                      00096         end
-MPASM  5.43                     INIT.TEST.ASM   5-10-2025  18:31:24         PAGE  4
+000088 FFFF FFFF FFFF 00089         db      0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff  ; C8
+       FFFF FFFF FFFF 
+000094 FFFF FFFF FFFF 00090         db      0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff                          ; C9
+       FFFF 
+                      00091 
+                      00092 
+                      00093 ;CV_PITCH_DATA:
+                      00094 ;       db      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+                      00095 ;       db      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+                      00096 ;       db      0x00, 0x00, 0x00, 0x00, 0x00, 0xf4, 0xf8, 0xfc
+                      00097 ;       db      0x00, 0x04, 0x08, 0x0c, 0x11, 0x15, 0x19, 0x1d
+                      00098 ;       db      0x22, 0x26, 0x2a, 0x2e, 0x33, 0x37, 0x3b, 0x3f
+                      00099 ;       db      0x44, 0x48, 0x4c, 0x50, 0x55, 0x59, 0x5d, 0x61
+                      00100 ;       db      0x66, 0x6a, 0x6e, 0x72, 0x77, 0x7b, 0x7f, 0x83
+                      00101 ;       db      0x88, 0x8c, 0x90, 0x94, 0x99, 0x9d, 0xa1, 0xa5
+                      00102 ;       db      0xaa, 0xae, 0xb2, 0xb6, 0xbb, 0xbf, 0xc3, 0xc7
+                      00103 ;       db      0xcc, 0xd0, 0xd4, 0xd8, 0xdd, 0xe1, 0xe5, 0xe9
+                      00104 ;       db      0xee, 0xf2, 0xf6, 0xfa, 0xff, 0xff, 0xff, 0xff
+                      00105 ;       db      0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
+                      00106 ;       db      0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
+                      00107 ;       db      0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
+                      00108 ;       db      0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
+                      00109 ;       db      0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
+                      00110 
+                      00111 
+                      00112         end
+MPASM  5.43                     INIT.TEST.ASM   5-10-2025  22:55:57         PAGE  4
 
 
 SYMBOL TABLE
@@ -191,7 +207,7 @@ BAUDCON                           00000FAA
 BAUDCTL                           00000FAA
 BF                                00000000
 BFEMT                             00000003
-MPASM  5.43                     INIT.TEST.ASM   5-10-2025  18:31:24         PAGE  5
+MPASM  5.43                     INIT.TEST.ASM   5-10-2025  22:55:57         PAGE  5
 
 
 SYMBOL TABLE
@@ -250,7 +266,7 @@ CCP2IP                            00000000
 CCP2M0                            00000000
 CCP2M1                            00000001
 CCP2M2                            00000002
-MPASM  5.43                     INIT.TEST.ASM   5-10-2025  18:31:24         PAGE  6
+MPASM  5.43                     INIT.TEST.ASM   5-10-2025  22:55:57         PAGE  6
 
 
 SYMBOL TABLE
@@ -309,7 +325,7 @@ DTPS1                             00000007
 D_A                               00000005
 D_NOT_A                           00000005
 EEADR                             00000FA9
-MPASM  5.43                     INIT.TEST.ASM   5-10-2025  18:31:24         PAGE  7
+MPASM  5.43                     INIT.TEST.ASM   5-10-2025  22:55:57         PAGE  7
 
 
 SYMBOL TABLE
@@ -368,7 +384,7 @@ GIEL                              00000006
 GIE_GIEH                          00000007
 GO                                00000001
 GODONE                            00000001
-MPASM  5.43                     INIT.TEST.ASM   5-10-2025  18:31:24         PAGE  8
+MPASM  5.43                     INIT.TEST.ASM   5-10-2025  22:55:57         PAGE  8
 
 
 SYMBOL TABLE
@@ -427,7 +443,7 @@ IVRST                             00000005
 LATA                              00000F89
 LATA0                             00000000
 LATA1                             00000001
-MPASM  5.43                     INIT.TEST.ASM   5-10-2025  18:31:24         PAGE  9
+MPASM  5.43                     INIT.TEST.ASM   5-10-2025  22:55:57         PAGE  9
 
 
 SYMBOL TABLE
@@ -486,7 +502,7 @@ NOT_RI                            00000004
 NOT_SS                            00000006
 NOT_T1SYNC                        00000002
 NOT_T5SYNC                        00000002
-MPASM  5.43                     INIT.TEST.ASM   5-10-2025  18:31:24         PAGE 10
+MPASM  5.43                     INIT.TEST.ASM   5-10-2025  22:55:57         PAGE 10
 
 
 SYMBOL TABLE
@@ -545,7 +561,7 @@ PORTC                             00000F82
 PORTE                             00000F84
 POSCNTH                           00000F67
 POSCNTL                           00000F66
-MPASM  5.43                     INIT.TEST.ASM   5-10-2025  18:31:24         PAGE 11
+MPASM  5.43                     INIT.TEST.ASM   5-10-2025  22:55:57         PAGE 11
 
 
 SYMBOL TABLE
@@ -604,7 +620,7 @@ PTOPS3                            00000007
 PTPERH                            00000F7A
 PTPERL                            00000F7B
 PWMCON0                           00000F6F
-MPASM  5.43                     INIT.TEST.ASM   5-10-2025  18:31:24         PAGE 12
+MPASM  5.43                     INIT.TEST.ASM   5-10-2025  22:55:57         PAGE 12
 
 
 SYMBOL TABLE
@@ -663,7 +679,7 @@ RI                                00000004
 RX                                00000007
 RX9                               00000006
 RX9D                              00000000
-MPASM  5.43                     INIT.TEST.ASM   5-10-2025  18:31:24         PAGE 13
+MPASM  5.43                     INIT.TEST.ASM   5-10-2025  22:55:57         PAGE 13
 
 
 SYMBOL TABLE
@@ -722,7 +738,7 @@ SSRC2                             00000002
 SSRC3                             00000003
 SSRC4                             00000004
 STATUS                            00000FD8
-MPASM  5.43                     INIT.TEST.ASM   5-10-2025  18:31:24         PAGE 14
+MPASM  5.43                     INIT.TEST.ASM   5-10-2025  22:55:57         PAGE 14
 
 
 SYMBOL TABLE
@@ -781,7 +797,7 @@ TBIF                              00000004
 TBIP                              00000004
 TBLPTR                            00000FF6
 TBLPTRH                           00000FF7
-MPASM  5.43                     INIT.TEST.ASM   5-10-2025  18:31:24         PAGE 15
+MPASM  5.43                     INIT.TEST.ASM   5-10-2025  22:55:57         PAGE 15
 
 
 SYMBOL TABLE
@@ -840,7 +856,7 @@ TRISB1                            00000001
 TRISB2                            00000002
 TRISB3                            00000003
 TRISB4                            00000004
-MPASM  5.43                     INIT.TEST.ASM   5-10-2025  18:31:24         PAGE 16
+MPASM  5.43                     INIT.TEST.ASM   5-10-2025  22:55:57         PAGE 16
 
 
 SYMBOL TABLE
@@ -899,7 +915,7 @@ WRERR                             00000003
 WUE                               00000001
 Z                                 00000002
 _BOREN_OFF_2L                     000000FD
-MPASM  5.43                     INIT.TEST.ASM   5-10-2025  18:31:24         PAGE 17
+MPASM  5.43                     INIT.TEST.ASM   5-10-2025  22:55:57         PAGE 17
 
 
 SYMBOL TABLE
@@ -958,7 +974,7 @@ _IDLOC2                           00200002
 _IDLOC3                           00200003
 _IDLOC4                           00200004
 _IDLOC5                           00200005
-MPASM  5.43                     INIT.TEST.ASM   5-10-2025  18:31:24         PAGE 18
+MPASM  5.43                     INIT.TEST.ASM   5-10-2025  22:55:57         PAGE 18
 
 
 SYMBOL TABLE
@@ -1017,7 +1033,7 @@ _WDPS_8_2H                        000000E7
 _WDTEN_OFF_2H                     000000FE
 _WDTEN_ON_2H                      000000FF
 _WINEN_OFF_2H                     000000FF
-MPASM  5.43                     INIT.TEST.ASM   5-10-2025  18:31:24         PAGE 19
+MPASM  5.43                     INIT.TEST.ASM   5-10-2025  22:55:57         PAGE 19
 
 
 SYMBOL TABLE

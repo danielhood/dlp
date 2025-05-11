@@ -1,4 +1,4 @@
-MPASM  5.43                       SERVICE.ASM   5-10-2025  18:31:26         PAGE  1
+MPASM  5.43                       SERVICE.ASM   5-10-2025  22:55:59         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,7 +57,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00038 ;------ midi.asm variables
   00000017            00039         TMP_CV_BYTE_L           ; Holds a temp value for pushing CV values to the PWM registers
   00000018            00040         TMP_CV_BYTE_H
-MPASM  5.43                       SERVICE.ASM   5-10-2025  18:31:26         PAGE  2
+MPASM  5.43                       SERVICE.ASM   5-10-2025  22:55:59         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -116,7 +116,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
   00000001            00091 GATE_4:         equ     0x01
   00000000            00092 GATE_5:         equ     0x00
                       00005 
-MPASM  5.43                       SERVICE.ASM   5-10-2025  18:31:26         PAGE  3
+MPASM  5.43                       SERVICE.ASM   5-10-2025  22:55:59         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -175,7 +175,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00050 ; ------------------------------------------------------------------------------
                       00051 ; Handler for MIDI IN over Serial RX
                       00052 ;
-MPASM  5.43                       SERVICE.ASM   5-10-2025  18:31:26         PAGE  4
+MPASM  5.43                       SERVICE.ASM   5-10-2025  22:55:59         PAGE  4
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -234,7 +234,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 000070 D???           00102         bra     _MSTATE_START_SONG
 000072 D???           00103         bra     _MSTATE_CONT_SONG
 000074 D???           00104         bra     _MSTATE_STOP_SONG
-MPASM  5.43                       SERVICE.ASM   5-10-2025  18:31:26         PAGE  5
+MPASM  5.43                       SERVICE.ASM   5-10-2025  22:55:59         PAGE  5
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -293,7 +293,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0000D8 EF?? F???      00154         goto    _RC_CLEANUP
 0000DC                00155 _PROCESS_PITCH_NOTE_OFF_CH5:
 0000DC C000 F015      00156         movff   CUR_BYTE,MSG_PITCH_CH5
-MPASM  5.43                       SERVICE.ASM   5-10-2025  18:31:26         PAGE  6
+MPASM  5.43                       SERVICE.ASM   5-10-2025  22:55:59         PAGE  6
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -352,7 +352,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 000146                00204 _PROCESS_VEL_NOTE_OFF_CH4:
 000146 5014           00205         movf    MSG_PITCH_CH4,W
 000148 6203           00206         cpfseq  CV_PITCH_CH4
-MPASM  5.43                       SERVICE.ASM   5-10-2025  18:31:26         PAGE  7
+MPASM  5.43                       SERVICE.ASM   5-10-2025  22:55:59         PAGE  7
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -411,7 +411,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00255         ;bsf    CV_FLAGS,CVF_PITCH
 0001B0 9807           00256         bcf     CV_GATE,GATE_1                  ; Clear GATE1
 0001B2 6A0E           00257         clrf    MSG_COUNT                       ; Reset message count
-MPASM  5.43                       SERVICE.ASM   5-10-2025  18:31:26         PAGE  8
+MPASM  5.43                       SERVICE.ASM   5-10-2025  22:55:59         PAGE  8
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -470,7 +470,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 000218 EF?? F???      00308         goto    _RC_CLEANUP
 00021C                00309 _PROCESS_PITCH_NOTE_ON_CH3:     
 00021C C000 F013      00310         movff   CUR_BYTE,MSG_PITCH_CH3
-MPASM  5.43                       SERVICE.ASM   5-10-2025  18:31:26         PAGE  9
+MPASM  5.43                       SERVICE.ASM   5-10-2025  22:55:59         PAGE  9
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -529,7 +529,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 000288 8407           00359         bsf     CV_GATE,GATE_3                  ; Trigger GATE
 00028A 6A0E           00360         clrf    MSG_COUNT                       ; Reset message count
 00028C EF?? F???      00361         goto    _RC_CLEANUP
-MPASM  5.43                       SERVICE.ASM   5-10-2025  18:31:26         PAGE 10
+MPASM  5.43                       SERVICE.ASM   5-10-2025  22:55:59         PAGE 10
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -588,7 +588,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0002F6 6A0E           00410         clrf    MSG_COUNT                       ; Reset message count
 0002F8 EF?? F???      00411         goto    _RC_CLEANUP
 0002FC                00412 _PROCESS_NOTE_ON_GATE2:
-MPASM  5.43                       SERVICE.ASM   5-10-2025  18:31:26         PAGE 11
+MPASM  5.43                       SERVICE.ASM   5-10-2025  22:55:59         PAGE 11
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -647,7 +647,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 000362 C000 F006      00463         movff   CUR_BYTE,CV_MOD                 ; Update CV3 to the CC value
 000366 8401           00464         bsf     CV_FLAGS,CVF_MOD
 000368 EF?? F???      00465         goto    _END_CVALUE
-MPASM  5.43                       SERVICE.ASM   5-10-2025  18:31:26         PAGE 12
+MPASM  5.43                       SERVICE.ASM   5-10-2025  22:55:59         PAGE 12
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -706,7 +706,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0003AE EF?? F???      00516         goto    _RC_CLEANUP
                       00517 
 0003B2                00518 _MSTATE_AS:
-MPASM  5.43                       SERVICE.ASM   5-10-2025  18:31:26         PAGE 13
+MPASM  5.43                       SERVICE.ASM   5-10-2025  22:55:59         PAGE 13
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -761,7 +761,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00563 
                       00564 
                       00565         end
-MPASM  5.43                       SERVICE.ASM   5-10-2025  18:31:26         PAGE 14
+MPASM  5.43                       SERVICE.ASM   5-10-2025  22:55:59         PAGE 14
 
 
 SYMBOL TABLE
@@ -820,7 +820,7 @@ BFEMT                             00000003
 BFOVFL                            00000002
 BOR                               00000000
 BRFEN                             00000007
-MPASM  5.43                       SERVICE.ASM   5-10-2025  18:31:26         PAGE 15
+MPASM  5.43                       SERVICE.ASM   5-10-2025  22:55:59         PAGE 15
 
 
 SYMBOL TABLE
@@ -879,7 +879,7 @@ CCP2M1                            00000001
 CCP2M2                            00000002
 CCP2M3                            00000003
 CCP2X                             00000005
-MPASM  5.43                       SERVICE.ASM   5-10-2025  18:31:26         PAGE 16
+MPASM  5.43                       SERVICE.ASM   5-10-2025  22:55:59         PAGE 16
 
 
 SYMBOL TABLE
@@ -938,7 +938,7 @@ DT3                               00000003
 DT4                               00000004
 DT5                               00000005
 DTA0                              00000000
-MPASM  5.43                       SERVICE.ASM   5-10-2025  18:31:26         PAGE 17
+MPASM  5.43                       SERVICE.ASM   5-10-2025  22:55:59         PAGE 17
 
 
 SYMBOL TABLE
@@ -997,7 +997,7 @@ FSR2                              00000002
 FSR2H                             00000FDA
 FSR2L                             00000FD9
 GASEL0                            00000000
-MPASM  5.43                       SERVICE.ASM   5-10-2025  18:31:26         PAGE 18
+MPASM  5.43                       SERVICE.ASM   5-10-2025  22:55:59         PAGE 18
 
 
 SYMBOL TABLE
@@ -1056,7 +1056,7 @@ INT2IF                            00000001
 INT2IP                            00000007
 INT2P                             00000007
 INTCON                            00000FF2
-MPASM  5.43                       SERVICE.ASM   5-10-2025  18:31:26         PAGE 19
+MPASM  5.43                       SERVICE.ASM   5-10-2025  22:55:59         PAGE 19
 
 
 SYMBOL TABLE
@@ -1115,7 +1115,7 @@ LVDL3                             00000003
 MAXCNTH                           00000F65
 MAXCNTL                           00000F64
 MCLR                              00000003
-MPASM  5.43                       SERVICE.ASM   5-10-2025  18:31:26         PAGE 20
+MPASM  5.43                       SERVICE.ASM   5-10-2025  22:55:59         PAGE 20
 
 
 SYMBOL TABLE
@@ -1174,7 +1174,7 @@ PCLATU                            00000FFB
 PD                                00000002
 PDC0H                             00000F78
 PDC0L                             00000F79
-MPASM  5.43                       SERVICE.ASM   5-10-2025  18:31:26         PAGE 21
+MPASM  5.43                       SERVICE.ASM   5-10-2025  22:55:59         PAGE 21
 
 
 SYMBOL TABLE
@@ -1233,7 +1233,7 @@ POVD7                             00000007
 PR2                               00000FCB
 PR5                               00000F90
 PR5H                              00000F91
-MPASM  5.43                       SERVICE.ASM   5-10-2025  18:31:26         PAGE 22
+MPASM  5.43                       SERVICE.ASM   5-10-2025  22:55:59         PAGE 22
 
 
 SYMBOL TABLE
@@ -1292,7 +1292,7 @@ RB5                               00000005
 RB6                               00000006
 RB7                               00000007
 RBIE                              00000003
-MPASM  5.43                       SERVICE.ASM   5-10-2025  18:31:26         PAGE 23
+MPASM  5.43                       SERVICE.ASM   5-10-2025  22:55:59         PAGE 23
 
 
 SYMBOL TABLE
@@ -1351,7 +1351,7 @@ SEVOPS0                           00000004
 SEVOPS1                           00000005
 SEVOPS2                           00000006
 SEVOPS3                           00000007
-MPASM  5.43                       SERVICE.ASM   5-10-2025  18:31:26         PAGE 24
+MPASM  5.43                       SERVICE.ASM   5-10-2025  22:55:59         PAGE 24
 
 
 SYMBOL TABLE
@@ -1410,7 +1410,7 @@ T0PS1                             00000001
 T0PS2                             00000002
 T0PS3                             00000003
 T0SE                              00000004
-MPASM  5.43                       SERVICE.ASM   5-10-2025  18:31:26         PAGE 25
+MPASM  5.43                       SERVICE.ASM   5-10-2025  22:55:59         PAGE 25
 
 
 SYMBOL TABLE
@@ -1469,7 +1469,7 @@ TMR2                              00000FCC
 TMR2IE                            00000001
 TMR2IF                            00000001
 TMR2IP                            00000001
-MPASM  5.43                       SERVICE.ASM   5-10-2025  18:31:26         PAGE 26
+MPASM  5.43                       SERVICE.ASM   5-10-2025  22:55:59         PAGE 26
 
 
 SYMBOL TABLE
@@ -1528,7 +1528,7 @@ TUN4                              00000004
 TUN5                              00000005
 TX                                00000006
 TX9                               00000006
-MPASM  5.43                       SERVICE.ASM   5-10-2025  18:31:26         PAGE 27
+MPASM  5.43                       SERVICE.ASM   5-10-2025  22:55:59         PAGE 27
 
 
 SYMBOL TABLE
@@ -1587,7 +1587,7 @@ _CONFIG6H                         0030000B
 _CONFIG6L                         0030000A
 _CONFIG7H                         0030000D
 _CONFIG7L                         0030000C
-MPASM  5.43                       SERVICE.ASM   5-10-2025  18:31:26         PAGE 28
+MPASM  5.43                       SERVICE.ASM   5-10-2025  22:55:59         PAGE 28
 
 
 SYMBOL TABLE
@@ -1646,7 +1646,7 @@ _MCLRE_OFF_3H                     0000007F
 _MCLRE_ON_3H                      000000FF
 _MOFFSET_AS                       0000002A
 _MOFFSET_CC                       00000006
-MPASM  5.43                       SERVICE.ASM   5-10-2025  18:31:26         PAGE 29
+MPASM  5.43                       SERVICE.ASM   5-10-2025  22:55:59         PAGE 29
 
 
 SYMBOL TABLE
@@ -1705,7 +1705,7 @@ _OSC_EC_1H                        000000F4
 _OSC_HSPLL_1H                     000000F6
 _OSC_HS_1H                        000000F2
 _OSC_IRCIO_1H                     000000F8
-MPASM  5.43                       SERVICE.ASM   5-10-2025  18:31:26         PAGE 30
+MPASM  5.43                       SERVICE.ASM   5-10-2025  22:55:59         PAGE 30
 
 
 SYMBOL TABLE
@@ -1764,7 +1764,7 @@ _PROCSES_CNUM                     0000032C
 _PROCSES_PITCH_NOTE_OFF           00000090
 _PROCSES_PITCH_NOTE_OFF_M1        00000172
 _PROCSES_PITCH_NOTE_ON            000001E4
-MPASM  5.43                       SERVICE.ASM   5-10-2025  18:31:26         PAGE 31
+MPASM  5.43                       SERVICE.ASM   5-10-2025  22:55:59         PAGE 31
 
 
 SYMBOL TABLE
@@ -1823,7 +1823,7 @@ _WRT3_OFF_6L                      000000FF
 _WRT3_ON_6L                       000000F7
 _WRTB_OFF_6H                      000000FF
 _WRTB_ON_6H                       000000BF
-MPASM  5.43                       SERVICE.ASM   5-10-2025  18:31:26         PAGE 32
+MPASM  5.43                       SERVICE.ASM   5-10-2025  22:55:59         PAGE 32
 
 
 SYMBOL TABLE

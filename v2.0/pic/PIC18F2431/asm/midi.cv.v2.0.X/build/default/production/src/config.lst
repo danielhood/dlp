@@ -1,4 +1,4 @@
-MPASM  5.43                        CONFIG.ASM   5-10-2025  18:31:23         PAGE  1
+MPASM  5.43                        CONFIG.ASM   5-10-2025  22:55:56         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -52,7 +52,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00045         config  EBTRB = OFF     ; Boot Block Table Read Protection bit
                       00046 
                       00047         end
-MPASM  5.43                        CONFIG.ASM   5-10-2025  18:31:23         PAGE  2
+MPASM  5.43                        CONFIG.ASM   5-10-2025  22:55:56         PAGE  2
 
 
 SYMBOL TABLE
