@@ -84,7 +84,13 @@ _UPDATE_VELOCITY:
 	btfss	CV_FLAGS,CVF_VELOCITY
 	goto	_UPDATE_MOD
 	movf	CV_VELOCITY,W
+	btfss	PORTA,0			; Check MIDI MODE
+	goto	_SCALE_VEL_TO_PITCH_FOR_M0
 	rlncf	WREG		; Double the value since we're using a period of 256 instead of 128
+	goto	_VEL_SPLIT
+_SCALE_VEL_TO_PITCH_FOR_M0:
+	_SCALE_CV_NOTE		; Scales W, returning result in W
+_VEL_SPLIT:
 	_SPLIT_CV_VALUE2
 	movff	TMP_CV_BYTE_H,PDC1H
 	movff	TMP_CV_BYTE_L,PDC1L
@@ -94,7 +100,13 @@ _UPDATE_MOD:
 	btfss	CV_FLAGS,CVF_MOD
 	goto	_UPDATE_GATE
 	movf	CV_MOD,W
+	btfss	PORTA,0			; Check MIDI MODE
+	goto	_SCALE_MOD_TO_PITCH_FOR_M0
 	rlncf	WREG		; Double the value since we're using a period of 256 instead of 128
+	goto	_MOD_SPLIT
+_SCALE_MOD_TO_PITCH_FOR_M0:
+	_SCALE_CV_NOTE		; Scales W, returning result in W
+_MOD_SPLIT:
 	_SPLIT_CV_VALUE2
 	movff	TMP_CV_BYTE_H,PDC2H
 	movff	TMP_CV_BYTE_L,PDC2L
