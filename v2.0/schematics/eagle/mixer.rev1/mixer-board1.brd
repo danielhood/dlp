@@ -459,7 +459,7 @@ design rules under a new name.</description>
 <attribute name="NAME" x="2.54" y="-167.513" size="1.27" layer="25" ratio="10"/>
 <attribute name="VALUE" x="2.794" y="-169.4688" size="1.27" layer="27" ratio="10"/>
 </element>
-<element name="R7" library="_common" package="0207/7" value="2.7K" x="5.08" y="-173.99" smashed="yes">
+<element name="R7" library="_common" package="0207/7" value="5.1K" x="5.08" y="-173.99" smashed="yes">
 <attribute name="NAME" x="2.54" y="-172.593" size="1.27" layer="25" ratio="10"/>
 <attribute name="VALUE" x="2.794" y="-174.5488" size="1.27" layer="27" ratio="10"/>
 </element>

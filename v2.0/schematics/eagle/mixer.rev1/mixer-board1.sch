@@ -548,7 +548,7 @@ grid 5 mm, outline 2.4 x 4.4 mm</description>
 <part name="R5" library="_common" deviceset="R" device="" value="5.1K"/>
 <part name="IC2" library="_common" deviceset="TL084" device="P"/>
 <part name="R6" library="_common" deviceset="R" device="" value="2.7K"/>
-<part name="R7" library="_common" deviceset="R" device="" value="2.7K"/>
+<part name="R7" library="_common" deviceset="R" device="" value="5.1K"/>
 <part name="R8" library="_common" deviceset="R" device="" value="5.1K"/>
 <part name="R9" library="_common" deviceset="R" device="" value="2.7K"/>
 <part name="C5" library="_common" deviceset="CC-US" device="025-024X044" value="20pF"/>
