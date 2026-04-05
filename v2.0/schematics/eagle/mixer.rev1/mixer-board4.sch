@@ -3303,8 +3303,8 @@ Source: www.kingbright.com</description>
 <part name="IC5" library="linear" library_urn="urn:adsk.eagle:library:262" deviceset="LM393" device="N" package3d_urn="urn:adsk.eagle:package:16409/2"/>
 <part name="C21" library="_common" deviceset="CE-US" device="E5-8.5" value="10uF"/>
 <part name="R33" library="_common" deviceset="R" device="" value="10K"/>
-<part name="LED1" library="led" library_urn="urn:adsk.eagle:library:259" deviceset="LED" device="3MM" package3d_urn="urn:adsk.eagle:package:15797/1" value="0dB"/>
-<part name="LED2" library="led" library_urn="urn:adsk.eagle:library:259" deviceset="LED" device="3MM" package3d_urn="urn:adsk.eagle:package:15797/1" value="PEAK"/>
+<part name="LED1" library="led" library_urn="urn:adsk.eagle:library:259" deviceset="LED" device="3MM" package3d_urn="urn:adsk.eagle:package:15797/1" value="SIGNAL (GRN)"/>
+<part name="LED2" library="led" library_urn="urn:adsk.eagle:library:259" deviceset="LED" device="3MM" package3d_urn="urn:adsk.eagle:package:15797/1" value="PEAK (RED)"/>
 <part name="R34" library="_common" deviceset="R" device="" value="22K"/>
 <part name="R35" library="_common" deviceset="R" device="" value="12K"/>
 <part name="D1" library="_common" deviceset="1N4148" device=""/>
