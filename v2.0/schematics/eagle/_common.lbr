@@ -2446,6 +2446,35 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <text x="23.368" y="0.508" size="1.778" layer="94">6</text>
 <text x="20.828" y="2.794" size="1.778" layer="94">5</text>
 </symbol>
+<symbol name="DRV134">
+<wire x1="17.78" y1="0" x2="-7.62" y2="12.7" width="0.254" layer="94"/>
+<wire x1="-7.62" y1="12.7" x2="-7.62" y2="-12.7" width="0.254" layer="94"/>
+<wire x1="-7.62" y1="-12.7" x2="17.78" y2="0" width="0.254" layer="94"/>
+<pin name="-V0" x="12.7" y="-7.62" visible="pad" length="middle" rot="R90"/>
+<pin name="-SENSE" x="7.62" y="-10.16" visible="pad" length="middle" rot="R90"/>
+<pin name="GND" x="-12.7" y="-7.62" visible="pad" length="middle"/>
+<pin name="VIN" x="-12.7" y="7.62" visible="pad" length="middle"/>
+<pin name="+SENSE" x="7.62" y="10.16" visible="pad" length="middle" rot="R270"/>
+<pin name="+V0" x="12.7" y="7.62" visible="pad" length="middle" rot="R270"/>
+<text x="-6.604" y="7.62" size="1.778" layer="94" align="center-left">V</text>
+<text x="-6.604" y="-7.62" size="1.778" layer="94" align="center-left">GND</text>
+<text x="-5.08" y="2.54" size="1.778" layer="95">&gt;NAME</text>
+<text x="-5.08" y="-2.54" size="1.778" layer="96">&gt;VALUE</text>
+<text x="-5.08" y="6.35" size="1.016" layer="94">IN</text>
+<text x="11.43" y="0.254" size="1.4224" layer="94">+V</text>
+<text x="11.938" y="-1.778" size="1.4224" layer="94">-V</text>
+<text x="6.096" y="2.54" size="1.4224" layer="94">+S</text>
+<text x="6.604" y="-4.064" size="1.4224" layer="94">-S</text>
+</symbol>
+<symbol name="PWR+-WIDE">
+<text x="1.27" y="8.255" size="0.8128" layer="93" rot="R90">V+</text>
+<text x="1.27" y="-4.445" size="0.8128" layer="93" rot="R90">V-</text>
+<pin name="V+" x="0" y="12.7" visible="pad" length="middle" direction="pwr" rot="R270"/>
+<pin name="V-" x="0" y="-12.7" visible="pad" length="middle" direction="pwr" rot="R90"/>
+<text x="-0.635" y="1.27" size="0.8128" layer="95">V+</text>
+<text x="-0.635" y="-2.032" size="0.8128" layer="95">V-</text>
+<text x="-1.27" y="-0.508" size="1.778" layer="95">&gt;NAME</text>
+</symbol>
 </symbols>
 <devicesets>
 <deviceset name="2N3906" prefix="Q">
@@ -3064,6 +3093,34 @@ Source: http://ww1.microchip.com/downloads/en/devicedoc/39616d.pdf</description>
 <connect gate="G$1" pin="4" pad="4"/>
 <connect gate="G$1" pin="5" pad="5"/>
 <connect gate="G$1" pin="6" pad="6"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="DRV134" prefix="IC">
+<description>Texas Instruments AUDIO LINE DRIVER
+
+https://www.mouser.ca/ProductDetail/Texas-Instruments/DRV134PA
+
+Note: Scheduled for obsolescence and will be discontinued by the manufacturer.</description>
+<gates>
+<gate name="A" symbol="DRV134" x="17.78" y="0"/>
+<gate name="P" symbol="PWR+-WIDE" x="20.32" y="0" addlevel="request" swaplevel="1"/>
+</gates>
+<devices>
+<device name="" package="DIL08">
+<connects>
+<connect gate="A" pin="+SENSE" pad="7"/>
+<connect gate="A" pin="+V0" pad="8"/>
+<connect gate="A" pin="-SENSE" pad="2"/>
+<connect gate="A" pin="-V0" pad="1"/>
+<connect gate="A" pin="GND" pad="3"/>
+<connect gate="A" pin="VIN" pad="4"/>
+<connect gate="P" pin="V+" pad="6"/>
+<connect gate="P" pin="V-" pad="5"/>
 </connects>
 <technologies>
 <technology name=""/>
