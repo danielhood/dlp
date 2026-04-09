@@ -3260,10 +3260,10 @@ Source: www.kingbright.com</description>
 <part name="C8" library="_common" deviceset="CE-US" device="E5-8.5" value="100uF"/>
 <part name="R1" library="_common" deviceset="R" device="" value="100K"/>
 <part name="R2" library="_common" deviceset="R" device="" value="100K"/>
-<part name="R7" library="_common" deviceset="R" device="" value="30K"/>
+<part name="R7" library="_common" deviceset="R" device="" value="48.8"/>
 <part name="C17" library="_common" deviceset="CC-US" device="025-024X044" value="22pF"/>
 <part name="GND19" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
-<part name="R8" library="_common" deviceset="R" device="" value="30K"/>
+<part name="R8" library="_common" deviceset="R" device="" value="48.8"/>
 <part name="C18" library="_common" deviceset="CC-US" device="025-024X044" value="22pF"/>
 <part name="C26" library="_common" deviceset="CE-US" device="E5-8.5" value="100uF"/>
 <part name="C27" library="_common" deviceset="CE-US" device="E5-8.5" value="100uF"/>
@@ -3583,9 +3583,9 @@ Based off of A&amp;H GL2200 meters</text>
 <attribute name="NAME" x="73.66" y="133.985" size="1.778" layer="95" rot="MR180"/>
 <attribute name="VALUE" x="73.66" y="142.24" size="1.778" layer="96" rot="MR180"/>
 </instance>
-<instance part="IC1" gate="B" x="71.12" y="88.9" smashed="yes">
-<attribute name="NAME" x="73.66" y="92.075" size="1.778" layer="95"/>
-<attribute name="VALUE" x="73.66" y="83.82" size="1.778" layer="96"/>
+<instance part="IC1" gate="B" x="71.12" y="88.9" smashed="yes" rot="MR180">
+<attribute name="NAME" x="73.66" y="85.725" size="1.778" layer="95" rot="MR180"/>
+<attribute name="VALUE" x="73.66" y="93.98" size="1.778" layer="96" rot="MR180"/>
 </instance>
 <instance part="C7" gate="G$1" x="40.64" y="139.7" smashed="yes" rot="MR270">
 <attribute name="NAME" x="40.64" y="142.494" size="1.778" layer="95" rot="MR0" align="center"/>
@@ -4184,10 +4184,10 @@ Based off of A&amp;H GL2200 meters</text>
 <wire x1="60.96" y1="134.62" x2="60.96" y2="124.46" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="IC1" gate="B" pin="-IN"/>
-<wire x1="63.5" y1="86.36" x2="60.96" y2="86.36" width="0.1524" layer="91"/>
 <pinref part="GND32" gate="1" pin="0V"/>
 <wire x1="60.96" y1="86.36" x2="60.96" y2="76.2" width="0.1524" layer="91"/>
+<pinref part="IC1" gate="B" pin="+IN"/>
+<wire x1="60.96" y1="86.36" x2="63.5" y2="86.36" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="J4" gate="G$1" pin="P$2"/>
@@ -5080,14 +5080,14 @@ Based off of A&amp;H GL2200 meters</text>
 <pinref part="R8" gate="G$1" pin="1"/>
 <wire x1="66.04" y1="99.06" x2="60.96" y2="99.06" width="0.1524" layer="91"/>
 <wire x1="60.96" y1="99.06" x2="60.96" y2="91.44" width="0.1524" layer="91"/>
-<pinref part="IC1" gate="B" pin="+IN"/>
-<wire x1="60.96" y1="91.44" x2="63.5" y2="91.44" width="0.1524" layer="91"/>
 <wire x1="60.96" y1="99.06" x2="60.96" y2="106.68" width="0.1524" layer="91"/>
 <junction x="60.96" y="99.06"/>
 <pinref part="C18" gate="G$1" pin="2"/>
 <wire x1="60.96" y1="106.68" x2="66.04" y2="106.68" width="0.1524" layer="91"/>
 <pinref part="R2" gate="G$1" pin="2"/>
 <wire x1="58.42" y1="91.44" x2="60.96" y2="91.44" width="0.1524" layer="91"/>
+<pinref part="IC1" gate="B" pin="-IN"/>
+<wire x1="60.96" y1="91.44" x2="63.5" y2="91.44" width="0.1524" layer="91"/>
 <junction x="60.96" y="91.44"/>
 </segment>
 </net>
@@ -5096,11 +5096,8 @@ Based off of A&amp;H GL2200 meters</text>
 <pinref part="C18" gate="G$1" pin="1"/>
 <wire x1="76.2" y1="106.68" x2="81.28" y2="106.68" width="0.1524" layer="91"/>
 <wire x1="81.28" y1="106.68" x2="81.28" y2="99.06" width="0.1524" layer="91"/>
-<pinref part="IC1" gate="B" pin="OUT"/>
 <wire x1="81.28" y1="99.06" x2="81.28" y2="88.9" width="0.1524" layer="91"/>
-<wire x1="81.28" y1="88.9" x2="78.74" y2="88.9" width="0.1524" layer="91"/>
 <pinref part="C27" gate="G$1" pin="-"/>
-<junction x="81.28" y="88.9"/>
 <pinref part="R8" gate="G$1" pin="2"/>
 <wire x1="81.28" y1="88.9" x2="83.82" y2="88.9" width="0.1524" layer="91"/>
 <wire x1="83.82" y1="88.9" x2="86.36" y2="88.9" width="0.1524" layer="91"/>
@@ -5113,6 +5110,9 @@ Based off of A&amp;H GL2200 meters</text>
 <wire x1="200.66" y1="147.32" x2="182.88" y2="147.32" width="0.1524" layer="91"/>
 <pinref part="C40" gate="G$1" pin="+"/>
 <wire x1="182.88" y1="147.32" x2="182.88" y2="165.1" width="0.1524" layer="91"/>
+<pinref part="IC1" gate="B" pin="OUT"/>
+<wire x1="78.74" y1="88.9" x2="81.28" y2="88.9" width="0.1524" layer="91"/>
+<junction x="81.28" y="88.9"/>
 </segment>
 </net>
 <net name="N$25" class="0">
