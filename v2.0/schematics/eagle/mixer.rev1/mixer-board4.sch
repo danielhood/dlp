@@ -3268,7 +3268,7 @@ Source: www.kingbright.com</description>
 <part name="P-2" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="-12V" device=""/>
 <part name="GND27" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="IC5" library="linear" library_urn="urn:adsk.eagle:library:262" deviceset="LM393" device="N" package3d_urn="urn:adsk.eagle:package:16409/2"/>
-<part name="C25" library="_common" deviceset="CE-US" device="E5-8.5" value="10uF"/>
+<part name="C25" library="_common" deviceset="CE-US" device="E2-5" value="10uF"/>
 <part name="R15" library="_common" deviceset="R" device="" value="10K"/>
 <part name="LED1" library="led" library_urn="urn:adsk.eagle:library:259" deviceset="LED" device="3MM" package3d_urn="urn:adsk.eagle:package:15797/1" value="SIGNAL (GRN)"/>
 <part name="LED2" library="led" library_urn="urn:adsk.eagle:library:259" deviceset="LED" device="3MM" package3d_urn="urn:adsk.eagle:package:15797/1" value="PEAK (RED)"/>
@@ -3278,7 +3278,7 @@ Source: www.kingbright.com</description>
 <part name="D2" library="_common" deviceset="1N4148" device=""/>
 <part name="P-3" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="-12V" device=""/>
 <part name="C28" library="_common" deviceset="CC-US" device="025-024X044" value="2.7nF"/>
-<part name="C31" library="_common" deviceset="CE-US" device="E5-8.5" value="1uF"/>
+<part name="C31" library="_common" deviceset="CE-US" device="E2-5" value="1uF"/>
 <part name="P-4" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="-12V" device=""/>
 <part name="GND29" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="P-5" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="-12V" device=""/>
@@ -3298,7 +3298,7 @@ Source: www.kingbright.com</description>
 <part name="GND20" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="GND21" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="IC6" library="linear" library_urn="urn:adsk.eagle:library:262" deviceset="LM393" device="N" package3d_urn="urn:adsk.eagle:package:16409/2"/>
-<part name="C40" library="_common" deviceset="CE-US" device="E5-8.5" value="10uF"/>
+<part name="C40" library="_common" deviceset="CE-US" device="E2-5" value="10uF"/>
 <part name="R41" library="_common" deviceset="R" device="" value="10K"/>
 <part name="LED3" library="led" library_urn="urn:adsk.eagle:library:259" deviceset="LED" device="3MM" package3d_urn="urn:adsk.eagle:package:15797/1" value="SIGNAL (GRN)"/>
 <part name="LED4" library="led" library_urn="urn:adsk.eagle:library:259" deviceset="LED" device="3MM" package3d_urn="urn:adsk.eagle:package:15797/1" value="PEAK (RED)"/>
@@ -3308,7 +3308,7 @@ Source: www.kingbright.com</description>
 <part name="D5" library="_common" deviceset="1N4148" device=""/>
 <part name="P-7" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="-12V" device=""/>
 <part name="C41" library="_common" deviceset="CC-US" device="025-024X044" value="2.7nF"/>
-<part name="C42" library="_common" deviceset="CE-US" device="E5-8.5" value="1uF"/>
+<part name="C42" library="_common" deviceset="CE-US" device="E2-5" value="1uF"/>
 <part name="P-8" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="-12V" device=""/>
 <part name="GND33" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="P-9" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="-12V" device=""/>
@@ -3324,9 +3324,9 @@ Source: www.kingbright.com</description>
 <part name="R48" library="_common" deviceset="R" device="" value="12K"/>
 <part name="P+6" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+12V" device=""/>
 <part name="P-10" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="-12V" device=""/>
-<part name="C1" library="_common" deviceset="CE-US" device="E5-8.5" value="10uF"/>
+<part name="C1" library="_common" deviceset="CE-US" device="E2-5" value="10uF"/>
 <part name="C4" library="_common" deviceset="CC-US" device="025-024X044" value="0.1uF"/>
-<part name="C2" library="_common" deviceset="CE-US" device="E5-8.5" value="10uF"/>
+<part name="C2" library="_common" deviceset="CE-US" device="E2-5" value="10uF"/>
 <part name="C6" library="_common" deviceset="CC-US" device="025-024X044" value="0.1uF"/>
 <part name="C10" library="_common" deviceset="CC-US" device="025-024X044" value="0.1uF"/>
 <part name="C12" library="_common" deviceset="CC-US" device="025-024X044" value="0.1uF"/>

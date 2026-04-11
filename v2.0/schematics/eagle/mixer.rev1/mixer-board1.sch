@@ -1093,46 +1093,6 @@ grid 5 mm, outline 2.4 x 4.4 mm</description>
 </library>
 <library name="_common.v1">
 <packages>
-<package name="E5-8,5">
-<description>&lt;b&gt;ELECTROLYTIC CAPACITOR&lt;/b&gt;&lt;p&gt;
-grid 5.08 mm, diameter 8.5 mm</description>
-<wire x1="-1.143" y1="0" x2="-0.889" y2="0" width="0.1524" layer="21"/>
-<wire x1="-0.889" y1="0" x2="-0.889" y2="-1.143" width="0.1524" layer="21"/>
-<wire x1="-0.889" y1="-1.143" x2="-0.254" y2="-1.143" width="0.1524" layer="21"/>
-<wire x1="-0.254" y1="-1.143" x2="-0.254" y2="1.143" width="0.1524" layer="21"/>
-<wire x1="-0.254" y1="1.143" x2="-0.889" y2="1.143" width="0.1524" layer="21"/>
-<wire x1="-0.889" y1="1.143" x2="-0.889" y2="0" width="0.1524" layer="21"/>
-<wire x1="0.635" y1="0" x2="1.143" y2="0" width="0.1524" layer="21"/>
-<wire x1="-3.302" y1="2.032" x2="-3.302" y2="1.27" width="0.1524" layer="21"/>
-<wire x1="-3.683" y1="1.651" x2="-2.921" y2="1.651" width="0.1524" layer="21"/>
-<wire x1="1.143" y1="0" x2="1.651" y2="0" width="0.1524" layer="51"/>
-<wire x1="-1.651" y1="0" x2="-1.143" y2="0" width="0.1524" layer="51"/>
-<circle x="0" y="0" radius="4.445" width="0.1524" layer="21"/>
-<pad name="+" x="-2.54" y="0" drill="1.016" diameter="2.54"/>
-<pad name="-" x="2.54" y="0" drill="1.016" diameter="2.54" shape="octagon"/>
-<text x="4.1402" y="2.286" size="1.27" layer="25" ratio="10">&gt;NAME</text>
-<text x="-2.5146" y="-3.0226" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
-<rectangle x1="0.254" y1="-1.143" x2="0.889" y2="1.143" layer="21"/>
-</package>
-<package name="E2-5">
-<description>&lt;b&gt;ELECTROLYTIC CAPACITOR&lt;/b&gt;&lt;p&gt;
-grid 2.032 mm, diameter 5 mm</description>
-<wire x1="-1.524" y1="0" x2="-0.762" y2="0" width="0.1524" layer="51"/>
-<wire x1="-0.762" y1="0" x2="-0.762" y2="-1.016" width="0.1524" layer="51"/>
-<wire x1="-0.762" y1="-1.016" x2="-0.254" y2="-1.016" width="0.1524" layer="51"/>
-<wire x1="-0.254" y1="-1.016" x2="-0.254" y2="1.016" width="0.1524" layer="51"/>
-<wire x1="-0.254" y1="1.016" x2="-0.762" y2="1.016" width="0.1524" layer="51"/>
-<wire x1="-0.762" y1="1.016" x2="-0.762" y2="0" width="0.1524" layer="51"/>
-<wire x1="0.635" y1="0" x2="1.524" y2="0" width="0.1524" layer="51"/>
-<wire x1="-1.27" y1="1.778" x2="-0.762" y2="1.778" width="0.1524" layer="21"/>
-<wire x1="-1.016" y1="1.524" x2="-1.016" y2="2.032" width="0.1524" layer="21"/>
-<circle x="0" y="0" radius="2.54" width="0.1524" layer="21"/>
-<pad name="-" x="1.016" y="0" drill="0.8128" diameter="1.27" shape="octagon"/>
-<pad name="+" x="-1.016" y="0" drill="0.8128" diameter="1.27"/>
-<text x="2.54" y="1.016" size="1.27" layer="25" ratio="10">&gt;NAME</text>
-<text x="2.54" y="-2.159" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
-<rectangle x1="0.254" y1="-1.016" x2="0.762" y2="1.016" layer="51"/>
-</package>
 <package name="C025-024X044">
 <description>&lt;b&gt;CAPACITOR&lt;/b&gt;&lt;p&gt;
 grid 2.5 mm, outline 2.4 x 4.4 mm</description>
@@ -1179,18 +1139,6 @@ grid 5 mm, outline 2.4 x 4.4 mm</description>
 </package>
 </packages>
 <symbols>
-<symbol name="CE-US">
-<wire x1="-1.016" y1="0.508" x2="0" y2="0.508" width="0.254" layer="94"/>
-<wire x1="0" y1="0.508" x2="1.016" y2="0.508" width="0.254" layer="94"/>
-<pin name="+" x="0" y="5.08" visible="off" length="short" direction="pas" swaplevel="1" rot="R270"/>
-<pin name="-" x="0" y="-5.08" visible="off" length="short" direction="pas" swaplevel="1" rot="R90"/>
-<text x="-1.778" y="0.762" size="1.778" layer="94">+</text>
-<wire x1="0" y1="2.54" x2="0" y2="0.508" width="0.1524" layer="94"/>
-<wire x1="-1.016" y1="-0.762" x2="1.016" y2="-0.762" width="0.254" layer="94" curve="-105.464992"/>
-<wire x1="0" y1="-0.254" x2="0" y2="-2.794" width="0.1524" layer="94"/>
-<text x="-2.794" y="0" size="1.778" layer="95" rot="R90" align="center">&gt;NAME</text>
-<text x="2.794" y="0" size="1.778" layer="96" rot="R90" align="center">&gt;VALUE</text>
-</symbol>
 <symbol name="CC-US">
 <wire x1="0" y1="-0.508" x2="0" y2="-2.54" width="0.1524" layer="94"/>
 <text x="-2.54" y="0.127" size="1.778" layer="95" rot="R90" align="center">&gt;NAME</text>
@@ -1205,32 +1153,6 @@ grid 5 mm, outline 2.4 x 4.4 mm</description>
 </symbol>
 </symbols>
 <devicesets>
-<deviceset name="CE-US" prefix="C" uservalue="yes">
-<description>&lt;B&gt;ELECTROLYTIC CAPACITOR&lt;/B&gt;, US symbol</description>
-<gates>
-<gate name="G$1" symbol="CE-US" x="0" y="0"/>
-</gates>
-<devices>
-<device name="E5-8.5" package="E5-8,5">
-<connects>
-<connect gate="G$1" pin="+" pad="+"/>
-<connect gate="G$1" pin="-" pad="-"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-<device name="E2-5" package="E2-5">
-<connects>
-<connect gate="G$1" pin="+" pad="+"/>
-<connect gate="G$1" pin="-" pad="-"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
 <deviceset name="CC-US" prefix="C" uservalue="yes">
 <description>&lt;B&gt;CAPACITOR&lt;/B&gt;, US symbol</description>
 <gates>
@@ -1280,19 +1202,19 @@ grid 5 mm, outline 2.4 x 4.4 mm</description>
 <part name="J3" library="jacks" deviceset="CL1384" device="" value="ST1-R"/>
 <part name="J4" library="jacks" deviceset="CL1384" device="" value="ST2-L"/>
 <part name="J5" library="jacks" deviceset="CL1384" device="" value="ST2-R"/>
-<part name="C13" library="_common" deviceset="CE-US" device="E2-5" value="100uF"/>
+<part name="C13" library="_common" deviceset="CE-US" device="E5-8.5" value="100uF"/>
 <part name="R1" library="_common" deviceset="R" device="" value="100K"/>
 <part name="GND1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="GND2" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="IC2" library="_common" deviceset="TL084" device="P"/>
 <part name="R7" library="_common" deviceset="R" device="" value="100K"/>
-<part name="C19" library="_common" deviceset="CE-US" device="E2-5" value="100uF"/>
+<part name="C19" library="_common" deviceset="CE-US" device="E5-8.5" value="100uF"/>
 <part name="GND3" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="R19" library="_common" deviceset="R" device="" value="1K"/>
 <part name="C25" library="_common" deviceset="CC-US" device="025-024X044" value="22pF"/>
 <part name="R13" library="_common" deviceset="R" device="" value="510"/>
 <part name="GND4" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
-<part name="C31" library="_common" deviceset="CE-US" device="E2-5" value="100uF"/>
+<part name="C31" library="_common" deviceset="CE-US" device="E5-8.5" value="100uF"/>
 <part name="R25" library="_common" deviceset="R" device="" value="5.1K"/>
 <part name="R37" library="_common" deviceset="R" device="" value="2.7K"/>
 <part name="R41" library="_common" deviceset="R" device="" value="5.1K"/>
@@ -1311,21 +1233,21 @@ grid 5 mm, outline 2.4 x 4.4 mm</description>
 <part name="R26" library="_common" deviceset="R" device="" value="5.1K"/>
 <part name="R27" library="_common" deviceset="R" device="" value="5.1K"/>
 <part name="R28" library="_common" deviceset="R" device="" value="5.1K"/>
-<part name="C43" library="_common" deviceset="CE-US" device="E2-5" value="100uF"/>
-<part name="C44" library="_common" deviceset="CE-US" device="E2-5" value="100uF"/>
+<part name="C43" library="_common" deviceset="CE-US" device="E5-8.5" value="100uF"/>
+<part name="C44" library="_common" deviceset="CE-US" device="E5-8.5" value="100uF"/>
 <part name="R43" library="_common" deviceset="R" device="" value="10K"/>
 <part name="R44" library="_common" deviceset="R" device="" value="10K"/>
 <part name="GND9" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="GND10" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
-<part name="C14" library="_common" deviceset="CE-US" device="E2-5" value="100uF"/>
+<part name="C14" library="_common" deviceset="CE-US" device="E5-8.5" value="100uF"/>
 <part name="R2" library="_common" deviceset="R" device="" value="100K"/>
 <part name="R8" library="_common" deviceset="R" device="" value="100K"/>
-<part name="C20" library="_common" deviceset="CE-US" device="E2-5" value="100uF"/>
+<part name="C20" library="_common" deviceset="CE-US" device="E5-8.5" value="100uF"/>
 <part name="R20" library="_common" deviceset="R" device="" value="1K"/>
 <part name="C26" library="_common" deviceset="CC-US" device="025-024X044" value="22pF"/>
-<part name="C32" library="_common" deviceset="CE-US" device="E2-5" value="100uF"/>
-<part name="C41" library="_common" deviceset="CE-US" device="E2-5" value="100uF"/>
-<part name="C42" library="_common" deviceset="CE-US" device="E2-5" value="100uF"/>
+<part name="C32" library="_common" deviceset="CE-US" device="E5-8.5" value="100uF"/>
+<part name="C41" library="_common" deviceset="CE-US" device="E5-8.5" value="100uF"/>
+<part name="C42" library="_common" deviceset="CE-US" device="E5-8.5" value="100uF"/>
 <part name="R14" library="_common" deviceset="R" device="" value="510"/>
 <part name="GND13" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="GND14" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
@@ -1347,8 +1269,8 @@ grid 5 mm, outline 2.4 x 4.4 mm</description>
 <part name="C4" library="_common.v1" deviceset="CC-US" device="025-024X044" value="0.1uF"/>
 <part name="C5" library="_common.v1" deviceset="CC-US" device="025-024X044" value="0.1uF"/>
 <part name="C6" library="_common.v1" deviceset="CC-US" device="025-024X044" value="0.1uF"/>
-<part name="C1" library="_common.v1" deviceset="CE-US" device="E2-5" value="10uF"/>
-<part name="C2" library="_common.v1" deviceset="CE-US" device="E2-5" value="10uF"/>
+<part name="C1" library="_common" deviceset="CE-US" device="E5-8.5" value="100uF"/>
+<part name="C2" library="_common" deviceset="CE-US" device="E5-8.5" value="100uF"/>
 <part name="P-10" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="-12V" device=""/>
 <part name="GND21" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="P+12" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+12V" device=""/>
@@ -1363,47 +1285,47 @@ grid 5 mm, outline 2.4 x 4.4 mm</description>
 <part name="GND25" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="GND26" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="R29" library="_common" deviceset="R" device="" value="5.1K"/>
-<part name="C15" library="_common" deviceset="CE-US" device="E2-5" value="100uF"/>
+<part name="C15" library="_common" deviceset="CE-US" device="E5-8.5" value="100uF"/>
 <part name="R3" library="_common" deviceset="R" device="" value="100K"/>
 <part name="R9" library="_common" deviceset="R" device="" value="100K"/>
-<part name="C21" library="_common" deviceset="CE-US" device="E2-5" value="100uF"/>
+<part name="C21" library="_common" deviceset="CE-US" device="E5-8.5" value="100uF"/>
 <part name="R21" library="_common" deviceset="R" device="" value="1K"/>
 <part name="C27" library="_common" deviceset="CC-US" device="025-024X044" value="22pF"/>
-<part name="C33" library="_common" deviceset="CE-US" device="E2-5" value="100uF"/>
+<part name="C33" library="_common" deviceset="CE-US" device="E5-8.5" value="100uF"/>
 <part name="R15" library="_common" deviceset="R" device="" value="510"/>
 <part name="GND29" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="GND30" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="R30" library="_common" deviceset="R" device="" value="5.1K"/>
-<part name="C16" library="_common" deviceset="CE-US" device="E2-5" value="100uF"/>
+<part name="C16" library="_common" deviceset="CE-US" device="E5-8.5" value="100uF"/>
 <part name="R4" library="_common" deviceset="R" device="" value="100K"/>
 <part name="R10" library="_common" deviceset="R" device="" value="100K"/>
-<part name="C22" library="_common" deviceset="CE-US" device="E2-5" value="100uF"/>
+<part name="C22" library="_common" deviceset="CE-US" device="E5-8.5" value="100uF"/>
 <part name="R22" library="_common" deviceset="R" device="" value="1K"/>
 <part name="C28" library="_common" deviceset="CC-US" device="025-024X044" value="22pF"/>
-<part name="C34" library="_common" deviceset="CE-US" device="E2-5" value="100uF"/>
+<part name="C34" library="_common" deviceset="CE-US" device="E5-8.5" value="100uF"/>
 <part name="R16" library="_common" deviceset="R" device="" value="510"/>
 <part name="GND32" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="GND33" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="GND22" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="R31" library="_common" deviceset="R" device="" value="5.1K"/>
-<part name="C17" library="_common" deviceset="CE-US" device="E2-5" value="100uF"/>
+<part name="C17" library="_common" deviceset="CE-US" device="E5-8.5" value="100uF"/>
 <part name="R5" library="_common" deviceset="R" device="" value="100K"/>
 <part name="R11" library="_common" deviceset="R" device="" value="100K"/>
-<part name="C23" library="_common" deviceset="CE-US" device="E2-5" value="100uF"/>
+<part name="C23" library="_common" deviceset="CE-US" device="E5-8.5" value="100uF"/>
 <part name="R23" library="_common" deviceset="R" device="" value="1K"/>
 <part name="C29" library="_common" deviceset="CC-US" device="025-024X044" value="22pF"/>
-<part name="C35" library="_common" deviceset="CE-US" device="E2-5" value="100uF"/>
+<part name="C35" library="_common" deviceset="CE-US" device="E5-8.5" value="100uF"/>
 <part name="R17" library="_common" deviceset="R" device="" value="510"/>
 <part name="GND28" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="GND31" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="R32" library="_common" deviceset="R" device="" value="5.1K"/>
-<part name="C18" library="_common" deviceset="CE-US" device="E2-5" value="100uF"/>
+<part name="C18" library="_common" deviceset="CE-US" device="E5-8.5" value="100uF"/>
 <part name="R6" library="_common" deviceset="R" device="" value="100K"/>
 <part name="R12" library="_common" deviceset="R" device="" value="100K"/>
-<part name="C24" library="_common" deviceset="CE-US" device="E2-5" value="100uF"/>
+<part name="C24" library="_common" deviceset="CE-US" device="E5-8.5" value="100uF"/>
 <part name="R24" library="_common" deviceset="R" device="" value="1K"/>
 <part name="C30" library="_common" deviceset="CC-US" device="025-024X044" value="22pF"/>
-<part name="C36" library="_common" deviceset="CE-US" device="E2-5" value="100uF"/>
+<part name="C36" library="_common" deviceset="CE-US" device="E5-8.5" value="100uF"/>
 <part name="R18" library="_common" deviceset="R" device="" value="510"/>
 <part name="GND34" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="GND35" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>

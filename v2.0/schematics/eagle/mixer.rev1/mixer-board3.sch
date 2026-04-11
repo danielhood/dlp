@@ -1223,7 +1223,7 @@ grid 5 mm, outline 2.4 x 4.4 mm</description>
 <part name="R19" library="_common" deviceset="R" device="" value="10K"/>
 <part name="GND19" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="GND20" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
-<part name="C29" library="_common" deviceset="CE-US" device="E2-5" value="100uF"/>
+<part name="C29" library="_common" deviceset="CE-US" device="E5-8.5" value="100uF"/>
 <part name="R23" library="_common" deviceset="R" device="" value="10K"/>
 <part name="GND21" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="IC3" library="_common" deviceset="TL082" device="P"/>
@@ -1237,7 +1237,7 @@ grid 5 mm, outline 2.4 x 4.4 mm</description>
 <part name="R20" library="_common" deviceset="R" device="" value="10K"/>
 <part name="GND23" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="GND24" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
-<part name="C30" library="_common" deviceset="CE-US" device="E2-5" value="100uF"/>
+<part name="C30" library="_common" deviceset="CE-US" device="E5-8.5" value="100uF"/>
 <part name="R24" library="_common" deviceset="R" device="" value="10K"/>
 <part name="GND25" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="IC4" library="_common" deviceset="TL082" device="P"/>
