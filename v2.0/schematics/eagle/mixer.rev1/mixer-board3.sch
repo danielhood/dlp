@@ -1275,6 +1275,7 @@ grid 5 mm, outline 2.4 x 4.4 mm</description>
 <wire x1="175.26" y1="132.08" x2="177.8" y2="129.54" width="0.1524" layer="97" style="shortdash"/>
 <wire x1="177.8" y1="129.54" x2="177.8" y2="106.68" width="0.1524" layer="97" style="shortdash"/>
 <wire x1="177.8" y1="106.68" x2="175.26" y2="109.22" width="0.1524" layer="97" style="shortdash"/>
+<text x="50.8" y="-20.32" size="1.778" layer="97">Mixer REV1 - Board 3</text>
 </plain>
 <instances>
 <instance part="J2" gate="G$1" x="60.96" y="142.24" smashed="yes">

@@ -3360,6 +3360,7 @@ Based off of A&amp;H GL2200 meters</text>
 <wire x1="27.94" y1="137.16" x2="30.48" y2="134.62" width="0.1524" layer="97" style="shortdash"/>
 <wire x1="30.48" y1="134.62" x2="30.48" y2="86.36" width="0.1524" layer="97" style="shortdash"/>
 <wire x1="30.48" y1="86.36" x2="27.94" y2="88.9" width="0.1524" layer="97" style="shortdash"/>
+<text x="22.86" y="-25.4" size="1.778" layer="97">Mixer REV1 - Board 4</text>
 </plain>
 <instances>
 <instance part="J1" gate="G$1" x="33.02" y="33.02" smashed="yes">

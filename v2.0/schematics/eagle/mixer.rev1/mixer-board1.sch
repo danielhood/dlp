@@ -1444,6 +1444,7 @@ grid 5 mm, outline 2.4 x 4.4 mm</description>
 <sheet>
 <plain>
 <text x="30.48" y="88.9" size="1.778" layer="97">1/4" TRS - NYS216-U (Neutrik on Mouser) (we have several of the NYS2612-U mono jacks already)</text>
+<text x="-58.42" y="-297.18" size="1.778" layer="97">Mixer REV1 - Board 1</text>
 </plain>
 <instances>
 <instance part="J6" gate="G$1" x="15.24" y="76.2" smashed="yes">

@@ -1383,6 +1383,7 @@ grid 5 mm, outline 2.4 x 4.4 mm</description>
 <wire x1="-17.78" y1="-63.5" x2="-15.24" y2="-66.04" width="0.1524" layer="97" style="shortdash"/>
 <wire x1="-15.24" y1="-66.04" x2="-15.24" y2="-88.9" width="0.1524" layer="97" style="shortdash"/>
 <wire x1="-15.24" y1="-88.9" x2="-17.78" y2="-86.36" width="0.1524" layer="97" style="shortdash"/>
+<text x="-88.9" y="-88.9" size="1.778" layer="97">Mixer REV1 - Board 2</text>
 </plain>
 <instances>
 <instance part="GND5" gate="1" x="-20.32" y="-93.98" smashed="yes">
