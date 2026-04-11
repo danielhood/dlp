@@ -7,7 +7,7 @@
 <setting keepoldvectorfont="yes"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
+<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="yes" altdistance="0.01" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="16" name="Bottom" color="1" fill="1" visible="yes" active="yes"/>
@@ -304,9 +304,9 @@ grid 2.032 mm, diameter 5 mm</description>
 <text x="-4.445" y="1.27" size="1.27" layer="25">&gt;VALUE</text>
 </package>
 <package name="R-VAR">
-<pad name="R1" x="-2.54" y="0" drill="0.8" shape="square"/>
-<pad name="VAR" x="0" y="0" drill="0.8" shape="square"/>
-<pad name="R2" x="2.54" y="0" drill="0.8" shape="square"/>
+<pad name="1" x="-2.54" y="0" drill="0.8" shape="square"/>
+<pad name="2" x="0" y="0" drill="0.8" shape="square"/>
+<pad name="3" x="2.54" y="0" drill="0.8" shape="square"/>
 <text x="-2.81" y="-3.54" size="1.27" layer="25">&gt;NAME</text>
 <text x="-2.81" y="2.52" size="1.27" layer="27">&gt;VALUE</text>
 <wire x1="-4.75" y1="-5" x2="-3" y2="-5" width="0.127" layer="21" style="shortdash"/>
@@ -2184,29 +2184,26 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <pin name="1" x="-5.08" y="0" visible="off" length="short" direction="pas" swaplevel="1"/>
 </symbol>
 <symbol name="R-VAR-US">
-<wire x1="-2.54" y1="0" x2="-2.159" y2="1.016" width="0.2032" layer="94"/>
-<wire x1="-2.159" y1="1.016" x2="-1.524" y2="-1.016" width="0.2032" layer="94"/>
-<wire x1="-1.524" y1="-1.016" x2="-0.889" y2="1.016" width="0.2032" layer="94"/>
-<wire x1="-0.889" y1="1.016" x2="-0.254" y2="-1.016" width="0.2032" layer="94"/>
-<wire x1="-0.254" y1="-1.016" x2="0.381" y2="1.016" width="0.2032" layer="94"/>
-<wire x1="0.381" y1="1.016" x2="1.016" y2="-1.016" width="0.2032" layer="94"/>
-<wire x1="1.016" y1="-1.016" x2="1.651" y2="1.016" width="0.2032" layer="94"/>
-<wire x1="1.651" y1="1.016" x2="2.286" y2="-1.016" width="0.2032" layer="94"/>
-<wire x1="2.286" y1="-1.016" x2="2.54" y2="0" width="0.2032" layer="94"/>
-<text x="0" y="-4.3434" size="1.778" layer="95" align="center">&gt;NAME</text>
-<text x="0" y="-2.286" size="1.778" layer="96" align="center">&gt;VALUE</text>
-<pin name="3" x="5.08" y="0" visible="off" length="short" direction="pas" swaplevel="1" rot="R180"/>
-<pin name="1" x="-5.08" y="0" visible="off" length="short" direction="pas" swaplevel="1"/>
-<pin name="2" x="0" y="5.08" visible="off" length="short" direction="pas" rot="R270"/>
+<wire x1="0" y1="-2.54" x2="1.016" y2="-2.159" width="0.2032" layer="94"/>
+<wire x1="1.016" y1="-2.159" x2="-1.016" y2="-1.524" width="0.2032" layer="94"/>
+<wire x1="-1.016" y1="-1.524" x2="1.016" y2="-0.889" width="0.2032" layer="94"/>
+<wire x1="1.016" y1="-0.889" x2="-1.016" y2="-0.254" width="0.2032" layer="94"/>
+<wire x1="-1.016" y1="-0.254" x2="1.016" y2="0.381" width="0.2032" layer="94"/>
+<wire x1="1.016" y1="0.381" x2="-1.016" y2="1.016" width="0.2032" layer="94"/>
+<wire x1="-1.016" y1="1.016" x2="1.016" y2="1.651" width="0.2032" layer="94"/>
+<wire x1="1.016" y1="1.651" x2="-1.016" y2="2.286" width="0.2032" layer="94"/>
+<wire x1="-1.016" y1="2.286" x2="0" y2="2.54" width="0.2032" layer="94"/>
+<text x="-4.826" y="0.2286" size="1.778" layer="95" rot="R90" align="center">&gt;NAME</text>
+<text x="-2.54" y="0.254" size="1.778" layer="96" rot="R90" align="center">&gt;VALUE</text>
+<pin name="3" x="0" y="5.08" visible="pad" length="short" direction="pas" swaplevel="1" rot="R270"/>
+<pin name="1" x="0" y="-5.08" visible="pad" length="short" direction="pas" swaplevel="1" rot="R90"/>
+<pin name="2" x="5.08" y="0" visible="pad" length="short" direction="pas" rot="R180"/>
 <polygon width="0.254" layer="94">
-<vertex x="-0.635" y="2.286"/>
-<vertex x="0.635" y="2.286"/>
-<vertex x="0" y="1.397"/>
+<vertex x="2.286" y="-0.635"/>
+<vertex x="2.286" y="0.635"/>
+<vertex x="1.397" y="0"/>
 </polygon>
-<wire x1="0" y1="2.54" x2="0" y2="1.778" width="0.1524" layer="94"/>
-<text x="-4.572" y="0.508" size="1.778" layer="94">1</text>
-<text x="3.048" y="0.508" size="1.778" layer="94">3</text>
-<text x="0.508" y="2.794" size="1.778" layer="94">2</text>
+<wire x1="2.54" y1="0" x2="1.778" y2="0" width="0.1524" layer="94"/>
 </symbol>
 <symbol name="CE-US">
 <wire x1="-1.016" y1="0.508" x2="0" y2="0.508" width="0.254" layer="94"/>
@@ -2789,9 +2786,9 @@ high speed (Philips)</description>
 <devices>
 <device name="" package="R-VAR">
 <connects>
-<connect gate="G$1" pin="1" pad="R1"/>
-<connect gate="G$1" pin="2" pad="VAR"/>
-<connect gate="G$1" pin="3" pad="R2"/>
+<connect gate="G$1" pin="1" pad="1"/>
+<connect gate="G$1" pin="2" pad="2"/>
+<connect gate="G$1" pin="3" pad="3"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -3082,17 +3079,18 @@ Source: http://ww1.microchip.com/downloads/en/devicedoc/39616d.pdf</description>
 </deviceset>
 <deviceset name="R-VAR-ST" prefix="RV" uservalue="yes">
 <gates>
-<gate name="G$1" symbol="R-VAR-ST-US" x="0" y="0"/>
+<gate name="L" symbol="R-VAR-US" x="0" y="2.54"/>
+<gate name="R" symbol="R-VAR-US" x="17.78" y="2.54"/>
 </gates>
 <devices>
 <device name="" package="_COMMON_3RP/1610G">
 <connects>
-<connect gate="G$1" pin="1" pad="1"/>
-<connect gate="G$1" pin="2" pad="2"/>
-<connect gate="G$1" pin="3" pad="3"/>
-<connect gate="G$1" pin="4" pad="4"/>
-<connect gate="G$1" pin="5" pad="5"/>
-<connect gate="G$1" pin="6" pad="6"/>
+<connect gate="L" pin="1" pad="1"/>
+<connect gate="L" pin="2" pad="2"/>
+<connect gate="L" pin="3" pad="3"/>
+<connect gate="R" pin="1" pad="4"/>
+<connect gate="R" pin="2" pad="5"/>
+<connect gate="R" pin="3" pad="6"/>
 </connects>
 <technologies>
 <technology name=""/>
