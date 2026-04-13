@@ -71,12 +71,12 @@
 <wire x1="100" y1="80" x2="0" y2="80" width="0" layer="20"/>
 <wire x1="0" y1="80" x2="0" y2="0" width="0" layer="20"/>
 <wire x1="93.98" y1="1.27" x2="99.06" y2="1.27" width="0.3048" layer="21"/>
-<text x="1.27" y="0.635" size="1.27" layer="25">BOARD2-A</text>
-<text x="27.94" y="0.635" size="1.27" layer="25">BOARD2-B</text>
-<text x="46.99" y="0.635" size="1.27" layer="25">BOARD3</text>
-<text x="73.66" y="0.635" size="1.27" layer="25">BOARD4</text>
-<text x="93.345" y="5.08" size="1.27" layer="25" rot="R90">PWR</text>
-<text x="1.27" y="22.86" size="1.27" layer="25">DLP MXR-B1-REV1</text>
+<text x="1.27" y="1.905" size="1.27" layer="25">BOARD2-A</text>
+<text x="27.94" y="1.905" size="1.27" layer="25">BOARD2-B</text>
+<text x="46.99" y="1.905" size="1.27" layer="25">BOARD3</text>
+<text x="73.66" y="1.905" size="1.27" layer="25">BOARD4</text>
+<text x="93.345" y="6.35" size="1.27" layer="25" rot="R90">PWR</text>
+<text x="1.27" y="10.16" size="1.27" layer="25">DLP MXR-B1-REV1</text>
 </plain>
 <libraries>
 <library name="jacks">
@@ -1368,6 +1368,18 @@ design rules under a new name.</description>
 <wire x1="17.6784" y1="20.2692" x2="31.0896" y2="20.2692" width="0.7112" layer="16"/>
 <wire x1="52.4256" y1="30.0228" x2="52.6542" y2="29.7942" width="0.7112" layer="16"/>
 <via x="13.4112" y="2.4384" extent="1-16" drill="0.35"/>
+<polygon width="0.1524" layer="1">
+<vertex x="1.27" y="1.27"/>
+<vertex x="99.06" y="1.27"/>
+<vertex x="99.06" y="78.74"/>
+<vertex x="1.27" y="78.74"/>
+</polygon>
+<polygon width="0.1524" layer="16">
+<vertex x="1.27" y="1.27"/>
+<vertex x="99.06" y="1.27"/>
+<vertex x="99.06" y="78.74"/>
+<vertex x="1.27" y="78.74"/>
+</polygon>
 </signal>
 <signal name="N$2">
 <contactref element="R13" pad="2"/>
