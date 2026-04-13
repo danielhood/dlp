@@ -1187,10 +1187,10 @@ grid 5 mm, outline 2.4 x 4.4 mm</description>
 <variantdefs>
 </variantdefs>
 <classes>
-<class number="0" name="default" width="0.4064" drill="0">
+<class number="0" name="default" width="0.3048" drill="0">
 <clearance class="0" value="0.3048"/>
 </class>
-<class number="1" name="power" width="0.8128" drill="0">
+<class number="1" name="power" width="0.7112" drill="0">
 <clearance class="1" value="0.3048"/>
 </class>
 </classes>
