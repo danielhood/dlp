@@ -1187,7 +1187,8 @@ grid 5 mm, outline 2.4 x 4.4 mm</description>
 <variantdefs>
 </variantdefs>
 <classes>
-<class number="0" name="default" width="0" drill="0">
+<class number="0" name="default" width="0.4064" drill="0">
+<clearance class="0" value="0.3048"/>
 </class>
 <class number="1" name="power" width="0.8128" drill="0">
 <clearance class="1" value="0.3048"/>
@@ -2039,7 +2040,7 @@ grid 5 mm, outline 2.4 x 4.4 mm</description>
 <label x="-27.94" y="73.66" size="1.778" layer="95"/>
 </segment>
 </net>
-<net name="0V" class="0">
+<net name="0V" class="1">
 <segment>
 <pinref part="J6" gate="G$1" pin="P$2"/>
 <pinref part="GND1" gate="1" pin="0V"/>
@@ -2773,7 +2774,7 @@ grid 5 mm, outline 2.4 x 4.4 mm</description>
 <label x="48.26" y="10.16" size="1.778" layer="95"/>
 </segment>
 </net>
-<net name="-12V" class="0">
+<net name="-12V" class="1">
 <segment>
 <pinref part="JP3" gate="A" pin="1"/>
 <pinref part="P-1" gate="1" pin="-12V"/>
@@ -2846,7 +2847,7 @@ grid 5 mm, outline 2.4 x 4.4 mm</description>
 <wire x1="-53.34" y1="83.82" x2="-53.34" y2="60.96" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="+12V" class="0">
+<net name="+12V" class="1">
 <segment>
 <pinref part="JP3" gate="A" pin="5"/>
 <pinref part="P+1" gate="1" pin="+12V"/>
