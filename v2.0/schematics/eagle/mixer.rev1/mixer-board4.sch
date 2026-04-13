@@ -3207,8 +3207,8 @@ Source: www.kingbright.com</description>
 <part name="R11" library="_common" deviceset="R" device="" value="9K"/>
 <part name="R23" library="_common" deviceset="R" device="" value="2.7K"/>
 <part name="R9" library="_common" deviceset="R" device="" value="9K"/>
-<part name="C24" library="_common" deviceset="CC-US" device="025-024X044" value="3.3nF"/>
-<part name="C23" library="_common" deviceset="CC-US" device="025-024X044" value="3.3nF"/>
+<part name="C24" library="_common" deviceset="CC-US" device="050-024X044" value="3.3nF"/>
+<part name="C23" library="_common" deviceset="CC-US" device="050-024X044" value="3.3nF"/>
 <part name="R3" library="_common" deviceset="R" device="" value="1K"/>
 <part name="R5" library="_common" deviceset="R" device="" value="1K"/>
 <part name="GND9" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
@@ -3219,8 +3219,8 @@ Source: www.kingbright.com</description>
 <part name="R10" library="_common" deviceset="R" device="" value="9K"/>
 <part name="R6" library="_common" deviceset="R" device="" value="1K"/>
 <part name="R12" library="_common" deviceset="R" device="" value="9K"/>
-<part name="C20" library="_common" deviceset="CC-US" device="025-024X044" value="3.3nF"/>
-<part name="C19" library="_common" deviceset="CC-US" device="025-024X044" value="3.3nF"/>
+<part name="C20" library="_common" deviceset="CC-US" device="050-024X044" value="3.3nF"/>
+<part name="C19" library="_common" deviceset="CC-US" device="050-024X044" value="3.3nF"/>
 <part name="GND11" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="GND12" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="GND13" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
@@ -3349,7 +3349,10 @@ Source: www.kingbright.com</description>
 <sheets>
 <sheet>
 <plain>
-<text x="43.18" y="12.7" size="1.778" layer="97">Match filter capacitors!</text>
+<text x="22.86" y="48.26" size="1.778" layer="97">Use Polyester Film Caps, at least 5%
+E.g.:https://www.mouser.ca/ProductDetail/KEMET/MMK5332J250J01L16.5TR18
+
+Match filter capacitors!</text>
 <text x="2.54" y="91.44" size="1.778" layer="97">MAIN OUT</text>
 <text x="5.08" y="139.7" size="1.778" layer="97">MAIN OUT</text>
 <text x="124.46" y="165.1" size="1.778" layer="97">VALUES NEED TO BE CHECKED
