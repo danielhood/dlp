@@ -3176,7 +3176,11 @@ Source: www.kingbright.com</description>
 <variantdefs>
 </variantdefs>
 <classes>
-<class number="0" name="default" width="0" drill="0">
+<class number="0" name="default" width="0.3048" drill="0">
+<clearance class="0" value="0.3048"/>
+</class>
+<class number="1" name="power" width="0.7112" drill="0">
+<clearance class="1" value="0.3048"/>
 </class>
 </classes>
 <parts>
@@ -4019,7 +4023,7 @@ Based off of A&amp;H GL2200 meters</text>
 <busses>
 </busses>
 <nets>
-<net name="0V" class="0">
+<net name="0V" class="1">
 <segment>
 <pinref part="J2" gate="G$1" pin="P$4"/>
 <pinref part="GND8" gate="1" pin="0V"/>
@@ -4696,7 +4700,7 @@ Based off of A&amp;H GL2200 meters</text>
 <junction x="139.7" y="144.78"/>
 </segment>
 </net>
-<net name="+12V" class="0">
+<net name="+12V" class="1">
 <segment>
 <pinref part="IC2" gate="P" pin="V+"/>
 <wire x1="231.14" y1="25.4" x2="231.14" y2="33.02" width="0.1524" layer="91"/>
@@ -4788,7 +4792,7 @@ Based off of A&amp;H GL2200 meters</text>
 <junction x="27.94" y="233.68"/>
 </segment>
 </net>
-<net name="-12V" class="0">
+<net name="-12V" class="1">
 <segment>
 <pinref part="IC2" gate="P" pin="V-"/>
 <wire x1="231.14" y1="10.16" x2="231.14" y2="2.54" width="0.1524" layer="91"/>
