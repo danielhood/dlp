@@ -119,8 +119,8 @@
 <text x="83.492" y="114.74" locked="yes" size="1.6764" layer="25" align="center">5</text>
 <hole x="7.5" y="125" drill="3.5" locked="yes"/>
 <hole x="7.5" y="3" drill="3.5" locked="yes"/>
-<text x="90" y="3" locked="yes" size="2.54" layer="25" align="center-right">DLP</text>
-<text x="90" y="125" locked="yes" size="2.54" layer="25" align="center-right">MXR+SNDS</text>
+<text x="88" y="3" locked="yes" size="2.54" layer="25" align="center-right">DLP</text>
+<text x="88" y="125" locked="yes" size="2.54" layer="25" align="center-right">MXR+SNDS</text>
 <hole x="93.86" y="125" drill="3.5" locked="yes"/>
 <hole x="93.86" y="3" drill="3.5" locked="yes"/>
 <text x="14.5" y="103.14" locked="yes" size="1.778" layer="25" align="center-left">M1</text>
