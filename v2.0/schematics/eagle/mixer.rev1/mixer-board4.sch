@@ -3290,9 +3290,9 @@ Source: www.kingbright.com</description>
 <part name="R22" library="_common" deviceset="R" device="" value="2.2M"/>
 <part name="R21" library="_common" deviceset="R" device="" value="220K"/>
 <part name="P+3" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+12V" device=""/>
-<part name="R27" library="_common" deviceset="R" device="" value="3.9K"/>
-<part name="R26" library="_common" deviceset="R" device="" value="1.8K"/>
-<part name="R25" library="_common" deviceset="R" device="" value="520"/>
+<part name="R27" library="_common" deviceset="R" device="" value="12K"/>
+<part name="R26" library="_common" deviceset="R" device="" value="1.5K"/>
+<part name="R25" library="_common" deviceset="R" device="" value="360"/>
 <part name="D3" library="_common" deviceset="1N4148" device=""/>
 <part name="GND31" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="R38" library="_common" deviceset="R" device="" value="12K"/>
@@ -3320,9 +3320,9 @@ Source: www.kingbright.com</description>
 <part name="R44" library="_common" deviceset="R" device="" value="2.2M"/>
 <part name="R43" library="_common" deviceset="R" device="" value="220K"/>
 <part name="P+5" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+12V" device=""/>
-<part name="R47" library="_common" deviceset="R" device="" value="3.9K"/>
-<part name="R46" library="_common" deviceset="R" device="" value="1.8K"/>
-<part name="R45" library="_common" deviceset="R" device="" value="520"/>
+<part name="R47" library="_common" deviceset="R" device="" value="12K"/>
+<part name="R46" library="_common" deviceset="R" device="" value="1.5K"/>
+<part name="R45" library="_common" deviceset="R" device="" value="360"/>
 <part name="D6" library="_common" deviceset="1N4148" device=""/>
 <part name="GND34" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
 <part name="R48" library="_common" deviceset="R" device="" value="12K"/>
@@ -3359,11 +3359,8 @@ E.g.:https://www.mouser.ca/ProductDetail/KEMET/MMK5332J250J01L16.5TR18
 Match filter capacitors!</text>
 <text x="2.54" y="91.44" size="1.778" layer="97">MAIN OUT</text>
 <text x="5.08" y="139.7" size="1.778" layer="97">MAIN OUT</text>
-<text x="124.46" y="165.1" size="1.778" layer="97">VALUES NEED TO BE CHECKED
-Based off of A&amp;H GL2200 meters</text>
+<text x="124.46" y="165.1" size="1.778" layer="97">Based off of A&amp;H GL2200 meters</text>
 <text x="88.9" y="104.14" size="1.778" layer="97">Note: Inverted output; DRV134 outputs flipped.</text>
-<text x="223.52" y="165.1" size="1.778" layer="97">VALUES NEED TO BE CHECKED
-Based off of A&amp;H GL2200 meters</text>
 <wire x1="27.94" y1="137.16" x2="30.48" y2="134.62" width="0.1524" layer="97" style="shortdash"/>
 <wire x1="30.48" y1="134.62" x2="30.48" y2="86.36" width="0.1524" layer="97" style="shortdash"/>
 <wire x1="30.48" y1="86.36" x2="27.94" y2="88.9" width="0.1524" layer="97" style="shortdash"/>
@@ -3764,12 +3761,12 @@ Based off of A&amp;H GL2200 meters</text>
 <attribute name="NAME" x="104.14" y="177.927" size="1.778" layer="95" rot="R90" align="center"/>
 <attribute name="VALUE" x="109.22" y="177.8" size="1.778" layer="96" rot="R90" align="center"/>
 </instance>
-<instance part="C31" gate="G$1" x="114.3" y="177.8" smashed="yes">
-<attribute name="NAME" x="111.506" y="177.8" size="1.778" layer="95" rot="R90" align="center"/>
-<attribute name="VALUE" x="117.094" y="177.8" size="1.778" layer="96" rot="R90" align="center"/>
+<instance part="C31" gate="G$1" x="114.3" y="203.2" smashed="yes">
+<attribute name="NAME" x="111.506" y="203.2" size="1.778" layer="95" rot="R90" align="center"/>
+<attribute name="VALUE" x="117.094" y="203.2" size="1.778" layer="96" rot="R90" align="center"/>
 </instance>
-<instance part="P-4" gate="1" x="114.3" y="167.64" smashed="yes">
-<attribute name="VALUE" x="111.76" y="165.1" size="1.778" layer="96" rot="R90"/>
+<instance part="P-4" gate="1" x="114.3" y="193.04" smashed="yes">
+<attribute name="VALUE" x="111.76" y="190.5" size="1.778" layer="96" rot="R90"/>
 </instance>
 <instance part="GND29" gate="1" x="91.44" y="165.1" smashed="yes">
 <attribute name="VALUE" x="89.535" y="162.56" size="1.778" layer="96"/>
@@ -3877,12 +3874,12 @@ Based off of A&amp;H GL2200 meters</text>
 <attribute name="NAME" x="203.2" y="177.927" size="1.778" layer="95" rot="R90" align="center"/>
 <attribute name="VALUE" x="208.28" y="177.8" size="1.778" layer="96" rot="R90" align="center"/>
 </instance>
-<instance part="C42" gate="G$1" x="213.36" y="177.8" smashed="yes">
-<attribute name="NAME" x="210.566" y="177.8" size="1.778" layer="95" rot="R90" align="center"/>
-<attribute name="VALUE" x="216.154" y="177.8" size="1.778" layer="96" rot="R90" align="center"/>
+<instance part="C42" gate="G$1" x="213.36" y="203.2" smashed="yes">
+<attribute name="NAME" x="210.566" y="203.2" size="1.778" layer="95" rot="R90" align="center"/>
+<attribute name="VALUE" x="216.154" y="203.2" size="1.778" layer="96" rot="R90" align="center"/>
 </instance>
-<instance part="P-8" gate="1" x="213.36" y="167.64" smashed="yes">
-<attribute name="VALUE" x="210.82" y="165.1" size="1.778" layer="96" rot="R90"/>
+<instance part="P-8" gate="1" x="213.36" y="193.04" smashed="yes">
+<attribute name="VALUE" x="210.82" y="190.5" size="1.778" layer="96" rot="R90"/>
 </instance>
 <instance part="GND33" gate="1" x="190.5" y="165.1" smashed="yes">
 <attribute name="VALUE" x="188.595" y="162.56" size="1.778" layer="96"/>
@@ -4844,7 +4841,7 @@ Based off of A&amp;H GL2200 meters</text>
 <segment>
 <pinref part="C31" gate="G$1" pin="-"/>
 <pinref part="P-4" gate="1" pin="-12V"/>
-<wire x1="114.3" y1="172.72" x2="114.3" y2="170.18" width="0.1524" layer="91"/>
+<wire x1="114.3" y1="198.12" x2="114.3" y2="195.58" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="C41" gate="G$1" pin="2"/>
@@ -4865,7 +4862,7 @@ Based off of A&amp;H GL2200 meters</text>
 <segment>
 <pinref part="C42" gate="G$1" pin="-"/>
 <pinref part="P-8" gate="1" pin="-12V"/>
-<wire x1="213.36" y1="172.72" x2="213.36" y2="170.18" width="0.1524" layer="91"/>
+<wire x1="213.36" y1="198.12" x2="213.36" y2="195.58" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="C2" gate="G$1" pin="-"/>
@@ -4942,6 +4939,8 @@ Based off of A&amp;H GL2200 meters</text>
 <junction x="114.3" y="210.82"/>
 <pinref part="R21" gate="G$1" pin="1"/>
 <wire x1="114.3" y1="213.36" x2="114.3" y2="210.82" width="0.1524" layer="91"/>
+<pinref part="C31" gate="G$1" pin="+"/>
+<wire x1="114.3" y1="208.28" x2="114.3" y2="210.82" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$47" class="0">
@@ -4950,17 +4949,13 @@ Based off of A&amp;H GL2200 meters</text>
 <wire x1="104.14" y1="187.96" x2="106.68" y2="187.96" width="0.1524" layer="91"/>
 <pinref part="D2" gate="G$1" pin="C"/>
 <pinref part="C28" gate="G$1" pin="1"/>
-<wire x1="106.68" y1="187.96" x2="114.3" y2="187.96" width="0.1524" layer="91"/>
-<wire x1="114.3" y1="187.96" x2="124.46" y2="187.96" width="0.1524" layer="91"/>
+<wire x1="106.68" y1="187.96" x2="124.46" y2="187.96" width="0.1524" layer="91"/>
 <wire x1="124.46" y1="187.96" x2="134.62" y2="187.96" width="0.1524" layer="91"/>
 <wire x1="106.68" y1="182.88" x2="106.68" y2="187.96" width="0.1524" layer="91"/>
 <junction x="106.68" y="187.96"/>
 <pinref part="R22" gate="G$1" pin="1"/>
 <wire x1="124.46" y1="213.36" x2="124.46" y2="187.96" width="0.1524" layer="91"/>
 <junction x="124.46" y="187.96"/>
-<pinref part="C31" gate="G$1" pin="+"/>
-<wire x1="114.3" y1="187.96" x2="114.3" y2="182.88" width="0.1524" layer="91"/>
-<junction x="114.3" y="187.96"/>
 </segment>
 </net>
 <net name="N$48" class="0">
@@ -5163,6 +5158,8 @@ Based off of A&amp;H GL2200 meters</text>
 <junction x="213.36" y="210.82"/>
 <pinref part="R43" gate="G$1" pin="1"/>
 <wire x1="213.36" y1="213.36" x2="213.36" y2="210.82" width="0.1524" layer="91"/>
+<pinref part="C42" gate="G$1" pin="+"/>
+<wire x1="213.36" y1="208.28" x2="213.36" y2="210.82" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$57" class="0">
@@ -5171,17 +5168,13 @@ Based off of A&amp;H GL2200 meters</text>
 <wire x1="203.2" y1="187.96" x2="205.74" y2="187.96" width="0.1524" layer="91"/>
 <pinref part="D5" gate="G$1" pin="C"/>
 <pinref part="C41" gate="G$1" pin="1"/>
-<wire x1="205.74" y1="187.96" x2="213.36" y2="187.96" width="0.1524" layer="91"/>
-<wire x1="213.36" y1="187.96" x2="223.52" y2="187.96" width="0.1524" layer="91"/>
+<wire x1="205.74" y1="187.96" x2="223.52" y2="187.96" width="0.1524" layer="91"/>
 <wire x1="223.52" y1="187.96" x2="233.68" y2="187.96" width="0.1524" layer="91"/>
 <wire x1="205.74" y1="182.88" x2="205.74" y2="187.96" width="0.1524" layer="91"/>
 <junction x="205.74" y="187.96"/>
 <pinref part="R44" gate="G$1" pin="1"/>
 <wire x1="223.52" y1="213.36" x2="223.52" y2="187.96" width="0.1524" layer="91"/>
 <junction x="223.52" y="187.96"/>
-<pinref part="C42" gate="G$1" pin="+"/>
-<wire x1="213.36" y1="187.96" x2="213.36" y2="182.88" width="0.1524" layer="91"/>
-<junction x="213.36" y="187.96"/>
 </segment>
 </net>
 <net name="N$58" class="0">
