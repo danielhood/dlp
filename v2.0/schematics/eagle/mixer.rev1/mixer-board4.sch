@@ -3238,10 +3238,10 @@ Source: www.kingbright.com</description>
 <part name="C8" library="_common" deviceset="CE-US" device="E5-8.5" value="100uF"/>
 <part name="R1" library="_common" deviceset="R" device="" value="100K"/>
 <part name="R2" library="_common" deviceset="R" device="" value="100K"/>
-<part name="R7" library="_common" deviceset="R" device="" value="48.8"/>
+<part name="R7" library="_common" deviceset="R" device="" value="49,9K"/>
 <part name="C17" library="_common" deviceset="CC-US" device="025-024X044" value="22pF"/>
 <part name="GND19" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="0V" device=""/>
-<part name="R8" library="_common" deviceset="R" device="" value="48.8"/>
+<part name="R8" library="_common" deviceset="R" device="" value="49.9K"/>
 <part name="C18" library="_common" deviceset="CC-US" device="025-024X044" value="22pF"/>
 <part name="C26" library="_common" deviceset="CE-US" device="E5-8.5" value="100uF"/>
 <part name="C27" library="_common" deviceset="CE-US" device="E5-8.5" value="100uF"/>
@@ -3365,6 +3365,7 @@ Match filter capacitors!</text>
 <wire x1="30.48" y1="134.62" x2="30.48" y2="86.36" width="0.1524" layer="97" style="shortdash"/>
 <wire x1="30.48" y1="86.36" x2="27.94" y2="88.9" width="0.1524" layer="97" style="shortdash"/>
 <text x="22.86" y="-25.4" size="1.778" layer="97">Mixer REV1 - Board 4</text>
+<text x="109.22" y="243.84" size="1.778" layer="97">!!! Board 4 rev1 was printed with R21 and R22 labels swapped !!!</text>
 </plain>
 <instances>
 <instance part="J1" gate="G$1" x="33.02" y="33.02" smashed="yes">

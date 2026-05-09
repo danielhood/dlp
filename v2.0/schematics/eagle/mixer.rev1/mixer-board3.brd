@@ -8,8 +8,8 @@
 </settings>
 <grid distance="50" unitdist="mil" unit="mm" style="lines" multiple="1" display="yes" altdistance="0.635" altunitdist="mm" altunit="mm"/>
 <layers>
-<layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
-<layer number="16" name="Bottom" color="1" fill="1" visible="yes" active="yes"/>
+<layer number="1" name="Top" color="4" fill="1" visible="no" active="yes"/>
+<layer number="16" name="Bottom" color="1" fill="1" visible="no" active="yes"/>
 <layer number="17" name="Pads" color="2" fill="1" visible="yes" active="yes"/>
 <layer number="18" name="Vias" color="2" fill="1" visible="yes" active="yes"/>
 <layer number="19" name="Unrouted" color="6" fill="1" visible="yes" active="yes"/>
@@ -681,7 +681,7 @@ design rules under a new name.</description>
 <attribute name="VALUE" x="57.912" y="22.733" size="1.27" layer="27" ratio="10"/>
 </element>
 <element name="C6" library="_common" package="C025-024X044" value="22pF" x="62.23" y="38.1" smashed="yes">
-<attribute name="NAME" x="60.452" y="39.497" size="1.27" layer="25" ratio="10"/>
+<attribute name="NAME" x="57.277" y="37.592" size="1.27" layer="25" ratio="10"/>
 <attribute name="VALUE" x="60.452" y="35.433" size="1.27" layer="27" ratio="10"/>
 </element>
 <element name="C7" library="_common" package="C025-024X044" value="22pF" x="87.63" y="25.4" smashed="yes">
@@ -738,7 +738,7 @@ design rules under a new name.</description>
 <attribute name="VALUE" x="66.5988" y="19.304" size="1.27" layer="27" ratio="10" rot="R90"/>
 </element>
 <element name="R10" library="_common" package="0207/7" value="30k" x="59.69" y="40.64" smashed="yes" rot="R180">
-<attribute name="NAME" x="62.23" y="39.243" size="1.27" layer="25" ratio="10" rot="R180"/>
+<attribute name="NAME" x="60.96" y="41.148" size="1.27" layer="25" ratio="10" rot="R180"/>
 <attribute name="VALUE" x="61.976" y="41.1988" size="1.27" layer="27" ratio="10" rot="R180"/>
 </element>
 <element name="R11" library="_common" package="0207/7" value="30k" x="85.09" y="22.86" smashed="yes" rot="R180">
@@ -778,7 +778,7 @@ design rules under a new name.</description>
 <attribute name="VALUE" x="6.9088" y="29.464" size="1.27" layer="27" ratio="10" rot="R90"/>
 </element>
 <element name="R2" library="_common" package="0207/7" value="10K" x="68.58" y="41.91" smashed="yes" rot="R270">
-<attribute name="NAME" x="68.072" y="41.275" size="1.27" layer="25" ratio="10" rot="R270"/>
+<attribute name="NAME" x="68.072" y="41.91" size="1.27" layer="25" ratio="10" rot="R270"/>
 <attribute name="VALUE" x="68.0212" y="44.196" size="1.27" layer="27" ratio="10" rot="R270"/>
 </element>
 <element name="R20" library="_common" package="0207/7" value="10K" x="26.67" y="31.75" smashed="yes" rot="R90">
