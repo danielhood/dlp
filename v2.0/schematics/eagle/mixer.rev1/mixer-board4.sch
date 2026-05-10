@@ -3366,6 +3366,7 @@ Match filter capacitors!</text>
 <wire x1="30.48" y1="86.36" x2="27.94" y2="88.9" width="0.1524" layer="97" style="shortdash"/>
 <text x="22.86" y="-25.4" size="1.778" layer="97">Mixer REV1 - Board 4</text>
 <text x="109.22" y="243.84" size="1.778" layer="97">!!! Board 4 rev1 was printed with R21 and R22 labels swapped !!!</text>
+<text x="121.92" y="20.32" size="1.778" layer="97">Mounted a 1K on top of the 2.7K's to give more boost for weak stereo ins</text>
 </plain>
 <instances>
 <instance part="J1" gate="G$1" x="33.02" y="33.02" smashed="yes">
